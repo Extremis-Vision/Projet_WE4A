@@ -6,3 +6,6 @@ Architecture du projet :
 - src : contient les fichiers sources de l'application (controllers, models, services)
 - templates : contient les fichiers de templates pour le rendu des pages (html, css, js)
 - var : cache et log de l'application
+
+
+figma : https://www.figma.com/design/hLAp3fQ61nuCg0xQC24zj1/Untitled?node-id=0-1&t=dJgG43q2Ze8Tpgo3-1

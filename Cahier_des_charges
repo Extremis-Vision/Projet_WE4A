@@ -1,0 +1,121 @@
+
+1) Description 
+Pourquoi ? 
+Trouvé la/les meilleures voitures pour le propriétaire avec un encadrement de prix. 
+Pour qui ?
+Tous ceux ayant le permis voiture 
+Comment ? Grâce au détail de toutes les motorisations et des différents retour et autre. 
+
+
+Simple efficace, un agrégateur. 
+
+2) Périmètre du projet 
+Le projet doit proposé des annonces de voitures au client. 
+
+Ses annonces doivent être précise et avoir des informations détaillés sur les défaut usuel de la voiture, ce à quoi il faut faire attention. 
+
+	1) Mettre en place le système d'affichage des annonces de vente ou de location
+		- **Administrateur** :
+		    - gère les utilisateurs
+		    - valide/supprime les annonces
+		    - modère les avis
+		    - accède aux stats globales
+		- **Vendeur (membre)** :
+		    - crée et gère (changes les photos, prix, description) ses annonces
+		    - supprime ses annonce
+		    - upload des photos/vidéos
+		    - reçoit des messages et répond
+		    - a un profil public noté
+
+		- **Acheteur (membre)** :
+		    - consulte les offres
+		    - met en favoris
+		    - contacte les vendeurs
+		    - laisse des reviews
+	- filtre minimum : 
+		- marques 
+		- prix 
+		- modèles 
+		- années 
+		- version 
+		- boite de vitesse 
+		- carburant
+		- type de véhicule 
+		- kilometrage 
+		- crit'air
+		- puissance DIN 
+		- puissance 
+		- etat du véhicule 
+		- nombre de portes 
+		- nombre de place 
+		- avec permis 
+		- cahier d'entretien complet ? 
+
+	- consigne / aide lors de l'achat : 
+		- instruction 
+			- date assurance et autre avec l'heure et minute 
+			- vérification à prévoir avant l'achat 
+			- méthode de paiement 
+			- 
+
+	2) Mettre en place le système avec le détails des défauts et prix des réparations 
+		- Voiture: 
+			- marques 
+			- modèles 
+			- version 
+			- année de sortie 
+			- moteur 
+			- transmission 
+			- boite de vitesse 
+		- transmission 
+		- moteur
+		- boite de vitesse 
+		- option 
+		- 
+
+
+
+Toutes personnes cherchant une voiture. 
+
+3) Evaluation de la concurrence 
+
+	1) https://www.caroom.fr
+	2) https://voiture.kidioui.fr
+	3) https://www.lacentrale.fr/
+	4) https://www.autoscout24.fr/
+	5) https://www.largus.fr/
+	6) https://www.aramisauto.com/
+	7) https://drive-turismo.fr/?hcb=1774884563390
+	
+	Source : 
+		- Wikipedia 
+		- https://www.sra.asso.fr/vehicules/automobiles/recherche
+		- https://swisscarinfo.ch/en/guides
+		- https://carapi.app/
+		-  https://api-ninjas.com/api/cars
+		- https://api.auto-data.net/
+		- https://github.com/plowman/open-vehicle-db
+		- https://docs.google.com/spreadsheets/d/0B5DhDCi2EzwVOGJua21UYk4tdzQ/edit?pli=1&resourcekey=0-dtoPV3ucyeTL4x11jgRa2w&gid=1009381356#gid=1009381356
+		- https://siv-auto.fr/
+		- https://voiture.car2db.com/
+		- https://avoindata.suomi.fi/data/en_GB/dataset/c5146eb4-5dc7-4e82-95a1-8feb3b041cc1/resource/00041d67-966e-48cf-a720-255faf09d55c
+
+
+5) Charte graphique et ergonomie générale
+
+
+
+6) Spécification fonctionnelles 
+## Architecture du projet :
+- config : configuration des routes services et accès à la BDD
+- public : contient les fichiers statiques publique (html, css, js)
+- src : contient les fichiers sources de l'application (controllers, models, services)
+- templates : contient les fichiers de templates pour le rendu des pages (html, css, js)
+- var : cache et log de l'application
+
+
+7) Délais : 
+	1) Schéma conceptuel de la base de données 
+	2) Schéma technique du Projet 
+
+

@@ -27,6 +27,13 @@ PAS DE PUSH dans le main sans l'avis de tous le monde pour des modifications fon
     - met en favoris
     - contacte les vendeurs
     - laisse des reviews
+- **Visiteur (sans compte)** :
+    - consulte les offres
+    - recherche
+    - filtre
+    - tri
+    - consulte les fiches détaillées
+    - consulte les reviews
 
 ### **Catalogue public (tout compte et sans compte) :**
 
@@ -42,3 +49,10 @@ PAS DE PUSH dans le main sans l'avis de tous le monde pour des modifications fon
 
 ## Ressources : ##
 figma : https://www.figma.com/design/hLAp3fQ61nuCg0xQC24zj1/Untitled?node-id=0-1&t=dJgG43q2Ze8Tpgo3-1
+
+## Stack ##
+- PHP Symfony 8 
+- HTML
+- CSS : tailwind
+- JS : vanilla
+- 

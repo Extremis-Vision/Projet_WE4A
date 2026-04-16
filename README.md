@@ -55,4 +55,3 @@ figma : https://www.figma.com/design/hLAp3fQ61nuCg0xQC24zj1/Untitled?node-id=0-1
 - HTML
 - CSS : tailwind
 - JS : vanilla
-- 

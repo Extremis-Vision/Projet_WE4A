@@ -50,8 +50,11 @@ PAS DE PUSH dans le main sans l'avis de tous le monde pour des modifications fon
 ## Ressources : ##
 figma : https://www.figma.com/design/hLAp3fQ61nuCg0xQC24zj1/Untitled?node-id=0-1&t=dJgG43q2Ze8Tpgo3-1
 
+stitch : https://stitch.withgoogle.com/projects/15741036538475195075
+
 ## Stack ##
 - PHP Symfony 8 
 - HTML
 - CSS : tailwind
 - JS : vanilla
+

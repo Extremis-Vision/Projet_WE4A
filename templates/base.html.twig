@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block pageTitle %} basePage {% endblock %}</title>
+
+    <link rel="icon" href="">
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('Styles/styles.css') }}">
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+    <div class="header">
+        {% block header %}
+            <span id="title">AutoMarket</span>
+            <span>Annonces</span>
+            <span>Avis</span>
+            <span>Vendre Ma Voiture</span>
+            <span>Connexion</span>
+            <span>S'inscrire</span>
+
+        {% endblock %}
+    </div>
+
+    <div class="main">
+        {% block main %}
+
+        {% endblock %}
+    </div>
+
+    <div class="footer">
+        {% block footer %}
+
+        {% endblock %}
+    </div>
+{% endblock %}
+</body>
+</html>

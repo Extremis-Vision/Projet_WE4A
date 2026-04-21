@@ -10,6 +10,6 @@ class mainController extends AbstractController
 {
     #[Route('/')]
     public function mainpage(){
-        return new Response("Hello World!");
+        return $this->render('base.html.twig');
     }
 }

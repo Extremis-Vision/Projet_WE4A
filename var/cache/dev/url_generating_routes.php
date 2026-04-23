@@ -4,4 +4,16 @@
 
 return [
     '_preview_error' => [['code', '_format'], ['_controller' => 'error_controller::preview', '_format' => 'html'], ['code' => '\\d+'], [['variable', '.', '[^/]++', '_format', true], ['variable', '/', '\\d+', 'code', true], ['text', '/_error']], [], [], []],
+    'homePage' => [[], ['_controller' => 'App\\Controller\\mainController::homePage'], [], [['text', '/']], [], [], []],
+    'annonces' => [[], ['_controller' => 'App\\Controller\\mainController::annoncesPage'], [], [['text', '/annonces']], [], [], []],
+    'avis' => [[], ['_controller' => 'App\\Controller\\mainController::avisPage'], [], [['text', '/avis']], [], [], []],
+    'vendreMaVoiture' => [[], ['_controller' => 'App\\Controller\\mainController::vendre_ma_voiture'], [], [['text', '/vendre-ma-voiture']], [], [], []],
+    'connexion' => [[], ['_controller' => 'App\\Controller\\mainController::connexionPage'], [], [['text', '/connexion']], [], [], []],
+    'inscription' => [[], ['_controller' => 'App\\Controller\\mainController::inscriptionPage'], [], [['text', '/inscription']], [], [], []],
+    'App\Controller\mainController::homePage' => [[], ['_controller' => 'App\\Controller\\mainController::homePage'], [], [['text', '/']], [], [], []],
+    'App\Controller\mainController::annoncesPage' => [[], ['_controller' => 'App\\Controller\\mainController::annoncesPage'], [], [['text', '/annonces']], [], [], []],
+    'App\Controller\mainController::avisPage' => [[], ['_controller' => 'App\\Controller\\mainController::avisPage'], [], [['text', '/avis']], [], [], []],
+    'App\Controller\mainController::vendre_ma_voiture' => [[], ['_controller' => 'App\\Controller\\mainController::vendre_ma_voiture'], [], [['text', '/vendre-ma-voiture']], [], [], []],
+    'App\Controller\mainController::connexionPage' => [[], ['_controller' => 'App\\Controller\\mainController::connexionPage'], [], [['text', '/connexion']], [], [], []],
+    'App\Controller\mainController::inscriptionPage' => [[], ['_controller' => 'App\\Controller\\mainController::inscriptionPage'], [], [['text', '/inscription']], [], [], []],
 ];

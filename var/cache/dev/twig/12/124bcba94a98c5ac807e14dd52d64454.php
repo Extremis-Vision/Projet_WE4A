@@ -62,13 +62,13 @@ class __TwigTemplate_907b620ba8bc047b93eee142c5d5574b extends Template
     ";
         // line 9
         yield from $this->unwrap()->yieldBlock('stylesheets', $context, $blocks);
-        // line 12
+        // line 13
         yield "</head>
 <body>
 ";
-        // line 14
+        // line 15
         yield from $this->unwrap()->yieldBlock('body', $context, $blocks);
-        // line 39
+        // line 52
         yield "</body>
 </html>";
         
@@ -87,7 +87,7 @@ class __TwigTemplate_907b620ba8bc047b93eee142c5d5574b extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "pageTitle"));
 
-        yield " basePage ";
+        yield "AutoMarket";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -108,6 +108,7 @@ class __TwigTemplate_907b620ba8bc047b93eee142c5d5574b extends Template
         yield "        <link rel=\"stylesheet\" href=\"";
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("Styles/styles.css"), "html", null, true);
         yield "\">
+        <script src=\"https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4\"></script>
     ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -115,7 +116,7 @@ class __TwigTemplate_907b620ba8bc047b93eee142c5d5574b extends Template
         yield from [];
     }
 
-    // line 14
+    // line 15
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -125,26 +126,26 @@ class __TwigTemplate_907b620ba8bc047b93eee142c5d5574b extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 15
-        yield "    <div class=\"header\">
-        ";
         // line 16
+        yield "    <nav class=\"header shadow-lg/5\">
+        ";
+        // line 17
         yield from $this->unwrap()->yieldBlock('header', $context, $blocks);
-        // line 25
-        yield "    </div>
+        // line 38
+        yield "    </nav>
 
     <div class=\"main\">
         ";
-        // line 28
+        // line 41
         yield from $this->unwrap()->yieldBlock('main', $context, $blocks);
-        // line 31
+        // line 44
         yield "    </div>
 
     <div class=\"footer\">
         ";
-        // line 34
+        // line 47
         yield from $this->unwrap()->yieldBlock('footer', $context, $blocks);
-        // line 37
+        // line 50
         yield "    </div>
 ";
         
@@ -153,7 +154,7 @@ class __TwigTemplate_907b620ba8bc047b93eee142c5d5574b extends Template
         yield from [];
     }
 
-    // line 16
+    // line 17
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -163,14 +164,45 @@ class __TwigTemplate_907b620ba8bc047b93eee142c5d5574b extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "header"));
 
-        // line 17
-        yield "            <span id=\"title\">AutoMarket</span>
-            <span>Annonces</span>
-            <span>Avis</span>
-            <span>Vendre Ma Voiture</span>
-            <span>Connexion</span>
-            <span>S'inscrire</span>
+        // line 18
+        yield "            <ul class = \"nav-container\">
 
+                <li id=\"nav-logo\">
+                    <a href=\"";
+        // line 21
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("homePage");
+        yield "\">AutoMarket</a>
+                </li>
+
+                <li class=\"nav-item nav-gauche\"><a href=\"";
+        // line 24
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("annonces");
+        yield "\">Annonces</a></li>
+                <li class=\"nav-item nav-gauche\"><a href=\"";
+        // line 25
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("avis");
+        yield "\">Avis</a></li>
+                <li class=\"nav-item nav-gauche\"><a href=\"";
+        // line 26
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("vendreMaVoiture");
+        yield "\">Vendre ma voiture</a></li>
+
+                <li class=\"spacer\"></li>
+
+                ";
+        // line 30
+        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 30, $this->source); })()), "user", [], "any", false, false, false, 30)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 31
+            yield "
+                ";
+        } else {
+            // line 33
+            yield "                    <li>Connexion</li>
+                    <li>S'inscrire</li>
+                ";
+        }
+        // line 36
+        yield "            </ul>
         ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -178,7 +210,7 @@ class __TwigTemplate_907b620ba8bc047b93eee142c5d5574b extends Template
         yield from [];
     }
 
-    // line 28
+    // line 41
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -188,7 +220,7 @@ class __TwigTemplate_907b620ba8bc047b93eee142c5d5574b extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "main"));
 
-        // line 29
+        // line 42
         yield "
         ";
         
@@ -197,7 +229,7 @@ class __TwigTemplate_907b620ba8bc047b93eee142c5d5574b extends Template
         yield from [];
     }
 
-    // line 34
+    // line 47
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -207,7 +239,7 @@ class __TwigTemplate_907b620ba8bc047b93eee142c5d5574b extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "footer"));
 
-        // line 35
+        // line 48
         yield "
         ";
         
@@ -229,7 +261,7 @@ class __TwigTemplate_907b620ba8bc047b93eee142c5d5574b extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  211 => 35,  201 => 34,  192 => 29,  182 => 28,  167 => 17,  157 => 16,  148 => 37,  146 => 34,  141 => 31,  139 => 28,  134 => 25,  132 => 16,  129 => 15,  119 => 14,  108 => 10,  98 => 9,  81 => 5,  72 => 39,  70 => 14,  66 => 12,  64 => 9,  57 => 5,  51 => 1,);
+        return array (  243 => 48,  233 => 47,  224 => 42,  214 => 41,  205 => 36,  200 => 33,  196 => 31,  194 => 30,  187 => 26,  183 => 25,  179 => 24,  173 => 21,  168 => 18,  158 => 17,  149 => 50,  147 => 47,  142 => 44,  140 => 41,  135 => 38,  133 => 17,  130 => 16,  120 => 15,  108 => 10,  98 => 9,  81 => 5,  72 => 52,  70 => 15,  66 => 13,  64 => 9,  57 => 5,  51 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -238,27 +270,40 @@ class __TwigTemplate_907b620ba8bc047b93eee142c5d5574b extends Template
 <html lang=\"fr\">
 <head>
     <meta charset=\"UTF-8\">
-    <title>{% block pageTitle %} basePage {% endblock %}</title>
+    <title>{% block pageTitle %}AutoMarket{% endblock %}</title>
 
     <link rel=\"icon\" href=\"\">
 
     {% block stylesheets %}
         <link rel=\"stylesheet\" href=\"{{ asset('Styles/styles.css') }}\">
+        <script src=\"https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4\"></script>
     {% endblock %}
 </head>
 <body>
 {% block body %}
-    <div class=\"header\">
+    <nav class=\"header shadow-lg/5\">
         {% block header %}
-            <span id=\"title\">AutoMarket</span>
-            <span>Annonces</span>
-            <span>Avis</span>
-            <span>Vendre Ma Voiture</span>
-            <span>Connexion</span>
-            <span>S'inscrire</span>
+            <ul class = \"nav-container\">
 
+                <li id=\"nav-logo\">
+                    <a href=\"{{ path('homePage') }}\">AutoMarket</a>
+                </li>
+
+                <li class=\"nav-item nav-gauche\"><a href=\"{{ path('annonces') }}\">Annonces</a></li>
+                <li class=\"nav-item nav-gauche\"><a href=\"{{ path(\"avis\") }}\">Avis</a></li>
+                <li class=\"nav-item nav-gauche\"><a href=\"{{ path('vendreMaVoiture') }}\">Vendre ma voiture</a></li>
+
+                <li class=\"spacer\"></li>
+
+                {% if app.user %}
+
+                {% else %}
+                    <li>Connexion</li>
+                    <li>S'inscrire</li>
+                {% endif %}
+            </ul>
         {% endblock %}
-    </div>
+    </nav>
 
     <div class=\"main\">
         {% block main %}

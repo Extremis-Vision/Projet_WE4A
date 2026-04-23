@@ -2,27 +2,55 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>{% block pageTitle %} basePage {% endblock %}</title>
+    <title>{% block pageTitle %}AutoMarket{% endblock %}</title>
 
     <link rel="icon" href="">
 
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('Styles/styles.css') }}">
     {% endblock %}
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "background": "#f7f9fb",
+                        "primary": "#04122e",
+                        "secondary": "#9d4300",
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 <body>
 {% block body %}
-    <div class="header">
+    <nav class="header shadow-lg/5">
         {% block header %}
-            <span id="title">AutoMarket</span>
-            <span>Annonces</span>
-            <span>Avis</span>
-            <span>Vendre Ma Voiture</span>
-            <span>Connexion</span>
-            <span>S'inscrire</span>
+            <ul class = "nav-container">
 
+                <li id="nav-logo text-[#04122e]">
+                    <a href="{{ path('homePage') }}">AutoMarket</a>
+                </li>
+
+                <li class="nav-item nav-gauche"><a href="{{ path('annonces') }}">Annonces</a></li>
+                <li class="nav-item nav-gauche"><a href="{{ path("avis") }}">Avis</a></li>
+                <li class="nav-item nav-gauche"><a href="{{ path('vendreMaVoiture') }}">Vendre ma voiture</a></li>
+
+                <li class="spacer"></li>
+
+                {% if app.user %}
+
+                {% else %}
+                    <li><a href="{{ path("connexion") }}">Connexion</a></li>
+                    <li><a class="bg-blue-400" href="{{ path("inscription") }}">S'inscrire</a></li>
+                {% endif %}
+            </ul>
         {% endblock %}
-    </div>
+    </nav>
 
     <div class="main">
         {% block main %}

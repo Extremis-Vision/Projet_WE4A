@@ -1,0 +1,113 @@
+body{
+    margin: 0;
+    background-color: #EFF1F3;
+    font-family: Inter, sans-serif;
+}
+
+.header{
+    background-color: #FFFFFF;
+    padding: 1em 2em 1em 2em;
+    display: flex;
+    justify-content: space-between;
+    gap: 3em;
+    align-items: center;
+    position: sticky;
+    top: 0;
+}
+
+#nav-logo{
+    font-family: ManRope, sans-serif;
+    font-weight: 800;
+    font-size: 1.5em;
+}
+
+.nav-container{
+    display: flex;
+    align-items: center;
+    gap : 3em;
+    width: 100%;
+}
+
+.nav-container .nav-item a{
+    text-align: center;
+    color: #515E7E;
+}
+
+.nav-container .nav-item a:hover{
+    color: #0D1B37;
+}
+
+.nav-container .nav-gauche{
+    display: flex;
+    align-items: center;
+    gap: 2em;
+}
+
+.spacer{
+    flex-grow: 1;
+}
+
+main{}
+
+footer{
+    background-color: #04122e;
+    bottom: 0;
+}
+
+a:focus {
+    outline: 3px solid #9d4300;
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+
+/* Font ManRope */
+@font-face{
+    font-family: 'ManRope';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../Fonts/Manrope/static/Manrope-Bold.ttf');
+}
+@font-face{
+    font-family: 'ManRope';
+    font-style: normal;
+    font-weight: 800;
+    src: url('../Fonts/Manrope/static/Manrope-ExtraBold.ttf');
+}
+@font-face{
+    font-family: 'ManRope';
+    font-style: normal;
+    font-weight: 300;
+    src: url('../Fonts/Manrope/static/Manrope-Light.ttf');
+}
+@font-face{
+    font-family: 'ManRope';
+    font-style: normal;
+    font-weight: 200;
+    src: url('../Fonts/Manrope/static/Manrope-ExtraLight.ttf');
+}
+@font-face{
+    font-family: 'ManRope';
+    font-style: normal;
+    font-weight: 500;
+    src: url('../Fonts/Manrope/static/Manrope-Medium.ttf');
+}
+@font-face{
+    font-family: 'ManRope';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../Fonts/Manrope/static/Manrope-Regular.ttf');
+}
+@font-face{
+    font-family: 'ManRope';
+    font-style: normal;
+    font-weight: 600;
+    src: url('../Fonts/Manrope/static/Manrope-SemiBold.ttf');
+}
+
+/* Font Inter */
+@font-face{
+    font-family: "Inter";
+    font-weight: 400;
+    font-style: normal;
+    src: url('../Fonts/Inter/inter.ttc')
+}

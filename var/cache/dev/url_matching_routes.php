@@ -10,7 +10,6 @@ return [
     [ // $staticRoutes
         '/' => [[['_route' => 'homePage', '_controller' => 'App\\Controller\\mainController::homePage'], null, null, null, false, false, null]],
         '/annonces' => [[['_route' => 'annonces', '_controller' => 'App\\Controller\\mainController::annoncesPage'], null, null, null, false, false, null]],
-        '/avis' => [[['_route' => 'avis', '_controller' => 'App\\Controller\\mainController::avisPage'], null, null, null, false, false, null]],
         '/vendre-ma-voiture' => [[['_route' => 'vendreMaVoiture', '_controller' => 'App\\Controller\\mainController::vendre_ma_voiture'], null, null, null, false, false, null]],
         '/connexion' => [[['_route' => 'connexion', '_controller' => 'App\\Controller\\mainController::connexionPage'], null, null, null, false, false, null]],
         '/inscription' => [[['_route' => 'inscription', '_controller' => 'App\\Controller\\mainController::inscriptionPage'], null, null, null, false, false, null]],

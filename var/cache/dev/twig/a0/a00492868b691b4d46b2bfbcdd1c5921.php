@@ -74,17 +74,18 @@ class __TwigTemplate_8f0b70884dcda446b77d65d5dd204eff extends Template
                         \"background\": \"#f7f9fb\",
                         \"primary\": \"#04122e\",
                         \"secondary\": \"#9d4300\",
+                        \"tertiary\": \"#334155\"
                     }
                 }
             }
         }
     </script>
 </head>
-<body>
+<body class=\"min-h-screen flex flex-col\">
 ";
-        // line 30
+        // line 31
         yield from $this->unwrap()->yieldBlock('body', $context, $blocks);
-        // line 67
+        // line 151
         yield "</body>
 </html>";
         
@@ -131,7 +132,7 @@ class __TwigTemplate_8f0b70884dcda446b77d65d5dd204eff extends Template
         yield from [];
     }
 
-    // line 30
+    // line 31
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -141,27 +142,27 @@ class __TwigTemplate_8f0b70884dcda446b77d65d5dd204eff extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 31
-        yield "    <nav class=\"header shadow-lg/5\">
-        ";
         // line 32
+        yield "    <nav class=\"header flex-none shadow-lg/5\">
+        ";
+        // line 33
         yield from $this->unwrap()->yieldBlock('header', $context, $blocks);
-        // line 53
+        // line 56
         yield "    </nav>
 
-    <div class=\"main\">
+    <main class=\"flex-grow\">
         ";
-        // line 56
-        yield from $this->unwrap()->yieldBlock('main', $context, $blocks);
         // line 59
-        yield "    </div>
-
-    <div class=\"footer\">
-        ";
+        yield from $this->unwrap()->yieldBlock('main', $context, $blocks);
         // line 62
-        yield from $this->unwrap()->yieldBlock('footer', $context, $blocks);
+        yield "    </main>
+
+    <footer class=\"flex-none py-10 text-white\">
+        ";
         // line 65
-        yield "    </div>
+        yield from $this->unwrap()->yieldBlock('footer', $context, $blocks);
+        // line 149
+        yield "    </footer>
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -169,7 +170,7 @@ class __TwigTemplate_8f0b70884dcda446b77d65d5dd204eff extends Template
         yield from [];
     }
 
-    // line 32
+    // line 33
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -179,49 +180,48 @@ class __TwigTemplate_8f0b70884dcda446b77d65d5dd204eff extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "header"));
 
-        // line 33
+        // line 34
         yield "            <ul class = \"nav-container\">
 
-                <li id=\"nav-logo text-[#04122e]\">
-                    <a href=\"";
-        // line 36
+                <li id=\"nav-logo\" class=\"text-[#04122e]\">
+                    <h1>
+                        <a href=\"";
+        // line 38
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("homePage");
         yield "\">AutoMarket</a>
+                    </h1>
                 </li>
 
                 <li class=\"nav-item nav-gauche\"><a href=\"";
-        // line 39
+        // line 42
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("annonces");
         yield "\">Annonces</a></li>
+
                 <li class=\"nav-item nav-gauche\"><a href=\"";
-        // line 40
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("avis");
-        yield "\">Avis</a></li>
-                <li class=\"nav-item nav-gauche\"><a href=\"";
-        // line 41
+        // line 44
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("vendreMaVoiture");
         yield "\">Vendre ma voiture</a></li>
 
                 <li class=\"spacer\"></li>
 
                 ";
-        // line 45
-        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 45, $this->source); })()), "user", [], "any", false, false, false, 45)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-            // line 46
+        // line 48
+        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 48, $this->source); })()), "user", [], "any", false, false, false, 48)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 49
             yield "
                 ";
         } else {
-            // line 48
+            // line 51
             yield "                    <li><a href=\"";
             yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("connexion");
             yield "\">Connexion</a></li>
-                    <li><a class=\"bg-blue-400\" href=\"";
-            // line 49
+                    <li><a class=\"px-6 py-2.5 bg-primary text-white font-bold rounded-lg active:scale-95\" href=\"";
+            // line 52
             yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("inscription");
             yield "\">S'inscrire</a></li>
                 ";
         }
-        // line 51
+        // line 54
         yield "            </ul>
         ";
         
@@ -230,7 +230,7 @@ class __TwigTemplate_8f0b70884dcda446b77d65d5dd204eff extends Template
         yield from [];
     }
 
-    // line 56
+    // line 59
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -240,7 +240,7 @@ class __TwigTemplate_8f0b70884dcda446b77d65d5dd204eff extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "main"));
 
-        // line 57
+        // line 60
         yield "
         ";
         
@@ -249,7 +249,7 @@ class __TwigTemplate_8f0b70884dcda446b77d65d5dd204eff extends Template
         yield from [];
     }
 
-    // line 62
+    // line 65
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -259,8 +259,95 @@ class __TwigTemplate_8f0b70884dcda446b77d65d5dd204eff extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "footer"));
 
-        // line 63
-        yield "
+        // line 66
+        yield "            <div class=\"px-10 py-5 flex flex-row gap-8\">
+                <div class=\"basis-1/3\"> <!-- 1ere colonne -->
+                    <h2 class=\"font-['ManRope'] text-white text-[20px] font-bold pb-5\">AutoMarket</h2>
+                    <p class=\"desc text-white/70\">
+                        L'expérience du Showroom Digital. Redéfinir la façon dont les passionnés achètent et vendent
+                        des chefs-d'œuvres automobiles avec intégrité éditoriale
+                    </p>
+                </div>
+                <div class=\"basis-1/6 text-[15px] text-white/70\"> <!-- 2eme colonne - Ecosystème -->
+                    <ul>
+                        <li class=\"pb-5\">
+                            <h3 class=\"font-['ManRope'] text-[15px] font-bold text-secondary\">ÉCOSYSTÈME</h3>
+                        </li>
+                        <li class=\"pb-3\">
+                            <a href=\"";
+        // line 80
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("annonces");
+        yield "\" >Annonces</a>
+                        </li>
+                        <li class=\"pb-3\">
+                            <a href=\"";
+        // line 83
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("vendreMaVoiture");
+        yield "\">Vente</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class=\"basis-1/6 text-[15px] text-white/70\"> <!-- 3eme colonne - Entreprise -->
+                    <ul>
+                        <li class=\"pb-5\">
+                            <h3 class=\"font-['ManRope'] text-[15px] font-bold text-secondary\">ENTREPRISE</h3>
+                        </li>
+                        <li class=\"pb-3\">
+                            <a>Politique de confidentialité</a>
+                        </li>
+                        <li class=\"pb-3\">
+                            <a>Conditions d'utilisations</a>
+                        </li>
+                        <li class=\"pb-3\">
+                            <a>Politique de Cookies</a>
+                        </li>
+                        <li class=\"pb-3\">
+                            <a>Contactez-nous</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class=\"flex-1 text-[15px] text-white/70\"> <!-- 4eme colonne - Rejoindre le club -->
+                    <ul>
+                        <li class=\"pb-5\">
+                            <h3 class=\"font-['ManRope'] text-[15px] font-bold text-secondary\">REJOINDRE LE CLUB</h3>
+                        </li>
+                        <li class=\"pb-3\">
+                            <p>Recevez le briefing éditorial hebdomadaire sur les tendances du marché et un
+                            accès anticipé exclusif aux annonces rares</p>
+                        </li>
+                        <li class=\"pb-3\">
+                            <form class=\"flex gap-3\">
+                                <input class=\"bg-white/5 border-none rounded-lg px-4 py-3 flex-1 text-sm focus:ring-1
+                                 focus:ring-secondary text-white\" placeholder=\"Adresse email\" type=\"email\"/>
+                                <button class=\"bg-secondary px-6 rounded-lg font-bold hover:bg-secondary-container
+                                transition-all \">
+                                    <span> > </span>
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+
+
+            </div>
+            <div class=\"border-t text-[10px] border-white/5 text-white/30 px-10 pt-5\">
+                <ul class=\"flex full-width flex-row gap-5\">
+                    <li class=\"\">
+                        © 2026 AUTOMARKET. Tous droits réservés
+                    </li>
+                    <li class=\"spacer\"></li>
+                    <li class=\"\">
+                        <a href=\"https://www.instagram.com\">INSTAGRAM</a>
+                    </li>
+                    <li class=\"\">
+                        <a href=\"https://www.x.com\">X / TWITTER</a>
+                    </li>
+                    <li class=\"\">
+                        <a href=\"https://www.linkedin.com\">LINKEDIN</a>
+                    </li>
+                </ul>
+            </div>
         ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -281,7 +368,7 @@ class __TwigTemplate_8f0b70884dcda446b77d65d5dd204eff extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  263 => 63,  253 => 62,  244 => 57,  234 => 56,  225 => 51,  220 => 49,  215 => 48,  211 => 46,  209 => 45,  202 => 41,  198 => 40,  194 => 39,  188 => 36,  183 => 33,  173 => 32,  164 => 65,  162 => 62,  157 => 59,  155 => 56,  150 => 53,  148 => 32,  145 => 31,  135 => 30,  124 => 10,  114 => 9,  97 => 5,  88 => 67,  86 => 30,  66 => 12,  64 => 9,  57 => 5,  51 => 1,);
+        return array (  285 => 83,  279 => 80,  263 => 66,  253 => 65,  244 => 60,  234 => 59,  225 => 54,  220 => 52,  215 => 51,  211 => 49,  209 => 48,  202 => 44,  197 => 42,  190 => 38,  184 => 34,  174 => 33,  165 => 149,  163 => 65,  158 => 62,  156 => 59,  151 => 56,  149 => 33,  146 => 32,  136 => 31,  125 => 10,  115 => 9,  98 => 5,  89 => 151,  87 => 31,  66 => 12,  64 => 9,  57 => 5,  51 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -308,24 +395,27 @@ class __TwigTemplate_8f0b70884dcda446b77d65d5dd204eff extends Template
                         \"background\": \"#f7f9fb\",
                         \"primary\": \"#04122e\",
                         \"secondary\": \"#9d4300\",
+                        \"tertiary\": \"#334155\"
                     }
                 }
             }
         }
     </script>
 </head>
-<body>
+<body class=\"min-h-screen flex flex-col\">
 {% block body %}
-    <nav class=\"header shadow-lg/5\">
+    <nav class=\"header flex-none shadow-lg/5\">
         {% block header %}
             <ul class = \"nav-container\">
 
-                <li id=\"nav-logo text-[#04122e]\">
-                    <a href=\"{{ path('homePage') }}\">AutoMarket</a>
+                <li id=\"nav-logo\" class=\"text-[#04122e]\">
+                    <h1>
+                        <a href=\"{{ path('homePage') }}\">AutoMarket</a>
+                    </h1>
                 </li>
 
                 <li class=\"nav-item nav-gauche\"><a href=\"{{ path('annonces') }}\">Annonces</a></li>
-                <li class=\"nav-item nav-gauche\"><a href=\"{{ path(\"avis\") }}\">Avis</a></li>
+
                 <li class=\"nav-item nav-gauche\"><a href=\"{{ path('vendreMaVoiture') }}\">Vendre ma voiture</a></li>
 
                 <li class=\"spacer\"></li>
@@ -334,23 +424,104 @@ class __TwigTemplate_8f0b70884dcda446b77d65d5dd204eff extends Template
 
                 {% else %}
                     <li><a href=\"{{ path(\"connexion\") }}\">Connexion</a></li>
-                    <li><a class=\"bg-blue-400\" href=\"{{ path(\"inscription\") }}\">S'inscrire</a></li>
+                    <li><a class=\"px-6 py-2.5 bg-primary text-white font-bold rounded-lg active:scale-95\" href=\"{{ path(\"inscription\") }}\">S'inscrire</a></li>
                 {% endif %}
             </ul>
         {% endblock %}
     </nav>
 
-    <div class=\"main\">
+    <main class=\"flex-grow\">
         {% block main %}
 
         {% endblock %}
-    </div>
+    </main>
 
-    <div class=\"footer\">
+    <footer class=\"flex-none py-10 text-white\">
         {% block footer %}
+            <div class=\"px-10 py-5 flex flex-row gap-8\">
+                <div class=\"basis-1/3\"> <!-- 1ere colonne -->
+                    <h2 class=\"font-['ManRope'] text-white text-[20px] font-bold pb-5\">AutoMarket</h2>
+                    <p class=\"desc text-white/70\">
+                        L'expérience du Showroom Digital. Redéfinir la façon dont les passionnés achètent et vendent
+                        des chefs-d'œuvres automobiles avec intégrité éditoriale
+                    </p>
+                </div>
+                <div class=\"basis-1/6 text-[15px] text-white/70\"> <!-- 2eme colonne - Ecosystème -->
+                    <ul>
+                        <li class=\"pb-5\">
+                            <h3 class=\"font-['ManRope'] text-[15px] font-bold text-secondary\">ÉCOSYSTÈME</h3>
+                        </li>
+                        <li class=\"pb-3\">
+                            <a href=\"{{ path(\"annonces\") }}\" >Annonces</a>
+                        </li>
+                        <li class=\"pb-3\">
+                            <a href=\"{{ path(\"vendreMaVoiture\") }}\">Vente</a>
+                        </li>
+                    </ul>
+                </div>
 
+                <div class=\"basis-1/6 text-[15px] text-white/70\"> <!-- 3eme colonne - Entreprise -->
+                    <ul>
+                        <li class=\"pb-5\">
+                            <h3 class=\"font-['ManRope'] text-[15px] font-bold text-secondary\">ENTREPRISE</h3>
+                        </li>
+                        <li class=\"pb-3\">
+                            <a>Politique de confidentialité</a>
+                        </li>
+                        <li class=\"pb-3\">
+                            <a>Conditions d'utilisations</a>
+                        </li>
+                        <li class=\"pb-3\">
+                            <a>Politique de Cookies</a>
+                        </li>
+                        <li class=\"pb-3\">
+                            <a>Contactez-nous</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class=\"flex-1 text-[15px] text-white/70\"> <!-- 4eme colonne - Rejoindre le club -->
+                    <ul>
+                        <li class=\"pb-5\">
+                            <h3 class=\"font-['ManRope'] text-[15px] font-bold text-secondary\">REJOINDRE LE CLUB</h3>
+                        </li>
+                        <li class=\"pb-3\">
+                            <p>Recevez le briefing éditorial hebdomadaire sur les tendances du marché et un
+                            accès anticipé exclusif aux annonces rares</p>
+                        </li>
+                        <li class=\"pb-3\">
+                            <form class=\"flex gap-3\">
+                                <input class=\"bg-white/5 border-none rounded-lg px-4 py-3 flex-1 text-sm focus:ring-1
+                                 focus:ring-secondary text-white\" placeholder=\"Adresse email\" type=\"email\"/>
+                                <button class=\"bg-secondary px-6 rounded-lg font-bold hover:bg-secondary-container
+                                transition-all \">
+                                    <span> > </span>
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+
+
+            </div>
+            <div class=\"border-t text-[10px] border-white/5 text-white/30 px-10 pt-5\">
+                <ul class=\"flex full-width flex-row gap-5\">
+                    <li class=\"\">
+                        © 2026 AUTOMARKET. Tous droits réservés
+                    </li>
+                    <li class=\"spacer\"></li>
+                    <li class=\"\">
+                        <a href=\"https://www.instagram.com\">INSTAGRAM</a>
+                    </li>
+                    <li class=\"\">
+                        <a href=\"https://www.x.com\">X / TWITTER</a>
+                    </li>
+                    <li class=\"\">
+                        <a href=\"https://www.linkedin.com\">LINKEDIN</a>
+                    </li>
+                </ul>
+            </div>
         {% endblock %}
-    </div>
+    </footer>
 {% endblock %}
 </body>
 </html>", "base.html.twig", "/Users/pierre/Documents/UTBM/BR2/WE4/WE4A/projet/templates/base.html.twig");

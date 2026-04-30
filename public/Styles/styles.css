@@ -47,10 +47,18 @@ body{
     flex-grow: 1;
 }
 
-.footer{
-    background-color: #FFFFFF;
+main{}
+
+footer{
+    background-color: #04122e;
+    bottom: 0;
 }
 
+a:focus {
+    outline: 3px solid #9d4300;
+    outline-offset: 4px;
+    border-radius: 4px;
+}
 
 /* Font ManRope */
 @font-face{

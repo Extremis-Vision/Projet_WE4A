@@ -18,11 +18,6 @@ class mainController extends AbstractController
         return $this->render('annonces.html.twig');
     }
 
-    #[Route('/avis', name : 'avis')]
-    public function avisPage():Response{
-        return $this->render('avis.html.twig');
-    }
-
     #[Route('/vendre-ma-voiture', name : 'vendreMaVoiture')]
     public function vendre_ma_voiture():Response{
         return $this->render('vendreMaVoiture.html.twig');

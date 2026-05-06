@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 29 avr. 2026 à 17:59
+-- Généré le : mer. 06 mai 2026 à 15:49
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -54,7 +54,9 @@ INSERT INTO `utilisateur` (`id_utilisateur`, `nom`, `prenom`, `email`, `mdp`, `r
 (9, 'Laurent', 'Camille', 'camille.laurent@email.fr', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'acheteur', '0608901234', '2024-03-10 15:30:00'),
 (10, 'Durand', 'Antoine', 'antoine.durand@email.fr', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'acheteur', '0609012345', '2024-03-15 09:45:00'),
 (11, 'Garnier', 'Sarah', 'sarah.garnier@email.fr', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'acheteur', '0610123456', '2024-03-20 14:00:00'),
-(12, 'Roux', 'Nicolas', 'nicolas.roux@email.fr', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'acheteur', '0611234567', '2024-03-25 10:15:00');
+(12, 'Roux', 'Nicolas', 'nicolas.roux@email.fr', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'acheteur', '0611234567', '2024-03-25 10:15:00'),
+(13, 'Heitzmann', 'Bastien', 'bastien@heitzmann.fr', '$2y$13$ZeNWaO8Yt/AfOWfZhXDA.uokFCssMixK6/CQkiDQPpzqkuku25FKK', 'acheteur', NULL, '2026-05-06 10:26:34'),
+(14, 'Atsiz', 'Blusk', 'blusk@mail.fr', '$2y$13$9.D1zGHmyKRzQM.gNTZy1uz00GtpRqvdjzOYbfJwoym9RC5NHAUR2', 'acheteur', NULL, '2026-05-06 14:59:07');
 
 --
 -- Index pour les tables déchargées
@@ -76,7 +78,7 @@ ALTER TABLE `utilisateur`
 -- AUTO_INCREMENT pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  MODIFY `id_utilisateur` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_utilisateur` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

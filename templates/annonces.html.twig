@@ -1,1 +1,114 @@
 {% extends 'base.html.twig' %}
+
+{% block pageTitle %}Annonces — AutoMarket{% endblock %}
+
+{% block main %}
+<div class="px-6 py-8 max-w-7xl mx-auto">
+
+    <h1 class="text-3xl font-bold text-primary font-['ManRope'] mb-6">Toutes les annonces</h1>
+
+    {# Filtres #}
+    <form id="filtres-form" class="bg-white rounded-xl p-5 shadow-sm mb-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-4">
+
+        <div>
+            <label class="block text-xs font-semibold text-tertiary mb-1 uppercase tracking-wide">Marque</label>
+            <select name="marque_id" id="filter-marque" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-secondary focus:outline-none bg-white">
+                <option value="">Toutes</option>
+                {% for m in marques %}
+                    <option value="{{ m.id_marque }}" {% if filters.marque_id == m.id_marque %}selected{% endif %}>{{ m.nom }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div>
+            <label class="block text-xs font-semibold text-tertiary mb-1 uppercase tracking-wide">Modèle</label>
+            <select name="modele_id" id="filter-modele" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-secondary focus:outline-none bg-white disabled:opacity-50" {% if not filters.marque_id %}disabled{% endif %}>
+                <option value="">Tous</option>
+                {% if filters.marque_id and modelesParMarque[filters.marque_id] is defined %}
+                    {% for mo in modelesParMarque[filters.marque_id] %}
+                        <option value="{{ mo.id }}" {% if filters.modele_id == mo.id %}selected{% endif %}>{{ mo.nom }}</option>
+                    {% endfor %}
+                {% endif %}
+            </select>
+        </div>
+
+        <div>
+            <label class="block text-xs font-semibold text-tertiary mb-1 uppercase tracking-wide">Prix min (€)</label>
+            <input type="number" name="prix_min" min="0" step="500"
+                   value="{{ filters.prix_min ?? '' }}"
+                   placeholder="0"
+                   class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-secondary focus:outline-none">
+        </div>
+
+        <div>
+            <label class="block text-xs font-semibold text-tertiary mb-1 uppercase tracking-wide">Prix max (€)</label>
+            <input type="number" name="prix_max" min="0" step="500"
+                   value="{{ filters.prix_max ?? '' }}"
+                   placeholder="100 000"
+                   class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-secondary focus:outline-none">
+        </div>
+
+        <div>
+            <label class="block text-xs font-semibold text-tertiary mb-1 uppercase tracking-wide">Km max</label>
+            <input type="number" name="km_max" min="0" step="5000"
+                   value="{{ filters.km_max ?? '' }}"
+                   placeholder="300 000"
+                   class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-secondary focus:outline-none">
+        </div>
+
+        <div>
+            <label class="block text-xs font-semibold text-tertiary mb-1 uppercase tracking-wide">Année min</label>
+            <input type="number" name="annee_min" min="1990" max="2025"
+                   value="{{ filters.annee_min ?? '' }}"
+                   placeholder="2000"
+                   class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-secondary focus:outline-none">
+        </div>
+
+        <div>
+            <label class="block text-xs font-semibold text-tertiary mb-1 uppercase tracking-wide">Année max</label>
+            <input type="number" name="annee_max" min="1990" max="2025"
+                   value="{{ filters.annee_max ?? '' }}"
+                   placeholder="2025"
+                   class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-secondary focus:outline-none">
+        </div>
+    </form>
+
+    {# Compteur #}
+    <p id="compteur" class="text-tertiary text-sm mb-4">
+        <span id="nb-resultats">{{ annonces|length }}</span> annonce(s) trouvée(s)
+    </p>
+
+    {# Grille des annonces #}
+    <div id="liste-annonces">
+        {% include 'annonce/_liste.html.twig' with {'annonces': annonces} %}
+    </div>
+
+</div>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+const MODELES_PAR_MARQUE = {{ modelesParMarque|json_encode|raw }};
+(function () {
+    var selMarque = document.getElementById('filter-marque');
+    var selModele = document.getElementById('filter-modele');
+
+    selMarque.addEventListener('change', function () {
+        var mid = this.value;
+        selModele.innerHTML = '<option value="">Tous</option>';
+        if (mid && MODELES_PAR_MARQUE[mid]) {
+            MODELES_PAR_MARQUE[mid].forEach(function (mo) {
+                var opt = document.createElement('option');
+                opt.value = mo.id;
+                opt.textContent = mo.nom;
+                selModele.appendChild(opt);
+            });
+            selModele.disabled = false;
+        } else {
+            selModele.disabled = true;
+        }
+    });
+})();
+</script>
+<script src="{{ asset('js/annonces.js') }}"></script>
+{% endblock %}

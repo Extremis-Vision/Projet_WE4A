@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+{% block pageTitle %}Mes annonces — AutoMarket{% endblock %}
+
+{% block main %}
+<div class="max-w-6xl mx-auto px-6 py-8">
+
+    {% for msg in app.flashes('success') %}
+        <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg mb-6 text-sm">{{ msg }}</div>
+    {% endfor %}
+
+    <div class="flex items-center justify-between mb-8">
+        <div>
+            <h1 class="text-3xl font-bold text-primary font-['ManRope']">Mes annonces</h1>
+            <p class="text-tertiary mt-1">{{ annonces|length }} annonce{{ annonces|length != 1 ? 's' : '' }}</p>
+        </div>
+        <a href="{{ path('annonce_nouvelle') }}"
+           class="px-5 py-3 bg-secondary text-white font-bold rounded-xl hover:bg-opacity-90 active:scale-95 transition-all text-sm">
+            + Nouvelle annonce
+        </a>
+    </div>
+
+    {% if annonces is empty %}
+        <div class="text-center py-24 bg-white rounded-xl shadow-sm">
+            <svg class="w-16 h-16 text-gray-200 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 7H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm-7 9c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm5-8H7l2-4h6l2 4z"/>
+            </svg>
+            <p class="text-xl font-semibold text-primary mb-2">Aucune annonce pour l'instant</p>
+            <p class="text-tertiary text-sm mb-6">Publiez votre première annonce et touchez des acheteurs qualifiés.</p>
+            <a href="{{ path('annonce_nouvelle') }}"
+               class="inline-block px-8 py-3 bg-secondary text-white font-bold rounded-xl hover:bg-opacity-90 active:scale-95 transition-all">
+                Publier une annonce
+            </a>
+        </div>
+    {% else %}
+        <div class="space-y-4">
+            {% for a in annonces %}
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden flex gap-0 hover:shadow-md transition-shadow">
+
+                {# Miniature #}
+                <a href="{{ path('annonce_detail', {id: a.id_annonce}) }}"
+                   class="flex-none w-40 h-32 bg-gray-100 overflow-hidden">
+                    {% if a.photo_principale %}
+                        <img src="{{ a.photo_principale }}" alt="{{ a.marque_nom }} {{ a.modele_nom }}"
+                             class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                    {% else %}
+                        <div class="w-full h-full flex items-center justify-center text-gray-300">
+                            <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 7H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm-7 9c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm5-8H7l2-4h6l2 4z"/>
+                            </svg>
+                        </div>
+                    {% endif %}
+                </a>
+
+                {# Infos #}
+                <div class="flex-1 px-5 py-4 min-w-0">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="min-w-0">
+                            <a href="{{ path('annonce_detail', {id: a.id_annonce}) }}"
+                               class="font-bold text-primary hover:text-secondary transition-colors">
+                                {{ a.marque_nom }} {{ a.modele_nom }}
+                            </a>
+                            <p class="text-xs text-tertiary mt-0.5">{{ a.version_nom }}</p>
+                        </div>
+                        <p class="text-xl font-bold text-secondary flex-none">
+                            {{ a.prix|number_format(0, ',', ' ') }} €
+                        </p>
+                    </div>
+
+                    <div class="flex flex-wrap gap-x-3 gap-y-1 text-xs text-tertiary mt-2">
+                        <span>{{ a.annee_circulation }}</span>
+                        <span>•</span>
+                        <span>{{ a.kilometrage|number_format(0, ',', ' ') }} km</span>
+                        {% if a.etat %}<span>•</span><span>{{ a.etat }}</span>{% endif %}
+                        {% if a.localisation %}<span>•</span><span>📍 {{ a.localisation }}</span>{% endif %}
+                    </div>
+
+                    <div class="flex items-center justify-between mt-3">
+                        <span class="text-xs text-gray-400">
+                            Publiée le {{ a.date_publication ? a.date_publication|date('d/m/Y') : a.date_creation|date('d/m/Y') }}
+                        </span>
+                        <div class="flex gap-2">
+                            <a href="{{ path('annonce_modifier', {id: a.id_annonce}) }}"
+                               class="px-3 py-1.5 border border-primary text-primary text-xs font-semibold rounded-lg hover:bg-primary hover:text-white transition-all">
+                                Modifier
+                            </a>
+                            <form action="{{ path('annonce_supprimer', {id: a.id_annonce}) }}" method="post">
+                                <button type="submit"
+                                        class="px-3 py-1.5 border border-red-300 text-red-500 text-xs font-semibold rounded-lg hover:bg-red-50 transition-all">
+                                    Supprimer
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+</div>
+{% endblock %}

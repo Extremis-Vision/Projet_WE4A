@@ -1,0 +1,208 @@
+{% extends 'base.html.twig' %}
+
+{% block pageTitle %}{{ annonce ? 'Modifier' : 'Publier' }} une annonce — AutoMarket{% endblock %}
+
+{% block main %}
+<div class="max-w-3xl mx-auto px-6 py-8">
+
+    <h1 class="text-3xl font-bold text-primary font-['ManRope'] mb-2">
+        {{ annonce ? 'Modifier l\'annonce' : 'Publier une annonce' }}
+    </h1>
+    <p class="text-tertiary mb-8">Renseignez les informations de votre véhicule</p>
+
+    {% for msg in app.flashes('warning') %}
+        <div class="bg-amber-50 border border-amber-200 text-amber-800 px-4 py-3 rounded-lg mb-4 text-sm">{{ msg }}</div>
+    {% endfor %}
+    {% for err in errors %}
+        <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4 text-sm">{{ err }}</div>
+    {% endfor %}
+
+    <form method="post" enctype="multipart/form-data" class="space-y-6">
+
+        {# Sélection du véhicule #}
+        <div class="bg-white rounded-xl p-6 shadow-sm space-y-4">
+            <h2 class="font-bold text-primary font-['ManRope']">Modèle du véhicule</h2>
+
+            <div>
+                <label class="block text-sm font-medium text-tertiary mb-1">Marque *</label>
+                <select id="sel-marque" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary bg-white text-primary text-sm">
+                    <option value="">Sélectionner une marque</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-tertiary mb-1">Modèle *</label>
+                <select id="sel-modele" disabled class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary bg-white text-primary text-sm disabled:opacity-50">
+                    <option value="">Sélectionner un modèle</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-tertiary mb-1">Génération *</label>
+                <select id="sel-generation" disabled class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary bg-white text-primary text-sm disabled:opacity-50">
+                    <option value="">Sélectionner une génération</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-tertiary mb-1">Version / Finition *</label>
+                <select id="sel-version" name="id_version" disabled required
+                        class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary bg-white text-primary text-sm disabled:opacity-50">
+                    <option value="">Sélectionner une version</option>
+                </select>
+            </div>
+        </div>
+
+        {# Informations du véhicule #}
+        <div class="bg-white rounded-xl p-6 shadow-sm space-y-4">
+            <h2 class="font-bold text-primary font-['ManRope']">Informations</h2>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-tertiary mb-1">Prix (€) *</label>
+                    <input type="number" name="prix" min="1" step="1" required
+                           value="{{ annonce.prix ?? '' }}"
+                           class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary bg-white text-primary">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-tertiary mb-1">Année de mise en circulation *</label>
+                    <input type="number" name="annee_circulation" min="1950" max="2025" required
+                           value="{{ annonce.annee_circulation ?? '' }}"
+                           class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary bg-white text-primary">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-tertiary mb-1">Kilométrage *</label>
+                    <input type="number" name="kilometrage" min="0" required
+                           value="{{ annonce.kilometrage ?? '' }}"
+                           class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary bg-white text-primary">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-tertiary mb-1">État</label>
+                    <select name="etat" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary bg-white text-primary text-sm">
+                        <option value="">Non précisé</option>
+                        {% for e in ['Excellent', 'Très bon', 'Bon', 'Correct', 'À rénover'] %}
+                            <option value="{{ e }}" {% if annonce.etat == e %}selected{% endif %}>{{ e }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-tertiary mb-1">Couleur</label>
+                    <input type="text" name="couleur" placeholder="Noir, Blanc, Rouge…"
+                           value="{{ annonce.couleur ?? '' }}"
+                           class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary bg-white text-primary">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-tertiary mb-1">Localisation</label>
+                    <input type="text" name="localisation" placeholder="Paris, 75001"
+                           value="{{ annonce.localisation ?? '' }}"
+                           class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary bg-white text-primary">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-tertiary mb-1">Nombre de propriétaires</label>
+                    <input type="number" name="nombre_proprietaire" id="nombre_proprietaire" min="1" max="20"
+                           value="{{ annonce.nombre_proprietaire ?? '' }}"
+                           class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary bg-white text-primary">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-tertiary mb-1">Contrôle technique</label>
+                    <input type="date" name="controle_technique"
+                           value="{{ annonce.controle_technique ?? '' }}"
+                           class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary bg-white text-primary">
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <input type="checkbox" id="premiere_main" name="premiere_main" value="1"
+                       {% if annonce.premiere_main %}checked{% endif %}
+                       class="w-4 h-4 accent-secondary rounded"
+                       onchange="
+                           var nb = document.getElementById('nombre_proprietaire');
+                           if (this.checked) { nb.value = 1; nb.disabled = true; }
+                           else { nb.disabled = false; nb.value = ''; }
+                       ">
+                <label for="premiere_main" class="text-sm font-medium text-tertiary cursor-pointer">Première main</label>
+            </div>
+        </div>
+
+        {# Description #}
+        <div class="bg-white rounded-xl p-6 shadow-sm">
+            <h2 class="font-bold text-primary font-['ManRope'] mb-3">Description</h2>
+            <textarea name="description" rows="5" placeholder="Décrivez l'état général, l'historique, les options…"
+                      class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary bg-white text-primary text-sm resize-none">{{ annonce.description ?? '' }}</textarea>
+        </div>
+
+        {# Photos #}
+        <div class="bg-white rounded-xl p-6 shadow-sm space-y-3">
+            <h2 class="font-bold text-primary font-['ManRope']">Photos du véhicule</h2>
+
+            {% if photos is defined and photos is not empty %}
+                <p class="text-sm font-medium text-tertiary">Photos actuelles</p>
+                <div class="grid grid-cols-4 gap-2">
+                    {% for photo in photos %}
+                    <div class="relative aspect-square bg-gray-100 rounded-lg overflow-hidden">
+                        <img src="{{ photo.url_photo }}" class="w-full h-full object-cover">
+                        <label class="absolute top-1 right-1 bg-red-500 hover:bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center cursor-pointer transition-colors"
+                               title="Supprimer cette photo">
+                            <input type="checkbox" name="delete_photos[]" value="{{ photo.id_photo }}" class="hidden" onchange="this.closest('.relative').style.opacity = this.checked ? '0.3' : '1'">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </label>
+                    </div>
+                    {% endfor %}
+                </div>
+                <p class="text-xs text-gray-400">Cochez la croix rouge pour supprimer une photo. Les nouvelles photos s'ajouteront aux existantes.</p>
+            {% endif %}
+
+            <p class="text-sm font-medium text-tertiary">Ajouter des photos</p>
+            <label class="flex flex-col items-center justify-center border-2 border-dashed border-gray-200 rounded-xl py-8 px-4 cursor-pointer hover:border-secondary transition-colors">
+                <svg class="w-10 h-10 text-gray-300 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                          d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                </svg>
+                <span class="text-sm text-tertiary">Cliquez pour sélectionner vos photos</span>
+                <span class="text-xs text-gray-400 mt-1">JPG, PNG, WEBP — plusieurs fichiers acceptés</span>
+                <input type="file" name="photos[]" multiple accept="image/jpeg,image/png,image/webp,image/gif"
+                       id="input-photos" class="hidden">
+            </label>
+            <div id="preview-photos" class="grid grid-cols-4 gap-2"></div>
+        </div>
+
+        <button type="submit"
+                class="w-full py-4 bg-primary text-white font-bold rounded-xl hover:bg-opacity-90 active:scale-95 transition-all text-lg">
+            {{ annonce.id_annonce is defined and annonce.id_annonce ? 'Enregistrer les modifications' : 'Publier l\'annonce' }}
+        </button>
+
+    </form>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+const CATALOG = {{ catalog|json_encode|raw }};
+const SELECTED_VERSION = {{ annonce.id_version|json_encode|raw }};
+</script>
+<script src="{{ asset('js/annonces.js') }}"></script>
+<script>
+document.getElementById('input-photos').addEventListener('change', function () {
+    const preview = document.getElementById('preview-photos');
+    preview.innerHTML = '';
+    Array.from(this.files).forEach(file => {
+        const reader = new FileReader();
+        reader.onload = e => {
+            const div = document.createElement('div');
+            div.className = 'aspect-square bg-gray-100 rounded-lg overflow-hidden';
+            div.innerHTML = `<img src="${e.target.result}" class="w-full h-full object-cover">`;
+            preview.appendChild(div);
+        };
+        reader.readAsDataURL(file);
+    });
+});
+</script>
+{% endblock %}

@@ -1,3 +1,323 @@
 {% extends "base.html.twig" %}
 
+{% block pageTitle %}AutoMarket — Le Showroom Digital{% endblock %}
 
+{% block main %}
+
+{# ═══════════════════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════════════════ #}
+<section class="relative overflow-hidden bg-primary min-h-[88vh] flex items-center">
+
+    {# Motif géométrique CSS en arrière-plan #}
+    <div class="absolute inset-0 opacity-[0.04]" style="
+        background-image:
+            linear-gradient(30deg, #ffffff 12%, transparent 12.5%, transparent 87%, #ffffff 87.5%, #ffffff),
+            linear-gradient(150deg, #ffffff 12%, transparent 12.5%, transparent 87%, #ffffff 87.5%, #ffffff),
+            linear-gradient(30deg, #ffffff 12%, transparent 12.5%, transparent 87%, #ffffff 87.5%, #ffffff),
+            linear-gradient(150deg, #ffffff 12%, transparent 12.5%, transparent 87%, #ffffff 87.5%, #ffffff),
+            linear-gradient(60deg, #ffffff77 25%, transparent 25.5%, transparent 75%, #ffffff77 75%, #ffffff77);
+        background-size: 80px 140px;
+        background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0;
+    "></div>
+
+    {# Gradient latéral droit #}
+    <div class="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-l from-secondary/10 to-transparent pointer-events-none"></div>
+
+    <div class="relative max-w-6xl mx-auto px-6 py-24 w-full">
+        <div class="max-w-3xl">
+
+            <span class="inline-block text-secondary text-sm font-semibold tracking-widest uppercase mb-6 border border-secondary/30 px-3 py-1 rounded-full">
+                Le Showroom Digital
+            </span>
+
+            <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold text-white font-['ManRope'] leading-[1.05] mb-6">
+                Trouvez votre<br>
+                prochaine <span class="text-secondary">œuvre</span><br>
+                automobile
+            </h1>
+
+            <p class="text-white/60 text-lg md:text-xl max-w-xl mb-10 leading-relaxed">
+                Des milliers d'annonces sélectionnées, présentées avec l'intégrité éditoriale
+                d'un vrai showroom. Sans compromis.
+            </p>
+
+            <div class="flex flex-wrap gap-4">
+                <a href="{{ path('annonces') }}"
+                   class="inline-flex items-center gap-2 px-8 py-4 bg-secondary text-white font-bold rounded-xl hover:bg-secondary/90 active:scale-95 transition-all text-base shadow-lg shadow-secondary/30">
+                    Voir les annonces
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                </a>
+                <a href="{{ path('vendreMaVoiture') }}"
+                   class="inline-flex items-center gap-2 px-8 py-4 border border-white/30 text-white font-semibold rounded-xl hover:bg-white/10 active:scale-95 transition-all text-base">
+                    Vendre ma voiture
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    {# Indicateur de scroll #}
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/30">
+        <span class="text-xs tracking-widest uppercase">Découvrir</span>
+        <div class="w-px h-8 bg-white/20 animate-pulse"></div>
+    </div>
+</section>
+
+{# ═══════════════════════════════════════════════════════
+   BARRE DE RECHERCHE
+═══════════════════════════════════════════════════════ #}
+<section class="bg-white shadow-lg relative z-10 -mt-1">
+    <div class="max-w-6xl mx-auto px-6 py-6">
+        <form action="{{ path('annonces') }}" method="get"
+              class="flex flex-wrap lg:flex-nowrap items-end gap-4">
+
+            <div class="flex-1 min-w-[140px]">
+                <label class="block text-xs font-semibold text-primary/50 uppercase tracking-wider mb-2">Marque</label>
+                <select name="marque_id" id="hp-marque"
+                        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm text-primary focus:outline-none focus:ring-2 focus:ring-secondary/40 transition">
+                    <option value="">Toutes les marques</option>
+                    {% for m in marques %}
+                        <option value="{{ m.id_marque }}">{{ m.nom }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="flex-1 min-w-[140px]">
+                <label class="block text-xs font-semibold text-primary/50 uppercase tracking-wider mb-2">Modèle</label>
+                <select name="modele_id" id="hp-modele" disabled
+                        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm text-primary focus:outline-none focus:ring-2 focus:ring-secondary/40 transition disabled:opacity-40">
+                    <option value="">Tous les modèles</option>
+                </select>
+            </div>
+
+            <div class="flex-1 min-w-[120px]">
+                <label class="block text-xs font-semibold text-primary/50 uppercase tracking-wider mb-2">Prix max (€)</label>
+                <input type="number" name="prix_max" placeholder="Ex: 30 000" min="0" step="1000"
+                       class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm text-primary focus:outline-none focus:ring-2 focus:ring-secondary/40 transition">
+            </div>
+
+            <div class="flex-1 min-w-[120px]">
+                <label class="block text-xs font-semibold text-primary/50 uppercase tracking-wider mb-2">Km max</label>
+                <input type="number" name="km_max" placeholder="Ex: 100 000" min="0" step="5000"
+                       class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm text-primary focus:outline-none focus:ring-2 focus:ring-secondary/40 transition">
+            </div>
+
+            <div class="flex-1 min-w-[110px]">
+                <label class="block text-xs font-semibold text-primary/50 uppercase tracking-wider mb-2">Année min</label>
+                <input type="number" name="annee_min" placeholder="Ex: 2018" min="1950" max="2025"
+                       class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm text-primary focus:outline-none focus:ring-2 focus:ring-secondary/40 transition">
+            </div>
+
+            <button type="submit"
+                    class="flex-none px-8 py-3 bg-secondary text-white font-bold rounded-lg hover:bg-secondary/90 active:scale-95 transition-all text-sm shadow-md shadow-secondary/20 whitespace-nowrap">
+                Rechercher
+            </button>
+        </form>
+    </div>
+</section>
+
+{# ═══════════════════════════════════════════════════════
+   ANNONCES EN VEDETTE
+═══════════════════════════════════════════════════════ #}
+<section class="bg-[#f8f8f6] py-20">
+    <div class="max-w-6xl mx-auto px-6">
+
+        <div class="flex items-end justify-between mb-10">
+            <div>
+                <p class="text-secondary text-sm font-semibold tracking-widest uppercase mb-2">Sélection éditoriale</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-primary font-['ManRope']">Annonces en vedette</h2>
+            </div>
+            <a href="{{ path('annonces') }}"
+               class="hidden md:inline-flex items-center gap-2 text-sm font-semibold text-primary/60 hover:text-secondary transition-colors">
+                Voir tout
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+            </a>
+        </div>
+
+        {% if vedettes is empty %}
+            <div class="text-center py-16 text-primary/40">
+                <p class="text-lg">Aucune annonce disponible pour le moment.</p>
+            </div>
+        {% else %}
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for a in vedettes %}
+            <a href="{{ path('annonce_detail', {id: a.id_annonce}) }}"
+               class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col">
+
+                {# Photo #}
+                <div class="relative aspect-[4/3] bg-gray-100 overflow-hidden flex-none">
+                    {% if a.photo_principale %}
+                        <img src="{{ a.photo_principale }}" alt="{{ a.marque_nom }} {{ a.modele_nom }}"
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    {% else %}
+                        <div class="w-full h-full flex items-center justify-center">
+                            <svg class="w-16 h-16 text-gray-200" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 7H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm-7 9c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm5-8H7l2-4h6l2 4z"/>
+                            </svg>
+                        </div>
+                    {% endif %}
+
+                    {# Badge #}
+                    {% if loop.index <= 2 %}
+                    <span class="absolute top-3 left-3 bg-secondary text-white text-xs font-bold px-2.5 py-1 rounded-full">
+                        {{ loop.index == 1 ? 'Premium' : 'Nouveau' }}
+                    </span>
+                    {% endif %}
+                </div>
+
+                {# Infos #}
+                <div class="p-5 flex flex-col flex-1">
+                    <div class="flex-1">
+                        <h3 class="font-bold text-primary text-base leading-tight mb-1 group-hover:text-secondary transition-colors">
+                            {{ a.marque_nom }} {{ a.modele_nom }}
+                        </h3>
+                        <p class="text-xs text-primary/50 mb-3">{{ a.version_nom }}</p>
+
+                        <div class="flex flex-wrap gap-x-3 gap-y-1 text-xs text-primary/50 mb-4">
+                            <span>{{ a.annee_circulation }}</span>
+                            <span>·</span>
+                            <span>{{ a.kilometrage|number_format(0, ',', ' ') }} km</span>
+                            {% if a.boite_vitesse %}<span>·</span><span>{{ a.boite_vitesse }}</span>{% endif %}
+                            {% if a.localisation %}<span>·</span><span>{{ a.localisation }}</span>{% endif %}
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                        <p class="text-xl font-bold text-secondary">{{ a.prix|number_format(0, ',', ' ') }} €</p>
+                        <span class="text-xs font-semibold text-primary/40 group-hover:text-secondary transition-colors flex items-center gap-1">
+                            Voir l'annonce
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+
+            </a>
+            {% endfor %}
+        </div>
+
+        <div class="text-center mt-10 md:hidden">
+            <a href="{{ path('annonces') }}"
+               class="inline-flex items-center gap-2 px-6 py-3 border border-primary text-primary font-semibold rounded-xl hover:bg-primary hover:text-white transition-all text-sm">
+                Voir toutes les annonces
+            </a>
+        </div>
+        {% endif %}
+
+    </div>
+</section>
+
+{# ═══════════════════════════════════════════════════════
+   STATS
+═══════════════════════════════════════════════════════ #}
+<section class="bg-primary py-16">
+    <div class="max-w-6xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left md:divide-x md:divide-white/10">
+
+            <div class="md:px-8 first:pl-0">
+                <p class="text-4xl md:text-5xl font-bold font-['ManRope'] text-secondary mb-2">
+                    {{ total > 0 ? total ~ '+' : '0' }}
+                </p>
+                <p class="text-white/60 text-sm font-medium uppercase tracking-wider">Annonces actives</p>
+            </div>
+
+            <div class="md:px-8">
+                <p class="text-4xl md:text-5xl font-bold font-['ManRope'] text-secondary mb-2">98%</p>
+                <p class="text-white/60 text-sm font-medium uppercase tracking-wider">Vendeurs satisfaits</p>
+            </div>
+
+            <div class="md:px-8">
+                <p class="text-4xl md:text-5xl font-bold font-['ManRope'] text-secondary mb-2">2026</p>
+                <p class="text-white/60 text-sm font-medium uppercase tracking-wider">Depuis</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{# ═══════════════════════════════════════════════════════
+   COMMENT ÇA MARCHE
+═══════════════════════════════════════════════════════ #}
+<section class="bg-[#f8f8f6] py-20">
+    <div class="max-w-6xl mx-auto px-6">
+
+        <div class="text-center mb-14">
+            <p class="text-secondary text-sm font-semibold tracking-widest uppercase mb-3">Simple & rapide</p>
+            <h2 class="text-3xl md:text-4xl font-bold text-primary font-['ManRope']">Comment ça marche ?</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+
+            {# Ligne de connexion desktop #}
+            <div class="hidden md:block absolute top-10 left-[calc(16.67%+2rem)] right-[calc(16.67%+2rem)] h-px bg-gray-200 z-0"></div>
+
+            {% set steps = [
+                {num: '01', icon: 'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z', title: 'Cherchez', desc: 'Parcourez des milliers d\'annonces filtrées par marque, prix, kilométrage et année. Notre sélection éditoriale met en avant les meilleures offres.'},
+                {num: '02', icon: 'M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z', title: 'Contactez', desc: 'Contactez directement le vendeur via la fiche annonce. Pas d\'intermédiaire, pas de commission cachée. Une mise en relation honnête et directe.'},
+                {num: '03', icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z', title: 'Achetez', desc: 'Finalisez votre achat en toute sérénité. AutoMarket vous accompagne à chaque étape avec des conseils d\'experts pour un achat réussi.'}
+            ] %}
+
+            {% for step in steps %}
+            <div class="relative z-10 text-center md:text-left">
+                <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-secondary/10 mb-6 relative">
+                    <svg class="w-8 h-8 text-secondary" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="{{ step.icon }}"/>
+                    </svg>
+                    <span class="absolute -top-2 -right-2 w-6 h-6 bg-secondary text-white text-xs font-bold rounded-full flex items-center justify-center">
+                        {{ loop.index }}
+                    </span>
+                </div>
+                <h3 class="text-xl font-bold text-primary font-['ManRope'] mb-3">{{ step.title }}</h3>
+                <p class="text-primary/60 text-sm leading-relaxed">{{ step.desc }}</p>
+            </div>
+            {% endfor %}
+
+        </div>
+
+        <div class="text-center mt-14">
+            <a href="{{ path('annonces') }}"
+               class="inline-flex items-center gap-2 px-8 py-4 bg-secondary text-white font-bold rounded-xl hover:bg-secondary/90 active:scale-95 transition-all shadow-lg shadow-secondary/20">
+                Commencer maintenant
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+            </a>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}
+
+{% block javascripts %}
+<script>
+const MODELES_PAR_MARQUE = {{ modelesParMarque|json_encode|raw }};
+(function () {
+    var selMarque = document.getElementById('hp-marque');
+    var selModele = document.getElementById('hp-modele');
+    if (!selMarque) return;
+
+    selMarque.addEventListener('change', function () {
+        var mid = this.value;
+        selModele.innerHTML = '<option value="">Tous les modèles</option>';
+        if (mid && MODELES_PAR_MARQUE[mid]) {
+            MODELES_PAR_MARQUE[mid].forEach(function (mo) {
+                var opt = document.createElement('option');
+                opt.value = mo.id;
+                opt.textContent = mo.nom;
+                selModele.appendChild(opt);
+            });
+            selModele.disabled = false;
+        } else {
+            selModele.disabled = true;
+        }
+    });
+})();
+</script>
+{% endblock %}

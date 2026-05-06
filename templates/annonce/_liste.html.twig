@@ -1,0 +1,54 @@
+{% if annonces is empty %}
+    <div class="text-center py-20 text-tertiary">
+        <p class="text-xl font-semibold mb-2">Aucune annonce trouvée</p>
+        <p class="text-sm">Essayez d'élargir vos critères de recherche.</p>
+    </div>
+{% else %}
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {% for a in annonces %}
+        <a href="{{ path('annonce_detail', {id: a.id_annonce}) }}"
+           class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow group">
+
+            <div class="aspect-[4/3] bg-gray-100 overflow-hidden">
+                {% if a.photo_principale %}
+                    <img src="{{ a.photo_principale }}" alt="{{ a.marque_nom }} {{ a.modele_nom }}"
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                {% else %}
+                    <div class="w-full h-full flex items-center justify-center text-gray-300">
+                        <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 7H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm-7 9c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm5-8H7l2-4h6l2 4z"/>
+                        </svg>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="p-4">
+                <div class="flex items-start justify-between mb-1">
+                    <h2 class="font-bold text-primary text-sm leading-tight">
+                        {{ a.marque_nom }} {{ a.modele_nom }}
+                    </h2>
+                </div>
+                <p class="text-xs text-tertiary mb-3">{{ a.version_nom }}</p>
+
+                <p class="text-xl font-bold text-secondary mb-3">
+                    {{ a.prix|number_format(0, ',', ' ') }} €
+                </p>
+
+                <div class="flex flex-wrap gap-x-3 gap-y-1 text-xs text-tertiary">
+                    <span>{{ a.annee_circulation }}</span>
+                    <span>•</span>
+                    <span>{{ a.kilometrage|number_format(0, ',', ' ') }} km</span>
+                    {% if a.boite_vitesse %}
+                        <span>•</span>
+                        <span>{{ a.boite_vitesse }}</span>
+                    {% endif %}
+                </div>
+
+                {% if a.localisation %}
+                    <p class="text-xs text-tertiary mt-2 truncate">📍 {{ a.localisation }}</p>
+                {% endif %}
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+{% endif %}

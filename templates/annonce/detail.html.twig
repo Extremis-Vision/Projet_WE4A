@@ -1,0 +1,250 @@
+{% extends 'base.html.twig' %}
+
+{% block pageTitle %}{{ annonce.marque_nom }} {{ annonce.modele_nom }} — AutoMarket{% endblock %}
+
+{% block main %}
+<div class="max-w-6xl mx-auto px-6 py-8">
+
+    {% for msg in app.flashes('success') %}
+        <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg mb-6 text-sm">{{ msg }}</div>
+    {% endfor %}
+    {% for msg in app.flashes('warning') %}
+        <div class="bg-amber-50 border border-amber-200 text-amber-800 px-4 py-3 rounded-lg mb-6 text-sm">{{ msg }}</div>
+    {% endfor %}
+
+    {# Breadcrumb #}
+    <nav class="text-sm text-tertiary mb-6">
+        <a href="{{ path('annonces') }}" class="hover:text-secondary">Annonces</a>
+        <span class="mx-2">/</span>
+        <span class="text-primary font-medium">{{ annonce.marque_nom }} {{ annonce.modele_nom }}</span>
+    </nav>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+        {# Colonne gauche : photos + infos principales #}
+        <div class="lg:col-span-2 space-y-6">
+
+            {# Carrousel photos #}
+            {% if photos is not empty %}
+            <div class="relative">
+                <div class="aspect-[16/9] bg-gray-100 rounded-xl overflow-hidden">
+                    <img id="carousel-main" src="{{ photos[0].url_photo }}"
+                         alt="{{ annonce.marque_nom }} {{ annonce.modele_nom }}"
+                         class="w-full h-full object-cover">
+                </div>
+
+                {% if photos|length > 1 %}
+                <button id="carousel-prev"
+                        class="absolute left-3 top-1/2 -translate-y-1/2 bg-white text-primary rounded-full w-10 h-10 flex items-center justify-center shadow-md hover:shadow-lg transition-shadow">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+                <button id="carousel-next"
+                        class="absolute right-3 top-1/2 -translate-y-1/2 bg-white text-primary rounded-full w-10 h-10 flex items-center justify-center shadow-md hover:shadow-lg transition-shadow">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </button>
+
+                <div class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black bg-opacity-50 text-white text-xs px-3 py-1 rounded-full" id="carousel-counter">
+                    1 / {{ photos|length }}
+                </div>
+                {% endif %}
+            </div>
+
+            {# Miniatures cliquables #}
+            {% if photos|length > 1 %}
+            <div class="grid grid-cols-5 gap-2">
+                {% for photo in photos %}
+                <div class="aspect-square bg-gray-100 rounded-lg overflow-hidden cursor-pointer ring-2 {% if loop.first %}ring-blue-500{% else %}ring-transparent{% endif %} hover:ring-blue-500 transition-all"
+                     data-thumb-index="{{ loop.index0 }}">
+                    <img src="{{ photo.url_photo }}" class="w-full h-full object-cover hover:opacity-80 transition-opacity">
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            {% else %}
+            <div class="aspect-[16/9] bg-gray-100 rounded-xl overflow-hidden">
+                <div class="w-full h-full flex items-center justify-center text-gray-300">
+                    <svg class="w-24 h-24" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M19 7H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm-7 9c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm5-8H7l2-4h6l2 4z"/>
+                    </svg>
+                </div>
+            </div>
+            {% endif %}
+
+            {# Caractéristiques clés #}
+            <div class="bg-white rounded-xl p-6 shadow-sm">
+                <h2 class="font-bold text-primary text-lg mb-4 font-['ManRope']">Caractéristiques</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+                    <div class="flex flex-col">
+                        <span class="text-tertiary text-xs uppercase tracking-wide mb-1">Année</span>
+                        <span class="font-semibold text-primary">{{ annonce.annee_circulation }}</span>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-tertiary text-xs uppercase tracking-wide mb-1">Kilométrage</span>
+                        <span class="font-semibold text-primary">{{ annonce.kilometrage|number_format(0, ',', ' ') }} km</span>
+                    </div>
+                    {% if annonce.boite_vitesse %}
+                    <div class="flex flex-col">
+                        <span class="text-tertiary text-xs uppercase tracking-wide mb-1">Boîte de vitesse</span>
+                        <span class="font-semibold text-primary">{{ annonce.boite_vitesse }}</span>
+                    </div>
+                    {% endif %}
+                    {% if annonce.transmission %}
+                    <div class="flex flex-col">
+                        <span class="text-tertiary text-xs uppercase tracking-wide mb-1">Transmission</span>
+                        <span class="font-semibold text-primary">{{ annonce.transmission }}</span>
+                    </div>
+                    {% endif %}
+                    {% if annonce.couleur %}
+                    <div class="flex flex-col">
+                        <span class="text-tertiary text-xs uppercase tracking-wide mb-1">Couleur</span>
+                        <span class="font-semibold text-primary">{{ annonce.couleur }}</span>
+                    </div>
+                    {% endif %}
+                    {% if annonce.etat %}
+                    <div class="flex flex-col">
+                        <span class="text-tertiary text-xs uppercase tracking-wide mb-1">État</span>
+                        <span class="font-semibold text-primary">{{ annonce.etat }}</span>
+                    </div>
+                    {% endif %}
+                    {% if annonce.nombre_places %}
+                    <div class="flex flex-col">
+                        <span class="text-tertiary text-xs uppercase tracking-wide mb-1">Places</span>
+                        <span class="font-semibold text-primary">{{ annonce.nombre_places }}</span>
+                    </div>
+                    {% endif %}
+                    {% if annonce.nombre_portes %}
+                    <div class="flex flex-col">
+                        <span class="text-tertiary text-xs uppercase tracking-wide mb-1">Portes</span>
+                        <span class="font-semibold text-primary">{{ annonce.nombre_portes }}</span>
+                    </div>
+                    {% endif %}
+                    <div class="flex flex-col">
+                        <span class="text-tertiary text-xs uppercase tracking-wide mb-1">Première main</span>
+                        <span class="font-semibold text-primary">{{ annonce.premiere_main ? 'Oui' : 'Non' }}</span>
+                    </div>
+                    {% if annonce.nombre_proprietaire %}
+                    <div class="flex flex-col">
+                        <span class="text-tertiary text-xs uppercase tracking-wide mb-1">Nb propriétaires</span>
+                        <span class="font-semibold text-primary">{{ annonce.nombre_proprietaire }}</span>
+                    </div>
+                    {% endif %}
+                    {% if annonce.controle_technique %}
+                    <div class="flex flex-col">
+                        <span class="text-tertiary text-xs uppercase tracking-wide mb-1">Contrôle technique</span>
+                        <span class="font-semibold text-primary">{{ annonce.controle_technique|date('d/m/Y') }}</span>
+                    </div>
+                    {% endif %}
+                    {% if annonce.localisation %}
+                    <div class="flex flex-col">
+                        <span class="text-tertiary text-xs uppercase tracking-wide mb-1">Localisation</span>
+                        <span class="font-semibold text-primary">{{ annonce.localisation }}</span>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            {# Description #}
+            {% if annonce.description %}
+            <div class="bg-white rounded-xl p-6 shadow-sm">
+                <h2 class="font-bold text-primary text-lg mb-3 font-['ManRope']">Description</h2>
+                <p class="text-tertiary text-sm leading-relaxed whitespace-pre-wrap">{{ annonce.description }}</p>
+            </div>
+            {% endif %}
+
+        </div>
+
+        {# Colonne droite : prix + vendeur + actions #}
+        <div class="space-y-4">
+
+            <div class="bg-white rounded-xl p-6 shadow-sm sticky top-4">
+
+                <p class="text-3xl font-bold text-secondary mb-1">
+                    {{ annonce.prix|number_format(0, ',', ' ') }} €
+                </p>
+                <p class="text-sm text-tertiary mb-1">{{ annonce.marque_nom }} {{ annonce.modele_nom }}</p>
+                <p class="text-xs text-tertiary mb-6">{{ annonce.version_nom }}</p>
+
+                <hr class="border-gray-100 mb-4">
+
+                <h3 class="font-semibold text-primary mb-3 text-sm">Vendeur</h3>
+                <p class="font-bold text-primary">{{ annonce.vendeur_prenom }} {{ annonce.vendeur_nom }}</p>
+                {% if annonce.vendeur_phone %}
+                <p class="text-secondary text-sm mt-1">📞 {{ annonce.vendeur_phone }}</p>
+                {% endif %}
+
+                {% if app.user %}
+                    {% if app.user.id != annonce.vendeur_id %}
+                    <a href="mailto:" class="mt-4 block text-center py-3 bg-secondary text-white font-bold rounded-lg hover:bg-opacity-90 active:scale-95 transition-all text-sm">
+                        Contacter le vendeur
+                    </a>
+                    {% else %}
+                    <a href="{{ path('annonce_modifier', {id: annonce.id_annonce}) }}"
+                       class="mt-4 block text-center py-2 border border-primary text-primary font-semibold rounded-lg hover:bg-primary hover:text-white transition-all text-sm">
+                        Modifier l'annonce
+                    </a>
+                    <form action="{{ path('annonce_supprimer', {id: annonce.id_annonce}) }}" method="post" class="mt-2">
+                        <button type="submit"
+                                class="w-full py-2 border border-red-300 text-red-500 font-semibold rounded-lg hover:bg-red-50 transition-all text-sm">
+                            Supprimer
+                        </button>
+                    </form>
+                    {% endif %}
+                {% else %}
+                <a href="{{ path('connexion') }}"
+                   class="mt-4 block text-center py-3 bg-primary text-white font-bold rounded-lg hover:bg-opacity-90 transition-all text-sm">
+                    Se connecter pour contacter
+                </a>
+                {% endif %}
+
+                {% if annonce.date_publication %}
+                <p class="text-xs text-tertiary mt-4 text-center">
+                    Publiée le {{ annonce.date_publication|date('d/m/Y') }}
+                </p>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% if photos|length > 1 %}
+<script>
+(function () {
+    var photos = {{ photos|map(p => p.url_photo)|json_encode|raw }};
+    var current = 0;
+
+    var mainImg = document.getElementById('carousel-main');
+    var counter = document.getElementById('carousel-counter');
+    var prevBtn = document.getElementById('carousel-prev');
+    var nextBtn = document.getElementById('carousel-next');
+    var thumbs  = document.querySelectorAll('[data-thumb-index]');
+
+    function goTo(index) {
+        current = (index + photos.length) % photos.length;
+        mainImg.src = photos[current];
+        counter.textContent = (current + 1) + ' / ' + photos.length;
+        thumbs.forEach(function(t) {
+            t.style.outline = parseInt(t.dataset.thumbIndex) === current ? '3px solid #3b82f6' : 'none';
+        });
+    }
+
+    prevBtn.addEventListener('click', function() { goTo(current - 1); });
+    nextBtn.addEventListener('click', function() { goTo(current + 1); });
+
+    thumbs.forEach(function(t) {
+        t.addEventListener('click', function() { goTo(parseInt(t.dataset.thumbIndex)); });
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft')  goTo(current - 1);
+        if (e.key === 'ArrowRight') goTo(current + 1);
+    });
+})();
+</script>
+{% endif %}
+{% endblock %}

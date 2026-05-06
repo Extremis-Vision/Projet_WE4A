@@ -1,1 +1,70 @@
 {% extends 'base.html.twig' %}
+
+{% block pageTitle %}Inscription — AutoMarket{% endblock %}
+
+{% block main %}
+<div class="min-h-[60vh] flex items-center justify-center py-12 px-4">
+    <div class="w-full max-w-lg">
+        <h1 class="text-3xl font-bold text-primary mb-2 font-['ManRope']">Créer un compte</h1>
+        <p class="text-tertiary mb-8">Rejoignez la communauté AutoMarket</p>
+
+        {% for message in app.flashes('error') %}
+            <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6 text-sm">{{ message }}</div>
+        {% endfor %}
+
+        <form id="form-inscription" action="{{ path('inscription') }}" method="post" class="space-y-5" novalidate>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label for="prenom" class="block text-sm font-medium text-tertiary mb-1">Prénom *</label>
+                    <input type="text" id="prenom" name="prenom" required
+                           class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary bg-white text-primary">
+                </div>
+                <div>
+                    <label for="nom" class="block text-sm font-medium text-tertiary mb-1">Nom *</label>
+                    <input type="text" id="nom" name="nom" required
+                           class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary bg-white text-primary">
+                </div>
+            </div>
+
+            <div>
+                <label for="email" class="block text-sm font-medium text-tertiary mb-1">Adresse email *</label>
+                <input type="email" id="email" name="email" required autocomplete="email"
+                       class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary bg-white text-primary">
+            </div>
+
+            <div>
+                <label for="numero_phone" class="block text-sm font-medium text-tertiary mb-1">Téléphone (optionnel)</label>
+                <input type="tel" id="numero_phone" name="numero_phone" placeholder="06 12 34 56 78"
+                       class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary bg-white text-primary">
+            </div>
+
+            <div>
+                <label for="mdp" class="block text-sm font-medium text-tertiary mb-1">Mot de passe * (8 caractères minimum)</label>
+                <input type="password" id="mdp" name="mdp" required minlength="8" autocomplete="new-password"
+                       class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary bg-white text-primary">
+            </div>
+
+            <div>
+                <label for="mdp_confirm" class="block text-sm font-medium text-tertiary mb-1">Confirmer le mot de passe *</label>
+                <input type="password" id="mdp_confirm" name="mdp_confirm" required autocomplete="new-password"
+                       class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary bg-white text-primary">
+                <p id="mdp-error" class="text-red-500 text-sm mt-1 hidden">Les mots de passe ne correspondent pas.</p>
+            </div>
+
+            <button type="submit"
+                    class="w-full py-3 bg-primary text-white font-bold rounded-lg hover:bg-opacity-90 active:scale-95 transition-all">
+                Créer mon compte
+            </button>
+        </form>
+
+        <p class="text-center text-tertiary mt-6 text-sm">
+            Déjà un compte ?
+            <a href="{{ path('connexion') }}" class="text-secondary font-semibold hover:underline">Se connecter</a>
+        </p>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/validation.js') }}"></script>
+{% endblock %}

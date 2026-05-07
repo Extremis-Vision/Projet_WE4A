@@ -237,24 +237,60 @@ class __TwigTemplate_fc0e3b272d8a4aab0e52e5990d2d5bf6 extends Template
                 // line 76
                 yield "                    </div>
 
-                    <div class=\"flex items-center justify-between mt-3\">
-                        <span class=\"text-xs text-gray-400\">
-                            Publiée le ";
-                // line 80
-                yield (((($tmp = CoreExtension::getAttribute($this->env, $this->source, $context["a"], "date_publication", [], "any", false, false, false, 80)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["a"], "date_publication", [], "any", false, false, false, 80), "d/m/Y"), "html", null, true)) : ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["a"], "date_creation", [], "any", false, false, false, 80), "d/m/Y"), "html", null, true)));
+                    ";
+                // line 78
+                if ((CoreExtension::getAttribute($this->env, $this->source, $context["a"], "statut", [], "any", false, false, false, 78) == "pause")) {
+                    // line 79
+                    yield "                    <div class=\"mt-3 p-3 bg-orange-50 border border-orange-200 rounded-lg\">
+                        <p class=\"text-xs font-semibold text-orange-700 mb-1\">Annonce suspendue par l'administration</p>
+                        ";
+                    // line 81
+                    if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, $context["a"], "commentaire_admin", [], "any", false, false, false, 81)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+                        // line 82
+                        yield "                        <p class=\"text-xs text-orange-600\">";
+                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["a"], "commentaire_admin", [], "any", false, false, false, 82), "html", null, true);
+                        yield "</p>
+                        ";
+                    }
+                    // line 84
+                    yield "                    </div>
+                    ";
+                }
+                // line 86
                 yield "
-                        </span>
+                    <div class=\"flex items-center justify-between mt-3\">
+                        <div class=\"flex items-center gap-2\">
+                            <span class=\"text-xs text-gray-400\">
+                                ";
+                // line 90
+                yield (((($tmp = CoreExtension::getAttribute($this->env, $this->source, $context["a"], "date_publication", [], "any", false, false, false, 90)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["a"], "date_publication", [], "any", false, false, false, 90), "d/m/Y"), "html", null, true)) : ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["a"], "date_creation", [], "any", false, false, false, 90), "d/m/Y"), "html", null, true)));
+                yield "
+                            </span>
+                            ";
+                // line 92
+                if ((CoreExtension::getAttribute($this->env, $this->source, $context["a"], "statut", [], "any", false, false, false, 92) == "active")) {
+                    // line 93
+                    yield "                                <span class=\"px-2 py-0.5 rounded-full text-[10px] font-semibold bg-green-100 text-green-700\">Active</span>
+                            ";
+                } elseif ((CoreExtension::getAttribute($this->env, $this->source,                 // line 94
+$context["a"], "statut", [], "any", false, false, false, 94) == "pause")) {
+                    // line 95
+                    yield "                                <span class=\"px-2 py-0.5 rounded-full text-[10px] font-semibold bg-orange-100 text-orange-700\">En pause</span>
+                            ";
+                }
+                // line 97
+                yield "                        </div>
                         <div class=\"flex gap-2\">
                             <a href=\"";
-                // line 83
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("annonce_modifier", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["a"], "id_annonce", [], "any", false, false, false, 83)]), "html", null, true);
+                // line 99
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("annonce_modifier", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["a"], "id_annonce", [], "any", false, false, false, 99)]), "html", null, true);
                 yield "\"
                                class=\"px-3 py-1.5 border border-primary text-primary text-xs font-semibold rounded-lg hover:bg-primary hover:text-white transition-all\">
                                 Modifier
                             </a>
                             <form action=\"";
-                // line 87
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("annonce_supprimer", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["a"], "id_annonce", [], "any", false, false, false, 87)]), "html", null, true);
+                // line 103
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("annonce_supprimer", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["a"], "id_annonce", [], "any", false, false, false, 103)]), "html", null, true);
                 yield "\" method=\"post\">
                                 <button type=\"submit\"
                                         class=\"px-3 py-1.5 border border-red-300 text-red-500 text-xs font-semibold rounded-lg hover:bg-red-50 transition-all\">
@@ -271,11 +307,11 @@ class __TwigTemplate_fc0e3b272d8a4aab0e52e5990d2d5bf6 extends Template
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_key'], $context['a'], $context['_parent']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 99
+            // line 115
             yield "        </div>
     ";
         }
-        // line 101
+        // line 117
         yield "
 </div>
 ";
@@ -306,7 +342,7 @@ class __TwigTemplate_fc0e3b272d8a4aab0e52e5990d2d5bf6 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  279 => 101,  275 => 99,  257 => 87,  250 => 83,  244 => 80,  238 => 76,  231 => 75,  225 => 74,  221 => 73,  216 => 71,  208 => 66,  202 => 63,  195 => 61,  190 => 59,  185 => 56,  181 => 53,  173 => 47,  162 => 44,  160 => 43,  154 => 41,  150 => 38,  146 => 37,  143 => 36,  134 => 30,  126 => 24,  124 => 23,  115 => 17,  108 => 15,  102 => 11,  93 => 9,  89 => 8,  85 => 6,  75 => 5,  58 => 3,  41 => 1,);
+        return array (  315 => 117,  311 => 115,  293 => 103,  286 => 99,  282 => 97,  278 => 95,  276 => 94,  273 => 93,  271 => 92,  266 => 90,  260 => 86,  256 => 84,  250 => 82,  248 => 81,  244 => 79,  242 => 78,  238 => 76,  231 => 75,  225 => 74,  221 => 73,  216 => 71,  208 => 66,  202 => 63,  195 => 61,  190 => 59,  185 => 56,  181 => 53,  173 => 47,  162 => 44,  160 => 43,  154 => 41,  150 => 38,  146 => 37,  143 => 36,  134 => 30,  126 => 24,  124 => 23,  115 => 17,  108 => 15,  102 => 11,  93 => 9,  89 => 8,  85 => 6,  75 => 5,  58 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -388,10 +424,26 @@ class __TwigTemplate_fc0e3b272d8a4aab0e52e5990d2d5bf6 extends Template
                         {% if a.localisation %}<span>•</span><span>📍 {{ a.localisation }}</span>{% endif %}
                     </div>
 
+                    {% if a.statut == 'pause' %}
+                    <div class=\"mt-3 p-3 bg-orange-50 border border-orange-200 rounded-lg\">
+                        <p class=\"text-xs font-semibold text-orange-700 mb-1\">Annonce suspendue par l'administration</p>
+                        {% if a.commentaire_admin %}
+                        <p class=\"text-xs text-orange-600\">{{ a.commentaire_admin }}</p>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+
                     <div class=\"flex items-center justify-between mt-3\">
-                        <span class=\"text-xs text-gray-400\">
-                            Publiée le {{ a.date_publication ? a.date_publication|date('d/m/Y') : a.date_creation|date('d/m/Y') }}
-                        </span>
+                        <div class=\"flex items-center gap-2\">
+                            <span class=\"text-xs text-gray-400\">
+                                {{ a.date_publication ? a.date_publication|date('d/m/Y') : a.date_creation|date('d/m/Y') }}
+                            </span>
+                            {% if a.statut == 'active' %}
+                                <span class=\"px-2 py-0.5 rounded-full text-[10px] font-semibold bg-green-100 text-green-700\">Active</span>
+                            {% elseif a.statut == 'pause' %}
+                                <span class=\"px-2 py-0.5 rounded-full text-[10px] font-semibold bg-orange-100 text-orange-700\">En pause</span>
+                            {% endif %}
+                        </div>
                         <div class=\"flex gap-2\">
                             <a href=\"{{ path('annonce_modifier', {id: a.id_annonce}) }}\"
                                class=\"px-3 py-1.5 border border-primary text-primary text-xs font-semibold rounded-lg hover:bg-primary hover:text-white transition-all\">

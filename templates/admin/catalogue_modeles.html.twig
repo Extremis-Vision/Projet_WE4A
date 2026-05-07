@@ -18,51 +18,106 @@
         <span class="text-primary font-medium">{{ marque.nom }}</span>
     </div>
 
-    <div class="flex items-center justify-between mb-8">
-        <h1 class="text-3xl font-bold text-primary font-['ManRope']">{{ marque.nom }} — Modèles</h1>
-        <a href="{{ path('admin_catalogue') }}" class="text-sm text-tertiary hover:text-primary">← Catalogue</a>
+    {# Entête marque #}
+    <div class="flex items-start justify-between mb-8">
+        <div>
+            <h1 class="text-3xl font-bold text-primary font-['ManRope']">{{ marque.nom }} — Modèles</h1>
+            <div class="flex flex-wrap gap-3 mt-2">
+                {% if marque.pays %}
+                    <span class="text-xs text-tertiary bg-gray-100 px-2 py-0.5 rounded-full">{{ marque.pays }}</span>
+                {% endif %}
+                {% if marque.continent %}
+                    <span class="text-xs text-tertiary bg-gray-100 px-2 py-0.5 rounded-full">{{ marque.continent }}</span>
+                {% endif %}
+                {% if marque.date_creation %}
+                    <span class="text-xs text-tertiary bg-gray-100 px-2 py-0.5 rounded-full">Fondée en {{ marque.date_creation }}</span>
+                {% endif %}
+                {% if marque.createur %}
+                    <span class="text-xs text-tertiary bg-gray-100 px-2 py-0.5 rounded-full">par {{ marque.createur }}</span>
+                {% endif %}
+            </div>
+            {% if marque.description %}
+                <p class="text-xs text-tertiary mt-2 max-w-lg">{{ marque.description }}</p>
+            {% endif %}
+        </div>
+        <a href="{{ path('admin_catalogue') }}" class="text-sm text-tertiary hover:text-primary shrink-0">← Catalogue</a>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-        <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+        {# Liste des modèles #}
+        <div class="lg:col-span-2 bg-white rounded-xl shadow-sm overflow-hidden">
             <div class="px-5 py-3 border-b border-gray-100">
                 <h2 class="font-semibold text-primary text-sm">{{ modeles|length }} modèle{{ modeles|length != 1 ? 's' : '' }}</h2>
             </div>
-            <ul class="divide-y divide-gray-50">
-                {% for m in modeles %}
-                <li class="flex items-center justify-between px-5 py-3 hover:bg-gray-50">
-                    <div>
-                        <a href="{{ path('admin_catalogue_generations', {id: m.id_modele}) }}"
-                           class="font-medium text-primary hover:text-secondary transition-colors text-sm">
-                            {{ m.nom }}
-                        </a>
-                        <span class="ml-2 text-xs text-tertiary">{{ m.nb_generations }} génération{{ m.nb_generations != 1 ? 's' : '' }}</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <a href="{{ path('admin_catalogue_generations', {id: m.id_modele}) }}"
-                           class="text-xs text-secondary hover:underline">Voir →</a>
-                        {% if m.nb_generations == 0 %}
-                        <form action="{{ path('admin_supprimer_modele', {id: m.id_modele}) }}" method="post"
-                              onsubmit="return confirm('Supprimer {{ m.nom }} ?')">
-                            <button class="text-xs text-red-400 hover:text-red-600 transition-colors">✕</button>
-                        </form>
-                        {% endif %}
-                    </div>
-                </li>
-                {% else %}
-                <li class="px-5 py-6 text-center text-tertiary text-sm">Aucun modèle.</li>
-                {% endfor %}
-            </ul>
+            {% if modeles is empty %}
+                <p class="px-5 py-6 text-center text-tertiary text-sm">Aucun modèle.</p>
+            {% else %}
+            <table class="w-full text-sm">
+                <thead class="bg-gray-50 border-b border-gray-100">
+                    <tr>
+                        <th class="px-5 py-2 text-left text-xs font-semibold text-tertiary">Modèle</th>
+                        <th class="px-5 py-2 text-left text-xs font-semibold text-tertiary">Type</th>
+                        <th class="px-5 py-2 text-left text-xs font-semibold text-tertiary">Année</th>
+                        <th class="px-5 py-2 text-left text-xs font-semibold text-tertiary">Générations</th>
+                        <th class="px-5 py-2"></th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-50">
+                    {% for m in modeles %}
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-5 py-2">
+                            <a href="{{ path('admin_catalogue_generations', {id: m.id_modele}) }}"
+                               class="font-medium text-primary hover:text-secondary transition-colors">{{ m.nom }}</a>
+                        </td>
+                        <td class="px-5 py-2 text-xs text-tertiary">{{ m.type_nom ?? '—' }}</td>
+                        <td class="px-5 py-2 text-xs text-tertiary">{{ m.annee_creation ?? '—' }}</td>
+                        <td class="px-5 py-2 text-xs text-tertiary">{{ m.nb_generations }}</td>
+                        <td class="px-5 py-2 text-right">
+                            <div class="flex items-center justify-end gap-2">
+                                <a href="{{ path('admin_catalogue_generations', {id: m.id_modele}) }}"
+                                   class="text-xs text-secondary hover:underline">Voir →</a>
+                                {% if m.nb_generations == 0 %}
+                                <form action="{{ path('admin_supprimer_modele', {id: m.id_modele}) }}" method="post"
+                                      onsubmit="return confirm('Supprimer {{ m.nom|e('js') }} ?')">
+                                    <button class="text-xs text-red-400 hover:text-red-600 transition-colors">✕</button>
+                                </form>
+                                {% endif %}
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
         </div>
 
+        {# Ajouter un modèle #}
         <div class="bg-white rounded-xl shadow-sm p-5 self-start">
             <h2 class="font-semibold text-primary text-sm mb-4">Ajouter un modèle</h2>
-            <form action="{{ path('admin_ajouter_modele', {id: marque.id_marque}) }}" method="post" class="flex gap-3">
-                <input type="text" name="nom" required placeholder="Nom du modèle"
-                       class="flex-1 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary">
+            <form action="{{ path('admin_ajouter_modele', {id: marque.id_marque}) }}" method="post" class="space-y-3">
+                <input type="text" name="nom" required placeholder="Nom du modèle *"
+                       class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary">
+
+                <div>
+                    <label class="block text-xs text-tertiary mb-1">Type de carrosserie *</label>
+                    <select name="id_type" required
+                            class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary">
+                        <option value="">Choisir un type</option>
+                        {% for t in types %}
+                            <option value="{{ t.id_type }}">{{ t.nom }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs text-tertiary mb-1">Année de création</label>
+                    <input type="number" name="annee_creation" min="1880" max="2030" placeholder="ex : 1998"
+                           class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary">
+                </div>
+
                 <button type="submit"
-                        class="px-4 py-2 bg-secondary text-white text-sm font-semibold rounded-lg hover:bg-opacity-90 transition-all">
+                        class="w-full px-4 py-2 bg-secondary text-white text-sm font-semibold rounded-lg hover:bg-opacity-90 transition-all">
                     Ajouter
                 </button>
             </form>

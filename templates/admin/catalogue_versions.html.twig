@@ -3,7 +3,7 @@
 {% block pageTitle %}{{ generation.generation_nom }} — Catalogue Admin{% endblock %}
 
 {% block main %}
-<div class="max-w-6xl mx-auto px-6 py-8">
+<div class="max-w-7xl mx-auto px-6 py-8">
 
     {% for msg in app.flashes('success') %}
         <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg mb-4 text-sm">{{ msg }}</div>
@@ -27,78 +27,295 @@
         <a href="{{ path('admin_catalogue_generations', {id: generation.id_modele}) }}" class="text-sm text-tertiary hover:text-primary">← {{ generation.modele_nom }}</a>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 xl:grid-cols-5 gap-6">
 
-        {# Liste des versions #}
-        <div class="lg:col-span-2 bg-white rounded-xl shadow-sm overflow-hidden">
-            <div class="px-5 py-3 border-b border-gray-100">
+        {# ── Liste des versions (cartes détaillées) ── #}
+        <div class="xl:col-span-3 space-y-4">
+            <div class="bg-white rounded-xl shadow-sm px-5 py-3 border-b border-gray-100">
                 <h2 class="font-semibold text-primary text-sm">{{ versions|length }} version{{ versions|length != 1 ? 's' : '' }}</h2>
             </div>
+
             {% if versions is empty %}
-            <p class="px-5 py-6 text-center text-tertiary text-sm">Aucune version.</p>
+            <div class="bg-white rounded-xl shadow-sm px-5 py-8 text-center text-tertiary text-sm">Aucune version.</div>
             {% else %}
-            <table class="w-full text-sm">
-                <thead class="bg-gray-50 border-b border-gray-100">
-                    <tr>
-                        <th class="px-5 py-2 text-left text-xs font-semibold text-tertiary">Version</th>
-                        <th class="px-5 py-2 text-left text-xs font-semibold text-tertiary">Transmission</th>
-                        <th class="px-5 py-2 text-left text-xs font-semibold text-tertiary">Boîte</th>
-                        <th class="px-5 py-2 text-left text-xs font-semibold text-tertiary">Places</th>
-                        <th class="px-5 py-2 text-left text-xs font-semibold text-tertiary">Portes</th>
-                        <th class="px-5 py-2"></th>
-                    </tr>
-                </thead>
-                <tbody class="divide-y divide-gray-50">
-                    {% for v in versions %}
-                    <tr class="hover:bg-gray-50">
-                        <td class="px-5 py-2 font-medium text-primary">{{ v.nom }}</td>
-                        <td class="px-5 py-2 text-tertiary text-xs">{{ v.transmission ?? '—' }}</td>
-                        <td class="px-5 py-2 text-tertiary text-xs">{{ v.boite_vitesse ?? '—' }}</td>
-                        <td class="px-5 py-2 text-tertiary text-xs">{{ v.nombre_places ?? '—' }}</td>
-                        <td class="px-5 py-2 text-tertiary text-xs">{{ v.nombre_portes ?? '—' }}</td>
-                        <td class="px-5 py-2 text-right">
-                            <form action="{{ path('admin_supprimer_version', {id: v.id_version}) }}" method="post"
-                                  onsubmit="return confirm('Supprimer {{ v.nom }} ?')">
-                                <button class="text-xs text-red-400 hover:text-red-600 transition-colors">✕</button>
-                            </form>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                {% for v in versions %}
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                    {# En-tête version #}
+                    <div class="flex items-center justify-between px-5 py-3 border-b border-gray-100">
+                        <h3 class="font-semibold text-primary text-sm">{{ v.nom }}</h3>
+                        <form action="{{ path('admin_supprimer_version', {id: v.id_version}) }}" method="post"
+                              onsubmit="return confirm('Supprimer {{ v.nom|e('js') }} ?')">
+                            <button class="text-xs text-red-400 hover:text-red-600 transition-colors px-2 py-1 rounded hover:bg-red-50">
+                                ✕ Supprimer
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="p-5 grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-3 text-xs">
+
+                        {# Motorisation #}
+                        {% if v.transmission or v.boite_vitesse or v.nombre_rapport %}
+                        <div class="col-span-full">
+                            <p class="text-[10px] font-bold text-tertiary uppercase tracking-widest mb-1.5">Motorisation</p>
+                            <div class="flex flex-wrap gap-3">
+                                {% if v.transmission %}
+                                    <span><span class="text-tertiary">Transmission :</span> <span class="font-medium text-primary">{{ v.transmission }}</span></span>
+                                {% endif %}
+                                {% if v.boite_vitesse %}
+                                    <span><span class="text-tertiary">Boîte :</span> <span class="font-medium text-primary">{{ v.boite_vitesse }}</span></span>
+                                {% endif %}
+                                {% if v.nombre_rapport %}
+                                    <span><span class="text-tertiary">Rapports :</span> <span class="font-medium text-primary">{{ v.nombre_rapport }}</span></span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {# Carrosserie #}
+                        {% if v.nombre_places or v.nombre_portes or v.vitesse_max %}
+                        <div class="col-span-full">
+                            <p class="text-[10px] font-bold text-tertiary uppercase tracking-widest mb-1.5">Carrosserie & performances</p>
+                            <div class="flex flex-wrap gap-3">
+                                {% if v.nombre_places %}
+                                    <span><span class="text-tertiary">Places :</span> <span class="font-medium text-primary">{{ v.nombre_places }}</span></span>
+                                {% endif %}
+                                {% if v.nombre_portes %}
+                                    <span><span class="text-tertiary">Portes :</span> <span class="font-medium text-primary">{{ v.nombre_portes }}</span></span>
+                                {% endif %}
+                                {% if v.vitesse_max %}
+                                    <span><span class="text-tertiary">Vmax :</span> <span class="font-medium text-primary">{{ v.vitesse_max }} km/h</span></span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {# Consommation & émissions #}
+                        {% if v.consomation_mixte or v.consommation_urbaine or v.consommation_extra_urbaine or v.emission_CO2 or v.Norme_euro or v.Crit_air %}
+                        <div class="col-span-full">
+                            <p class="text-[10px] font-bold text-tertiary uppercase tracking-widest mb-1.5">Consommation & émissions</p>
+                            <div class="flex flex-wrap gap-3">
+                                {% if v.consommation_urbaine %}
+                                    <span><span class="text-tertiary">Urbain :</span> <span class="font-medium text-primary">{{ v.consommation_urbaine }} L/100</span></span>
+                                {% endif %}
+                                {% if v.consommation_extra_urbaine %}
+                                    <span><span class="text-tertiary">Extra-urbain :</span> <span class="font-medium text-primary">{{ v.consommation_extra_urbaine }} L/100</span></span>
+                                {% endif %}
+                                {% if v.consomation_mixte %}
+                                    <span><span class="text-tertiary">Mixte :</span> <span class="font-medium text-primary">{{ v.consomation_mixte }} L/100</span></span>
+                                {% endif %}
+                                {% if v.emission_CO2 %}
+                                    <span><span class="text-tertiary">CO₂ :</span> <span class="font-medium text-primary">{{ v.emission_CO2 }} g/km</span></span>
+                                {% endif %}
+                                {% if v.Norme_euro %}
+                                    <span><span class="text-tertiary">Euro :</span> <span class="font-medium text-primary">{{ v.Norme_euro }}</span></span>
+                                {% endif %}
+                                {% if v.Crit_air is not null and v.Crit_air != '' %}
+                                    <span><span class="text-tertiary">Crit'Air :</span>
+                                        <span class="font-bold text-white px-1.5 py-0.5 rounded text-[10px]
+                                            {% if v.Crit_air == 0 %}bg-green-600
+                                            {% elseif v.Crit_air == 1 %}bg-green-500
+                                            {% elseif v.Crit_air == 2 %}bg-yellow-500
+                                            {% elseif v.Crit_air == 3 %}bg-orange-500
+                                            {% else %}bg-red-500{% endif %}">
+                                            {{ v.Crit_air }}
+                                        </span>
+                                    </span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {# Dimensions #}
+                        {% if v.largeur_sans_retros or v.hauteur or v.empattement or v.poids_vide %}
+                        <div class="col-span-full">
+                            <p class="text-[10px] font-bold text-tertiary uppercase tracking-widest mb-1.5">Dimensions & poids</p>
+                            <div class="flex flex-wrap gap-3">
+                                {% if v.largeur_sans_retros %}
+                                    <span><span class="text-tertiary">Largeur :</span> <span class="font-medium text-primary">{{ v.largeur_sans_retros }} mm</span></span>
+                                {% endif %}
+                                {% if v.hauteur %}
+                                    <span><span class="text-tertiary">Hauteur :</span> <span class="font-medium text-primary">{{ v.hauteur }} mm</span></span>
+                                {% endif %}
+                                {% if v.empattement %}
+                                    <span><span class="text-tertiary">Empattement :</span> <span class="font-medium text-primary">{{ v.empattement }} mm</span></span>
+                                {% endif %}
+                                {% if v.poids_vide %}
+                                    <span><span class="text-tertiary">Poids :</span> <span class="font-medium text-primary">{{ v.poids_vide }} kg</span></span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {# Châssis #}
+                        {% if v.suspension_avant or v.suspension_arriere or v.freins_avant or v.freins_arriere or v.diametre_braquage %}
+                        <div class="col-span-full">
+                            <p class="text-[10px] font-bold text-tertiary uppercase tracking-widest mb-1.5">Châssis</p>
+                            <div class="flex flex-wrap gap-3">
+                                {% if v.suspension_avant %}
+                                    <span><span class="text-tertiary">Susp. av. :</span> <span class="font-medium text-primary">{{ v.suspension_avant }}</span></span>
+                                {% endif %}
+                                {% if v.suspension_arriere %}
+                                    <span><span class="text-tertiary">Susp. ar. :</span> <span class="font-medium text-primary">{{ v.suspension_arriere }}</span></span>
+                                {% endif %}
+                                {% if v.freins_avant %}
+                                    <span><span class="text-tertiary">Freins av. :</span> <span class="font-medium text-primary">{{ v.freins_avant }}</span></span>
+                                {% endif %}
+                                {% if v.freins_arriere %}
+                                    <span><span class="text-tertiary">Freins ar. :</span> <span class="font-medium text-primary">{{ v.freins_arriere }}</span></span>
+                                {% endif %}
+                                {% if v.diametre_braquage %}
+                                    <span><span class="text-tertiary">Braquage :</span> <span class="font-medium text-primary">{{ v.diametre_braquage }} m</span></span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endif %}
+
+                    </div>
+                </div>
+                {% endfor %}
             {% endif %}
         </div>
 
-        {# Ajouter une version #}
-        <div class="bg-white rounded-xl shadow-sm p-5 self-start">
-            <h2 class="font-semibold text-primary text-sm mb-4">Ajouter une version</h2>
-            <form action="{{ path('admin_ajouter_version', {id: generation.id_generation}) }}" method="post" class="space-y-3">
-                <input type="text" name="nom" required placeholder="Nom (ex : 1.5 TSI 150 S line)"
-                       class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary">
-                <select name="transmission"
-                        class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary">
-                    <option value="">Transmission (optionnel)</option>
-                    <option value="Traction avant">Traction avant</option>
-                    <option value="Propulsion">Propulsion</option>
-                    <option value="Intégrale">Intégrale</option>
-                </select>
-                <select name="boite_vitesse"
-                        class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary">
-                    <option value="">Boîte (optionnel)</option>
-                    <option value="Manuelle">Manuelle</option>
-                    <option value="Automatique">Automatique</option>
-                </select>
-                <div class="grid grid-cols-2 gap-2">
-                    <input type="number" name="nombre_places" min="1" max="9" placeholder="Places"
-                           class="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary">
-                    <input type="number" name="nombre_portes" min="2" max="5" placeholder="Portes"
-                           class="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary">
-                </div>
-                <button type="submit"
-                        class="w-full px-4 py-2 bg-secondary text-white text-sm font-semibold rounded-lg hover:bg-opacity-90 transition-all">
-                    Ajouter
-                </button>
-            </form>
+        {# ── Formulaire d'ajout ── #}
+        <div class="xl:col-span-2">
+            <div class="bg-white rounded-xl shadow-sm p-5 sticky top-4">
+                <h2 class="font-semibold text-primary text-sm mb-4">Ajouter une version</h2>
+                <form action="{{ path('admin_ajouter_version', {id: generation.id_generation}) }}" method="post" class="space-y-4">
+
+                    {# Identité #}
+                    <input type="text" name="nom" required placeholder="Nom * (ex : 1.5 TSI 150 S line)"
+                           class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary">
+
+                    {# Motorisation #}
+                    <details class="group">
+                        <summary class="cursor-pointer text-xs font-semibold text-tertiary uppercase tracking-wide flex items-center justify-between select-none">
+                            Motorisation
+                            <span class="group-open:rotate-180 transition-transform text-base leading-none">›</span>
+                        </summary>
+                        <div class="mt-2 space-y-2">
+                            <select name="transmission"
+                                    class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary">
+                                <option value="">Transmission</option>
+                                <option value="Traction avant">Traction avant</option>
+                                <option value="Propulsion">Propulsion</option>
+                                <option value="Intégrale">Intégrale</option>
+                            </select>
+                            <select name="boite_vitesse"
+                                    class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary">
+                                <option value="">Boîte de vitesse</option>
+                                <option value="Manuelle">Manuelle</option>
+                                <option value="Automatique">Automatique</option>
+                                <option value="Robotisée">Robotisée</option>
+                                <option value="CVT">CVT</option>
+                            </select>
+                            <input type="number" name="nombre_rapport" min="1" max="12" placeholder="Nombre de rapports"
+                                   class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary">
+                        </div>
+                    </details>
+
+                    {# Carrosserie & perfs #}
+                    <details class="group">
+                        <summary class="cursor-pointer text-xs font-semibold text-tertiary uppercase tracking-wide flex items-center justify-between select-none">
+                            Carrosserie & performances
+                            <span class="group-open:rotate-180 transition-transform text-base leading-none">›</span>
+                        </summary>
+                        <div class="mt-2 grid grid-cols-2 gap-2">
+                            <input type="number" name="nombre_places" min="1" max="9" placeholder="Places"
+                                   class="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary">
+                            <input type="number" name="nombre_portes" min="2" max="5" placeholder="Portes"
+                                   class="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary">
+                            <input type="number" name="vitesse_max" min="50" max="400" placeholder="Vmax (km/h)"
+                                   class="col-span-2 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary">
+                        </div>
+                    </details>
+
+                    {# Consommation & émissions #}
+                    <details class="group">
+                        <summary class="cursor-pointer text-xs font-semibold text-tertiary uppercase tracking-wide flex items-center justify-between select-none">
+                            Consommation & émissions
+                            <span class="group-open:rotate-180 transition-transform text-base leading-none">›</span>
+                        </summary>
+                        <div class="mt-2 space-y-2">
+                            <div class="grid grid-cols-3 gap-2">
+                                <input type="number" name="consommation_urbaine" step="0.1" min="0" placeholder="Urbain L/100"
+                                       class="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary">
+                                <input type="number" name="consommation_extra" step="0.1" min="0" placeholder="Extra-urb."
+                                       class="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary">
+                                <input type="number" name="consommation_mixte" step="0.1" min="0" placeholder="Mixte"
+                                       class="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary">
+                            </div>
+                            <input type="number" name="emission_co2" min="0" max="500" placeholder="Émissions CO₂ (g/km)"
+                                   class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary">
+                            <div class="grid grid-cols-2 gap-2">
+                                <select name="norme_euro"
+                                        class="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary">
+                                    <option value="">Norme Euro</option>
+                                    <option>Euro 4</option>
+                                    <option>Euro 5</option>
+                                    <option>Euro 6</option>
+                                    <option>Euro 6d</option>
+                                    <option>Euro 6d-TEMP</option>
+                                </select>
+                                <select name="crit_air"
+                                        class="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary">
+                                    <option value="">Crit'Air</option>
+                                    <option value="0">0 (ZEV)</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                        </div>
+                    </details>
+
+                    {# Dimensions #}
+                    <details class="group">
+                        <summary class="cursor-pointer text-xs font-semibold text-tertiary uppercase tracking-wide flex items-center justify-between select-none">
+                            Dimensions & poids
+                            <span class="group-open:rotate-180 transition-transform text-base leading-none">›</span>
+                        </summary>
+                        <div class="mt-2 grid grid-cols-2 gap-2">
+                            <input type="number" name="largeur_sans_retros" placeholder="Largeur (mm)"
+                                   class="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary">
+                            <input type="number" name="hauteur" placeholder="Hauteur (mm)"
+                                   class="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary">
+                            <input type="number" name="empattement" placeholder="Empattement (mm)"
+                                   class="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary">
+                            <input type="number" name="poids_vide" placeholder="Poids (kg)"
+                                   class="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary">
+                        </div>
+                    </details>
+
+                    {# Châssis #}
+                    <details class="group">
+                        <summary class="cursor-pointer text-xs font-semibold text-tertiary uppercase tracking-wide flex items-center justify-between select-none">
+                            Châssis & freinage
+                            <span class="group-open:rotate-180 transition-transform text-base leading-none">›</span>
+                        </summary>
+                        <div class="mt-2 space-y-2">
+                            <div class="grid grid-cols-2 gap-2">
+                                <input type="text" name="suspension_avant" placeholder="Susp. avant"
+                                       class="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary">
+                                <input type="text" name="suspension_arriere" placeholder="Susp. arrière"
+                                       class="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary">
+                                <input type="text" name="freins_avant" placeholder="Freins avant"
+                                       class="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary">
+                                <input type="text" name="freins_arriere" placeholder="Freins arrière"
+                                       class="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary">
+                            </div>
+                            <input type="number" name="diametre_braquage" step="0.1" min="0" placeholder="Diamètre de braquage (m)"
+                                   class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary">
+                        </div>
+                    </details>
+
+                    <button type="submit"
+                            class="w-full px-4 py-2 bg-secondary text-white text-sm font-semibold rounded-lg hover:bg-opacity-90 transition-all">
+                        Ajouter la version
+                    </button>
+                </form>
+            </div>
         </div>
 
     </div>

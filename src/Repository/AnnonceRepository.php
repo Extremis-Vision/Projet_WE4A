@@ -8,38 +8,60 @@ class AnnonceRepository
 {
     private const BASE_SELECT = '
         SELECT
-            a.id_annonce, a.prix, a.annee_circulation, a.kilometrage, a.etat, a.couleur,
-            a.localisation, a.statut, a.description, a.premiere_main, a.nombre_proprietaire,
-            a.controle_technique, a.date_publication, a.date_creation,
-            v.id_version, v.nom AS version_nom, v.transmission, v.boite_vitesse, v.nombre_places, v.nombre_portes,
-            g.id_generation, g.nom AS generation_nom,
-            mo.id_modele, mo.nom AS modele_nom,
-            ma.id_marque, ma.nom AS marque_nom,
+            a.id_annonce, a.prix, a.annee_circulation, a.kilometrage,
+            a.etat, a.couleur, a.sellerie, a.finition, a.provenance,
+            a.localisation, a.statut, a.description,
+            a.premiere_main, a.nombre_proprietaire, a.controle_technique,
+            a.date_publication, a.date_creation, a.date_vente,
+            v.id_version, v.nom AS version_nom,
+            v.transmission, v.boite_vitesse, v.nombre_places, v.nombre_portes, v.nombre_rapport,
+            v.vitesse_max,
+            v.consommation_urbaine, v.consommation_extra_urbaine, v.consomation_mixte,
+            v.emission_CO2, v.Norme_euro, v.Crit_air,
+            v.largeur_sans_retros, v.hauteur, v.empattement, v.poids_vide,
+            v.suspension_avant, v.suspension_arriere, v.freins_avant, v.freins_arriere,
+            v.diametre_braquage,
+            g.id_generation, g.nom AS generation_nom, g.date_sortie AS generation_date_sortie,
+            mo.id_modele, mo.nom AS modele_nom, mo.annee_creation AS modele_annee,
+            t.nom AS type_nom,
+            ma.id_marque, ma.nom AS marque_nom, ma.pays AS marque_pays,
             u.id_utilisateur AS vendeur_id, u.prenom AS vendeur_prenom, u.nom AS vendeur_nom, u.numero_phone AS vendeur_phone,
             (SELECT url_photo FROM photo p WHERE p.id_annonce = a.id_annonce ORDER BY p.id_photo LIMIT 1) AS photo_principale
         FROM annonce a
         JOIN version v ON a.id_version = v.id_version
         JOIN generation g ON v.id_generation = g.id_generation
         JOIN modele mo ON g.id_modele = mo.id_modele
+        LEFT JOIN type t ON t.id_type = mo.id_type
         JOIN marque ma ON mo.id_marque = ma.id_marque
         JOIN utilisateur u ON a.id_utilisateur = u.id_utilisateur
     ';
 
     private const BASE_SELECT_ADMIN = '
         SELECT
-            a.id_annonce, a.prix, a.annee_circulation, a.kilometrage, a.etat, a.couleur,
-            a.localisation, a.statut, a.commentaire_admin, a.description, a.premiere_main, a.nombre_proprietaire,
-            a.controle_technique, a.date_publication, a.date_creation,
-            v.id_version, v.nom AS version_nom, v.transmission, v.boite_vitesse, v.nombre_places, v.nombre_portes,
-            g.id_generation, g.nom AS generation_nom,
-            mo.id_modele, mo.nom AS modele_nom,
-            ma.id_marque, ma.nom AS marque_nom,
+            a.id_annonce, a.prix, a.annee_circulation, a.kilometrage,
+            a.etat, a.couleur, a.sellerie, a.finition, a.provenance,
+            a.localisation, a.statut, a.commentaire_admin, a.description,
+            a.premiere_main, a.nombre_proprietaire, a.controle_technique,
+            a.date_publication, a.date_creation, a.date_vente,
+            v.id_version, v.nom AS version_nom,
+            v.transmission, v.boite_vitesse, v.nombre_places, v.nombre_portes, v.nombre_rapport,
+            v.vitesse_max,
+            v.consommation_urbaine, v.consommation_extra_urbaine, v.consomation_mixte,
+            v.emission_CO2, v.Norme_euro, v.Crit_air,
+            v.largeur_sans_retros, v.hauteur, v.empattement, v.poids_vide,
+            v.suspension_avant, v.suspension_arriere, v.freins_avant, v.freins_arriere,
+            v.diametre_braquage,
+            g.id_generation, g.nom AS generation_nom, g.date_sortie AS generation_date_sortie,
+            mo.id_modele, mo.nom AS modele_nom, mo.annee_creation AS modele_annee,
+            t.nom AS type_nom,
+            ma.id_marque, ma.nom AS marque_nom, ma.pays AS marque_pays,
             u.id_utilisateur AS vendeur_id, u.prenom AS vendeur_prenom, u.nom AS vendeur_nom, u.numero_phone AS vendeur_phone,
             (SELECT url_photo FROM photo p WHERE p.id_annonce = a.id_annonce ORDER BY p.id_photo LIMIT 1) AS photo_principale
         FROM annonce a
         JOIN version v ON a.id_version = v.id_version
         JOIN generation g ON v.id_generation = g.id_generation
         JOIN modele mo ON g.id_modele = mo.id_modele
+        LEFT JOIN type t ON t.id_type = mo.id_type
         JOIN marque ma ON mo.id_marque = ma.id_marque
         JOIN utilisateur u ON a.id_utilisateur = u.id_utilisateur
     ';
@@ -244,5 +266,12 @@ class AnnonceRepository
             'DELETE FROM photo WHERE id_annonce = ?'
         );
         $stmt->execute([$idAnnonce]);
+    }
+
+    public function marquerVendu(int $id): void
+    {
+        $this->db->getConnection()
+            ->prepare('UPDATE annonce SET statut = "vendu", date_vente = NOW() WHERE id_annonce = ?')
+            ->execute([$id]);
     }
 }

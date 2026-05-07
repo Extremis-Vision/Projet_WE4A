@@ -126,8 +126,8 @@ class __TwigTemplate_b586030c0f0be795a006243e584f65be extends Template
         </div>
         <a href=\"";
         // line 20
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_dashboard");
-        yield "\" class=\"text-sm text-tertiary hover:text-primary\">← Tableau de bord</a>
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("annonces");
+        yield "\" class=\"text-sm text-tertiary hover:text-primary\">← Site</a>
     </div>
 
     <div class=\"bg-white rounded-xl shadow-sm overflow-hidden\">
@@ -172,32 +172,37 @@ $context["u"], "role", [], "any", false, false, false, 43) == "vendeur")) {
                 // line 44
                 yield "                            <span class=\"px-2 py-0.5 rounded-full text-[10px] font-semibold bg-blue-100 text-blue-700\">Vendeur</span>
                         ";
-            } else {
+            } elseif ((CoreExtension::getAttribute($this->env, $this->source,             // line 45
+$context["u"], "role", [], "any", false, false, false, 45) == "entreprise")) {
                 // line 46
-                yield "                            <span class=\"px-2 py-0.5 rounded-full text-[10px] font-semibold bg-gray-100 text-gray-600\">Acheteur</span>
+                yield "                            <span class=\"px-2 py-0.5 rounded-full text-[10px] font-semibold bg-amber-100 text-amber-700\">Entreprise</span>
+                        ";
+            } else {
+                // line 48
+                yield "                            <span class=\"px-2 py-0.5 rounded-full text-[10px] font-semibold bg-gray-100 text-gray-600\">Particulier</span>
                         ";
             }
-            // line 48
+            // line 50
             yield "                    </td>
                     <td class=\"px-5 py-3 text-tertiary\">";
-            // line 49
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["u"], "nb_annonces", [], "any", false, false, false, 49), "html", null, true);
+            // line 51
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["u"], "nb_annonces", [], "any", false, false, false, 51), "html", null, true);
             yield "</td>
                     <td class=\"px-5 py-3 text-tertiary\">";
-            // line 50
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["u"], "date_inscription", [], "any", false, false, false, 50), "d/m/Y"), "html", null, true);
+            // line 52
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["u"], "date_inscription", [], "any", false, false, false, 52), "d/m/Y"), "html", null, true);
             yield "</td>
                     <td class=\"px-5 py-3 text-right\">
                         ";
-            // line 52
-            if ((CoreExtension::getAttribute($this->env, $this->source, $context["u"], "role", [], "any", false, false, false, 52) != "admin")) {
-                // line 53
+            // line 54
+            if ((CoreExtension::getAttribute($this->env, $this->source, $context["u"], "role", [], "any", false, false, false, 54) != "admin")) {
+                // line 55
                 yield "                        <form action=\"";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_supprimer_utilisateur", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["u"], "id_utilisateur", [], "any", false, false, false, 53)]), "html", null, true);
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_supprimer_utilisateur", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["u"], "id_utilisateur", [], "any", false, false, false, 55)]), "html", null, true);
                 yield "\" method=\"post\"
                               onsubmit=\"return confirm('Supprimer ";
-                // line 54
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((CoreExtension::getAttribute($this->env, $this->source, $context["u"], "prenom", [], "any", false, false, false, 54) . " ") . CoreExtension::getAttribute($this->env, $this->source, $context["u"], "nom", [], "any", false, false, false, 54)), "js"), "html", null, true);
+                // line 56
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((CoreExtension::getAttribute($this->env, $this->source, $context["u"], "prenom", [], "any", false, false, false, 56) . " ") . CoreExtension::getAttribute($this->env, $this->source, $context["u"], "nom", [], "any", false, false, false, 56)), "js"), "html", null, true);
                 yield " et toutes ses annonces ?')\">
                             <button type=\"submit\"
                                     class=\"px-3 py-1 border border-red-300 text-red-500 text-xs font-semibold rounded-lg hover:bg-red-50 transition-all\">
@@ -206,7 +211,7 @@ $context["u"], "role", [], "any", false, false, false, 43) == "vendeur")) {
                         </form>
                         ";
             }
-            // line 61
+            // line 63
             yield "                    </td>
                 </tr>
                 ";
@@ -214,7 +219,7 @@ $context["u"], "role", [], "any", false, false, false, 43) == "vendeur")) {
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['u'], $context['_parent']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 64
+        // line 66
         yield "            </tbody>
         </table>
     </div>
@@ -248,7 +253,7 @@ $context["u"], "role", [], "any", false, false, false, 43) == "vendeur")) {
      */
     public function getDebugInfo(): array
     {
-        return array (  218 => 64,  210 => 61,  200 => 54,  195 => 53,  193 => 52,  188 => 50,  184 => 49,  181 => 48,  177 => 46,  173 => 44,  171 => 43,  168 => 42,  166 => 41,  161 => 39,  155 => 38,  152 => 37,  148 => 36,  129 => 20,  122 => 18,  116 => 14,  107 => 12,  102 => 11,  93 => 9,  89 => 8,  85 => 6,  75 => 5,  58 => 3,  41 => 1,);
+        return array (  223 => 66,  215 => 63,  205 => 56,  200 => 55,  198 => 54,  193 => 52,  189 => 51,  186 => 50,  182 => 48,  178 => 46,  176 => 45,  173 => 44,  171 => 43,  168 => 42,  166 => 41,  161 => 39,  155 => 38,  152 => 37,  148 => 36,  129 => 20,  122 => 18,  116 => 14,  107 => 12,  102 => 11,  93 => 9,  89 => 8,  85 => 6,  75 => 5,  58 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -272,7 +277,7 @@ $context["u"], "role", [], "any", false, false, false, 43) == "vendeur")) {
             <h1 class=\"text-3xl font-bold text-primary font-['ManRope']\">Utilisateurs</h1>
             <p class=\"text-tertiary mt-1\">{{ users|length }} compte{{ users|length != 1 ? 's' : '' }}</p>
         </div>
-        <a href=\"{{ path('admin_dashboard') }}\" class=\"text-sm text-tertiary hover:text-primary\">← Tableau de bord</a>
+        <a href=\"{{ path('annonces') }}\" class=\"text-sm text-tertiary hover:text-primary\">← Site</a>
     </div>
 
     <div class=\"bg-white rounded-xl shadow-sm overflow-hidden\">
@@ -297,8 +302,10 @@ $context["u"], "role", [], "any", false, false, false, 43) == "vendeur")) {
                             <span class=\"px-2 py-0.5 rounded-full text-[10px] font-semibold bg-purple-100 text-purple-700\">Admin</span>
                         {% elseif u.role == 'vendeur' %}
                             <span class=\"px-2 py-0.5 rounded-full text-[10px] font-semibold bg-blue-100 text-blue-700\">Vendeur</span>
+                        {% elseif u.role == 'entreprise' %}
+                            <span class=\"px-2 py-0.5 rounded-full text-[10px] font-semibold bg-amber-100 text-amber-700\">Entreprise</span>
                         {% else %}
-                            <span class=\"px-2 py-0.5 rounded-full text-[10px] font-semibold bg-gray-100 text-gray-600\">Acheteur</span>
+                            <span class=\"px-2 py-0.5 rounded-full text-[10px] font-semibold bg-gray-100 text-gray-600\">Particulier</span>
                         {% endif %}
                     </td>
                     <td class=\"px-5 py-3 text-tertiary\">{{ u.nb_annonces }}</td>

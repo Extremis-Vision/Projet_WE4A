@@ -17,7 +17,7 @@
             <h1 class="text-3xl font-bold text-primary font-['ManRope']">Utilisateurs</h1>
             <p class="text-tertiary mt-1">{{ users|length }} compte{{ users|length != 1 ? 's' : '' }}</p>
         </div>
-        <a href="{{ path('admin_dashboard') }}" class="text-sm text-tertiary hover:text-primary">← Tableau de bord</a>
+        <a href="{{ path('annonces') }}" class="text-sm text-tertiary hover:text-primary">← Site</a>
     </div>
 
     <div class="bg-white rounded-xl shadow-sm overflow-hidden">
@@ -42,8 +42,10 @@
                             <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-purple-100 text-purple-700">Admin</span>
                         {% elseif u.role == 'vendeur' %}
                             <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-blue-100 text-blue-700">Vendeur</span>
+                        {% elseif u.role == 'entreprise' %}
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-amber-100 text-amber-700">Entreprise</span>
                         {% else %}
-                            <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-gray-100 text-gray-600">Acheteur</span>
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-gray-100 text-gray-600">Particulier</span>
                         {% endif %}
                     </td>
                     <td class="px-5 py-3 text-tertiary">{{ u.nb_annonces }}</td>

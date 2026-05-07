@@ -13,15 +13,21 @@
     {% endfor %}
 
     {# Breadcrumb #}
-    <nav class="text-sm text-tertiary mb-6">
+    <nav class="text-sm text-tertiary mb-6 flex items-center gap-2">
         <a href="{{ path('annonces') }}" class="hover:text-secondary">Annonces</a>
-        <span class="mx-2">/</span>
-        <span class="text-primary font-medium">{{ annonce.marque_nom }} {{ annonce.modele_nom }}</span>
+        <span>/</span>
+        {% if annonce.type_nom %}
+            <span>{{ annonce.type_nom }}</span>
+            <span>/</span>
+        {% endif %}
+        <span>{{ annonce.marque_nom }}</span>
+        <span>/</span>
+        <span class="text-primary font-medium">{{ annonce.modele_nom }} {{ annonce.version_nom }}</span>
     </nav>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
-        {# Colonne gauche : photos + infos principales #}
+        {# ── Colonne gauche : photos + toutes les données ── #}
         <div class="lg:col-span-2 space-y-6">
 
             {# Carrousel photos #}
@@ -32,149 +38,362 @@
                          alt="{{ annonce.marque_nom }} {{ annonce.modele_nom }}"
                          class="w-full h-full object-cover">
                 </div>
-
                 {% if photos|length > 1 %}
-                <button id="carousel-prev"
-                        class="absolute left-3 top-1/2 -translate-y-1/2 bg-white text-primary rounded-full w-10 h-10 flex items-center justify-center shadow-md hover:shadow-lg transition-shadow">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
-                    </svg>
+                <button id="carousel-prev" class="absolute left-3 top-1/2 -translate-y-1/2 bg-white text-primary rounded-full w-10 h-10 flex items-center justify-center shadow-md hover:shadow-lg transition-shadow">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
                 </button>
-                <button id="carousel-next"
-                        class="absolute right-3 top-1/2 -translate-y-1/2 bg-white text-primary rounded-full w-10 h-10 flex items-center justify-center shadow-md hover:shadow-lg transition-shadow">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-                    </svg>
+                <button id="carousel-next" class="absolute right-3 top-1/2 -translate-y-1/2 bg-white text-primary rounded-full w-10 h-10 flex items-center justify-center shadow-md hover:shadow-lg transition-shadow">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
                 </button>
-
-                <div class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black bg-opacity-50 text-white text-xs px-3 py-1 rounded-full" id="carousel-counter">
-                    1 / {{ photos|length }}
-                </div>
+                <div class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black bg-opacity-50 text-white text-xs px-3 py-1 rounded-full" id="carousel-counter">1 / {{ photos|length }}</div>
                 {% endif %}
             </div>
-
-            {# Miniatures cliquables #}
             {% if photos|length > 1 %}
             <div class="grid grid-cols-5 gap-2">
                 {% for photo in photos %}
-                <div class="aspect-square bg-gray-100 rounded-lg overflow-hidden cursor-pointer ring-2 {% if loop.first %}ring-blue-500{% else %}ring-transparent{% endif %} hover:ring-blue-500 transition-all"
-                     data-thumb-index="{{ loop.index0 }}">
+                <div class="aspect-square bg-gray-100 rounded-lg overflow-hidden cursor-pointer ring-2 {% if loop.first %}ring-secondary{% else %}ring-transparent{% endif %} hover:ring-secondary transition-all" data-thumb-index="{{ loop.index0 }}">
                     <img src="{{ photo.url_photo }}" class="w-full h-full object-cover hover:opacity-80 transition-opacity">
                 </div>
                 {% endfor %}
             </div>
             {% endif %}
-
             {% else %}
-            <div class="aspect-[16/9] bg-gray-100 rounded-xl overflow-hidden">
-                <div class="w-full h-full flex items-center justify-center text-gray-300">
-                    <svg class="w-24 h-24" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M19 7H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm-7 9c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm5-8H7l2-4h6l2 4z"/>
-                    </svg>
+            <div class="aspect-[16/9] bg-gray-100 rounded-xl flex items-center justify-center text-gray-300">
+                <svg class="w-24 h-24" fill="currentColor" viewBox="0 0 24 24"><path d="M19 7H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm-7 9c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm5-8H7l2-4h6l2 4z"/></svg>
+            </div>
+            {% endif %}
+
+            {# ── Section : Informations annonce ── #}
+            <div class="bg-white rounded-xl p-6 shadow-sm">
+                <h2 class="font-bold text-primary text-base font-['ManRope'] mb-4 flex items-center gap-2">
+                    <span class="w-1 h-4 bg-secondary rounded-full inline-block"></span>
+                    Informations de l'annonce
+                </h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-y-4 gap-x-6 text-sm">
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Année</p>
+                        <p class="font-semibold text-primary">{{ annonce.annee_circulation }}</p>
+                    </div>
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Kilométrage</p>
+                        <p class="font-semibold text-primary">{{ annonce.kilometrage|number_format(0, ',', ' ') }} km</p>
+                    </div>
+                    {% if annonce.etat %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">État</p>
+                        <p class="font-semibold text-primary">{{ annonce.etat }}</p>
+                    </div>
+                    {% endif %}
+                    {% if annonce.couleur %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Couleur</p>
+                        <p class="font-semibold text-primary">{{ annonce.couleur }}</p>
+                    </div>
+                    {% endif %}
+                    {% if annonce.sellerie %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Sellerie</p>
+                        <p class="font-semibold text-primary">{{ annonce.sellerie }}</p>
+                    </div>
+                    {% endif %}
+                    {% if annonce.finition %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Finition</p>
+                        <p class="font-semibold text-primary">{{ annonce.finition }}</p>
+                    </div>
+                    {% endif %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Première main</p>
+                        <p class="font-semibold text-primary">{{ annonce.premiere_main ? 'Oui' : 'Non' }}</p>
+                    </div>
+                    {% if annonce.nombre_proprietaire %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Nb propriétaires</p>
+                        <p class="font-semibold text-primary">{{ annonce.nombre_proprietaire }}</p>
+                    </div>
+                    {% endif %}
+                    {% if annonce.controle_technique %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Contrôle technique</p>
+                        <p class="font-semibold text-primary">{{ annonce.controle_technique|date('d/m/Y') }}</p>
+                    </div>
+                    {% endif %}
+                    {% if annonce.provenance %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Provenance</p>
+                        <p class="font-semibold text-primary">{{ annonce.provenance }}</p>
+                    </div>
+                    {% endif %}
+                    {% if annonce.localisation %}
+                    <div class="col-span-2 md:col-span-1">
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Localisation</p>
+                        <p class="font-semibold text-primary">{{ annonce.localisation }}</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            {# ── Section : Motorisation ── #}
+            {% if annonce.transmission or annonce.boite_vitesse or annonce.nombre_rapport or annonce.nombre_places or annonce.nombre_portes or annonce.vitesse_max %}
+            <div class="bg-white rounded-xl p-6 shadow-sm">
+                <h2 class="font-bold text-primary text-base font-['ManRope'] mb-4 flex items-center gap-2">
+                    <span class="w-1 h-4 bg-secondary rounded-full inline-block"></span>
+                    Motorisation & carrosserie
+                </h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-y-4 gap-x-6 text-sm">
+                    {% if annonce.transmission %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Transmission</p>
+                        <p class="font-semibold text-primary">{{ annonce.transmission }}</p>
+                    </div>
+                    {% endif %}
+                    {% if annonce.boite_vitesse %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Boîte de vitesse</p>
+                        <p class="font-semibold text-primary">{{ annonce.boite_vitesse }}</p>
+                    </div>
+                    {% endif %}
+                    {% if annonce.nombre_rapport %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Nombre de rapports</p>
+                        <p class="font-semibold text-primary">{{ annonce.nombre_rapport }}</p>
+                    </div>
+                    {% endif %}
+                    {% if annonce.nombre_places %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Places</p>
+                        <p class="font-semibold text-primary">{{ annonce.nombre_places }}</p>
+                    </div>
+                    {% endif %}
+                    {% if annonce.nombre_portes %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Portes</p>
+                        <p class="font-semibold text-primary">{{ annonce.nombre_portes }}</p>
+                    </div>
+                    {% endif %}
+                    {% if annonce.vitesse_max %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Vitesse max</p>
+                        <p class="font-semibold text-primary">{{ annonce.vitesse_max }} km/h</p>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
             {% endif %}
 
-            {# Caractéristiques clés #}
+            {# ── Section : Consommation & émissions ── #}
+            {% if annonce.consommation_urbaine or annonce.consommation_extra_urbaine or annonce.consomation_mixte or annonce.emission_CO2 or annonce.Norme_euro or (annonce.Crit_air is not null and annonce.Crit_air != '') %}
             <div class="bg-white rounded-xl p-6 shadow-sm">
-                <h2 class="font-bold text-primary text-lg mb-4 font-['ManRope']">Caractéristiques</h2>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
-                    <div class="flex flex-col">
-                        <span class="text-tertiary text-xs uppercase tracking-wide mb-1">Année</span>
-                        <span class="font-semibold text-primary">{{ annonce.annee_circulation }}</span>
-                    </div>
-                    <div class="flex flex-col">
-                        <span class="text-tertiary text-xs uppercase tracking-wide mb-1">Kilométrage</span>
-                        <span class="font-semibold text-primary">{{ annonce.kilometrage|number_format(0, ',', ' ') }} km</span>
-                    </div>
-                    {% if annonce.boite_vitesse %}
-                    <div class="flex flex-col">
-                        <span class="text-tertiary text-xs uppercase tracking-wide mb-1">Boîte de vitesse</span>
-                        <span class="font-semibold text-primary">{{ annonce.boite_vitesse }}</span>
+                <h2 class="font-bold text-primary text-base font-['ManRope'] mb-4 flex items-center gap-2">
+                    <span class="w-1 h-4 bg-secondary rounded-full inline-block"></span>
+                    Consommation & émissions
+                </h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-y-4 gap-x-6 text-sm">
+                    {% if annonce.consommation_urbaine %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Urbain</p>
+                        <p class="font-semibold text-primary">{{ annonce.consommation_urbaine }} L/100 km</p>
                     </div>
                     {% endif %}
-                    {% if annonce.transmission %}
-                    <div class="flex flex-col">
-                        <span class="text-tertiary text-xs uppercase tracking-wide mb-1">Transmission</span>
-                        <span class="font-semibold text-primary">{{ annonce.transmission }}</span>
+                    {% if annonce.consommation_extra_urbaine %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Extra-urbain</p>
+                        <p class="font-semibold text-primary">{{ annonce.consommation_extra_urbaine }} L/100 km</p>
                     </div>
                     {% endif %}
-                    {% if annonce.couleur %}
-                    <div class="flex flex-col">
-                        <span class="text-tertiary text-xs uppercase tracking-wide mb-1">Couleur</span>
-                        <span class="font-semibold text-primary">{{ annonce.couleur }}</span>
+                    {% if annonce.consomation_mixte %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Mixte</p>
+                        <p class="font-semibold text-primary">{{ annonce.consomation_mixte }} L/100 km</p>
                     </div>
                     {% endif %}
-                    {% if annonce.etat %}
-                    <div class="flex flex-col">
-                        <span class="text-tertiary text-xs uppercase tracking-wide mb-1">État</span>
-                        <span class="font-semibold text-primary">{{ annonce.etat }}</span>
+                    {% if annonce.emission_CO2 %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Émissions CO₂</p>
+                        <p class="font-semibold text-primary">{{ annonce.emission_CO2 }} g/km</p>
                     </div>
                     {% endif %}
-                    {% if annonce.nombre_places %}
-                    <div class="flex flex-col">
-                        <span class="text-tertiary text-xs uppercase tracking-wide mb-1">Places</span>
-                        <span class="font-semibold text-primary">{{ annonce.nombre_places }}</span>
+                    {% if annonce.Norme_euro %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Norme Euro</p>
+                        <p class="font-semibold text-primary">{{ annonce.Norme_euro }}</p>
                     </div>
                     {% endif %}
-                    {% if annonce.nombre_portes %}
-                    <div class="flex flex-col">
-                        <span class="text-tertiary text-xs uppercase tracking-wide mb-1">Portes</span>
-                        <span class="font-semibold text-primary">{{ annonce.nombre_portes }}</span>
+                    {% if annonce.Crit_air is not null and annonce.Crit_air != '' %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Crit'Air</p>
+                        <span class="inline-block font-bold text-white px-3 py-1 rounded text-sm
+                            {% if annonce.Crit_air == 0 %}bg-green-600
+                            {% elseif annonce.Crit_air == 1 %}bg-green-500
+                            {% elseif annonce.Crit_air == 2 %}bg-yellow-500
+                            {% elseif annonce.Crit_air == 3 %}bg-orange-500
+                            {% else %}bg-red-500{% endif %}">
+                            {{ annonce.Crit_air }}
+                        </span>
                     </div>
                     {% endif %}
-                    <div class="flex flex-col">
-                        <span class="text-tertiary text-xs uppercase tracking-wide mb-1">Première main</span>
-                        <span class="font-semibold text-primary">{{ annonce.premiere_main ? 'Oui' : 'Non' }}</span>
-                    </div>
-                    {% if annonce.nombre_proprietaire %}
-                    <div class="flex flex-col">
-                        <span class="text-tertiary text-xs uppercase tracking-wide mb-1">Nb propriétaires</span>
-                        <span class="font-semibold text-primary">{{ annonce.nombre_proprietaire }}</span>
+                </div>
+            </div>
+            {% endif %}
+
+            {# ── Section : Dimensions & poids ── #}
+            {% if annonce.largeur_sans_retros or annonce.hauteur or annonce.empattement or annonce.poids_vide %}
+            <div class="bg-white rounded-xl p-6 shadow-sm">
+                <h2 class="font-bold text-primary text-base font-['ManRope'] mb-4 flex items-center gap-2">
+                    <span class="w-1 h-4 bg-secondary rounded-full inline-block"></span>
+                    Dimensions & poids
+                </h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-y-4 gap-x-6 text-sm">
+                    {% if annonce.largeur_sans_retros %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Largeur</p>
+                        <p class="font-semibold text-primary">{{ annonce.largeur_sans_retros }} mm</p>
                     </div>
                     {% endif %}
-                    {% if annonce.controle_technique %}
-                    <div class="flex flex-col">
-                        <span class="text-tertiary text-xs uppercase tracking-wide mb-1">Contrôle technique</span>
-                        <span class="font-semibold text-primary">{{ annonce.controle_technique|date('d/m/Y') }}</span>
+                    {% if annonce.hauteur %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Hauteur</p>
+                        <p class="font-semibold text-primary">{{ annonce.hauteur }} mm</p>
                     </div>
                     {% endif %}
-                    {% if annonce.localisation %}
-                    <div class="flex flex-col">
-                        <span class="text-tertiary text-xs uppercase tracking-wide mb-1">Localisation</span>
-                        <span class="font-semibold text-primary">{{ annonce.localisation }}</span>
+                    {% if annonce.empattement %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Empattement</p>
+                        <p class="font-semibold text-primary">{{ annonce.empattement }} mm</p>
+                    </div>
+                    {% endif %}
+                    {% if annonce.poids_vide %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Poids à vide</p>
+                        <p class="font-semibold text-primary">{{ annonce.poids_vide }} kg</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+
+            {# ── Section : Châssis ── #}
+            {% if annonce.suspension_avant or annonce.suspension_arriere or annonce.freins_avant or annonce.freins_arriere or annonce.diametre_braquage %}
+            <div class="bg-white rounded-xl p-6 shadow-sm">
+                <h2 class="font-bold text-primary text-base font-['ManRope'] mb-4 flex items-center gap-2">
+                    <span class="w-1 h-4 bg-secondary rounded-full inline-block"></span>
+                    Châssis & freinage
+                </h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-y-4 gap-x-6 text-sm">
+                    {% if annonce.suspension_avant %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Suspension avant</p>
+                        <p class="font-semibold text-primary">{{ annonce.suspension_avant }}</p>
+                    </div>
+                    {% endif %}
+                    {% if annonce.suspension_arriere %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Suspension arrière</p>
+                        <p class="font-semibold text-primary">{{ annonce.suspension_arriere }}</p>
+                    </div>
+                    {% endif %}
+                    {% if annonce.freins_avant %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Freins avant</p>
+                        <p class="font-semibold text-primary">{{ annonce.freins_avant }}</p>
+                    </div>
+                    {% endif %}
+                    {% if annonce.freins_arriere %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Freins arrière</p>
+                        <p class="font-semibold text-primary">{{ annonce.freins_arriere }}</p>
+                    </div>
+                    {% endif %}
+                    {% if annonce.diametre_braquage %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Diamètre de braquage</p>
+                        <p class="font-semibold text-primary">{{ annonce.diametre_braquage }} m</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+
+            {# ── Section : Fiche modèle ── #}
+            <div class="bg-white rounded-xl p-6 shadow-sm">
+                <h2 class="font-bold text-primary text-base font-['ManRope'] mb-4 flex items-center gap-2">
+                    <span class="w-1 h-4 bg-secondary rounded-full inline-block"></span>
+                    Fiche modèle
+                </h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-y-4 gap-x-6 text-sm">
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Marque</p>
+                        <p class="font-semibold text-primary">{{ annonce.marque_nom }}{% if annonce.marque_pays %} ({{ annonce.marque_pays }}){% endif %}</p>
+                    </div>
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Modèle</p>
+                        <p class="font-semibold text-primary">{{ annonce.modele_nom }}</p>
+                    </div>
+                    {% if annonce.type_nom %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Type de carrosserie</p>
+                        <p class="font-semibold text-primary">{{ annonce.type_nom }}</p>
+                    </div>
+                    {% endif %}
+                    {% if annonce.generation_nom %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Génération</p>
+                        <p class="font-semibold text-primary">{{ annonce.generation_nom }}{% if annonce.generation_date_sortie %} ({{ annonce.generation_date_sortie|date('Y') }}){% endif %}</p>
+                    </div>
+                    {% endif %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Version</p>
+                        <p class="font-semibold text-primary">{{ annonce.version_nom }}</p>
+                    </div>
+                    {% if annonce.modele_annee %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Commercialisé depuis</p>
+                        <p class="font-semibold text-primary">{{ annonce.modele_annee }}</p>
                     </div>
                     {% endif %}
                 </div>
             </div>
 
-            {# Description #}
+            {# ── Description libre ── #}
             {% if annonce.description %}
             <div class="bg-white rounded-xl p-6 shadow-sm">
-                <h2 class="font-bold text-primary text-lg mb-3 font-['ManRope']">Description</h2>
+                <h2 class="font-bold text-primary text-base font-['ManRope'] mb-3 flex items-center gap-2">
+                    <span class="w-1 h-4 bg-secondary rounded-full inline-block"></span>
+                    Description du vendeur
+                </h2>
                 <p class="text-tertiary text-sm leading-relaxed whitespace-pre-wrap">{{ annonce.description }}</p>
             </div>
             {% endif %}
 
         </div>
 
-        {# Colonne droite : prix + vendeur + actions #}
+        {# ── Colonne droite : prix + vendeur ── #}
         <div class="space-y-4">
-
             <div class="bg-white rounded-xl p-6 shadow-sm sticky top-4">
 
-                <p class="text-3xl font-bold text-secondary mb-1">
-                    {{ annonce.prix|number_format(0, ',', ' ') }} €
-                </p>
-                <p class="text-sm text-tertiary mb-1">{{ annonce.marque_nom }} {{ annonce.modele_nom }}</p>
-                <p class="text-xs text-tertiary mb-6">{{ annonce.version_nom }}</p>
+                <p class="text-3xl font-bold text-secondary mb-1">{{ annonce.prix|number_format(0, ',', ' ') }} €</p>
+                <p class="text-sm text-primary font-semibold">{{ annonce.marque_nom }} {{ annonce.modele_nom }}</p>
+                <p class="text-xs text-tertiary mt-0.5 mb-1">{{ annonce.version_nom }}</p>
+                <div class="flex flex-wrap gap-2 mt-2 mb-4">
+                    {% if annonce.type_nom %}
+                        <span class="text-[10px] bg-gray-100 text-tertiary px-2 py-0.5 rounded-full">{{ annonce.type_nom }}</span>
+                    {% endif %}
+                    <span class="text-[10px] bg-gray-100 text-tertiary px-2 py-0.5 rounded-full">{{ annonce.annee_circulation }}</span>
+                    <span class="text-[10px] bg-gray-100 text-tertiary px-2 py-0.5 rounded-full">{{ annonce.kilometrage|number_format(0, ',', ' ') }} km</span>
+                    {% if annonce.boite_vitesse %}
+                        <span class="text-[10px] bg-gray-100 text-tertiary px-2 py-0.5 rounded-full">{{ annonce.boite_vitesse }}</span>
+                    {% endif %}
+                    {% if annonce.couleur %}
+                        <span class="text-[10px] bg-gray-100 text-tertiary px-2 py-0.5 rounded-full">{{ annonce.couleur }}</span>
+                    {% endif %}
+                </div>
 
                 <hr class="border-gray-100 mb-4">
 
-                <h3 class="font-semibold text-primary mb-3 text-sm">Vendeur</h3>
-                <p class="font-bold text-primary">{{ annonce.vendeur_prenom }} {{ annonce.vendeur_nom }}</p>
+                <h3 class="font-semibold text-primary mb-2 text-sm">Vendeur</h3>
+                <p class="font-bold text-primary text-sm">{{ annonce.vendeur_prenom }} {{ annonce.vendeur_nom }}</p>
                 {% if annonce.vendeur_phone %}
-                <p class="text-secondary text-sm mt-1">📞 {{ annonce.vendeur_phone }}</p>
+                <p class="text-secondary text-sm mt-1 font-medium">📞 {{ annonce.vendeur_phone }}</p>
                 {% endif %}
 
                 {% if app.user %}
@@ -188,7 +407,7 @@
                         Modifier l'annonce
                     </a>
                     <form action="{{ path('annonce_supprimer', {id: annonce.id_annonce}) }}" method="post" class="mt-2">
-                        <button type="submit"
+                        <button type="submit" onclick="return confirm('Supprimer cette annonce ?')"
                                 class="w-full py-2 border border-red-300 text-red-500 font-semibold rounded-lg hover:bg-red-50 transition-all text-sm">
                             Supprimer
                         </button>
@@ -202,13 +421,11 @@
                 {% endif %}
 
                 {% if annonce.date_publication %}
-                <p class="text-xs text-tertiary mt-4 text-center">
-                    Publiée le {{ annonce.date_publication|date('d/m/Y') }}
-                </p>
+                <p class="text-xs text-tertiary mt-4 text-center">Publiée le {{ annonce.date_publication|date('d/m/Y') }}</p>
                 {% endif %}
             </div>
-
         </div>
+
     </div>
 </div>
 
@@ -217,7 +434,6 @@
 (function () {
     var photos = {{ photos|map(p => p.url_photo)|json_encode|raw }};
     var current = 0;
-
     var mainImg = document.getElementById('carousel-main');
     var counter = document.getElementById('carousel-counter');
     var prevBtn = document.getElementById('carousel-prev');
@@ -229,17 +445,15 @@
         mainImg.src = photos[current];
         counter.textContent = (current + 1) + ' / ' + photos.length;
         thumbs.forEach(function(t) {
-            t.style.outline = parseInt(t.dataset.thumbIndex) === current ? '3px solid #3b82f6' : 'none';
+            t.style.outline = parseInt(t.dataset.thumbIndex) === current ? '2px solid #9d4300' : 'none';
         });
     }
 
     prevBtn.addEventListener('click', function() { goTo(current - 1); });
     nextBtn.addEventListener('click', function() { goTo(current + 1); });
-
     thumbs.forEach(function(t) {
         t.addEventListener('click', function() { goTo(parseInt(t.dataset.thumbIndex)); });
     });
-
     document.addEventListener('keydown', function(e) {
         if (e.key === 'ArrowLeft')  goTo(current - 1);
         if (e.key === 'ArrowRight') goTo(current + 1);

@@ -127,8 +127,8 @@ class __TwigTemplate_7d1acf227883603008d3abdca0e27100 extends Template
         </div>
         <a href=\"";
         // line 20
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_dashboard");
-        yield "\" class=\"text-sm text-tertiary hover:text-primary\">← Tableau de bord</a>
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_utilisateurs");
+        yield "\" class=\"text-sm text-tertiary hover:text-primary\">← Utilisateurs</a>
     </div>
 
     ";
@@ -499,7 +499,7 @@ function togglePauseForm(id) {
             <h1 class=\"text-3xl font-bold text-primary font-['ManRope']\">Annonces</h1>
             <p class=\"text-tertiary mt-1\">{{ annonces|length }} résultat{{ annonces|length != 1 ? 's' : '' }}</p>
         </div>
-        <a href=\"{{ path('admin_dashboard') }}\" class=\"text-sm text-tertiary hover:text-primary\">← Tableau de bord</a>
+        <a href=\"{{ path('admin_utilisateurs') }}\" class=\"text-sm text-tertiary hover:text-primary\">← Utilisateurs</a>
     </div>
 
     {# Filtres #}

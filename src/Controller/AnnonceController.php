@@ -249,6 +249,19 @@ class AnnonceController extends AbstractController
         ]);
     }
 
+    #[Route('/annonces/{id}/vendu', name: 'annonce_vendu', methods: ['POST'], requirements: ['id' => '\d+'])]
+    #[IsGranted('ROLE_USER')]
+    public function marquerVendu(int $id, AnnonceRepository $repo): Response
+    {
+        $owner = $repo->getOwner($id);
+        if ((int) $owner !== (int) $this->getUser()->getId()) {
+            throw $this->createAccessDeniedException();
+        }
+        $repo->marquerVendu($id);
+        $this->addFlash('success', 'Annonce marquée comme vendue. Félicitations !');
+        return $this->redirectToRoute('mes_annonces');
+    }
+
     #[Route('/annonces/{id}/supprimer', name: 'annonce_supprimer', methods: ['POST'], requirements: ['id' => '\d+'])]
     #[IsGranted('ROLE_USER')]
     public function supprimer(int $id, AnnonceRepository $repo): Response

@@ -42,16 +42,22 @@
                 </li>
 
                 {% if is_granted('ROLE_ADMIN') %}
-                    <li class="nav-item nav-gauche"><a href="{{ path('admin_dashboard') }}">Tableau de bord</a></li>
                     <li class="nav-item nav-gauche"><a href="{{ path('admin_utilisateurs') }}">Utilisateurs</a></li>
                     <li class="nav-item nav-gauche"><a href="{{ path('admin_annonces') }}">Annonces</a></li>
                     <li class="nav-item nav-gauche"><a href="{{ path('admin_catalogue') }}">Catalogue</a></li>
+                    <li class="nav-item nav-gauche"><a href="{{ path('stats') }}">Statistiques</a></li>
+                {% elseif is_granted('ROLE_ENTREPRISE') %}
+                    <li class="nav-item nav-gauche"><a href="{{ path('annonces') }}">Annonces</a></li>
+                    <li class="nav-item nav-gauche"><a href="{{ path('vendreMaVoiture') }}">Vendre ma voiture</a></li>
+                    <li class="nav-item nav-gauche"><a href="{{ path('mes_annonces') }}">Mes annonces</a></li>
+                    <li class="nav-item nav-gauche"><a href="{{ path('stats') }}">Statistiques</a></li>
+                {% elseif is_granted('ROLE_USER') %}
+                    <li class="nav-item nav-gauche"><a href="{{ path('annonces') }}">Annonces</a></li>
+                    <li class="nav-item nav-gauche"><a href="{{ path('vendreMaVoiture') }}">Vendre ma voiture</a></li>
+                    <li class="nav-item nav-gauche"><a href="{{ path('mes_annonces') }}">Mes annonces</a></li>
                 {% else %}
                     <li class="nav-item nav-gauche"><a href="{{ path('annonces') }}">Annonces</a></li>
                     <li class="nav-item nav-gauche"><a href="{{ path('vendreMaVoiture') }}">Vendre ma voiture</a></li>
-                    {% if app.user %}
-                    <li class="nav-item nav-gauche"><a href="{{ path('mes_annonces') }}">Mes annonces</a></li>
-                    {% endif %}
                 {% endif %}
 
                 <li class="spacer"></li>
@@ -95,16 +101,25 @@
                         <li class="pb-5">
                             <h3 class="font-['ManRope'] text-[15px] font-bold text-secondary">ÉCOSYSTÈME</h3>
                         </li>
-                        <li class="pb-3">
-                            <a href="{{ path("annonces") }}">Annonces</a>
-                        </li>
-                        <li class="pb-3">
-                            <a href="{{ path("vendreMaVoiture") }}">Vente</a>
-                        </li>
-                        {% if app.user %}
-                        <li class="pb-3">
-                            <a href="{{ path("mes_annonces") }}">Mes annonces</a>
-                        </li>
+                        {% if is_granted('ROLE_ADMIN') %}
+                        <li class="pb-3"><a href="{{ path('admin_utilisateurs') }}">Utilisateurs</a></li>
+                        <li class="pb-3"><a href="{{ path('admin_annonces') }}">Annonces</a></li>
+                        <li class="pb-3"><a href="{{ path('admin_catalogue') }}">Catalogue</a></li>
+                        <li class="pb-3"><a href="{{ path('stats') }}">Statistiques</a></li>
+                        {% elseif is_granted('ROLE_ENTREPRISE') %}
+                        <li class="pb-3"><a href="{{ path('annonces') }}">Annonces</a></li>
+                        <li class="pb-3"><a href="{{ path('vendreMaVoiture') }}">Vendre ma voiture</a></li>
+                        <li class="pb-3"><a href="{{ path('mes_annonces') }}">Mes annonces</a></li>
+                        <li class="pb-3"><a href="{{ path('stats') }}">Statistiques</a></li>
+                        {% elseif is_granted('ROLE_USER') %}
+                        <li class="pb-3"><a href="{{ path('annonces') }}">Annonces</a></li>
+                        <li class="pb-3"><a href="{{ path('vendreMaVoiture') }}">Vendre ma voiture</a></li>
+                        <li class="pb-3"><a href="{{ path('mes_annonces') }}">Mes annonces</a></li>
+                        {% else %}
+                        <li class="pb-3"><a href="{{ path('annonces') }}">Annonces</a></li>
+                        <li class="pb-3"><a href="{{ path('vendreMaVoiture') }}">Vendre ma voiture</a></li>
+                        <li class="pb-3"><a href="{{ path('connexion') }}">Connexion</a></li>
+                        <li class="pb-3"><a href="{{ path('inscription') }}">S'inscrire</a></li>
                         {% endif %}
                     </ul>
                 </div>

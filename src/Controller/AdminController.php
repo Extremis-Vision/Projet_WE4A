@@ -16,14 +16,10 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[IsGranted('ROLE_ADMIN')]
 class AdminController extends AbstractController
 {
-    // ── DASHBOARD ────────────────────────────────────────────────────────────
-
     #[Route('', name: 'dashboard')]
-    public function dashboard(AdminRepository $repo): Response
+    public function index(): Response
     {
-        return $this->render('admin/dashboard.html.twig', [
-            'stats' => $repo->getStats(),
-        ]);
+        return $this->redirectToRoute('admin_utilisateurs');
     }
 
     // ── UTILISATEURS ─────────────────────────────────────────────────────────
@@ -113,7 +109,14 @@ class AdminController extends AbstractController
     {
         $nom = trim($request->request->get('nom', ''));
         if ($nom !== '') {
-            $repo->createMarque($nom);
+            $repo->createMarque(
+                $nom,
+                $request->request->get('continent') ?: null,
+                $request->request->get('pays') ?: null,
+                $request->request->get('date_creation') ? (int) $request->request->get('date_creation') : null,
+                $request->request->get('description') ?: null,
+                $request->request->get('createur') ?: null,
+            );
             $this->addFlash('success', "Marque « $nom » ajoutée.");
         }
         return $this->redirectToRoute('admin_catalogue');
@@ -142,16 +145,25 @@ class AdminController extends AbstractController
         return $this->render('admin/catalogue_modeles.html.twig', [
             'marque'  => $marque,
             'modeles' => $repo->findModelesByMarque($id),
+            'types'   => $repo->findAllTypes(),
         ]);
     }
 
     #[Route('/catalogue/marques/{id}/modeles/ajouter', name: 'ajouter_modele', methods: ['POST'])]
     public function ajouterModele(int $id, Request $request, CatalogueRepository $repo): Response
     {
-        $nom = trim($request->request->get('nom', ''));
-        if ($nom !== '') {
-            $repo->createModele($id, $nom);
+        $nom    = trim($request->request->get('nom', ''));
+        $idType = (int) $request->request->get('id_type', 0);
+        if ($nom !== '' && $idType > 0) {
+            $repo->createModele(
+                $id,
+                $nom,
+                $idType,
+                $request->request->get('annee_creation') ? (int) $request->request->get('annee_creation') : null,
+            );
             $this->addFlash('success', "Modèle « $nom » ajouté.");
+        } else {
+            $this->addFlash('error', 'Le nom et le type sont obligatoires.');
         }
         return $this->redirectToRoute('admin_catalogue_modeles', ['id' => $id]);
     }
@@ -229,13 +241,31 @@ class AdminController extends AbstractController
     {
         $nom = trim($request->request->get('nom', ''));
         if ($nom !== '') {
+            $r = $request->request;
             $repo->createVersion(
                 $id,
                 $nom,
-                $request->request->get('transmission') ?: null,
-                $request->request->get('boite_vitesse') ?: null,
-                $request->request->get('nombre_places') ? (int) $request->request->get('nombre_places') : null,
-                $request->request->get('nombre_portes') ? (int) $request->request->get('nombre_portes') : null,
+                $r->get('transmission') ?: null,
+                $r->get('boite_vitesse') ?: null,
+                $r->get('nombre_places')          ? (int)   $r->get('nombre_places')          : null,
+                $r->get('nombre_portes')          ? (int)   $r->get('nombre_portes')          : null,
+                $r->get('vitesse_max')            ? (int)   $r->get('vitesse_max')            : null,
+                $r->get('consommation_urbaine')   ? (float) $r->get('consommation_urbaine')   : null,
+                $r->get('consommation_extra')     ? (float) $r->get('consommation_extra')     : null,
+                $r->get('consommation_mixte')     ? (float) $r->get('consommation_mixte')     : null,
+                $r->get('emission_co2')           ? (int)   $r->get('emission_co2')           : null,
+                $r->get('norme_euro')             ?: null,
+                $r->get('crit_air')               ? (int)   $r->get('crit_air')               : null,
+                $r->get('nombre_rapport')         ? (int)   $r->get('nombre_rapport')         : null,
+                $r->get('largeur_sans_retros')    ? (int)   $r->get('largeur_sans_retros')    : null,
+                $r->get('hauteur')                ? (int)   $r->get('hauteur')                : null,
+                $r->get('empattement')            ? (int)   $r->get('empattement')            : null,
+                $r->get('poids_vide')             ? (int)   $r->get('poids_vide')             : null,
+                $r->get('suspension_avant')       ?: null,
+                $r->get('suspension_arriere')     ?: null,
+                $r->get('freins_avant')           ?: null,
+                $r->get('freins_arriere')         ?: null,
+                $r->get('diametre_braquage')      ? (float) $r->get('diametre_braquage')      : null,
             );
             $this->addFlash('success', "Version « $nom » ajoutée.");
         }

@@ -8,18 +8,6 @@ class AdminRepository
 {
     public function __construct(private DatabaseService $db) {}
 
-    public function getStats(): array
-    {
-        $stmt = $this->db->getConnection()->query('
-            SELECT
-                (SELECT COUNT(*) FROM utilisateur WHERE role != "admin") AS total_users,
-                (SELECT COUNT(*) FROM annonce WHERE statut = "active")   AS active_annonces,
-                (SELECT COUNT(*) FROM annonce WHERE statut = "pause")    AS paused_annonces,
-                (SELECT COUNT(*) FROM annonce)                           AS total_annonces
-        ');
-        return $stmt->fetch();
-    }
-
     public function findAllUsers(): array
     {
         $stmt = $this->db->getConnection()->query('
@@ -31,15 +19,6 @@ class AdminRepository
             ORDER BY u.date_inscription DESC
         ');
         return $stmt->fetchAll();
-    }
-
-    public function findUserById(int $id): ?array
-    {
-        $stmt = $this->db->getConnection()->prepare(
-            'SELECT id_utilisateur, nom, prenom, email, role, numero_phone, date_inscription FROM utilisateur WHERE id_utilisateur = ?'
-        );
-        $stmt->execute([$id]);
-        return $stmt->fetch() ?: null;
     }
 
     public function deleteUser(int $id): void

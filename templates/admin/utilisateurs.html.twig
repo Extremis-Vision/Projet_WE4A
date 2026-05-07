@@ -51,7 +51,7 @@
                     <td class="px-5 py-3 text-right">
                         {% if u.role != 'admin' %}
                         <form action="{{ path('admin_supprimer_utilisateur', {id: u.id_utilisateur}) }}" method="post"
-                              onsubmit="return confirm('Supprimer {{ u.prenom }} {{ u.nom }} et toutes ses annonces ?')">
+                              onsubmit="return confirm('Supprimer {{ (u.prenom ~ ' ' ~ u.nom)|e('js') }} et toutes ses annonces ?')">
                             <button type="submit"
                                     class="px-3 py-1 border border-red-300 text-red-500 text-xs font-semibold rounded-lg hover:bg-red-50 transition-all">
                                 Supprimer

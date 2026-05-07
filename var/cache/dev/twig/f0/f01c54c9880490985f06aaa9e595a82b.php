@@ -197,9 +197,7 @@ $context["u"], "role", [], "any", false, false, false, 43) == "vendeur")) {
                 yield "\" method=\"post\"
                               onsubmit=\"return confirm('Supprimer ";
                 // line 54
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["u"], "prenom", [], "any", false, false, false, 54), "html", null, true);
-                yield " ";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["u"], "nom", [], "any", false, false, false, 54), "html", null, true);
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((CoreExtension::getAttribute($this->env, $this->source, $context["u"], "prenom", [], "any", false, false, false, 54) . " ") . CoreExtension::getAttribute($this->env, $this->source, $context["u"], "nom", [], "any", false, false, false, 54)), "js"), "html", null, true);
                 yield " et toutes ses annonces ?')\">
                             <button type=\"submit\"
                                     class=\"px-3 py-1 border border-red-300 text-red-500 text-xs font-semibold rounded-lg hover:bg-red-50 transition-all\">
@@ -250,7 +248,7 @@ $context["u"], "role", [], "any", false, false, false, 43) == "vendeur")) {
      */
     public function getDebugInfo(): array
     {
-        return array (  220 => 64,  212 => 61,  200 => 54,  195 => 53,  193 => 52,  188 => 50,  184 => 49,  181 => 48,  177 => 46,  173 => 44,  171 => 43,  168 => 42,  166 => 41,  161 => 39,  155 => 38,  152 => 37,  148 => 36,  129 => 20,  122 => 18,  116 => 14,  107 => 12,  102 => 11,  93 => 9,  89 => 8,  85 => 6,  75 => 5,  58 => 3,  41 => 1,);
+        return array (  218 => 64,  210 => 61,  200 => 54,  195 => 53,  193 => 52,  188 => 50,  184 => 49,  181 => 48,  177 => 46,  173 => 44,  171 => 43,  168 => 42,  166 => 41,  161 => 39,  155 => 38,  152 => 37,  148 => 36,  129 => 20,  122 => 18,  116 => 14,  107 => 12,  102 => 11,  93 => 9,  89 => 8,  85 => 6,  75 => 5,  58 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -308,7 +306,7 @@ $context["u"], "role", [], "any", false, false, false, 43) == "vendeur")) {
                     <td class=\"px-5 py-3 text-right\">
                         {% if u.role != 'admin' %}
                         <form action=\"{{ path('admin_supprimer_utilisateur', {id: u.id_utilisateur}) }}\" method=\"post\"
-                              onsubmit=\"return confirm('Supprimer {{ u.prenom }} {{ u.nom }} et toutes ses annonces ?')\">
+                              onsubmit=\"return confirm('Supprimer {{ (u.prenom ~ ' ' ~ u.nom)|e('js') }} et toutes ses annonces ?')\">
                             <button type=\"submit\"
                                     class=\"px-3 py-1 border border-red-300 text-red-500 text-xs font-semibold rounded-lg hover:bg-red-50 transition-all\">
                                 Supprimer

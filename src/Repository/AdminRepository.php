@@ -44,15 +44,9 @@ class AdminRepository
 
     public function deleteUser(int $id): void
     {
-        $pdo = $this->db->getConnection();
-
-        // Supprimer les photos des annonces de l'utilisateur
-        $pdo->prepare('DELETE FROM photo WHERE id_annonce IN (SELECT id_annonce FROM annonce WHERE id_utilisateur = ?)')->execute([$id]);
-
-        // Supprimer les annonces
-        $pdo->prepare('DELETE FROM annonce WHERE id_utilisateur = ?')->execute([$id]);
-
-        // Supprimer l'utilisateur
-        $pdo->prepare('DELETE FROM utilisateur WHERE id_utilisateur = ?')->execute([$id]);
+        // Les FK ON DELETE CASCADE gèrent automatiquement : annonces, photos, messages, favoris, avis, recherches
+        $this->db->getConnection()
+            ->prepare('DELETE FROM utilisateur WHERE id_utilisateur = ?')
+            ->execute([$id]);
     }
 }

@@ -1,0 +1,139 @@
+{% extends 'base.html.twig' %}
+
+{% block pageTitle %}Versions — {{ generation.generation_nom }}{% endblock %}
+
+{% block main %}
+<div class="max-w-6xl mx-auto px-6 py-8">
+
+    {% for msg in app.flashes('success') %}
+        <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg mb-6 text-sm">{{ msg }}</div>
+    {% endfor %}
+    {% for msg in app.flashes('error') %}
+        <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6 text-sm">{{ msg }}</div>
+    {% endfor %}
+
+    <div class="flex items-center justify-between mb-2">
+        <div>
+            <p class="text-sm text-tertiary mb-1">
+                <a href="{{ path('admin_catalogue') }}" class="hover:text-primary transition-colors">Catalogue</a>
+                <span class="mx-1">›</span>
+                <a href="{{ path('admin_catalogue_modeles', {id: generation.id_marque}) }}" class="hover:text-primary transition-colors">{{ generation.marque_nom }}</a>
+                <span class="mx-1">›</span>
+                <a href="{{ path('admin_catalogue_generations', {id: generation.id_modele}) }}" class="hover:text-primary transition-colors">{{ generation.modele_nom }}</a>
+                <span class="mx-1">›</span>
+                <span>{{ generation.generation_nom ?: 'Génération' }}</span>
+            </p>
+            <h1 class="text-3xl font-bold text-primary font-['ManRope']">{{ generation.marque_nom }} {{ generation.modele_nom }} — Versions</h1>
+            <p class="text-tertiary mt-1">{{ versions|length }} version{{ versions|length != 1 ? 's' : '' }}</p>
+        </div>
+        <a href="{{ path('admin_catalogue_generations', {id: generation.id_modele}) }}" class="text-sm text-tertiary hover:text-primary transition-colors">← Générations</a>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+
+        {# Formulaire d'ajout #}
+        <div class="lg:col-span-1">
+            <div class="bg-white rounded-xl shadow-sm p-6 sticky top-6">
+                <h2 class="font-bold text-primary mb-1">Ajouter une version</h2>
+                <p class="text-xs text-gray-400 mb-4">Génération : <span class="font-semibold">{{ generation.generation_nom ?: '—' }}</span></p>
+                <form action="{{ path('admin_ajouter_version', {id: generation.id_generation}) }}" method="post" class="space-y-3">
+
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wider">Nom *</label>
+                        <input type="text" name="nom" required
+                               placeholder="Ex : 1.5 dCi 110, GTI 200…"
+                               class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wider">Transmission</label>
+                        <select name="transmission"
+                                class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20">
+                            <option value="">—</option>
+                            <option value="Traction">Traction</option>
+                            <option value="Propulsion">Propulsion</option>
+                            <option value="4x4">4x4 / Intégrale</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wider">Boîte de vitesses</label>
+                        <select name="boite_vitesse"
+                                class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20">
+                            <option value="">—</option>
+                            <option value="Manuelle">Manuelle</option>
+                            <option value="Automatique">Automatique</option>
+                            <option value="Semi-automatique">Semi-automatique</option>
+                            <option value="CVT">CVT</option>
+                        </select>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wider">Places</label>
+                            <input type="number" name="nombre_places" min="1" max="9" placeholder="5"
+                                   class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wider">Portes</label>
+                            <input type="number" name="nombre_portes" min="2" max="6" placeholder="5"
+                                   class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20">
+                        </div>
+                    </div>
+
+                    <button type="submit"
+                            class="w-full py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:bg-opacity-90 active:scale-[0.98] transition-all">
+                        Ajouter
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        {# Liste des versions #}
+        <div class="lg:col-span-2">
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                {% if versions is empty %}
+                    <div class="text-center py-16 text-gray-400">Aucune version pour cette génération.</div>
+                {% else %}
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead class="bg-gray-50 border-b border-gray-100">
+                                <tr>
+                                    <th class="text-left px-6 py-3 font-semibold text-gray-500 text-xs uppercase tracking-wider">Version</th>
+                                    <th class="text-left px-4 py-3 font-semibold text-gray-500 text-xs uppercase tracking-wider">Transmission</th>
+                                    <th class="text-left px-4 py-3 font-semibold text-gray-500 text-xs uppercase tracking-wider">Boîte</th>
+                                    <th class="text-center px-4 py-3 font-semibold text-gray-500 text-xs uppercase tracking-wider">Places</th>
+                                    <th class="text-center px-4 py-3 font-semibold text-gray-500 text-xs uppercase tracking-wider">Portes</th>
+                                    <th class="px-6 py-3"></th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-50">
+                                {% for v in versions %}
+                                <tr class="hover:bg-gray-50 transition-colors">
+                                    <td class="px-6 py-3 font-semibold text-primary">{{ v.nom }}</td>
+                                    <td class="px-4 py-3 text-gray-500">{{ v.transmission ?? '—' }}</td>
+                                    <td class="px-4 py-3 text-gray-500">{{ v.boite_vitesse ?? '—' }}</td>
+                                    <td class="px-4 py-3 text-center text-gray-500">{{ v.nombre_places ?? '—' }}</td>
+                                    <td class="px-4 py-3 text-center text-gray-500">{{ v.nombre_portes ?? '—' }}</td>
+                                    <td class="px-6 py-3">
+                                        <form action="{{ path('admin_supprimer_version', {id: v.id_version}) }}" method="post"
+                                              onsubmit="return confirm('Supprimer la version {{ v.nom }} ?')">
+                                            <button type="submit"
+                                                    class="px-3 py-1.5 border border-red-300 text-red-500 text-xs font-semibold rounded-lg hover:bg-red-50 transition-all">
+                                                Supprimer
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

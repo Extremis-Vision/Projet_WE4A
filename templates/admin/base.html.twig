@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin — {% block pageTitle %}AutoMarket{% endblock %}</title>
+    <link rel="icon" href="">
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('Styles/styles.css') }}">
+    {% endblock %}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "background": "#f7f9fb",
+                        "primary":    "#04122e",
+                        "secondary":  "#9d4300",
+                        "tertiary":   "#334155"
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="flex h-screen bg-gray-100 overflow-hidden">
+
+    {# ── SIDEBAR ─────────────────────────────────────────────────────────── #}
+    <aside class="w-60 bg-primary flex flex-col flex-none h-full">
+        <div class="px-6 py-5 border-b border-white/10">
+            <a href="{{ path('homePage') }}">
+                <img src="{{ asset('automarket_logo.svg') }}" alt="AutoMarket" class="h-9 w-auto">
+            </a>
+            <span class="mt-1 block text-[10px] uppercase tracking-widest text-secondary font-bold">Espace Admin</span>
+        </div>
+
+        <nav class="flex-1 py-4 px-3 space-y-1 overflow-y-auto">
+            {% set current = app.request.attributes.get('_route') %}
+
+            <a href="{{ path('admin_dashboard') }}"
+               class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors
+                      {{ current == 'admin_dashboard' ? 'bg-white/10 text-white' : 'text-white/60 hover:text-white hover:bg-white/5' }}">
+                <svg class="w-4 h-4 flex-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                </svg>
+                Tableau de bord
+            </a>
+
+            <a href="{{ path('admin_utilisateurs') }}"
+               class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors
+                      {{ current starts with 'admin_utilisateurs' or current == 'admin_supprimer_utilisateur' ? 'bg-white/10 text-white' : 'text-white/60 hover:text-white hover:bg-white/5' }}">
+                <svg class="w-4 h-4 flex-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+                Utilisateurs
+            </a>
+
+            <a href="{{ path('admin_annonces') }}"
+               class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors
+                      {{ current starts with 'admin_annonces' or current starts with 'admin_pauser' or current starts with 'admin_reactiver' or current starts with 'admin_supprimer_annonce' ? 'bg-white/10 text-white' : 'text-white/60 hover:text-white hover:bg-white/5' }}">
+                <svg class="w-4 h-4 flex-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                </svg>
+                Annonces
+            </a>
+
+            <a href="{{ path('admin_catalogue') }}"
+               class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors
+                      {{ current starts with 'admin_catalogue' or current starts with 'admin_ajouter_' or current starts with 'admin_supprimer_marque' or current starts with 'admin_supprimer_modele' or current starts with 'admin_supprimer_generation' or current starts with 'admin_supprimer_version' ? 'bg-white/10 text-white' : 'text-white/60 hover:text-white hover:bg-white/5' }}">
+                <svg class="w-4 h-4 flex-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+                </svg>
+                Catalogue
+            </a>
+        </nav>
+
+        <div class="px-3 py-4 border-t border-white/10">
+            <a href="{{ path('homePage') }}"
+               class="flex items-center gap-2 px-3 py-2 text-white/50 hover:text-white text-sm transition-colors rounded-lg hover:bg-white/5">
+                <svg class="w-4 h-4 flex-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                </svg>
+                Retour au site
+            </a>
+            <div class="mt-3 px-3 py-2 text-xs text-white/30">
+                Connecté : <span class="text-white/60 font-medium">{{ app.user.prenom }} {{ app.user.nom }}</span>
+            </div>
+        </div>
+    </aside>
+
+    {# ── CONTENU PRINCIPAL ───────────────────────────────────────────────── #}
+    <div class="flex-1 flex flex-col min-w-0 h-full overflow-auto">
+
+        {# En-tête de page #}
+        <header class="flex-none bg-white border-b border-gray-200 px-8 py-4 flex items-center justify-between">
+            <h1 class="text-lg font-bold text-primary font-['ManRope']">{% block pageHeading %}{% endblock %}</h1>
+            <nav class="flex items-center gap-1 text-xs text-gray-400">
+                <a href="{{ path('admin_dashboard') }}" class="hover:text-primary">Admin</a>
+                {% block breadcrumb %}{% endblock %}
+            </nav>
+        </header>
+
+        {# Flash messages #}
+        <div class="flex-none px-8 pt-5">
+            {% for msg in app.flashes('success') %}
+                <div class="flex items-center gap-2 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg mb-3 text-sm">
+                    <svg class="w-4 h-4 flex-none" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                    {{ msg }}
+                </div>
+            {% endfor %}
+            {% for msg in app.flashes('error') %}
+                <div class="flex items-center gap-2 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-3 text-sm">
+                    <svg class="w-4 h-4 flex-none" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                    </svg>
+                    {{ msg }}
+                </div>
+            {% endfor %}
+        </div>
+
+        {# Contenu #}
+        <main class="flex-1 px-8 pb-8 pt-3">
+            {% block content %}{% endblock %}
+        </main>
+
+    </div>
+
+{% block javascripts %}{% endblock %}
+</body>
+</html>

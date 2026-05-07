@@ -1,0 +1,208 @@
+{% extends 'base.html.twig' %}
+
+{% block pageTitle %}Annonces — Admin{% endblock %}
+
+{% block main %}
+<div class="max-w-6xl mx-auto px-6 py-8">
+
+    {% for msg in app.flashes('success') %}
+        <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg mb-6 text-sm">{{ msg }}</div>
+    {% endfor %}
+    {% for msg in app.flashes('error') %}
+        <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6 text-sm">{{ msg }}</div>
+    {% endfor %}
+
+    <div class="flex items-center justify-between mb-8">
+        <div>
+            <h1 class="text-3xl font-bold text-primary font-['ManRope']">Annonces</h1>
+            <p class="text-tertiary mt-1">{{ annonces|length }} annonce{{ annonces|length != 1 ? 's' : '' }}</p>
+        </div>
+        <a href="{{ path('admin_dashboard') }}" class="text-sm text-tertiary hover:text-primary transition-colors">← Tableau de bord</a>
+    </div>
+
+    {# Filtres #}
+    <form method="get" action="{{ path('admin_annonces') }}"
+          class="bg-white rounded-xl shadow-sm p-4 mb-6 flex flex-wrap gap-3 items-end">
+
+        <div class="flex-1 min-w-[180px]">
+            <label class="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wider">Recherche</label>
+            <input type="text" name="search" value="{{ filters.search }}"
+                   placeholder="Marque, modèle, vendeur…"
+                   class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20">
+        </div>
+
+        <div>
+            <label class="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wider">Statut</label>
+            <select name="statut" class="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20">
+                <option value="">Tous</option>
+                <option value="active" {{ filters.statut == 'active' ? 'selected' : '' }}>Actives</option>
+                <option value="pause"  {{ filters.statut == 'pause'  ? 'selected' : '' }}>En pause</option>
+            </select>
+        </div>
+
+        <div>
+            <label class="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wider">Marque</label>
+            <select name="marque_id" class="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20">
+                <option value="">Toutes</option>
+                {% for m in marques %}
+                    <option value="{{ m.id_marque }}" {{ filters.marque_id == m.id_marque ? 'selected' : '' }}>{{ m.nom }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button type="submit"
+                class="px-5 py-2 bg-primary text-white text-sm font-semibold rounded-lg hover:bg-opacity-90 transition-all active:scale-95">
+            Filtrer
+        </button>
+        {% if filters.statut or filters.marque_id or filters.search %}
+            <a href="{{ path('admin_annonces') }}"
+               class="px-5 py-2 border border-gray-200 text-gray-500 text-sm rounded-lg hover:bg-gray-50 transition-all">
+                Réinitialiser
+            </a>
+        {% endif %}
+
+    </form>
+
+    {# Liste #}
+    {% if annonces is empty %}
+        <div class="text-center py-24 bg-white rounded-xl shadow-sm">
+            <p class="text-xl font-semibold text-primary mb-2">Aucune annonce trouvée</p>
+            <p class="text-tertiary text-sm">Modifiez les filtres pour afficher des résultats.</p>
+        </div>
+    {% else %}
+        <div class="space-y-4">
+            {% for a in annonces %}
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden" id="annonce-{{ a.id_annonce }}">
+                <div class="flex gap-0">
+
+                    {# Photo #}
+                    <a href="{{ path('annonce_detail', {id: a.id_annonce}) }}" target="_blank"
+                       class="flex-none w-40 h-32 bg-gray-100 overflow-hidden">
+                        {% if a.photo_principale %}
+                            <img src="{{ a.photo_principale }}" alt=""
+                                 class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                        {% else %}
+                            <div class="w-full h-full flex items-center justify-center text-gray-300">
+                                <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M19 7H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm-7 9c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm5-8H7l2-4h6l2 4z"/>
+                                </svg>
+                            </div>
+                        {% endif %}
+                    </a>
+
+                    {# Infos #}
+                    <div class="flex-1 px-5 py-4 min-w-0">
+                        <div class="flex items-start justify-between gap-4">
+                            <div class="min-w-0">
+                                <div class="flex items-center gap-2 flex-wrap">
+                                    <a href="{{ path('annonce_detail', {id: a.id_annonce}) }}" target="_blank"
+                                       class="font-bold text-primary hover:text-secondary transition-colors">
+                                        {{ a.marque_nom }} {{ a.modele_nom }}
+                                    </a>
+                                    {% if a.statut == 'active' %}
+                                        <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-green-100 text-green-700">Active</span>
+                                    {% elseif a.statut == 'pause' %}
+                                        <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-orange-100 text-orange-700">En pause</span>
+                                    {% endif %}
+                                </div>
+                                <p class="text-xs text-tertiary mt-0.5">{{ a.version_nom }}</p>
+                                <div class="flex flex-wrap gap-x-3 gap-y-1 text-xs text-tertiary mt-1">
+                                    <span>{{ a.annee_circulation }}</span>
+                                    <span>•</span>
+                                    <span>{{ a.kilometrage|number_format(0, ',', ' ') }} km</span>
+                                    {% if a.localisation %}<span>•</span><span>{{ a.localisation }}</span>{% endif %}
+                                </div>
+                                <p class="text-xs text-gray-400 mt-1">
+                                    Vendeur : <span class="font-medium text-tertiary">{{ a.vendeur_prenom }} {{ a.vendeur_nom }}</span>
+                                    — {{ a.date_publication ? a.date_publication|date('d/m/Y') : a.date_creation|date('d/m/Y') }}
+                                </p>
+
+                                {% if a.statut == 'pause' and a.commentaire_admin %}
+                                <div class="mt-2 p-2 bg-orange-50 border border-orange-100 rounded-lg text-xs text-orange-700">
+                                    <span class="font-semibold">Commentaire :</span> {{ a.commentaire_admin }}
+                                </div>
+                                {% endif %}
+                            </div>
+                            <p class="text-xl font-bold text-secondary flex-none">{{ a.prix|number_format(0, ',', ' ') }} €</p>
+                        </div>
+
+                        <div class="flex items-center justify-between mt-3">
+                            <span></span>
+                            <div class="flex gap-2">
+                                <a href="{{ path('annonce_detail', {id: a.id_annonce}) }}" target="_blank"
+                                   class="px-3 py-1.5 border border-gray-200 text-gray-500 text-xs font-semibold rounded-lg hover:bg-gray-50 transition-all">
+                                    Voir
+                                </a>
+
+                                {% if a.statut == 'active' %}
+                                    <button type="button"
+                                            onclick="togglePauseForm({{ a.id_annonce }})"
+                                            class="px-3 py-1.5 border border-orange-200 text-orange-600 text-xs font-semibold rounded-lg hover:bg-orange-50 transition-all">
+                                        Mettre en pause
+                                    </button>
+                                {% elseif a.statut == 'pause' %}
+                                    <form action="{{ path('admin_reactiver_annonce', {id: a.id_annonce}) }}" method="post">
+                                        <button type="submit"
+                                                class="px-3 py-1.5 border border-green-200 text-green-600 text-xs font-semibold rounded-lg hover:bg-green-50 transition-all">
+                                            Réactiver
+                                        </button>
+                                    </form>
+                                {% endif %}
+
+                                <form action="{{ path('admin_supprimer_annonce', {id: a.id_annonce}) }}" method="post"
+                                      onsubmit="return confirm('Supprimer définitivement cette annonce ?')">
+                                    <button type="submit"
+                                            class="px-3 py-1.5 border border-red-300 text-red-500 text-xs font-semibold rounded-lg hover:bg-red-50 transition-all">
+                                        Supprimer
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                {# Formulaire de pause (masqué par défaut) #}
+                <div id="pause-form-{{ a.id_annonce }}" class="hidden border-t border-gray-100">
+                    <form action="{{ path('admin_pauser_annonce', {id: a.id_annonce}) }}" method="post"
+                          class="px-5 py-4 bg-orange-50">
+                        <label class="block text-xs font-semibold text-orange-700 mb-2">
+                            Commentaire pour le vendeur
+                            <span class="font-normal text-orange-500">(expliquez ce qui doit être corrigé)</span>
+                        </label>
+                        <textarea name="commentaire_admin" rows="3" required
+                                  placeholder="Ex : Les photos ne correspondent pas au véhicule. Merci de les remplacer."
+                                  class="w-full border border-orange-200 rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-orange-300 resize-none"></textarea>
+                        <div class="flex gap-2 mt-2">
+                            <button type="submit"
+                                    class="px-4 py-1.5 bg-orange-600 text-white text-xs font-semibold rounded-lg hover:bg-orange-700 transition-all">
+                                Confirmer la mise en pause
+                            </button>
+                            <button type="button"
+                                    onclick="togglePauseForm({{ a.id_annonce }})"
+                                    class="px-4 py-1.5 border border-gray-200 text-gray-500 text-xs rounded-lg hover:bg-gray-50 transition-all">
+                                Annuler
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+</div>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+function togglePauseForm(id) {
+    const form = document.getElementById('pause-form-' + id);
+    form.classList.toggle('hidden');
+    if (!form.classList.contains('hidden')) {
+        form.querySelector('textarea').focus();
+    }
+}
+</script>
+{% endblock %}

@@ -134,13 +134,55 @@
             </div>
 
             {# ── Section : Motorisation ── #}
-            {% if annonce.transmission or annonce.boite_vitesse or annonce.nombre_rapport or annonce.nombre_places or annonce.nombre_portes or annonce.vitesse_max %}
+            {% if annonce.puissance_DIN or annonce.cylindree or annonce.carburant or annonce.transmission or annonce.boite_vitesse or annonce.nombre_rapport or annonce.nombre_places or annonce.nombre_portes or annonce.vitesse_max or annonce.coffre_volume %}
             <div class="bg-white rounded-xl p-6 shadow-sm">
                 <h2 class="font-bold text-primary text-base font-['ManRope'] mb-4 flex items-center gap-2">
                     <span class="w-1 h-4 bg-secondary rounded-full inline-block"></span>
                     Motorisation & carrosserie
                 </h2>
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-y-4 gap-x-6 text-sm">
+                    {% if annonce.puissance_DIN %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Puissance</p>
+                        <p class="font-semibold text-primary">{{ annonce.puissance_DIN }} ch{% if annonce.puissance_fiscale %} ({{ annonce.puissance_fiscale }} CV){% endif %}</p>
+                    </div>
+                    {% endif %}
+                    {% if annonce.couple_cumul %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Couple</p>
+                        <p class="font-semibold text-primary">{{ annonce.couple_cumul }} Nm</p>
+                    </div>
+                    {% endif %}
+                    {% if annonce.cylindree %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Cylindrée</p>
+                        <p class="font-semibold text-primary">{{ annonce.cylindree }} cm³</p>
+                    </div>
+                    {% endif %}
+                    {% if annonce.nombre_cylindre %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Cylindres</p>
+                        <p class="font-semibold text-primary">{{ annonce.nombre_cylindre }} cyl.{% if annonce.nombre_soupapes_cyclindre %} × {{ annonce.nombre_soupapes_cyclindre }} soupapes{% endif %}</p>
+                    </div>
+                    {% endif %}
+                    {% if annonce.alimentation %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Alimentation</p>
+                        <p class="font-semibold text-primary">{{ annonce.alimentation }}</p>
+                    </div>
+                    {% endif %}
+                    {% if annonce.type_suralimentation %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Suralimentation</p>
+                        <p class="font-semibold text-primary">{{ annonce.type_suralimentation }}</p>
+                    </div>
+                    {% endif %}
+                    {% if annonce.carburant %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Carburant</p>
+                        <p class="font-semibold text-primary">{{ annonce.carburant }}{% if annonce.reservoir_volume %} — {{ annonce.reservoir_volume }} L{% endif %}</p>
+                    </div>
+                    {% endif %}
                     {% if annonce.transmission %}
                     <div>
                         <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Transmission</p>
@@ -155,8 +197,14 @@
                     {% endif %}
                     {% if annonce.nombre_rapport %}
                     <div>
-                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Nombre de rapports</p>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Rapports</p>
                         <p class="font-semibold text-primary">{{ annonce.nombre_rapport }}</p>
+                    </div>
+                    {% endif %}
+                    {% if annonce.vitesse_max %}
+                    <div>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Vitesse max</p>
+                        <p class="font-semibold text-primary">{{ annonce.vitesse_max }} km/h</p>
                     </div>
                     {% endif %}
                     {% if annonce.nombre_places %}
@@ -171,10 +219,10 @@
                         <p class="font-semibold text-primary">{{ annonce.nombre_portes }}</p>
                     </div>
                     {% endif %}
-                    {% if annonce.vitesse_max %}
+                    {% if annonce.coffre_volume %}
                     <div>
-                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Vitesse max</p>
-                        <p class="font-semibold text-primary">{{ annonce.vitesse_max }} km/h</p>
+                        <p class="text-[11px] text-tertiary uppercase tracking-wide mb-0.5">Volume coffre</p>
+                        <p class="font-semibold text-primary">{{ annonce.coffre_volume }} L</p>
                     </div>
                     {% endif %}
                 </div>
@@ -380,6 +428,12 @@
                     {% endif %}
                     <span class="text-[10px] bg-gray-100 text-tertiary px-2 py-0.5 rounded-full">{{ annonce.annee_circulation }}</span>
                     <span class="text-[10px] bg-gray-100 text-tertiary px-2 py-0.5 rounded-full">{{ annonce.kilometrage|number_format(0, ',', ' ') }} km</span>
+                    {% if annonce.carburant %}
+                        <span class="text-[10px] bg-gray-100 text-tertiary px-2 py-0.5 rounded-full">{{ annonce.carburant }}</span>
+                    {% endif %}
+                    {% if annonce.puissance_DIN %}
+                        <span class="text-[10px] bg-gray-100 text-tertiary px-2 py-0.5 rounded-full">{{ annonce.puissance_DIN }} ch</span>
+                    {% endif %}
                     {% if annonce.boite_vitesse %}
                         <span class="text-[10px] bg-gray-100 text-tertiary px-2 py-0.5 rounded-full">{{ annonce.boite_vitesse }}</span>
                     {% endif %}

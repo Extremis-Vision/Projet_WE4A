@@ -398,7 +398,7 @@ class __TwigTemplate_5929c1c6209ed468dd2d4e299a3a2f61 extends Template
             ";
         // line 137
         yield "            ";
-        if ((((((CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 137, $this->source); })()), "transmission", [], "any", false, false, false, 137) || CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 137, $this->source); })()), "boite_vitesse", [], "any", false, false, false, 137)) || CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 137, $this->source); })()), "nombre_rapport", [], "any", false, false, false, 137)) || CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 137, $this->source); })()), "nombre_places", [], "any", false, false, false, 137)) || CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 137, $this->source); })()), "nombre_portes", [], "any", false, false, false, 137)) || CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 137, $this->source); })()), "vitesse_max", [], "any", false, false, false, 137))) {
+        if ((((((((((CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 137, $this->source); })()), "puissance_DIN", [], "any", false, false, false, 137) || CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 137, $this->source); })()), "cylindree", [], "any", false, false, false, 137)) || CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 137, $this->source); })()), "carburant", [], "any", false, false, false, 137)) || CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 137, $this->source); })()), "transmission", [], "any", false, false, false, 137)) || CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 137, $this->source); })()), "boite_vitesse", [], "any", false, false, false, 137)) || CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 137, $this->source); })()), "nombre_rapport", [], "any", false, false, false, 137)) || CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 137, $this->source); })()), "nombre_places", [], "any", false, false, false, 137)) || CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 137, $this->source); })()), "nombre_portes", [], "any", false, false, false, 137)) || CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 137, $this->source); })()), "vitesse_max", [], "any", false, false, false, 137)) || CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 137, $this->source); })()), "coffre_volume", [], "any", false, false, false, 137))) {
             // line 138
             yield "            <div class=\"bg-white rounded-xl p-6 shadow-sm\">
                 <h2 class=\"font-bold text-primary text-base font-['ManRope'] mb-4 flex items-center gap-2\">
@@ -408,94 +408,215 @@ class __TwigTemplate_5929c1c6209ed468dd2d4e299a3a2f61 extends Template
                 <div class=\"grid grid-cols-2 md:grid-cols-3 gap-y-4 gap-x-6 text-sm\">
                     ";
             // line 144
-            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 144, $this->source); })()), "transmission", [], "any", false, false, false, 144)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 144, $this->source); })()), "puissance_DIN", [], "any", false, false, false, 144)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
                 // line 145
                 yield "                    <div>
-                        <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Transmission</p>
+                        <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Puissance</p>
                         <p class=\"font-semibold text-primary\">";
                 // line 147
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 147, $this->source); })()), "transmission", [], "any", false, false, false, 147), "html", null, true);
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 147, $this->source); })()), "puissance_DIN", [], "any", false, false, false, 147), "html", null, true);
+                yield " ch";
+                if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 147, $this->source); })()), "puissance_fiscale", [], "any", false, false, false, 147)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+                    yield " (";
+                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 147, $this->source); })()), "puissance_fiscale", [], "any", false, false, false, 147), "html", null, true);
+                    yield " CV)";
+                }
                 yield "</p>
                     </div>
                     ";
             }
             // line 150
             yield "                    ";
-            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 150, $this->source); })()), "boite_vitesse", [], "any", false, false, false, 150)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 150, $this->source); })()), "couple_cumul", [], "any", false, false, false, 150)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
                 // line 151
                 yield "                    <div>
-                        <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Boîte de vitesse</p>
+                        <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Couple</p>
                         <p class=\"font-semibold text-primary\">";
                 // line 153
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 153, $this->source); })()), "boite_vitesse", [], "any", false, false, false, 153), "html", null, true);
-                yield "</p>
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 153, $this->source); })()), "couple_cumul", [], "any", false, false, false, 153), "html", null, true);
+                yield " Nm</p>
                     </div>
                     ";
             }
             // line 156
             yield "                    ";
-            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 156, $this->source); })()), "nombre_rapport", [], "any", false, false, false, 156)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 156, $this->source); })()), "cylindree", [], "any", false, false, false, 156)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
                 // line 157
                 yield "                    <div>
-                        <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Nombre de rapports</p>
+                        <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Cylindrée</p>
                         <p class=\"font-semibold text-primary\">";
                 // line 159
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 159, $this->source); })()), "nombre_rapport", [], "any", false, false, false, 159), "html", null, true);
-                yield "</p>
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 159, $this->source); })()), "cylindree", [], "any", false, false, false, 159), "html", null, true);
+                yield " cm³</p>
                     </div>
                     ";
             }
             // line 162
             yield "                    ";
-            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 162, $this->source); })()), "nombre_places", [], "any", false, false, false, 162)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 162, $this->source); })()), "nombre_cylindre", [], "any", false, false, false, 162)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
                 // line 163
                 yield "                    <div>
-                        <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Places</p>
+                        <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Cylindres</p>
                         <p class=\"font-semibold text-primary\">";
                 // line 165
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 165, $this->source); })()), "nombre_places", [], "any", false, false, false, 165), "html", null, true);
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 165, $this->source); })()), "nombre_cylindre", [], "any", false, false, false, 165), "html", null, true);
+                yield " cyl.";
+                if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 165, $this->source); })()), "nombre_soupapes_cyclindre", [], "any", false, false, false, 165)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+                    yield " × ";
+                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 165, $this->source); })()), "nombre_soupapes_cyclindre", [], "any", false, false, false, 165), "html", null, true);
+                    yield " soupapes";
+                }
                 yield "</p>
                     </div>
                     ";
             }
             // line 168
             yield "                    ";
-            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 168, $this->source); })()), "nombre_portes", [], "any", false, false, false, 168)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 168, $this->source); })()), "alimentation", [], "any", false, false, false, 168)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
                 // line 169
                 yield "                    <div>
-                        <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Portes</p>
+                        <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Alimentation</p>
                         <p class=\"font-semibold text-primary\">";
                 // line 171
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 171, $this->source); })()), "nombre_portes", [], "any", false, false, false, 171), "html", null, true);
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 171, $this->source); })()), "alimentation", [], "any", false, false, false, 171), "html", null, true);
                 yield "</p>
                     </div>
                     ";
             }
             // line 174
             yield "                    ";
-            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 174, $this->source); })()), "vitesse_max", [], "any", false, false, false, 174)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 174, $this->source); })()), "type_suralimentation", [], "any", false, false, false, 174)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
                 // line 175
                 yield "                    <div>
-                        <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Vitesse max</p>
+                        <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Suralimentation</p>
                         <p class=\"font-semibold text-primary\">";
                 // line 177
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 177, $this->source); })()), "vitesse_max", [], "any", false, false, false, 177), "html", null, true);
-                yield " km/h</p>
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 177, $this->source); })()), "type_suralimentation", [], "any", false, false, false, 177), "html", null, true);
+                yield "</p>
                     </div>
                     ";
             }
             // line 180
+            yield "                    ";
+            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 180, $this->source); })()), "carburant", [], "any", false, false, false, 180)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+                // line 181
+                yield "                    <div>
+                        <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Carburant</p>
+                        <p class=\"font-semibold text-primary\">";
+                // line 183
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 183, $this->source); })()), "carburant", [], "any", false, false, false, 183), "html", null, true);
+                if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 183, $this->source); })()), "reservoir_volume", [], "any", false, false, false, 183)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+                    yield " — ";
+                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 183, $this->source); })()), "reservoir_volume", [], "any", false, false, false, 183), "html", null, true);
+                    yield " L";
+                }
+                yield "</p>
+                    </div>
+                    ";
+            }
+            // line 186
+            yield "                    ";
+            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 186, $this->source); })()), "transmission", [], "any", false, false, false, 186)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+                // line 187
+                yield "                    <div>
+                        <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Transmission</p>
+                        <p class=\"font-semibold text-primary\">";
+                // line 189
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 189, $this->source); })()), "transmission", [], "any", false, false, false, 189), "html", null, true);
+                yield "</p>
+                    </div>
+                    ";
+            }
+            // line 192
+            yield "                    ";
+            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 192, $this->source); })()), "boite_vitesse", [], "any", false, false, false, 192)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+                // line 193
+                yield "                    <div>
+                        <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Boîte de vitesse</p>
+                        <p class=\"font-semibold text-primary\">";
+                // line 195
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 195, $this->source); })()), "boite_vitesse", [], "any", false, false, false, 195), "html", null, true);
+                yield "</p>
+                    </div>
+                    ";
+            }
+            // line 198
+            yield "                    ";
+            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 198, $this->source); })()), "nombre_rapport", [], "any", false, false, false, 198)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+                // line 199
+                yield "                    <div>
+                        <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Rapports</p>
+                        <p class=\"font-semibold text-primary\">";
+                // line 201
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 201, $this->source); })()), "nombre_rapport", [], "any", false, false, false, 201), "html", null, true);
+                yield "</p>
+                    </div>
+                    ";
+            }
+            // line 204
+            yield "                    ";
+            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 204, $this->source); })()), "vitesse_max", [], "any", false, false, false, 204)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+                // line 205
+                yield "                    <div>
+                        <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Vitesse max</p>
+                        <p class=\"font-semibold text-primary\">";
+                // line 207
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 207, $this->source); })()), "vitesse_max", [], "any", false, false, false, 207), "html", null, true);
+                yield " km/h</p>
+                    </div>
+                    ";
+            }
+            // line 210
+            yield "                    ";
+            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 210, $this->source); })()), "nombre_places", [], "any", false, false, false, 210)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+                // line 211
+                yield "                    <div>
+                        <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Places</p>
+                        <p class=\"font-semibold text-primary\">";
+                // line 213
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 213, $this->source); })()), "nombre_places", [], "any", false, false, false, 213), "html", null, true);
+                yield "</p>
+                    </div>
+                    ";
+            }
+            // line 216
+            yield "                    ";
+            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 216, $this->source); })()), "nombre_portes", [], "any", false, false, false, 216)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+                // line 217
+                yield "                    <div>
+                        <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Portes</p>
+                        <p class=\"font-semibold text-primary\">";
+                // line 219
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 219, $this->source); })()), "nombre_portes", [], "any", false, false, false, 219), "html", null, true);
+                yield "</p>
+                    </div>
+                    ";
+            }
+            // line 222
+            yield "                    ";
+            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 222, $this->source); })()), "coffre_volume", [], "any", false, false, false, 222)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+                // line 223
+                yield "                    <div>
+                        <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Volume coffre</p>
+                        <p class=\"font-semibold text-primary\">";
+                // line 225
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 225, $this->source); })()), "coffre_volume", [], "any", false, false, false, 225), "html", null, true);
+                yield " L</p>
+                    </div>
+                    ";
+            }
+            // line 228
             yield "                </div>
             </div>
             ";
         }
-        // line 183
+        // line 231
         yield "
             ";
-        // line 185
+        // line 233
         yield "            ";
-        if ((((((CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 185, $this->source); })()), "consommation_urbaine", [], "any", false, false, false, 185) || CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 185, $this->source); })()), "consommation_extra_urbaine", [], "any", false, false, false, 185)) || CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 185, $this->source); })()), "consomation_mixte", [], "any", false, false, false, 185)) || CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 185, $this->source); })()), "emission_CO2", [], "any", false, false, false, 185)) || CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 185, $this->source); })()), "Norme_euro", [], "any", false, false, false, 185)) || ( !(null === CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 185, $this->source); })()), "Crit_air", [], "any", false, false, false, 185)) && (CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 185, $this->source); })()), "Crit_air", [], "any", false, false, false, 185) != "")))) {
-            // line 186
+        if ((((((CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 233, $this->source); })()), "consommation_urbaine", [], "any", false, false, false, 233) || CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 233, $this->source); })()), "consommation_extra_urbaine", [], "any", false, false, false, 233)) || CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 233, $this->source); })()), "consomation_mixte", [], "any", false, false, false, 233)) || CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 233, $this->source); })()), "emission_CO2", [], "any", false, false, false, 233)) || CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 233, $this->source); })()), "Norme_euro", [], "any", false, false, false, 233)) || ( !(null === CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 233, $this->source); })()), "Crit_air", [], "any", false, false, false, 233)) && (CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 233, $this->source); })()), "Crit_air", [], "any", false, false, false, 233) != "")))) {
+            // line 234
             yield "            <div class=\"bg-white rounded-xl p-6 shadow-sm\">
                 <h2 class=\"font-bold text-primary text-base font-['ManRope'] mb-4 flex items-center gap-2\">
                     <span class=\"w-1 h-4 bg-secondary rounded-full inline-block\"></span>
@@ -503,119 +624,119 @@ class __TwigTemplate_5929c1c6209ed468dd2d4e299a3a2f61 extends Template
                 </h2>
                 <div class=\"grid grid-cols-2 md:grid-cols-3 gap-y-4 gap-x-6 text-sm\">
                     ";
-            // line 192
-            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 192, $this->source); })()), "consommation_urbaine", [], "any", false, false, false, 192)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-                // line 193
+            // line 240
+            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 240, $this->source); })()), "consommation_urbaine", [], "any", false, false, false, 240)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+                // line 241
                 yield "                    <div>
                         <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Urbain</p>
                         <p class=\"font-semibold text-primary\">";
-                // line 195
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 195, $this->source); })()), "consommation_urbaine", [], "any", false, false, false, 195), "html", null, true);
+                // line 243
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 243, $this->source); })()), "consommation_urbaine", [], "any", false, false, false, 243), "html", null, true);
                 yield " L/100 km</p>
                     </div>
                     ";
             }
-            // line 198
+            // line 246
             yield "                    ";
-            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 198, $this->source); })()), "consommation_extra_urbaine", [], "any", false, false, false, 198)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-                // line 199
+            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 246, $this->source); })()), "consommation_extra_urbaine", [], "any", false, false, false, 246)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+                // line 247
                 yield "                    <div>
                         <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Extra-urbain</p>
                         <p class=\"font-semibold text-primary\">";
-                // line 201
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 201, $this->source); })()), "consommation_extra_urbaine", [], "any", false, false, false, 201), "html", null, true);
+                // line 249
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 249, $this->source); })()), "consommation_extra_urbaine", [], "any", false, false, false, 249), "html", null, true);
                 yield " L/100 km</p>
                     </div>
                     ";
             }
-            // line 204
+            // line 252
             yield "                    ";
-            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 204, $this->source); })()), "consomation_mixte", [], "any", false, false, false, 204)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-                // line 205
+            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 252, $this->source); })()), "consomation_mixte", [], "any", false, false, false, 252)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+                // line 253
                 yield "                    <div>
                         <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Mixte</p>
                         <p class=\"font-semibold text-primary\">";
-                // line 207
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 207, $this->source); })()), "consomation_mixte", [], "any", false, false, false, 207), "html", null, true);
+                // line 255
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 255, $this->source); })()), "consomation_mixte", [], "any", false, false, false, 255), "html", null, true);
                 yield " L/100 km</p>
                     </div>
                     ";
             }
-            // line 210
+            // line 258
             yield "                    ";
-            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 210, $this->source); })()), "emission_CO2", [], "any", false, false, false, 210)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-                // line 211
+            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 258, $this->source); })()), "emission_CO2", [], "any", false, false, false, 258)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+                // line 259
                 yield "                    <div>
                         <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Émissions CO₂</p>
                         <p class=\"font-semibold text-primary\">";
-                // line 213
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 213, $this->source); })()), "emission_CO2", [], "any", false, false, false, 213), "html", null, true);
+                // line 261
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 261, $this->source); })()), "emission_CO2", [], "any", false, false, false, 261), "html", null, true);
                 yield " g/km</p>
                     </div>
                     ";
             }
-            // line 216
+            // line 264
             yield "                    ";
-            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 216, $this->source); })()), "Norme_euro", [], "any", false, false, false, 216)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-                // line 217
+            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 264, $this->source); })()), "Norme_euro", [], "any", false, false, false, 264)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+                // line 265
                 yield "                    <div>
                         <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Norme Euro</p>
                         <p class=\"font-semibold text-primary\">";
-                // line 219
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 219, $this->source); })()), "Norme_euro", [], "any", false, false, false, 219), "html", null, true);
+                // line 267
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 267, $this->source); })()), "Norme_euro", [], "any", false, false, false, 267), "html", null, true);
                 yield "</p>
                     </div>
                     ";
             }
-            // line 222
+            // line 270
             yield "                    ";
-            if (( !(null === CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 222, $this->source); })()), "Crit_air", [], "any", false, false, false, 222)) && (CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 222, $this->source); })()), "Crit_air", [], "any", false, false, false, 222) != ""))) {
-                // line 223
+            if (( !(null === CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 270, $this->source); })()), "Crit_air", [], "any", false, false, false, 270)) && (CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 270, $this->source); })()), "Crit_air", [], "any", false, false, false, 270) != ""))) {
+                // line 271
                 yield "                    <div>
                         <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Crit'Air</p>
                         <span class=\"inline-block font-bold text-white px-3 py-1 rounded text-sm
                             ";
-                // line 226
-                if ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 226, $this->source); })()), "Crit_air", [], "any", false, false, false, 226) == 0)) {
+                // line 274
+                if ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 274, $this->source); })()), "Crit_air", [], "any", false, false, false, 274) == 0)) {
                     yield "bg-green-600
                             ";
-                } elseif ((CoreExtension::getAttribute($this->env, $this->source,                 // line 227
-(isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 227, $this->source); })()), "Crit_air", [], "any", false, false, false, 227) == 1)) {
+                } elseif ((CoreExtension::getAttribute($this->env, $this->source,                 // line 275
+(isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 275, $this->source); })()), "Crit_air", [], "any", false, false, false, 275) == 1)) {
                     yield "bg-green-500
                             ";
-                } elseif ((CoreExtension::getAttribute($this->env, $this->source,                 // line 228
-(isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 228, $this->source); })()), "Crit_air", [], "any", false, false, false, 228) == 2)) {
+                } elseif ((CoreExtension::getAttribute($this->env, $this->source,                 // line 276
+(isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 276, $this->source); })()), "Crit_air", [], "any", false, false, false, 276) == 2)) {
                     yield "bg-yellow-500
                             ";
-                } elseif ((CoreExtension::getAttribute($this->env, $this->source,                 // line 229
-(isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 229, $this->source); })()), "Crit_air", [], "any", false, false, false, 229) == 3)) {
+                } elseif ((CoreExtension::getAttribute($this->env, $this->source,                 // line 277
+(isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 277, $this->source); })()), "Crit_air", [], "any", false, false, false, 277) == 3)) {
                     yield "bg-orange-500
                             ";
                 } else {
-                    // line 230
+                    // line 278
                     yield "bg-red-500";
                 }
                 yield "\">
                             ";
-                // line 231
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 231, $this->source); })()), "Crit_air", [], "any", false, false, false, 231), "html", null, true);
+                // line 279
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 279, $this->source); })()), "Crit_air", [], "any", false, false, false, 279), "html", null, true);
                 yield "
                         </span>
                     </div>
                     ";
             }
-            // line 235
+            // line 283
             yield "                </div>
             </div>
             ";
         }
-        // line 238
+        // line 286
         yield "
             ";
-        // line 240
+        // line 288
         yield "            ";
-        if ((((CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 240, $this->source); })()), "largeur_sans_retros", [], "any", false, false, false, 240) || CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 240, $this->source); })()), "hauteur", [], "any", false, false, false, 240)) || CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 240, $this->source); })()), "empattement", [], "any", false, false, false, 240)) || CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 240, $this->source); })()), "poids_vide", [], "any", false, false, false, 240))) {
-            // line 241
+        if ((((CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 288, $this->source); })()), "largeur_sans_retros", [], "any", false, false, false, 288) || CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 288, $this->source); })()), "hauteur", [], "any", false, false, false, 288)) || CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 288, $this->source); })()), "empattement", [], "any", false, false, false, 288)) || CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 288, $this->source); })()), "poids_vide", [], "any", false, false, false, 288))) {
+            // line 289
             yield "            <div class=\"bg-white rounded-xl p-6 shadow-sm\">
                 <h2 class=\"font-bold text-primary text-base font-['ManRope'] mb-4 flex items-center gap-2\">
                     <span class=\"w-1 h-4 bg-secondary rounded-full inline-block\"></span>
@@ -623,69 +744,69 @@ class __TwigTemplate_5929c1c6209ed468dd2d4e299a3a2f61 extends Template
                 </h2>
                 <div class=\"grid grid-cols-2 md:grid-cols-4 gap-y-4 gap-x-6 text-sm\">
                     ";
-            // line 247
-            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 247, $this->source); })()), "largeur_sans_retros", [], "any", false, false, false, 247)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-                // line 248
+            // line 295
+            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 295, $this->source); })()), "largeur_sans_retros", [], "any", false, false, false, 295)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+                // line 296
                 yield "                    <div>
                         <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Largeur</p>
                         <p class=\"font-semibold text-primary\">";
-                // line 250
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 250, $this->source); })()), "largeur_sans_retros", [], "any", false, false, false, 250), "html", null, true);
+                // line 298
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 298, $this->source); })()), "largeur_sans_retros", [], "any", false, false, false, 298), "html", null, true);
                 yield " mm</p>
                     </div>
                     ";
             }
-            // line 253
+            // line 301
             yield "                    ";
-            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 253, $this->source); })()), "hauteur", [], "any", false, false, false, 253)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-                // line 254
+            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 301, $this->source); })()), "hauteur", [], "any", false, false, false, 301)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+                // line 302
                 yield "                    <div>
                         <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Hauteur</p>
                         <p class=\"font-semibold text-primary\">";
-                // line 256
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 256, $this->source); })()), "hauteur", [], "any", false, false, false, 256), "html", null, true);
+                // line 304
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 304, $this->source); })()), "hauteur", [], "any", false, false, false, 304), "html", null, true);
                 yield " mm</p>
                     </div>
                     ";
             }
-            // line 259
+            // line 307
             yield "                    ";
-            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 259, $this->source); })()), "empattement", [], "any", false, false, false, 259)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-                // line 260
+            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 307, $this->source); })()), "empattement", [], "any", false, false, false, 307)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+                // line 308
                 yield "                    <div>
                         <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Empattement</p>
                         <p class=\"font-semibold text-primary\">";
-                // line 262
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 262, $this->source); })()), "empattement", [], "any", false, false, false, 262), "html", null, true);
+                // line 310
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 310, $this->source); })()), "empattement", [], "any", false, false, false, 310), "html", null, true);
                 yield " mm</p>
                     </div>
                     ";
             }
-            // line 265
+            // line 313
             yield "                    ";
-            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 265, $this->source); })()), "poids_vide", [], "any", false, false, false, 265)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-                // line 266
+            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 313, $this->source); })()), "poids_vide", [], "any", false, false, false, 313)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+                // line 314
                 yield "                    <div>
                         <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Poids à vide</p>
                         <p class=\"font-semibold text-primary\">";
-                // line 268
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 268, $this->source); })()), "poids_vide", [], "any", false, false, false, 268), "html", null, true);
+                // line 316
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 316, $this->source); })()), "poids_vide", [], "any", false, false, false, 316), "html", null, true);
                 yield " kg</p>
                     </div>
                     ";
             }
-            // line 271
+            // line 319
             yield "                </div>
             </div>
             ";
         }
-        // line 274
+        // line 322
         yield "
             ";
-        // line 276
+        // line 324
         yield "            ";
-        if (((((CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 276, $this->source); })()), "suspension_avant", [], "any", false, false, false, 276) || CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 276, $this->source); })()), "suspension_arriere", [], "any", false, false, false, 276)) || CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 276, $this->source); })()), "freins_avant", [], "any", false, false, false, 276)) || CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 276, $this->source); })()), "freins_arriere", [], "any", false, false, false, 276)) || CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 276, $this->source); })()), "diametre_braquage", [], "any", false, false, false, 276))) {
-            // line 277
+        if (((((CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 324, $this->source); })()), "suspension_avant", [], "any", false, false, false, 324) || CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 324, $this->source); })()), "suspension_arriere", [], "any", false, false, false, 324)) || CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 324, $this->source); })()), "freins_avant", [], "any", false, false, false, 324)) || CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 324, $this->source); })()), "freins_arriere", [], "any", false, false, false, 324)) || CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 324, $this->source); })()), "diametre_braquage", [], "any", false, false, false, 324))) {
+            // line 325
             yield "            <div class=\"bg-white rounded-xl p-6 shadow-sm\">
                 <h2 class=\"font-bold text-primary text-base font-['ManRope'] mb-4 flex items-center gap-2\">
                     <span class=\"w-1 h-4 bg-secondary rounded-full inline-block\"></span>
@@ -693,79 +814,79 @@ class __TwigTemplate_5929c1c6209ed468dd2d4e299a3a2f61 extends Template
                 </h2>
                 <div class=\"grid grid-cols-2 md:grid-cols-3 gap-y-4 gap-x-6 text-sm\">
                     ";
-            // line 283
-            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 283, $this->source); })()), "suspension_avant", [], "any", false, false, false, 283)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-                // line 284
+            // line 331
+            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 331, $this->source); })()), "suspension_avant", [], "any", false, false, false, 331)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+                // line 332
                 yield "                    <div>
                         <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Suspension avant</p>
                         <p class=\"font-semibold text-primary\">";
-                // line 286
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 286, $this->source); })()), "suspension_avant", [], "any", false, false, false, 286), "html", null, true);
+                // line 334
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 334, $this->source); })()), "suspension_avant", [], "any", false, false, false, 334), "html", null, true);
                 yield "</p>
                     </div>
                     ";
             }
-            // line 289
+            // line 337
             yield "                    ";
-            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 289, $this->source); })()), "suspension_arriere", [], "any", false, false, false, 289)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-                // line 290
+            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 337, $this->source); })()), "suspension_arriere", [], "any", false, false, false, 337)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+                // line 338
                 yield "                    <div>
                         <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Suspension arrière</p>
                         <p class=\"font-semibold text-primary\">";
-                // line 292
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 292, $this->source); })()), "suspension_arriere", [], "any", false, false, false, 292), "html", null, true);
+                // line 340
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 340, $this->source); })()), "suspension_arriere", [], "any", false, false, false, 340), "html", null, true);
                 yield "</p>
                     </div>
                     ";
             }
-            // line 295
+            // line 343
             yield "                    ";
-            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 295, $this->source); })()), "freins_avant", [], "any", false, false, false, 295)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-                // line 296
+            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 343, $this->source); })()), "freins_avant", [], "any", false, false, false, 343)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+                // line 344
                 yield "                    <div>
                         <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Freins avant</p>
                         <p class=\"font-semibold text-primary\">";
-                // line 298
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 298, $this->source); })()), "freins_avant", [], "any", false, false, false, 298), "html", null, true);
+                // line 346
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 346, $this->source); })()), "freins_avant", [], "any", false, false, false, 346), "html", null, true);
                 yield "</p>
                     </div>
                     ";
             }
-            // line 301
+            // line 349
             yield "                    ";
-            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 301, $this->source); })()), "freins_arriere", [], "any", false, false, false, 301)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-                // line 302
+            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 349, $this->source); })()), "freins_arriere", [], "any", false, false, false, 349)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+                // line 350
                 yield "                    <div>
                         <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Freins arrière</p>
                         <p class=\"font-semibold text-primary\">";
-                // line 304
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 304, $this->source); })()), "freins_arriere", [], "any", false, false, false, 304), "html", null, true);
+                // line 352
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 352, $this->source); })()), "freins_arriere", [], "any", false, false, false, 352), "html", null, true);
                 yield "</p>
                     </div>
                     ";
             }
-            // line 307
+            // line 355
             yield "                    ";
-            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 307, $this->source); })()), "diametre_braquage", [], "any", false, false, false, 307)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-                // line 308
+            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 355, $this->source); })()), "diametre_braquage", [], "any", false, false, false, 355)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+                // line 356
                 yield "                    <div>
                         <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Diamètre de braquage</p>
                         <p class=\"font-semibold text-primary\">";
-                // line 310
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 310, $this->source); })()), "diametre_braquage", [], "any", false, false, false, 310), "html", null, true);
+                // line 358
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 358, $this->source); })()), "diametre_braquage", [], "any", false, false, false, 358), "html", null, true);
                 yield " m</p>
                     </div>
                     ";
             }
-            // line 313
+            // line 361
             yield "                </div>
             </div>
             ";
         }
-        // line 316
+        // line 364
         yield "
             ";
-        // line 318
+        // line 366
         yield "            <div class=\"bg-white rounded-xl p-6 shadow-sm\">
                 <h2 class=\"font-bold text-primary text-base font-['ManRope'] mb-4 flex items-center gap-2\">
                     <span class=\"w-1 h-4 bg-secondary rounded-full inline-block\"></span>
@@ -775,11 +896,11 @@ class __TwigTemplate_5929c1c6209ed468dd2d4e299a3a2f61 extends Template
                     <div>
                         <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Marque</p>
                         <p class=\"font-semibold text-primary\">";
-        // line 326
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 326, $this->source); })()), "marque_nom", [], "any", false, false, false, 326), "html", null, true);
-        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 326, $this->source); })()), "marque_pays", [], "any", false, false, false, 326)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+        // line 374
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 374, $this->source); })()), "marque_nom", [], "any", false, false, false, 374), "html", null, true);
+        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 374, $this->source); })()), "marque_pays", [], "any", false, false, false, 374)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
             yield " (";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 326, $this->source); })()), "marque_pays", [], "any", false, false, false, 326), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 374, $this->source); })()), "marque_pays", [], "any", false, false, false, 374), "html", null, true);
             yield ")";
         }
         yield "</p>
@@ -787,187 +908,205 @@ class __TwigTemplate_5929c1c6209ed468dd2d4e299a3a2f61 extends Template
                     <div>
                         <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Modèle</p>
                         <p class=\"font-semibold text-primary\">";
-        // line 330
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 330, $this->source); })()), "modele_nom", [], "any", false, false, false, 330), "html", null, true);
+        // line 378
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 378, $this->source); })()), "modele_nom", [], "any", false, false, false, 378), "html", null, true);
         yield "</p>
                     </div>
                     ";
-        // line 332
-        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 332, $this->source); })()), "type_nom", [], "any", false, false, false, 332)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-            // line 333
+        // line 380
+        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 380, $this->source); })()), "type_nom", [], "any", false, false, false, 380)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 381
             yield "                    <div>
                         <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Type de carrosserie</p>
                         <p class=\"font-semibold text-primary\">";
-            // line 335
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 335, $this->source); })()), "type_nom", [], "any", false, false, false, 335), "html", null, true);
+            // line 383
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 383, $this->source); })()), "type_nom", [], "any", false, false, false, 383), "html", null, true);
             yield "</p>
                     </div>
                     ";
         }
-        // line 338
+        // line 386
         yield "                    ";
-        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 338, $this->source); })()), "generation_nom", [], "any", false, false, false, 338)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-            // line 339
+        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 386, $this->source); })()), "generation_nom", [], "any", false, false, false, 386)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 387
             yield "                    <div>
                         <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Génération</p>
                         <p class=\"font-semibold text-primary\">";
-            // line 341
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 341, $this->source); })()), "generation_nom", [], "any", false, false, false, 341), "html", null, true);
-            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 341, $this->source); })()), "generation_date_sortie", [], "any", false, false, false, 341)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 389
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 389, $this->source); })()), "generation_nom", [], "any", false, false, false, 389), "html", null, true);
+            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 389, $this->source); })()), "generation_date_sortie", [], "any", false, false, false, 389)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
                 yield " (";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 341, $this->source); })()), "generation_date_sortie", [], "any", false, false, false, 341), "Y"), "html", null, true);
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 389, $this->source); })()), "generation_date_sortie", [], "any", false, false, false, 389), "Y"), "html", null, true);
                 yield ")";
             }
             yield "</p>
                     </div>
                     ";
         }
-        // line 344
+        // line 392
         yield "                    <div>
                         <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Version</p>
                         <p class=\"font-semibold text-primary\">";
-        // line 346
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 346, $this->source); })()), "version_nom", [], "any", false, false, false, 346), "html", null, true);
+        // line 394
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 394, $this->source); })()), "version_nom", [], "any", false, false, false, 394), "html", null, true);
         yield "</p>
                     </div>
                     ";
-        // line 348
-        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 348, $this->source); })()), "modele_annee", [], "any", false, false, false, 348)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-            // line 349
+        // line 396
+        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 396, $this->source); })()), "modele_annee", [], "any", false, false, false, 396)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 397
             yield "                    <div>
                         <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Commercialisé depuis</p>
                         <p class=\"font-semibold text-primary\">";
-            // line 351
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 351, $this->source); })()), "modele_annee", [], "any", false, false, false, 351), "html", null, true);
+            // line 399
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 399, $this->source); })()), "modele_annee", [], "any", false, false, false, 399), "html", null, true);
             yield "</p>
                     </div>
                     ";
         }
-        // line 354
+        // line 402
         yield "                </div>
             </div>
 
             ";
-        // line 358
+        // line 406
         yield "            ";
-        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 358, $this->source); })()), "description", [], "any", false, false, false, 358)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-            // line 359
+        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 406, $this->source); })()), "description", [], "any", false, false, false, 406)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 407
             yield "            <div class=\"bg-white rounded-xl p-6 shadow-sm\">
                 <h2 class=\"font-bold text-primary text-base font-['ManRope'] mb-3 flex items-center gap-2\">
                     <span class=\"w-1 h-4 bg-secondary rounded-full inline-block\"></span>
                     Description du vendeur
                 </h2>
                 <p class=\"text-tertiary text-sm leading-relaxed whitespace-pre-wrap\">";
-            // line 364
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 364, $this->source); })()), "description", [], "any", false, false, false, 364), "html", null, true);
+            // line 412
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 412, $this->source); })()), "description", [], "any", false, false, false, 412), "html", null, true);
             yield "</p>
             </div>
             ";
         }
-        // line 367
+        // line 415
         yield "
         </div>
 
         ";
-        // line 371
+        // line 419
         yield "        <div class=\"space-y-4\">
             <div class=\"bg-white rounded-xl p-6 shadow-sm sticky top-4\">
 
                 <p class=\"text-3xl font-bold text-secondary mb-1\">";
-        // line 374
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 374, $this->source); })()), "prix", [], "any", false, false, false, 374), 0, ",", " "), "html", null, true);
+        // line 422
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 422, $this->source); })()), "prix", [], "any", false, false, false, 422), 0, ",", " "), "html", null, true);
         yield " €</p>
                 <p class=\"text-sm text-primary font-semibold\">";
-        // line 375
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 375, $this->source); })()), "marque_nom", [], "any", false, false, false, 375), "html", null, true);
+        // line 423
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 423, $this->source); })()), "marque_nom", [], "any", false, false, false, 423), "html", null, true);
         yield " ";
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 375, $this->source); })()), "modele_nom", [], "any", false, false, false, 375), "html", null, true);
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 423, $this->source); })()), "modele_nom", [], "any", false, false, false, 423), "html", null, true);
         yield "</p>
                 <p class=\"text-xs text-tertiary mt-0.5 mb-1\">";
-        // line 376
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 376, $this->source); })()), "version_nom", [], "any", false, false, false, 376), "html", null, true);
+        // line 424
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 424, $this->source); })()), "version_nom", [], "any", false, false, false, 424), "html", null, true);
         yield "</p>
                 <div class=\"flex flex-wrap gap-2 mt-2 mb-4\">
                     ";
-        // line 378
-        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 378, $this->source); })()), "type_nom", [], "any", false, false, false, 378)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-            // line 379
+        // line 426
+        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 426, $this->source); })()), "type_nom", [], "any", false, false, false, 426)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 427
             yield "                        <span class=\"text-[10px] bg-gray-100 text-tertiary px-2 py-0.5 rounded-full\">";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 379, $this->source); })()), "type_nom", [], "any", false, false, false, 379), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 427, $this->source); })()), "type_nom", [], "any", false, false, false, 427), "html", null, true);
             yield "</span>
                     ";
         }
-        // line 381
+        // line 429
         yield "                    <span class=\"text-[10px] bg-gray-100 text-tertiary px-2 py-0.5 rounded-full\">";
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 381, $this->source); })()), "annee_circulation", [], "any", false, false, false, 381), "html", null, true);
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 429, $this->source); })()), "annee_circulation", [], "any", false, false, false, 429), "html", null, true);
         yield "</span>
                     <span class=\"text-[10px] bg-gray-100 text-tertiary px-2 py-0.5 rounded-full\">";
-        // line 382
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 382, $this->source); })()), "kilometrage", [], "any", false, false, false, 382), 0, ",", " "), "html", null, true);
+        // line 430
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 430, $this->source); })()), "kilometrage", [], "any", false, false, false, 430), 0, ",", " "), "html", null, true);
         yield " km</span>
                     ";
-        // line 383
-        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 383, $this->source); })()), "boite_vitesse", [], "any", false, false, false, 383)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-            // line 384
+        // line 431
+        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 431, $this->source); })()), "carburant", [], "any", false, false, false, 431)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 432
             yield "                        <span class=\"text-[10px] bg-gray-100 text-tertiary px-2 py-0.5 rounded-full\">";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 384, $this->source); })()), "boite_vitesse", [], "any", false, false, false, 384), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 432, $this->source); })()), "carburant", [], "any", false, false, false, 432), "html", null, true);
             yield "</span>
                     ";
         }
-        // line 386
+        // line 434
         yield "                    ";
-        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 386, $this->source); })()), "couleur", [], "any", false, false, false, 386)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-            // line 387
+        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 434, $this->source); })()), "puissance_DIN", [], "any", false, false, false, 434)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 435
             yield "                        <span class=\"text-[10px] bg-gray-100 text-tertiary px-2 py-0.5 rounded-full\">";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 387, $this->source); })()), "couleur", [], "any", false, false, false, 387), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 435, $this->source); })()), "puissance_DIN", [], "any", false, false, false, 435), "html", null, true);
+            yield " ch</span>
+                    ";
+        }
+        // line 437
+        yield "                    ";
+        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 437, $this->source); })()), "boite_vitesse", [], "any", false, false, false, 437)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 438
+            yield "                        <span class=\"text-[10px] bg-gray-100 text-tertiary px-2 py-0.5 rounded-full\">";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 438, $this->source); })()), "boite_vitesse", [], "any", false, false, false, 438), "html", null, true);
             yield "</span>
                     ";
         }
-        // line 389
+        // line 440
+        yield "                    ";
+        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 440, $this->source); })()), "couleur", [], "any", false, false, false, 440)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 441
+            yield "                        <span class=\"text-[10px] bg-gray-100 text-tertiary px-2 py-0.5 rounded-full\">";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 441, $this->source); })()), "couleur", [], "any", false, false, false, 441), "html", null, true);
+            yield "</span>
+                    ";
+        }
+        // line 443
         yield "                </div>
 
                 <hr class=\"border-gray-100 mb-4\">
 
                 <h3 class=\"font-semibold text-primary mb-2 text-sm\">Vendeur</h3>
                 <p class=\"font-bold text-primary text-sm\">";
-        // line 394
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 394, $this->source); })()), "vendeur_prenom", [], "any", false, false, false, 394), "html", null, true);
+        // line 448
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 448, $this->source); })()), "vendeur_prenom", [], "any", false, false, false, 448), "html", null, true);
         yield " ";
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 394, $this->source); })()), "vendeur_nom", [], "any", false, false, false, 394), "html", null, true);
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 448, $this->source); })()), "vendeur_nom", [], "any", false, false, false, 448), "html", null, true);
         yield "</p>
                 ";
-        // line 395
-        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 395, $this->source); })()), "vendeur_phone", [], "any", false, false, false, 395)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-            // line 396
+        // line 449
+        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 449, $this->source); })()), "vendeur_phone", [], "any", false, false, false, 449)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 450
             yield "                <p class=\"text-secondary text-sm mt-1 font-medium\">📞 ";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 396, $this->source); })()), "vendeur_phone", [], "any", false, false, false, 396), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 450, $this->source); })()), "vendeur_phone", [], "any", false, false, false, 450), "html", null, true);
             yield "</p>
                 ";
         }
-        // line 398
+        // line 452
         yield "
                 ";
-        // line 399
-        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 399, $this->source); })()), "user", [], "any", false, false, false, 399)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-            // line 400
+        // line 453
+        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 453, $this->source); })()), "user", [], "any", false, false, false, 453)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 454
             yield "                    ";
-            if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 400, $this->source); })()), "user", [], "any", false, false, false, 400), "id", [], "any", false, false, false, 400) != CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 400, $this->source); })()), "vendeur_id", [], "any", false, false, false, 400))) {
-                // line 401
+            if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 454, $this->source); })()), "user", [], "any", false, false, false, 454), "id", [], "any", false, false, false, 454) != CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 454, $this->source); })()), "vendeur_id", [], "any", false, false, false, 454))) {
+                // line 455
                 yield "                    <a href=\"mailto:\" class=\"mt-4 block text-center py-3 bg-secondary text-white font-bold rounded-lg hover:bg-opacity-90 active:scale-95 transition-all text-sm\">
                         Contacter le vendeur
                     </a>
                     ";
             } else {
-                // line 405
+                // line 459
                 yield "                    <a href=\"";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("annonce_modifier", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 405, $this->source); })()), "id_annonce", [], "any", false, false, false, 405)]), "html", null, true);
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("annonce_modifier", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 459, $this->source); })()), "id_annonce", [], "any", false, false, false, 459)]), "html", null, true);
                 yield "\"
                        class=\"mt-4 block text-center py-2 border border-primary text-primary font-semibold rounded-lg hover:bg-primary hover:text-white transition-all text-sm\">
                         Modifier l'annonce
                     </a>
                     <form action=\"";
-                // line 409
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("annonce_supprimer", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 409, $this->source); })()), "id_annonce", [], "any", false, false, false, 409)]), "html", null, true);
+                // line 463
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("annonce_supprimer", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 463, $this->source); })()), "id_annonce", [], "any", false, false, false, 463)]), "html", null, true);
                 yield "\" method=\"post\" class=\"mt-2\">
                         <button type=\"submit\" onclick=\"return confirm('Supprimer cette annonce ?')\"
                                 class=\"w-full py-2 border border-red-300 text-red-500 font-semibold rounded-lg hover:bg-red-50 transition-all text-sm\">
@@ -976,10 +1115,10 @@ class __TwigTemplate_5929c1c6209ed468dd2d4e299a3a2f61 extends Template
                     </form>
                     ";
             }
-            // line 416
+            // line 470
             yield "                ";
         } else {
-            // line 417
+            // line 471
             yield "                <a href=\"";
             yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("connexion");
             yield "\"
@@ -988,18 +1127,18 @@ class __TwigTemplate_5929c1c6209ed468dd2d4e299a3a2f61 extends Template
                 </a>
                 ";
         }
-        // line 422
+        // line 476
         yield "
                 ";
-        // line 423
-        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 423, $this->source); })()), "date_publication", [], "any", false, false, false, 423)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-            // line 424
+        // line 477
+        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 477, $this->source); })()), "date_publication", [], "any", false, false, false, 477)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 478
             yield "                <p class=\"text-xs text-tertiary mt-4 text-center\">Publiée le ";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 424, $this->source); })()), "date_publication", [], "any", false, false, false, 424), "d/m/Y"), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 478, $this->source); })()), "date_publication", [], "any", false, false, false, 478), "d/m/Y"), "html", null, true);
             yield "</p>
                 ";
         }
-        // line 426
+        // line 480
         yield "            </div>
         </div>
 
@@ -1007,14 +1146,14 @@ class __TwigTemplate_5929c1c6209ed468dd2d4e299a3a2f61 extends Template
 </div>
 
 ";
-        // line 432
-        if ((Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["photos"]) || array_key_exists("photos", $context) ? $context["photos"] : (function () { throw new RuntimeError('Variable "photos" does not exist.', 432, $this->source); })())) > 1)) {
-            // line 433
+        // line 486
+        if ((Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["photos"]) || array_key_exists("photos", $context) ? $context["photos"] : (function () { throw new RuntimeError('Variable "photos" does not exist.', 486, $this->source); })())) > 1)) {
+            // line 487
             yield "<script>
 (function () {
     var photos = ";
-            // line 435
-            yield json_encode(Twig\Extension\CoreExtension::map($this->env, (isset($context["photos"]) || array_key_exists("photos", $context) ? $context["photos"] : (function () { throw new RuntimeError('Variable "photos" does not exist.', 435, $this->source); })()), function ($__p__) use ($context, $macros) { $context["p"] = $__p__; return CoreExtension::getAttribute($this->env, $this->source, (isset($context["p"]) || array_key_exists("p", $context) ? $context["p"] : (function () { throw new RuntimeError('Variable "p" does not exist.', 435, $this->source); })()), "url_photo", [], "any", false, false, false, 435); }));
+            // line 489
+            yield json_encode(Twig\Extension\CoreExtension::map($this->env, (isset($context["photos"]) || array_key_exists("photos", $context) ? $context["photos"] : (function () { throw new RuntimeError('Variable "photos" does not exist.', 489, $this->source); })()), function ($__p__) use ($context, $macros) { $context["p"] = $__p__; return CoreExtension::getAttribute($this->env, $this->source, (isset($context["p"]) || array_key_exists("p", $context) ? $context["p"] : (function () { throw new RuntimeError('Variable "p" does not exist.', 489, $this->source); })()), "url_photo", [], "any", false, false, false, 489); }));
             yield ";
     var current = 0;
     var mainImg = document.getElementById('carousel-main');
@@ -1072,7 +1211,7 @@ class __TwigTemplate_5929c1c6209ed468dd2d4e299a3a2f61 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  1017 => 435,  1013 => 433,  1011 => 432,  1003 => 426,  997 => 424,  995 => 423,  992 => 422,  983 => 417,  980 => 416,  970 => 409,  962 => 405,  956 => 401,  953 => 400,  951 => 399,  948 => 398,  942 => 396,  940 => 395,  934 => 394,  927 => 389,  921 => 387,  918 => 386,  912 => 384,  910 => 383,  906 => 382,  901 => 381,  895 => 379,  893 => 378,  888 => 376,  882 => 375,  878 => 374,  873 => 371,  868 => 367,  862 => 364,  855 => 359,  852 => 358,  847 => 354,  841 => 351,  837 => 349,  835 => 348,  830 => 346,  826 => 344,  815 => 341,  811 => 339,  808 => 338,  802 => 335,  798 => 333,  796 => 332,  791 => 330,  779 => 326,  769 => 318,  766 => 316,  761 => 313,  755 => 310,  751 => 308,  748 => 307,  742 => 304,  738 => 302,  735 => 301,  729 => 298,  725 => 296,  722 => 295,  716 => 292,  712 => 290,  709 => 289,  703 => 286,  699 => 284,  697 => 283,  689 => 277,  686 => 276,  683 => 274,  678 => 271,  672 => 268,  668 => 266,  665 => 265,  659 => 262,  655 => 260,  652 => 259,  646 => 256,  642 => 254,  639 => 253,  633 => 250,  629 => 248,  627 => 247,  619 => 241,  616 => 240,  613 => 238,  608 => 235,  601 => 231,  596 => 230,  591 => 229,  587 => 228,  583 => 227,  579 => 226,  574 => 223,  571 => 222,  565 => 219,  561 => 217,  558 => 216,  552 => 213,  548 => 211,  545 => 210,  539 => 207,  535 => 205,  532 => 204,  526 => 201,  522 => 199,  519 => 198,  513 => 195,  509 => 193,  507 => 192,  499 => 186,  496 => 185,  493 => 183,  488 => 180,  482 => 177,  478 => 175,  475 => 174,  469 => 171,  465 => 169,  462 => 168,  456 => 165,  452 => 163,  449 => 162,  443 => 159,  439 => 157,  436 => 156,  430 => 153,  426 => 151,  423 => 150,  417 => 147,  413 => 145,  411 => 144,  403 => 138,  400 => 137,  395 => 133,  389 => 130,  385 => 128,  382 => 127,  376 => 124,  372 => 122,  369 => 121,  363 => 118,  359 => 116,  356 => 115,  350 => 112,  346 => 110,  344 => 109,  339 => 107,  335 => 105,  329 => 102,  325 => 100,  322 => 99,  316 => 96,  312 => 94,  309 => 93,  303 => 90,  299 => 88,  296 => 87,  290 => 84,  286 => 82,  284 => 81,  279 => 79,  272 => 75,  262 => 67,  259 => 65,  253 => 61,  250 => 60,  246 => 58,  229 => 55,  218 => 54,  201 => 53,  198 => 52,  196 => 51,  193 => 50,  188 => 48,  180 => 42,  178 => 41,  170 => 38,  166 => 37,  162 => 35,  159 => 34,  155 => 31,  145 => 25,  139 => 23,  132 => 20,  130 => 19,  125 => 17,  122 => 16,  119 => 14,  110 => 12,  105 => 11,  96 => 9,  92 => 8,  88 => 6,  78 => 5,  58 => 3,  41 => 1,);
+        return array (  1156 => 489,  1152 => 487,  1150 => 486,  1142 => 480,  1136 => 478,  1134 => 477,  1131 => 476,  1122 => 471,  1119 => 470,  1109 => 463,  1101 => 459,  1095 => 455,  1092 => 454,  1090 => 453,  1087 => 452,  1081 => 450,  1079 => 449,  1073 => 448,  1066 => 443,  1060 => 441,  1057 => 440,  1051 => 438,  1048 => 437,  1042 => 435,  1039 => 434,  1033 => 432,  1031 => 431,  1027 => 430,  1022 => 429,  1016 => 427,  1014 => 426,  1009 => 424,  1003 => 423,  999 => 422,  994 => 419,  989 => 415,  983 => 412,  976 => 407,  973 => 406,  968 => 402,  962 => 399,  958 => 397,  956 => 396,  951 => 394,  947 => 392,  936 => 389,  932 => 387,  929 => 386,  923 => 383,  919 => 381,  917 => 380,  912 => 378,  900 => 374,  890 => 366,  887 => 364,  882 => 361,  876 => 358,  872 => 356,  869 => 355,  863 => 352,  859 => 350,  856 => 349,  850 => 346,  846 => 344,  843 => 343,  837 => 340,  833 => 338,  830 => 337,  824 => 334,  820 => 332,  818 => 331,  810 => 325,  807 => 324,  804 => 322,  799 => 319,  793 => 316,  789 => 314,  786 => 313,  780 => 310,  776 => 308,  773 => 307,  767 => 304,  763 => 302,  760 => 301,  754 => 298,  750 => 296,  748 => 295,  740 => 289,  737 => 288,  734 => 286,  729 => 283,  722 => 279,  717 => 278,  712 => 277,  708 => 276,  704 => 275,  700 => 274,  695 => 271,  692 => 270,  686 => 267,  682 => 265,  679 => 264,  673 => 261,  669 => 259,  666 => 258,  660 => 255,  656 => 253,  653 => 252,  647 => 249,  643 => 247,  640 => 246,  634 => 243,  630 => 241,  628 => 240,  620 => 234,  617 => 233,  614 => 231,  609 => 228,  603 => 225,  599 => 223,  596 => 222,  590 => 219,  586 => 217,  583 => 216,  577 => 213,  573 => 211,  570 => 210,  564 => 207,  560 => 205,  557 => 204,  551 => 201,  547 => 199,  544 => 198,  538 => 195,  534 => 193,  531 => 192,  525 => 189,  521 => 187,  518 => 186,  507 => 183,  503 => 181,  500 => 180,  494 => 177,  490 => 175,  487 => 174,  481 => 171,  477 => 169,  474 => 168,  462 => 165,  458 => 163,  455 => 162,  449 => 159,  445 => 157,  442 => 156,  436 => 153,  432 => 151,  429 => 150,  417 => 147,  413 => 145,  411 => 144,  403 => 138,  400 => 137,  395 => 133,  389 => 130,  385 => 128,  382 => 127,  376 => 124,  372 => 122,  369 => 121,  363 => 118,  359 => 116,  356 => 115,  350 => 112,  346 => 110,  344 => 109,  339 => 107,  335 => 105,  329 => 102,  325 => 100,  322 => 99,  316 => 96,  312 => 94,  309 => 93,  303 => 90,  299 => 88,  296 => 87,  290 => 84,  286 => 82,  284 => 81,  279 => 79,  272 => 75,  262 => 67,  259 => 65,  253 => 61,  250 => 60,  246 => 58,  229 => 55,  218 => 54,  201 => 53,  198 => 52,  196 => 51,  193 => 50,  188 => 48,  180 => 42,  178 => 41,  170 => 38,  166 => 37,  162 => 35,  159 => 34,  155 => 31,  145 => 25,  139 => 23,  132 => 20,  130 => 19,  125 => 17,  122 => 16,  119 => 14,  110 => 12,  105 => 11,  96 => 9,  92 => 8,  88 => 6,  78 => 5,  58 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -1213,13 +1352,55 @@ class __TwigTemplate_5929c1c6209ed468dd2d4e299a3a2f61 extends Template
             </div>
 
             {# ── Section : Motorisation ── #}
-            {% if annonce.transmission or annonce.boite_vitesse or annonce.nombre_rapport or annonce.nombre_places or annonce.nombre_portes or annonce.vitesse_max %}
+            {% if annonce.puissance_DIN or annonce.cylindree or annonce.carburant or annonce.transmission or annonce.boite_vitesse or annonce.nombre_rapport or annonce.nombre_places or annonce.nombre_portes or annonce.vitesse_max or annonce.coffre_volume %}
             <div class=\"bg-white rounded-xl p-6 shadow-sm\">
                 <h2 class=\"font-bold text-primary text-base font-['ManRope'] mb-4 flex items-center gap-2\">
                     <span class=\"w-1 h-4 bg-secondary rounded-full inline-block\"></span>
                     Motorisation & carrosserie
                 </h2>
                 <div class=\"grid grid-cols-2 md:grid-cols-3 gap-y-4 gap-x-6 text-sm\">
+                    {% if annonce.puissance_DIN %}
+                    <div>
+                        <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Puissance</p>
+                        <p class=\"font-semibold text-primary\">{{ annonce.puissance_DIN }} ch{% if annonce.puissance_fiscale %} ({{ annonce.puissance_fiscale }} CV){% endif %}</p>
+                    </div>
+                    {% endif %}
+                    {% if annonce.couple_cumul %}
+                    <div>
+                        <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Couple</p>
+                        <p class=\"font-semibold text-primary\">{{ annonce.couple_cumul }} Nm</p>
+                    </div>
+                    {% endif %}
+                    {% if annonce.cylindree %}
+                    <div>
+                        <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Cylindrée</p>
+                        <p class=\"font-semibold text-primary\">{{ annonce.cylindree }} cm³</p>
+                    </div>
+                    {% endif %}
+                    {% if annonce.nombre_cylindre %}
+                    <div>
+                        <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Cylindres</p>
+                        <p class=\"font-semibold text-primary\">{{ annonce.nombre_cylindre }} cyl.{% if annonce.nombre_soupapes_cyclindre %} × {{ annonce.nombre_soupapes_cyclindre }} soupapes{% endif %}</p>
+                    </div>
+                    {% endif %}
+                    {% if annonce.alimentation %}
+                    <div>
+                        <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Alimentation</p>
+                        <p class=\"font-semibold text-primary\">{{ annonce.alimentation }}</p>
+                    </div>
+                    {% endif %}
+                    {% if annonce.type_suralimentation %}
+                    <div>
+                        <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Suralimentation</p>
+                        <p class=\"font-semibold text-primary\">{{ annonce.type_suralimentation }}</p>
+                    </div>
+                    {% endif %}
+                    {% if annonce.carburant %}
+                    <div>
+                        <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Carburant</p>
+                        <p class=\"font-semibold text-primary\">{{ annonce.carburant }}{% if annonce.reservoir_volume %} — {{ annonce.reservoir_volume }} L{% endif %}</p>
+                    </div>
+                    {% endif %}
                     {% if annonce.transmission %}
                     <div>
                         <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Transmission</p>
@@ -1234,8 +1415,14 @@ class __TwigTemplate_5929c1c6209ed468dd2d4e299a3a2f61 extends Template
                     {% endif %}
                     {% if annonce.nombre_rapport %}
                     <div>
-                        <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Nombre de rapports</p>
+                        <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Rapports</p>
                         <p class=\"font-semibold text-primary\">{{ annonce.nombre_rapport }}</p>
+                    </div>
+                    {% endif %}
+                    {% if annonce.vitesse_max %}
+                    <div>
+                        <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Vitesse max</p>
+                        <p class=\"font-semibold text-primary\">{{ annonce.vitesse_max }} km/h</p>
                     </div>
                     {% endif %}
                     {% if annonce.nombre_places %}
@@ -1250,10 +1437,10 @@ class __TwigTemplate_5929c1c6209ed468dd2d4e299a3a2f61 extends Template
                         <p class=\"font-semibold text-primary\">{{ annonce.nombre_portes }}</p>
                     </div>
                     {% endif %}
-                    {% if annonce.vitesse_max %}
+                    {% if annonce.coffre_volume %}
                     <div>
-                        <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Vitesse max</p>
-                        <p class=\"font-semibold text-primary\">{{ annonce.vitesse_max }} km/h</p>
+                        <p class=\"text-[11px] text-tertiary uppercase tracking-wide mb-0.5\">Volume coffre</p>
+                        <p class=\"font-semibold text-primary\">{{ annonce.coffre_volume }} L</p>
                     </div>
                     {% endif %}
                 </div>
@@ -1459,6 +1646,12 @@ class __TwigTemplate_5929c1c6209ed468dd2d4e299a3a2f61 extends Template
                     {% endif %}
                     <span class=\"text-[10px] bg-gray-100 text-tertiary px-2 py-0.5 rounded-full\">{{ annonce.annee_circulation }}</span>
                     <span class=\"text-[10px] bg-gray-100 text-tertiary px-2 py-0.5 rounded-full\">{{ annonce.kilometrage|number_format(0, ',', ' ') }} km</span>
+                    {% if annonce.carburant %}
+                        <span class=\"text-[10px] bg-gray-100 text-tertiary px-2 py-0.5 rounded-full\">{{ annonce.carburant }}</span>
+                    {% endif %}
+                    {% if annonce.puissance_DIN %}
+                        <span class=\"text-[10px] bg-gray-100 text-tertiary px-2 py-0.5 rounded-full\">{{ annonce.puissance_DIN }} ch</span>
+                    {% endif %}
                     {% if annonce.boite_vitesse %}
                         <span class=\"text-[10px] bg-gray-100 text-tertiary px-2 py-0.5 rounded-full\">{{ annonce.boite_vitesse }}</span>
                     {% endif %}

@@ -21,6 +21,11 @@ class AnnonceRepository
             v.largeur_sans_retros, v.hauteur, v.empattement, v.poids_vide,
             v.suspension_avant, v.suspension_arriere, v.freins_avant, v.freins_arriere,
             v.diametre_braquage,
+            r.type AS carburant, r.volume AS reservoir_volume,
+            co.volume AS coffre_volume,
+            mot.moteur_nom, mot.puissance_DIN, mot.puissance_fiscale, mot.cylindree,
+            mot.couple_cumul, mot.nombre_cylindre, mot.nombre_soupapes_cyclindre,
+            mot.alimentation, mot.type_suralimentation,
             g.id_generation, g.nom AS generation_nom, g.date_sortie AS generation_date_sortie,
             mo.id_modele, mo.nom AS modele_nom, mo.annee_creation AS modele_annee,
             t.nom AS type_nom,
@@ -29,6 +34,23 @@ class AnnonceRepository
             (SELECT url_photo FROM photo p WHERE p.id_annonce = a.id_annonce ORDER BY p.id_photo LIMIT 1) AS photo_principale
         FROM annonce a
         JOIN version v ON a.id_version = v.id_version
+        LEFT JOIN reservoir r ON r.id_reservoir = v.id_reservoir
+        LEFT JOIN coffre co ON co.id_coffre = v.id_coffre
+        LEFT JOIN (
+            SELECT pm.id_version,
+                MIN(m.nom) AS moteur_nom,
+                MIN(m.puissance_DIN) AS puissance_DIN,
+                MIN(m.puissance_fiscale) AS puissance_fiscale,
+                MIN(m.cylindree) AS cylindree,
+                MIN(m.couple_cumul) AS couple_cumul,
+                MIN(m.nombre_cylindre) AS nombre_cylindre,
+                MIN(m.nombre_soupapes_cyclindre) AS nombre_soupapes_cyclindre,
+                MIN(m.alimentation) AS alimentation,
+                MIN(m.type_suralimentation) AS type_suralimentation
+            FROM possession_moteur pm
+            JOIN moteur m ON m.id_moteur = pm.id_moteur
+            GROUP BY pm.id_version
+        ) mot ON mot.id_version = v.id_version
         JOIN generation g ON v.id_generation = g.id_generation
         JOIN modele mo ON g.id_modele = mo.id_modele
         LEFT JOIN type t ON t.id_type = mo.id_type
@@ -51,6 +73,11 @@ class AnnonceRepository
             v.largeur_sans_retros, v.hauteur, v.empattement, v.poids_vide,
             v.suspension_avant, v.suspension_arriere, v.freins_avant, v.freins_arriere,
             v.diametre_braquage,
+            r.type AS carburant, r.volume AS reservoir_volume,
+            co.volume AS coffre_volume,
+            mot.moteur_nom, mot.puissance_DIN, mot.puissance_fiscale, mot.cylindree,
+            mot.couple_cumul, mot.nombre_cylindre, mot.nombre_soupapes_cyclindre,
+            mot.alimentation, mot.type_suralimentation,
             g.id_generation, g.nom AS generation_nom, g.date_sortie AS generation_date_sortie,
             mo.id_modele, mo.nom AS modele_nom, mo.annee_creation AS modele_annee,
             t.nom AS type_nom,
@@ -59,6 +86,23 @@ class AnnonceRepository
             (SELECT url_photo FROM photo p WHERE p.id_annonce = a.id_annonce ORDER BY p.id_photo LIMIT 1) AS photo_principale
         FROM annonce a
         JOIN version v ON a.id_version = v.id_version
+        LEFT JOIN reservoir r ON r.id_reservoir = v.id_reservoir
+        LEFT JOIN coffre co ON co.id_coffre = v.id_coffre
+        LEFT JOIN (
+            SELECT pm.id_version,
+                MIN(m.nom) AS moteur_nom,
+                MIN(m.puissance_DIN) AS puissance_DIN,
+                MIN(m.puissance_fiscale) AS puissance_fiscale,
+                MIN(m.cylindree) AS cylindree,
+                MIN(m.couple_cumul) AS couple_cumul,
+                MIN(m.nombre_cylindre) AS nombre_cylindre,
+                MIN(m.nombre_soupapes_cyclindre) AS nombre_soupapes_cyclindre,
+                MIN(m.alimentation) AS alimentation,
+                MIN(m.type_suralimentation) AS type_suralimentation
+            FROM possession_moteur pm
+            JOIN moteur m ON m.id_moteur = pm.id_moteur
+            GROUP BY pm.id_version
+        ) mot ON mot.id_version = v.id_version
         JOIN generation g ON v.id_generation = g.id_generation
         JOIN modele mo ON g.id_modele = mo.id_modele
         LEFT JOIN type t ON t.id_type = mo.id_type

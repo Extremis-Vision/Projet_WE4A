@@ -174,6 +174,14 @@ class AnnonceController extends AbstractController
             throw $this->createNotFoundException('Annonce introuvable.');
         }
 
+        if ($annonce['statut'] === 'pause') {
+            $user    = $this->getUser();
+            $isOwner = $user && (int) $annonce['vendeur_id'] === (int) $user->getId();
+            if (!$isOwner && !$this->isGranted('ROLE_ADMIN')) {
+                throw $this->createNotFoundException('Annonce introuvable.');
+            }
+        }
+
         $photos = $repo->findPhotos($id);
 
         return $this->render('annonce/detail.html.twig', [

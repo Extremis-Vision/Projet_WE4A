@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block pageTitle %}Catalogue — AutoMarket Admin{% endblock %}
+
+{% block main %}
+<div class="max-w-6xl mx-auto px-6 py-8">
+
+    {% for msg in app.flashes('success') %}
+        <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg mb-4 text-sm">{{ msg }}</div>
+    {% endfor %}
+    {% for msg in app.flashes('error') %}
+        <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4 text-sm">{{ msg }}</div>
+    {% endfor %}
+
+    <div class="flex items-center justify-between mb-8">
+        <div>
+            <h1 class="text-3xl font-bold text-primary font-['ManRope']">Catalogue — Marques</h1>
+            <p class="text-tertiary mt-1">{{ marques|length }} marque{{ marques|length != 1 ? 's' : '' }}</p>
+        </div>
+        <a href="{{ path('admin_dashboard') }}" class="text-sm text-tertiary hover:text-primary">← Tableau de bord</a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        {# Liste des marques #}
+        <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+            <div class="px-5 py-3 border-b border-gray-100">
+                <h2 class="font-semibold text-primary text-sm">Liste des marques</h2>
+            </div>
+            <ul class="divide-y divide-gray-50">
+                {% for m in marques %}
+                <li class="flex items-center justify-between px-5 py-3 hover:bg-gray-50">
+                    <div>
+                        <a href="{{ path('admin_catalogue_modeles', {id: m.id_marque}) }}"
+                           class="font-medium text-primary hover:text-secondary transition-colors text-sm">
+                            {{ m.nom }}
+                        </a>
+                        <span class="ml-2 text-xs text-tertiary">{{ m.nb_modeles }} modèle{{ m.nb_modeles != 1 ? 's' : '' }}</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <a href="{{ path('admin_catalogue_modeles', {id: m.id_marque}) }}"
+                           class="text-xs text-secondary hover:underline">Voir →</a>
+                        {% if m.nb_modeles == 0 %}
+                        <form action="{{ path('admin_supprimer_marque', {id: m.id_marque}) }}" method="post"
+                              onsubmit="return confirm('Supprimer {{ m.nom }} ?')">
+                            <button class="text-xs text-red-400 hover:text-red-600 transition-colors">✕</button>
+                        </form>
+                        {% endif %}
+                    </div>
+                </li>
+                {% else %}
+                <li class="px-5 py-6 text-center text-tertiary text-sm">Aucune marque.</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        {# Ajouter une marque #}
+        <div class="bg-white rounded-xl shadow-sm p-5 self-start">
+            <h2 class="font-semibold text-primary text-sm mb-4">Ajouter une marque</h2>
+            <form action="{{ path('admin_ajouter_marque') }}" method="post" class="flex gap-3">
+                <input type="text" name="nom" required placeholder="Nom de la marque"
+                       class="flex-1 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary">
+                <button type="submit"
+                        class="px-4 py-2 bg-secondary text-white text-sm font-semibold rounded-lg hover:bg-opacity-90 transition-all">
+                    Ajouter
+                </button>
+            </form>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

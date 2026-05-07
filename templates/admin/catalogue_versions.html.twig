@@ -1,0 +1,106 @@
+{% extends 'base.html.twig' %}
+
+{% block pageTitle %}{{ generation.generation_nom }} — Catalogue Admin{% endblock %}
+
+{% block main %}
+<div class="max-w-6xl mx-auto px-6 py-8">
+
+    {% for msg in app.flashes('success') %}
+        <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg mb-4 text-sm">{{ msg }}</div>
+    {% endfor %}
+    {% for msg in app.flashes('error') %}
+        <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4 text-sm">{{ msg }}</div>
+    {% endfor %}
+
+    <div class="flex items-center gap-2 text-xs text-tertiary mb-6">
+        <a href="{{ path('admin_catalogue') }}" class="hover:text-primary">Catalogue</a>
+        <span>›</span>
+        <a href="{{ path('admin_catalogue_modeles', {id: generation.id_marque}) }}" class="hover:text-primary">{{ generation.marque_nom }}</a>
+        <span>›</span>
+        <a href="{{ path('admin_catalogue_generations', {id: generation.id_modele}) }}" class="hover:text-primary">{{ generation.modele_nom }}</a>
+        <span>›</span>
+        <span class="text-primary font-medium">{{ generation.generation_nom }}</span>
+    </div>
+
+    <div class="flex items-center justify-between mb-8">
+        <h1 class="text-3xl font-bold text-primary font-['ManRope']">{{ generation.generation_nom }} — Versions</h1>
+        <a href="{{ path('admin_catalogue_generations', {id: generation.id_modele}) }}" class="text-sm text-tertiary hover:text-primary">← {{ generation.modele_nom }}</a>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+        {# Liste des versions #}
+        <div class="lg:col-span-2 bg-white rounded-xl shadow-sm overflow-hidden">
+            <div class="px-5 py-3 border-b border-gray-100">
+                <h2 class="font-semibold text-primary text-sm">{{ versions|length }} version{{ versions|length != 1 ? 's' : '' }}</h2>
+            </div>
+            {% if versions is empty %}
+            <p class="px-5 py-6 text-center text-tertiary text-sm">Aucune version.</p>
+            {% else %}
+            <table class="w-full text-sm">
+                <thead class="bg-gray-50 border-b border-gray-100">
+                    <tr>
+                        <th class="px-5 py-2 text-left text-xs font-semibold text-tertiary">Version</th>
+                        <th class="px-5 py-2 text-left text-xs font-semibold text-tertiary">Transmission</th>
+                        <th class="px-5 py-2 text-left text-xs font-semibold text-tertiary">Boîte</th>
+                        <th class="px-5 py-2 text-left text-xs font-semibold text-tertiary">Places</th>
+                        <th class="px-5 py-2 text-left text-xs font-semibold text-tertiary">Portes</th>
+                        <th class="px-5 py-2"></th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-50">
+                    {% for v in versions %}
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-5 py-2 font-medium text-primary">{{ v.nom }}</td>
+                        <td class="px-5 py-2 text-tertiary text-xs">{{ v.transmission ?? '—' }}</td>
+                        <td class="px-5 py-2 text-tertiary text-xs">{{ v.boite_vitesse ?? '—' }}</td>
+                        <td class="px-5 py-2 text-tertiary text-xs">{{ v.nombre_places ?? '—' }}</td>
+                        <td class="px-5 py-2 text-tertiary text-xs">{{ v.nombre_portes ?? '—' }}</td>
+                        <td class="px-5 py-2 text-right">
+                            <form action="{{ path('admin_supprimer_version', {id: v.id_version}) }}" method="post"
+                                  onsubmit="return confirm('Supprimer {{ v.nom }} ?')">
+                                <button class="text-xs text-red-400 hover:text-red-600 transition-colors">✕</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+        </div>
+
+        {# Ajouter une version #}
+        <div class="bg-white rounded-xl shadow-sm p-5 self-start">
+            <h2 class="font-semibold text-primary text-sm mb-4">Ajouter une version</h2>
+            <form action="{{ path('admin_ajouter_version', {id: generation.id_generation}) }}" method="post" class="space-y-3">
+                <input type="text" name="nom" required placeholder="Nom (ex : 1.5 TSI 150 S line)"
+                       class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary">
+                <select name="transmission"
+                        class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary">
+                    <option value="">Transmission (optionnel)</option>
+                    <option value="Traction avant">Traction avant</option>
+                    <option value="Propulsion">Propulsion</option>
+                    <option value="Intégrale">Intégrale</option>
+                </select>
+                <select name="boite_vitesse"
+                        class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary">
+                    <option value="">Boîte (optionnel)</option>
+                    <option value="Manuelle">Manuelle</option>
+                    <option value="Automatique">Automatique</option>
+                </select>
+                <div class="grid grid-cols-2 gap-2">
+                    <input type="number" name="nombre_places" min="1" max="9" placeholder="Places"
+                           class="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary">
+                    <input type="number" name="nombre_portes" min="2" max="5" placeholder="Portes"
+                           class="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary">
+                </div>
+                <button type="submit"
+                        class="w-full px-4 py-2 bg-secondary text-white text-sm font-semibold rounded-lg hover:bg-opacity-90 transition-all">
+                    Ajouter
+                </button>
+            </form>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

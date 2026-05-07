@@ -25,6 +25,25 @@ class AnnonceRepository
         JOIN utilisateur u ON a.id_utilisateur = u.id_utilisateur
     ';
 
+    private const BASE_SELECT_ADMIN = '
+        SELECT
+            a.id_annonce, a.prix, a.annee_circulation, a.kilometrage, a.etat, a.couleur,
+            a.localisation, a.statut, a.commentaire_admin, a.description, a.premiere_main, a.nombre_proprietaire,
+            a.controle_technique, a.date_publication, a.date_creation,
+            v.id_version, v.nom AS version_nom, v.transmission, v.boite_vitesse, v.nombre_places, v.nombre_portes,
+            g.id_generation, g.nom AS generation_nom,
+            mo.id_modele, mo.nom AS modele_nom,
+            ma.id_marque, ma.nom AS marque_nom,
+            u.id_utilisateur AS vendeur_id, u.prenom AS vendeur_prenom, u.nom AS vendeur_nom, u.numero_phone AS vendeur_phone,
+            (SELECT url_photo FROM photo p WHERE p.id_annonce = a.id_annonce ORDER BY p.id_photo LIMIT 1) AS photo_principale
+        FROM annonce a
+        JOIN version v ON a.id_version = v.id_version
+        JOIN generation g ON v.id_generation = g.id_generation
+        JOIN modele mo ON g.id_modele = mo.id_modele
+        JOIN marque ma ON mo.id_marque = ma.id_marque
+        JOIN utilisateur u ON a.id_utilisateur = u.id_utilisateur
+    ';
+
     public function __construct(private DatabaseService $db) {}
 
     public function findAll(array $filters = []): array
@@ -89,11 +108,47 @@ class AnnonceRepository
 
     public function findByVendeur(int $idUser): array
     {
-        $sql  = self::BASE_SELECT . ' WHERE a.id_utilisateur = ?';
+        // Inclut active + pause pour que le vendeur voie ses annonces suspendues
+        $sql  = self::BASE_SELECT_ADMIN . ' WHERE a.id_utilisateur = ?';
         $sql .= ' ORDER BY a.date_creation DESC';
         $stmt = $this->db->getConnection()->prepare($sql);
         $stmt->execute([$idUser]);
         return $stmt->fetchAll();
+    }
+
+    public function findAllAdmin(array $filters = []): array
+    {
+        $where  = ['1=1'];
+        $params = [];
+
+        if (!empty($filters['statut'])) {
+            $where[]  = 'a.statut = ?';
+            $params[] = $filters['statut'];
+        }
+        if (!empty($filters['marque_id'])) {
+            $where[]  = 'ma.id_marque = ?';
+            $params[] = (int) $filters['marque_id'];
+        }
+        if (!empty($filters['search'])) {
+            $where[]  = '(ma.nom LIKE ? OR mo.nom LIKE ? OR u.nom LIKE ? OR u.prenom LIKE ?)';
+            $s        = '%' . $filters['search'] . '%';
+            $params   = array_merge($params, [$s, $s, $s, $s]);
+        }
+
+        $sql  = self::BASE_SELECT_ADMIN . ' WHERE ' . implode(' AND ', $where);
+        $sql .= ' ORDER BY a.date_creation DESC';
+
+        $stmt = $this->db->getConnection()->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->fetchAll();
+    }
+
+    public function updateStatut(int $id, string $statut, ?string $commentaire = null): void
+    {
+        $stmt = $this->db->getConnection()->prepare(
+            'UPDATE annonce SET statut = ?, commentaire_admin = ? WHERE id_annonce = ?'
+        );
+        $stmt->execute([$statut, $commentaire, $id]);
     }
 
     public function create(array $data): int

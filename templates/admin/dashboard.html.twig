@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block pageTitle %}Tableau de bord — AutoMarket Admin{% endblock %}
+
+{% block main %}
+<div class="max-w-6xl mx-auto px-6 py-8">
+
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-primary font-['ManRope']">Tableau de bord</h1>
+        <p class="text-tertiary mt-1">Bienvenue, {{ app.user.prenom }} {{ app.user.nom }}</p>
+    </div>
+
+    {# Stats #}
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        <div class="bg-white rounded-xl shadow-sm p-5">
+            <p class="text-xs text-tertiary uppercase tracking-wide mb-1">Utilisateurs</p>
+            <p class="text-3xl font-bold text-primary">{{ stats.total_users }}</p>
+        </div>
+        <div class="bg-white rounded-xl shadow-sm p-5">
+            <p class="text-xs text-tertiary uppercase tracking-wide mb-1">Annonces actives</p>
+            <p class="text-3xl font-bold text-green-600">{{ stats.active_annonces }}</p>
+        </div>
+        <div class="bg-white rounded-xl shadow-sm p-5">
+            <p class="text-xs text-tertiary uppercase tracking-wide mb-1">En pause</p>
+            <p class="text-3xl font-bold text-orange-500">{{ stats.paused_annonces }}</p>
+        </div>
+        <div class="bg-white rounded-xl shadow-sm p-5">
+            <p class="text-xs text-tertiary uppercase tracking-wide mb-1">Total annonces</p>
+            <p class="text-3xl font-bold text-primary">{{ stats.total_annonces }}</p>
+        </div>
+    </div>
+
+    {# Accès rapides #}
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <a href="{{ path('admin_utilisateurs') }}"
+           class="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition-shadow flex items-center gap-4">
+            <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-none">
+                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+            </div>
+            <div>
+                <p class="font-bold text-primary">Utilisateurs</p>
+                <p class="text-xs text-tertiary mt-0.5">Gérer les comptes</p>
+            </div>
+        </a>
+
+        <a href="{{ path('admin_annonces') }}"
+           class="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition-shadow flex items-center gap-4">
+            <div class="w-12 h-12 bg-secondary/10 rounded-xl flex items-center justify-center flex-none">
+                <svg class="w-6 h-6 text-secondary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                </svg>
+            </div>
+            <div>
+                <p class="font-bold text-primary">Annonces</p>
+                <p class="text-xs text-tertiary mt-0.5">Modérer les annonces</p>
+            </div>
+        </a>
+
+        <a href="{{ path('admin_catalogue') }}"
+           class="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition-shadow flex items-center gap-4">
+            <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center flex-none">
+                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+                </svg>
+            </div>
+            <div>
+                <p class="font-bold text-primary">Catalogue</p>
+                <p class="text-xs text-tertiary mt-0.5">Marques, modèles, versions</p>
+            </div>
+        </a>
+    </div>
+
+</div>
+{% endblock %}

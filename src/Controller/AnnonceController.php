@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\AnnonceRepository;
+use App\Repository\FavorisRepository;
 use App\Repository\MarqueRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
@@ -19,7 +20,7 @@ class AnnonceController extends AbstractController
     ) {}
 
     #[Route('/annonces', name: 'annonces', methods: ['GET'])]
-    public function liste(Request $request, AnnonceRepository $repo, MarqueRepository $marqueRepo): Response
+    public function liste(Request $request, AnnonceRepository $repo, MarqueRepository $marqueRepo, FavorisRepository $favorisRepo): Response
     {
         $filters = [
             'marque_id' => $request->query->get('marque_id'),
@@ -31,12 +32,13 @@ class AnnonceController extends AbstractController
             'annee_max' => $request->query->get('annee_max'),
         ];
 
-        $annonces = $repo->findAll($filters);
-        $marques  = $marqueRepo->findAll();
+        $annonces    = $repo->findAll($filters);
+        $marques     = $marqueRepo->findAll();
         $modelesParMarque = $marqueRepo->findModelesByMarque();
+        $favorisIds  = $this->getUser() ? $favorisRepo->getUserFavorisIds($this->getUser()->getId()) : [];
 
         if ($request->isXmlHttpRequest()) {
-            return $this->render('annonce/_liste.html.twig', ['annonces' => $annonces]);
+            return $this->render('annonce/_liste.html.twig', ['annonces' => $annonces, 'favoris_ids' => $favorisIds]);
         }
 
         return $this->render('annonces.html.twig', [
@@ -44,6 +46,7 @@ class AnnonceController extends AbstractController
             'marques'          => $marques,
             'modelesParMarque' => $modelesParMarque,
             'filters'          => $filters,
+            'favoris_ids'      => $favorisIds,
         ]);
     }
 
@@ -166,7 +169,7 @@ class AnnonceController extends AbstractController
     }
 
     #[Route('/annonces/{id}', name: 'annonce_detail', methods: ['GET'], requirements: ['id' => '\d+'])]
-    public function detail(int $id, AnnonceRepository $repo): Response
+    public function detail(int $id, AnnonceRepository $repo, FavorisRepository $favorisRepo): Response
     {
         $annonce = $repo->findById($id);
 
@@ -182,11 +185,15 @@ class AnnonceController extends AbstractController
             }
         }
 
-        $photos = $repo->findPhotos($id);
+        $photos     = $repo->findPhotos($id);
+        $isFavori   = $this->getUser()
+            ? in_array($id, $favorisRepo->getUserFavorisIds($this->getUser()->getId()))
+            : false;
 
         return $this->render('annonce/detail.html.twig', [
-            'annonce' => $annonce,
-            'photos'  => $photos,
+            'annonce'   => $annonce,
+            'photos'    => $photos,
+            'is_favori' => $isFavori,
         ]);
     }
 

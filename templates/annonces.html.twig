@@ -80,7 +80,7 @@
 
     {# Grille des annonces #}
     <div id="liste-annonces">
-        {% include 'annonce/_liste.html.twig' with {'annonces': annonces} %}
+        {% include 'annonce/_liste.html.twig' with {'annonces': annonces, 'favoris_ids': favoris_ids} %}
     </div>
 
 </div>

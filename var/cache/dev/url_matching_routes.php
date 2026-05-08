@@ -64,8 +64,10 @@ return [
                     .'|nnonces/(?'
                         .'|(\\d+)(*:460)'
                         .'|(\\d+)/modifier(*:482)'
-                        .'|(\\d+)/vendu(*:501)'
-                        .'|(\\d+)/supprimer(*:524)'
+                        .'|(\\d+)/pause(*:501)'
+                        .'|(\\d+)/reprendre(*:524)'
+                        .'|(\\d+)/vendu(*:543)'
+                        .'|(\\d+)/supprimer(*:566)'
                     .')'
                 .')'
             .')/?$}sDu',
@@ -88,8 +90,10 @@ return [
         434 => [[['_route' => 'admin_supprimer_version', '_controller' => 'App\\Controller\\AdminController::supprimerVersion'], ['id'], ['POST' => 0], null, false, false, null]],
         460 => [[['_route' => 'annonce_detail', '_controller' => 'App\\Controller\\AnnonceController::detail'], ['id'], ['GET' => 0], null, false, true, null]],
         482 => [[['_route' => 'annonce_modifier', '_controller' => 'App\\Controller\\AnnonceController::modifier'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        501 => [[['_route' => 'annonce_vendu', '_controller' => 'App\\Controller\\AnnonceController::marquerVendu'], ['id'], ['POST' => 0], null, false, false, null]],
-        524 => [
+        501 => [[['_route' => 'annonce_pause', '_controller' => 'App\\Controller\\AnnonceController::mettreEnPause'], ['id'], ['POST' => 0], null, false, false, null]],
+        524 => [[['_route' => 'annonce_reprendre', '_controller' => 'App\\Controller\\AnnonceController::reprendre'], ['id'], ['POST' => 0], null, false, false, null]],
+        543 => [[['_route' => 'annonce_vendu', '_controller' => 'App\\Controller\\AnnonceController::marquerVendu'], ['id'], ['POST' => 0], null, false, false, null]],
+        566 => [
             [['_route' => 'annonce_supprimer', '_controller' => 'App\\Controller\\AnnonceController::supprimer'], ['id'], ['POST' => 0], null, false, false, null],
             [null, null, null, null, false, false, 0],
         ],

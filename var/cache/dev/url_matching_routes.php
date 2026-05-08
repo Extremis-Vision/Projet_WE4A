@@ -19,6 +19,8 @@ return [
         '/connexion' => [[['_route' => 'connexion', '_controller' => 'App\\Controller\\AuthController::connexion'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/inscription' => [[['_route' => 'inscription', '_controller' => 'App\\Controller\\AuthController::inscription'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/deconnexion' => [[['_route' => 'deconnexion', '_controller' => 'App\\Controller\\AuthController::deconnexion'], null, null, null, false, false, null]],
+        '/favoris' => [[['_route' => 'favoris', '_controller' => 'App\\Controller\\FavorisController::index'], null, ['GET' => 0], null, false, false, null]],
+        '/messagerie' => [[['_route' => 'messagerie_inbox', '_controller' => 'App\\Controller\\MessagerieController::inbox'], null, ['GET' => 0], null, false, false, null]],
         '/stats' => [[['_route' => 'stats', '_controller' => 'App\\Controller\\StatsController::index'], null, null, null, false, false, null]],
         '/' => [[['_route' => 'homePage', '_controller' => 'App\\Controller\\mainController::homePage'], null, null, null, false, false, null]],
         '/vendre-ma-voiture' => [[['_route' => 'vendreMaVoiture', '_controller' => 'App\\Controller\\mainController::vendre_ma_voiture'], null, null, null, false, false, null]],
@@ -68,6 +70,11 @@ return [
                         .'|(\\d+)/supprimer(*:524)'
                     .')'
                 .')'
+                .'|/favoris/(\\d+)/toggle(*:555)'
+                .'|/messagerie/(?'
+                    .'|(\\d+)/(\\d+)(*:589)'
+                    .'|(\\d+)/(\\d+)/envoyer(*:616)'
+                .')'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -89,8 +96,11 @@ return [
         460 => [[['_route' => 'annonce_detail', '_controller' => 'App\\Controller\\AnnonceController::detail'], ['id'], ['GET' => 0], null, false, true, null]],
         482 => [[['_route' => 'annonce_modifier', '_controller' => 'App\\Controller\\AnnonceController::modifier'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
         501 => [[['_route' => 'annonce_vendu', '_controller' => 'App\\Controller\\AnnonceController::marquerVendu'], ['id'], ['POST' => 0], null, false, false, null]],
-        524 => [
-            [['_route' => 'annonce_supprimer', '_controller' => 'App\\Controller\\AnnonceController::supprimer'], ['id'], ['POST' => 0], null, false, false, null],
+        524 => [[['_route' => 'annonce_supprimer', '_controller' => 'App\\Controller\\AnnonceController::supprimer'], ['id'], ['POST' => 0], null, false, false, null]],
+        555 => [[['_route' => 'favori_toggle', '_controller' => 'App\\Controller\\FavorisController::toggle'], ['id'], ['POST' => 0], null, false, false, null]],
+        589 => [[['_route' => 'messagerie_conversation', '_controller' => 'App\\Controller\\MessagerieController::conversation'], ['id_vendeur', 'id_annonce'], ['GET' => 0], null, false, true, null]],
+        616 => [
+            [['_route' => 'messagerie_envoyer', '_controller' => 'App\\Controller\\MessagerieController::envoyer'], ['id_vendeur', 'id_annonce'], ['POST' => 0], null, false, false, null],
             [null, null, null, null, false, false, 0],
         ],
     ],

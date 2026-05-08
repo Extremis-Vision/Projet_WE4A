@@ -9,7 +9,8 @@ class FavorisRepository
     private const BASE_SELECT = '
         SELECT
             a.id_annonce, a.prix, a.annee_circulation, a.kilometrage,
-            a.etat, a.couleur, a.premiere_main, a.nombre_places,
+            a.etat, a.couleur, a.premiere_main,
+            v.nombre_places,
             a.localisation, a.statut,
             v.nom AS version_nom, v.transmission, v.boite_vitesse,
             mo.nom AS modele_nom,
@@ -17,7 +18,7 @@ class FavorisRepository
             ma.nom AS marque_nom,
             (SELECT url_photo FROM photo p WHERE p.id_annonce = a.id_annonce ORDER BY p.id_photo LIMIT 1) AS photo_principale,
             f.date_ajout
-        FROM favori f
+        FROM favorie f
         JOIN annonce  a  ON a.id_annonce   = f.id_annonce
         JOIN version  v  ON v.id_version   = a.id_version
         JOIN generation g ON g.id_generation = v.id_generation
@@ -40,7 +41,7 @@ class FavorisRepository
     public function getUserFavorisIds(int $userId): array
     {
         $stmt = $this->db->getConnection()->prepare(
-            'SELECT id_annonce FROM favori WHERE id_utilisateur = :uid'
+            'SELECT id_annonce FROM favorie WHERE id_utilisateur = :uid'
         );
         $stmt->execute(['uid' => $userId]);
         return array_column($stmt->fetchAll(), 'id_annonce');
@@ -49,19 +50,19 @@ class FavorisRepository
     public function toggle(int $userId, int $idAnnonce): bool
     {
         $stmt = $this->db->getConnection()->prepare(
-            'SELECT 1 FROM favori WHERE id_utilisateur = :uid AND id_annonce = :ann'
+            'SELECT 1 FROM favorie WHERE id_utilisateur = :uid AND id_annonce = :ann'
         );
         $stmt->execute(['uid' => $userId, 'ann' => $idAnnonce]);
 
         if ($stmt->fetch()) {
             $this->db->getConnection()->prepare(
-                'DELETE FROM favori WHERE id_utilisateur = :uid AND id_annonce = :ann'
+                'DELETE FROM favorie WHERE id_utilisateur = :uid AND id_annonce = :ann'
             )->execute(['uid' => $userId, 'ann' => $idAnnonce]);
             return false;
         }
 
         $this->db->getConnection()->prepare(
-            'INSERT INTO favori (id_utilisateur, id_annonce, date_ajout) VALUES (:uid, :ann, NOW())'
+            'INSERT INTO favorie (id_utilisateur, id_annonce, date_ajout) VALUES (:uid, :ann, NOW())'
         )->execute(['uid' => $userId, 'ann' => $idAnnonce]);
         return true;
     }

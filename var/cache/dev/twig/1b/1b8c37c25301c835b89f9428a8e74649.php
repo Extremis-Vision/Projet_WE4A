@@ -239,78 +239,88 @@ class __TwigTemplate_fc0e3b272d8a4aab0e52e5990d2d5bf6 extends Template
 
                     ";
                 // line 78
-                if ((CoreExtension::getAttribute($this->env, $this->source, $context["a"], "statut", [], "any", false, false, false, 78) == "pause")) {
+                if (((CoreExtension::getAttribute($this->env, $this->source, $context["a"], "statut", [], "any", false, false, false, 78) == "pause") && CoreExtension::getAttribute($this->env, $this->source, $context["a"], "commentaire_admin", [], "any", false, false, false, 78))) {
                     // line 79
                     yield "                    <div class=\"mt-3 p-3 bg-orange-50 border border-orange-200 rounded-lg\">
                         <p class=\"text-xs font-semibold text-orange-700 mb-1\">Annonce suspendue par l'administration</p>
-                        ";
+                        <p class=\"text-xs text-orange-600\">";
                     // line 81
-                    if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, $context["a"], "commentaire_admin", [], "any", false, false, false, 81)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-                        // line 82
-                        yield "                        <p class=\"text-xs text-orange-600\">";
-                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["a"], "commentaire_admin", [], "any", false, false, false, 82), "html", null, true);
-                        yield "</p>
-                        ";
-                    }
+                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["a"], "commentaire_admin", [], "any", false, false, false, 81), "html", null, true);
+                    yield "</p>
+                    </div>
+                    ";
+                } elseif ((CoreExtension::getAttribute($this->env, $this->source,                 // line 83
+$context["a"], "statut", [], "any", false, false, false, 83) == "pause")) {
                     // line 84
-                    yield "                    </div>
+                    yield "                    <div class=\"mt-3 p-3 bg-yellow-50 border border-yellow-200 rounded-lg\">
+                        <p class=\"text-xs font-semibold text-yellow-700\">Annonce mise en pause par vous</p>
+                    </div>
                     ";
                 }
-                // line 86
+                // line 88
                 yield "
                     ";
-                // line 87
-                if ((CoreExtension::getAttribute($this->env, $this->source, $context["a"], "statut", [], "any", false, false, false, 87) == "vendu")) {
-                    // line 88
+                // line 89
+                if ((CoreExtension::getAttribute($this->env, $this->source, $context["a"], "statut", [], "any", false, false, false, 89) == "vendu")) {
+                    // line 90
                     yield "                    <div class=\"mt-3 p-3 bg-blue-50 border border-blue-200 rounded-lg\">
                         <p class=\"text-xs font-semibold text-blue-700\">
                             Vendu";
-                    // line 90
-                    if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, $context["a"], "date_vente", [], "any", false, false, false, 90)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+                    // line 92
+                    if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, $context["a"], "date_vente", [], "any", false, false, false, 92)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
                         yield " le ";
-                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["a"], "date_vente", [], "any", false, false, false, 90), "d/m/Y"), "html", null, true);
+                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["a"], "date_vente", [], "any", false, false, false, 92), "d/m/Y"), "html", null, true);
                     }
                     yield " — merci pour votre confiance !
                         </p>
                     </div>
                     ";
                 }
-                // line 94
+                // line 96
                 yield "
                     <div class=\"flex items-center justify-between mt-3\">
                         <div class=\"flex items-center gap-2\">
                             <span class=\"text-xs text-gray-400\">
                                 ";
-                // line 98
-                yield (((($tmp = CoreExtension::getAttribute($this->env, $this->source, $context["a"], "date_publication", [], "any", false, false, false, 98)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["a"], "date_publication", [], "any", false, false, false, 98), "d/m/Y"), "html", null, true)) : ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["a"], "date_creation", [], "any", false, false, false, 98), "d/m/Y"), "html", null, true)));
+                // line 100
+                yield (((($tmp = CoreExtension::getAttribute($this->env, $this->source, $context["a"], "date_publication", [], "any", false, false, false, 100)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["a"], "date_publication", [], "any", false, false, false, 100), "d/m/Y"), "html", null, true)) : ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["a"], "date_creation", [], "any", false, false, false, 100), "d/m/Y"), "html", null, true)));
                 yield "
                             </span>
                             ";
-                // line 100
-                if ((CoreExtension::getAttribute($this->env, $this->source, $context["a"], "statut", [], "any", false, false, false, 100) == "active")) {
-                    // line 101
+                // line 102
+                if ((CoreExtension::getAttribute($this->env, $this->source, $context["a"], "statut", [], "any", false, false, false, 102) == "active")) {
+                    // line 103
                     yield "                                <span class=\"px-2 py-0.5 rounded-full text-[10px] font-semibold bg-green-100 text-green-700\">Active</span>
                             ";
-                } elseif ((CoreExtension::getAttribute($this->env, $this->source,                 // line 102
-$context["a"], "statut", [], "any", false, false, false, 102) == "pause")) {
-                    // line 103
+                } elseif ((CoreExtension::getAttribute($this->env, $this->source,                 // line 104
+$context["a"], "statut", [], "any", false, false, false, 104) == "pause")) {
+                    // line 105
                     yield "                                <span class=\"px-2 py-0.5 rounded-full text-[10px] font-semibold bg-orange-100 text-orange-700\">En pause</span>
                             ";
-                } elseif ((CoreExtension::getAttribute($this->env, $this->source,                 // line 104
-$context["a"], "statut", [], "any", false, false, false, 104) == "vendu")) {
-                    // line 105
+                } elseif ((CoreExtension::getAttribute($this->env, $this->source,                 // line 106
+$context["a"], "statut", [], "any", false, false, false, 106) == "vendu")) {
+                    // line 107
                     yield "                                <span class=\"px-2 py-0.5 rounded-full text-[10px] font-semibold bg-blue-100 text-blue-700\">Vendu</span>
                             ";
                 }
-                // line 107
+                // line 109
                 yield "                        </div>
                         <div class=\"flex gap-2\">
                             ";
-                // line 109
-                if ((CoreExtension::getAttribute($this->env, $this->source, $context["a"], "statut", [], "any", false, false, false, 109) == "active")) {
-                    // line 110
+                // line 111
+                if ((CoreExtension::getAttribute($this->env, $this->source, $context["a"], "statut", [], "any", false, false, false, 111) == "active")) {
+                    // line 112
                     yield "                            <form action=\"";
-                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("annonce_vendu", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["a"], "id_annonce", [], "any", false, false, false, 110)]), "html", null, true);
+                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("annonce_pause", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["a"], "id_annonce", [], "any", false, false, false, 112)]), "html", null, true);
+                    yield "\" method=\"post\">
+                                <button type=\"submit\"
+                                        class=\"px-3 py-1.5 border border-yellow-400 text-yellow-600 text-xs font-semibold rounded-lg hover:bg-yellow-50 transition-all\">
+                                    ⏸ Pause
+                                </button>
+                            </form>
+                            <form action=\"";
+                    // line 118
+                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("annonce_vendu", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["a"], "id_annonce", [], "any", false, false, false, 118)]), "html", null, true);
                     yield "\" method=\"post\"
                                   onsubmit=\"return confirm('Marquer cette annonce comme vendue ? Cette action est irréversible.')\">
                                 <button type=\"submit\"
@@ -320,21 +330,35 @@ $context["a"], "statut", [], "any", false, false, false, 104) == "vendu")) {
                             </form>
                             ";
                 }
-                // line 118
+                // line 126
                 yield "                            ";
-                if ((CoreExtension::getAttribute($this->env, $this->source, $context["a"], "statut", [], "any", false, false, false, 118) != "vendu")) {
-                    // line 119
+                if (((CoreExtension::getAttribute($this->env, $this->source, $context["a"], "statut", [], "any", false, false, false, 126) == "pause") &&  !CoreExtension::getAttribute($this->env, $this->source, $context["a"], "commentaire_admin", [], "any", false, false, false, 126))) {
+                    // line 127
+                    yield "                            <form action=\"";
+                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("annonce_reprendre", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["a"], "id_annonce", [], "any", false, false, false, 127)]), "html", null, true);
+                    yield "\" method=\"post\">
+                                <button type=\"submit\"
+                                        class=\"px-3 py-1.5 border border-green-400 text-green-600 text-xs font-semibold rounded-lg hover:bg-green-50 transition-all\">
+                                    ▶ Reprendre
+                                </button>
+                            </form>
+                            ";
+                }
+                // line 134
+                yield "                            ";
+                if ((CoreExtension::getAttribute($this->env, $this->source, $context["a"], "statut", [], "any", false, false, false, 134) != "vendu")) {
+                    // line 135
                     yield "                            <a href=\"";
-                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("annonce_modifier", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["a"], "id_annonce", [], "any", false, false, false, 119)]), "html", null, true);
+                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("annonce_modifier", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["a"], "id_annonce", [], "any", false, false, false, 135)]), "html", null, true);
                     yield "\"
                                class=\"px-3 py-1.5 border border-primary text-primary text-xs font-semibold rounded-lg hover:bg-primary hover:text-white transition-all\">
                                 Modifier
                             </a>
                             ";
                 }
-                // line 124
+                // line 140
                 yield "                            <form action=\"";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("annonce_supprimer", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["a"], "id_annonce", [], "any", false, false, false, 124)]), "html", null, true);
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("annonce_supprimer", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["a"], "id_annonce", [], "any", false, false, false, 140)]), "html", null, true);
                 yield "\" method=\"post\">
                                 <button type=\"submit\" onclick=\"return confirm('Supprimer cette annonce ?')\"
                                         class=\"px-3 py-1.5 border border-red-300 text-red-500 text-xs font-semibold rounded-lg hover:bg-red-50 transition-all\">
@@ -351,11 +375,11 @@ $context["a"], "statut", [], "any", false, false, false, 104) == "vendu")) {
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_key'], $context['a'], $context['_parent']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 136
+            // line 152
             yield "        </div>
     ";
         }
-        // line 138
+        // line 154
         yield "
 </div>
 ";
@@ -386,7 +410,7 @@ $context["a"], "statut", [], "any", false, false, false, 104) == "vendu")) {
      */
     public function getDebugInfo(): array
     {
-        return array (  359 => 138,  355 => 136,  336 => 124,  327 => 119,  324 => 118,  312 => 110,  310 => 109,  306 => 107,  302 => 105,  300 => 104,  297 => 103,  295 => 102,  292 => 101,  290 => 100,  285 => 98,  279 => 94,  269 => 90,  265 => 88,  263 => 87,  260 => 86,  256 => 84,  250 => 82,  248 => 81,  244 => 79,  242 => 78,  238 => 76,  231 => 75,  225 => 74,  221 => 73,  216 => 71,  208 => 66,  202 => 63,  195 => 61,  190 => 59,  185 => 56,  181 => 53,  173 => 47,  162 => 44,  160 => 43,  154 => 41,  150 => 38,  146 => 37,  143 => 36,  134 => 30,  126 => 24,  124 => 23,  115 => 17,  108 => 15,  102 => 11,  93 => 9,  89 => 8,  85 => 6,  75 => 5,  58 => 3,  41 => 1,);
+        return array (  383 => 154,  379 => 152,  360 => 140,  351 => 135,  348 => 134,  337 => 127,  334 => 126,  323 => 118,  313 => 112,  311 => 111,  307 => 109,  303 => 107,  301 => 106,  298 => 105,  296 => 104,  293 => 103,  291 => 102,  286 => 100,  280 => 96,  270 => 92,  266 => 90,  264 => 89,  261 => 88,  255 => 84,  253 => 83,  248 => 81,  244 => 79,  242 => 78,  238 => 76,  231 => 75,  225 => 74,  221 => 73,  216 => 71,  208 => 66,  202 => 63,  195 => 61,  190 => 59,  185 => 56,  181 => 53,  173 => 47,  162 => 44,  160 => 43,  154 => 41,  150 => 38,  146 => 37,  143 => 36,  134 => 30,  126 => 24,  124 => 23,  115 => 17,  108 => 15,  102 => 11,  93 => 9,  89 => 8,  85 => 6,  75 => 5,  58 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -468,12 +492,14 @@ $context["a"], "statut", [], "any", false, false, false, 104) == "vendu")) {
                         {% if a.localisation %}<span>•</span><span>📍 {{ a.localisation }}</span>{% endif %}
                     </div>
 
-                    {% if a.statut == 'pause' %}
+                    {% if a.statut == 'pause' and a.commentaire_admin %}
                     <div class=\"mt-3 p-3 bg-orange-50 border border-orange-200 rounded-lg\">
                         <p class=\"text-xs font-semibold text-orange-700 mb-1\">Annonce suspendue par l'administration</p>
-                        {% if a.commentaire_admin %}
                         <p class=\"text-xs text-orange-600\">{{ a.commentaire_admin }}</p>
-                        {% endif %}
+                    </div>
+                    {% elseif a.statut == 'pause' %}
+                    <div class=\"mt-3 p-3 bg-yellow-50 border border-yellow-200 rounded-lg\">
+                        <p class=\"text-xs font-semibold text-yellow-700\">Annonce mise en pause par vous</p>
                     </div>
                     {% endif %}
 
@@ -500,11 +526,25 @@ $context["a"], "statut", [], "any", false, false, false, 104) == "vendu")) {
                         </div>
                         <div class=\"flex gap-2\">
                             {% if a.statut == 'active' %}
+                            <form action=\"{{ path('annonce_pause', {id: a.id_annonce}) }}\" method=\"post\">
+                                <button type=\"submit\"
+                                        class=\"px-3 py-1.5 border border-yellow-400 text-yellow-600 text-xs font-semibold rounded-lg hover:bg-yellow-50 transition-all\">
+                                    ⏸ Pause
+                                </button>
+                            </form>
                             <form action=\"{{ path('annonce_vendu', {id: a.id_annonce}) }}\" method=\"post\"
                                   onsubmit=\"return confirm('Marquer cette annonce comme vendue ? Cette action est irréversible.')\">
                                 <button type=\"submit\"
                                         class=\"px-3 py-1.5 border border-blue-300 text-blue-600 text-xs font-semibold rounded-lg hover:bg-blue-50 transition-all\">
                                     ✓ Vendu
+                                </button>
+                            </form>
+                            {% endif %}
+                            {% if a.statut == 'pause' and not a.commentaire_admin %}
+                            <form action=\"{{ path('annonce_reprendre', {id: a.id_annonce}) }}\" method=\"post\">
+                                <button type=\"submit\"
+                                        class=\"px-3 py-1.5 border border-green-400 text-green-600 text-xs font-semibold rounded-lg hover:bg-green-50 transition-all\">
+                                    ▶ Reprendre
                                 </button>
                             </form>
                             {% endif %}

@@ -179,9 +179,26 @@ php -S localhost:8000 -t public/
 
 L'application est alors accessible à l'adresse : `http://localhost:8000`
 
+
+---
+## 8. Mot de passe utilisateur par defaut 
+
+| Rôle           | Nom               | Email                    | Mot de passe |
+|----------------|-------------------|--------------------------|--------------|
+| Administrateur | AutoMarket Admin  | admin@automarket.fr      |  password            |
+| Acheteur       | Emma Moreau       | emma.moreau@email.fr     |    password          |
+| Acheteur       | Lucas Simon       | lucas.simon@email.fr     |     password         |
+| Acheteur       | Camille Laurent   | camille.laurent@email.fr |     password         |
+| Acheteur       | Antoine Durand    | antoine.durand@email.fr  |    password          |
+| Acheteur       | Sarah Garnier     | sarah.garnier@email.fr   |   password           |
+| Acheteur       | Bastien Heitzmann | bastien@heitzmann.fr     |   azertyuiop           |
+| Acheteur       | Blusk Atsiz       | blusk@mail.fr            |    blusk12345          |
+| Acheteur       | Jean Dujardin     | jean@dujardin.fr         |    azertyuiop          |
+| Entreprise     | Akram Ojjeh       | akram@ojjeh.fr           |       azertyuiop       |
+
 ---
 
-## 8. Workflow Git
+## 9. Workflow Git
 
 Le projet utilise un workflow par branches :
 
@@ -194,16 +211,10 @@ Le projet utilise un workflow par branches :
 
 ---
 
-## 9. Ressources et références
+## 10. Ressources et références
 
 | Ressource       | Lien                                                                                              |
 |-----------------|---------------------------------------------------------------------------------------------------|
 | **Maquettes**   | [Figma](https://www.figma.com/design/hLAp3fQ61nuCg0xQC24zj1/Untitled?node-id=0-1&t=dJgG43q2Ze8Tpgo3-1) |
 | **Prototypage** | [Stitch](https://stitch.withgoogle.com/projects/15741036538475195075)                             |
 | **Dépôt Git**   | [GitHub](https://github.com/Extremis-Vision/Projet_WE4A)                                         |
-
----
-
-## 10. Équipe
-
-Projet réalisé dans le cadre des modules **WE4A** et **SI40** — UTBM.

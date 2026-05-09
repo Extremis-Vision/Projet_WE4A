@@ -218,3 +218,9 @@ Le projet utilise un workflow par branches :
 | **Maquettes**   | [Figma](https://www.figma.com/design/hLAp3fQ61nuCg0xQC24zj1/Untitled?node-id=0-1&t=dJgG43q2Ze8Tpgo3-1) |
 | **Prototypage** | [Stitch](https://stitch.withgoogle.com/projects/15741036538475195075)                             |
 | **Dépôt Git**   | [GitHub](https://github.com/Extremis-Vision/Projet_WE4A)                                         |
+
+---
+
+## 10. Équipe
+
+Projet réalisé dans le cadre des modules **WE4A** et **SI40** — UTBM.

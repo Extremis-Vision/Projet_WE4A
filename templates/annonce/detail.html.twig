@@ -477,6 +477,9 @@
                 {% if annonce.date_publication %}
                 <p class="text-xs text-tertiary mt-4 text-center">Publiée le {{ annonce.date_publication|date('d/m/Y') }}</p>
                 {% endif %}
+                <p class="text-xs text-tertiary text-center mt-1">
+                    👁 {{ nb_vues }} vue{{ nb_vues != 1 ? 's' : '' }}
+                </p>
             </div>
         </div>
 

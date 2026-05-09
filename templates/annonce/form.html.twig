@@ -102,6 +102,33 @@
                 </div>
             </div>
 
+            <div class="grid grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-tertiary mb-1">Sellerie</label>
+                    <select name="sellerie" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary bg-white text-primary text-sm">
+                        <option value="">Non précisé</option>
+                        {% for s in ['Tissu', 'Cuir', 'Semi-cuir', 'Alcantara', 'Velours'] %}
+                            <option value="{{ s }}" {% if annonce.sellerie == s %}selected{% endif %}>{{ s }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-tertiary mb-1">Finition</label>
+                    <input type="text" name="finition" placeholder="Sport, Luxe, Business…"
+                           value="{{ annonce.finition ?? '' }}"
+                           class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary bg-white text-primary">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-tertiary mb-1">Provenance</label>
+                    <select name="provenance" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary bg-white text-primary text-sm">
+                        <option value="">Non précisé</option>
+                        {% for p in ['France', 'Import UE', 'Import hors UE'] %}
+                            <option value="{{ p }}" {% if annonce.provenance == p %}selected{% endif %}>{{ p }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
             <div class="grid grid-cols-2 gap-4">
                 <div>
                     <label class="block text-sm font-medium text-tertiary mb-1">Nombre de propriétaires</label>

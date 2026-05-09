@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\AnnonceRepository;
 use App\Repository\MarqueRepository;
+use App\Repository\RechercheRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -63,6 +64,9 @@ class AnnonceController extends AbstractController
                 'kilometrage'       => (int) $request->request->get('kilometrage'),
                 'etat'              => $request->request->get('etat'),
                 'couleur'           => $request->request->get('couleur'),
+                'sellerie'          => $request->request->get('sellerie'),
+                'finition'          => $request->request->get('finition'),
+                'provenance'        => $request->request->get('provenance'),
                 'premiere_main'     => $request->request->has('premiere_main'),
                 'nombre_proprietaire' => $request->request->get('nombre_proprietaire') ?: null,
                 'controle_technique'  => $request->request->get('controle_technique') ?: null,
@@ -146,6 +150,9 @@ class AnnonceController extends AbstractController
             'kilometrage'         => '',
             'etat'                => '',
             'couleur'             => '',
+            'sellerie'            => '',
+            'finition'            => '',
+            'provenance'          => '',
             'premiere_main'       => false,
             'nombre_proprietaire' => '',
             'controle_technique'  => '',
@@ -166,7 +173,7 @@ class AnnonceController extends AbstractController
     }
 
     #[Route('/annonces/{id}', name: 'annonce_detail', methods: ['GET'], requirements: ['id' => '\d+'])]
-    public function detail(int $id, AnnonceRepository $repo): Response
+    public function detail(int $id, AnnonceRepository $repo, RechercheRepository $rechercheRepo): Response
     {
         $annonce = $repo->findById($id);
 
@@ -174,19 +181,20 @@ class AnnonceController extends AbstractController
             throw $this->createNotFoundException('Annonce introuvable.');
         }
 
-        if (in_array($annonce['statut'], ['pause', 'vendu'])) {
-            $user    = $this->getUser();
-            $isOwner = $user && (int) $annonce['vendeur_id'] === (int) $user->getId();
-            if (!$isOwner && !$this->isGranted('ROLE_ADMIN')) {
-                throw $this->createNotFoundException('Annonce introuvable.');
-            }
+        $user    = $this->getUser();
+        $isOwner = $user && (int) $annonce['vendeur_id'] === (int) $user->getId();
+
+        if (!$isOwner) {
+            $rechercheRepo->enregistrerVisite($id, $user ? $user->getId() : null);
         }
 
-        $photos = $repo->findPhotos($id);
+        $photos  = $repo->findPhotos($id);
+        $nbVues  = $rechercheRepo->countVisites($id);
 
         return $this->render('annonce/detail.html.twig', [
             'annonce' => $annonce,
             'photos'  => $photos,
+            'nb_vues' => $nbVues,
         ]);
     }
 
@@ -215,6 +223,9 @@ class AnnonceController extends AbstractController
                 'kilometrage'       => (int) $request->request->get('kilometrage'),
                 'etat'              => $request->request->get('etat'),
                 'couleur'           => $request->request->get('couleur'),
+                'sellerie'          => $request->request->get('sellerie'),
+                'finition'          => $request->request->get('finition'),
+                'provenance'        => $request->request->get('provenance'),
                 'premiere_main'     => $request->request->has('premiere_main'),
                 'nombre_proprietaire' => $request->request->get('nombre_proprietaire') ?: null,
                 'controle_technique'  => $request->request->get('controle_technique') ?: null,

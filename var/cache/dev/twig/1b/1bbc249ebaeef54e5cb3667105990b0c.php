@@ -256,6 +256,6 @@ class __TwigTemplate_214669954dbaa1bd87c9f3fd8ef2e92d extends Template
     </div>
 </div>
 {% endblock %}
-", "connexion.html.twig", "C:\\projets\\Projet_WE4A\\templates\\connexion.html.twig");
+", "connexion.html.twig", "C:\\Users\\jean-\\PhpstormProjects\\WE4A_projet\\templates\\connexion.html.twig");
     }
 }

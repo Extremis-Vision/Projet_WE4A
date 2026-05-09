@@ -87,6 +87,8 @@
                             <!-- Menu déroulant -->
                             <div class="absolute right-0 mt-0 w-48 bg-white rounded-xl shadow-lg py-2 border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                                 <a href="{{ path('avis_vendeur', {id: app.user.id}) }}" class="block px-4 py-2 text-sm text-tertiary hover:bg-gray-50 hover:text-primary">Mon Profil</a>
+                                <a href="{{ path('parametres') }}" class="block px-4 py-2 text-sm text-tertiary hover:bg-gray-50 hover:text-primary">Paramètres</a>
+                                <hr class="my-1 border-gray-100">
                                 <a href="{{ path('deconnexion') }}" class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50 font-medium">Déconnexion</a>
                             </div>
                         </div>
@@ -155,6 +157,7 @@
                     <div class="mt-3 px-2 space-y-1">
                         <a href="{{ path('favoris') }}" class="block px-3 py-2 rounded-md text-base font-medium text-tertiary hover:text-primary hover:bg-gray-50">Mes Favoris</a>
                         <a href="{{ path('avis_vendeur', {id: app.user.id}) }}" class="block px-3 py-2 rounded-md text-base font-medium text-tertiary hover:text-primary hover:bg-gray-50">Mon Profil</a>
+                        <a href="{{ path('parametres') }}" class="block px-3 py-2 rounded-md text-base font-medium text-tertiary hover:text-primary hover:bg-gray-50">Paramètres</a>
                         <a href="{{ path('deconnexion') }}" class="block px-3 py-2 rounded-md text-base font-medium text-red-600 hover:bg-red-50">Déconnexion</a>
                     </div>
                 {% else %}

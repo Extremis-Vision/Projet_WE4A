@@ -325,6 +325,6 @@ class __TwigTemplate_415b7ef544a9339668448656691c1d1e extends Template
 {% block javascripts %}
     <script src=\"{{ asset('js/validation.js') }}\"></script>
 {% endblock %}
-", "inscription.html.twig", "C:\\projets\\Projet_WE4A\\templates\\inscription.html.twig");
+", "inscription.html.twig", "C:\\Users\\jean-\\PhpstormProjects\\WE4A_projet\\templates\\inscription.html.twig");
     }
 }

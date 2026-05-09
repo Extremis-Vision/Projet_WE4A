@@ -21,6 +21,7 @@ return [
         '/deconnexion' => [[['_route' => 'deconnexion', '_controller' => 'App\\Controller\\AuthController::deconnexion'], null, null, null, false, false, null]],
         '/favoris' => [[['_route' => 'favoris', '_controller' => 'App\\Controller\\FavorisController::index'], null, ['GET' => 0], null, false, false, null]],
         '/messagerie' => [[['_route' => 'messagerie_inbox', '_controller' => 'App\\Controller\\MessagerieController::inbox'], null, ['GET' => 0], null, false, false, null]],
+        '/parametres' => [[['_route' => 'parametres', '_controller' => 'App\\Controller\\ParametresController::index'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/stats' => [[['_route' => 'stats', '_controller' => 'App\\Controller\\StatsController::index'], null, null, null, false, false, null]],
         '/' => [[['_route' => 'homePage', '_controller' => 'App\\Controller\\mainController::homePage'], null, null, null, false, false, null]],
         '/vendre-ma-voiture' => [[['_route' => 'vendreMaVoiture', '_controller' => 'App\\Controller\\mainController::vendre_ma_voiture'], null, null, null, false, false, null]],
@@ -80,6 +81,7 @@ return [
                     .'|(\\d+)/(\\d+)(*:673)'
                     .'|(\\d+)/(\\d+)/envoyer(*:700)'
                 .')'
+                .'|/profil/(\\d+)(*:722)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -107,8 +109,9 @@ return [
         609 => [[['_route' => 'avis_ajouter', '_controller' => 'App\\Controller\\AvisController::ajouter'], ['id'], ['POST' => 0], null, false, false, null]],
         639 => [[['_route' => 'favori_toggle', '_controller' => 'App\\Controller\\FavorisController::toggle'], ['id'], ['POST' => 0], null, false, false, null]],
         673 => [[['_route' => 'messagerie_conversation', '_controller' => 'App\\Controller\\MessagerieController::conversation'], ['id_vendeur', 'id_annonce'], ['GET' => 0], null, false, true, null]],
-        700 => [
-            [['_route' => 'messagerie_envoyer', '_controller' => 'App\\Controller\\MessagerieController::envoyer'], ['id_vendeur', 'id_annonce'], ['POST' => 0], null, false, false, null],
+        700 => [[['_route' => 'messagerie_envoyer', '_controller' => 'App\\Controller\\MessagerieController::envoyer'], ['id_vendeur', 'id_annonce'], ['POST' => 0], null, false, false, null]],
+        722 => [
+            [['_route' => 'user_profil', '_controller' => 'App\\Controller\\UserController::profil'], ['id'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
     ],

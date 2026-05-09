@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-{% block pageTitle %}Avis sur {{ vendeur.prenom }} {{ vendeur.nom }} — AutoMarket{% endblock %}
+{% block pageTitle %}Profil de {{ vendeur.prenom }} {{ vendeur.nom }} — AutoMarket{% endblock %}
 
 {% block main %}
 <div class="max-w-3xl mx-auto px-6 py-10">
@@ -99,8 +99,22 @@
         </div>
     {% endif %}
 
+    {# Annonces du vendeur #}
+    <div class="mb-12">
+        <h2 class="font-bold text-primary text-xl font-['ManRope'] mb-6 flex items-center gap-2">
+            <span class="w-1.5 h-6 bg-secondary rounded-full inline-block"></span>
+            Annonces en cours
+        </h2>
+        {% include 'annonce/_liste.html.twig' with {'annonces': annonces} %}
+    </div>
+
     {# Liste des avis #}
-    <div class="space-y-4">
+    <div>
+        <h2 class="font-bold text-primary text-xl font-['ManRope'] mb-6 flex items-center gap-2">
+            <span class="w-1.5 h-6 bg-secondary rounded-full inline-block"></span>
+            Avis clients
+        </h2>
+        <div class="space-y-4">
         {% if avis is empty %}
             <div class="flex flex-col items-center justify-center py-16 text-center">
                 <div class="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center mb-4">
@@ -152,6 +166,7 @@
             </div>
             {% endfor %}
         {% endif %}
+    </div>
     </div>
 
 </div>

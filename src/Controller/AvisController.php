@@ -12,7 +12,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class AvisController extends AbstractController
 {
     #[Route('/vendeur/{id}/avis', name: 'avis_vendeur', methods: ['GET'], requirements: ['id' => '\d+'])]
-    public function index(int $id, AvisRepository $repo): Response
+    public function index(int $id, AvisRepository $repo, \App\Repository\AnnonceRepository $annonceRepo): Response
     {
         $vendeur = $repo->findVendeur($id);
 
@@ -22,6 +22,7 @@ class AvisController extends AbstractController
 
         $avis     = $repo->findByVendeur($id);
         $stats    = $repo->getStats($id);
+        $annonces = $annonceRepo->findAll(['vendeur_id' => $id]);
         $dejaNote = false;
 
         if ($this->getUser()) {
@@ -32,6 +33,7 @@ class AvisController extends AbstractController
             'vendeur'   => $vendeur,
             'avis'      => $avis,
             'stats'     => $stats,
+            'annonces'  => $annonces,
             'deja_note' => $dejaNote,
         ]);
     }

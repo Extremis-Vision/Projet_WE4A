@@ -30,7 +30,7 @@ class AnnonceRepository
             mo.id_modele, mo.nom AS modele_nom, mo.annee_creation AS modele_annee,
             t.nom AS type_nom,
             ma.id_marque, ma.nom AS marque_nom, ma.pays AS marque_pays,
-            u.id_utilisateur AS vendeur_id, u.prenom AS vendeur_prenom, u.nom AS vendeur_nom, u.numero_phone AS vendeur_phone,
+            u.id_utilisateur AS vendeur_id, u.prenom AS vendeur_prenom, u.nom AS vendeur_nom,
             (SELECT url_photo FROM photo p WHERE p.id_annonce = a.id_annonce ORDER BY p.id_photo LIMIT 1) AS photo_principale
         FROM annonce a
         JOIN version v ON a.id_version = v.id_version
@@ -82,7 +82,7 @@ class AnnonceRepository
             mo.id_modele, mo.nom AS modele_nom, mo.annee_creation AS modele_annee,
             t.nom AS type_nom,
             ma.id_marque, ma.nom AS marque_nom, ma.pays AS marque_pays,
-            u.id_utilisateur AS vendeur_id, u.prenom AS vendeur_prenom, u.nom AS vendeur_nom, u.numero_phone AS vendeur_phone,
+            u.id_utilisateur AS vendeur_id, u.prenom AS vendeur_prenom, u.nom AS vendeur_nom,
             (SELECT url_photo FROM photo p WHERE p.id_annonce = a.id_annonce ORDER BY p.id_photo LIMIT 1) AS photo_principale
         FROM annonce a
         JOIN version v ON a.id_version = v.id_version
@@ -144,6 +144,10 @@ class AnnonceRepository
         if (!empty($filters['annee_max'])) {
             $where[]  = 'a.annee_circulation <= ?';
             $params[] = (int) $filters['annee_max'];
+        }
+        if (!empty($filters['vendeur_id'])) {
+            $where[]  = 'a.id_utilisateur = ?';
+            $params[] = (int) $filters['vendeur_id'];
         }
 
         $sql  = self::BASE_SELECT . ' WHERE ' . implode(' AND ', $where);

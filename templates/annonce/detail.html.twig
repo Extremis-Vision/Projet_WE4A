@@ -464,13 +464,9 @@
                 <hr class="border-gray-100 mb-4">
 
                 <h3 class="font-semibold text-primary mb-2 text-sm">Vendeur</h3>
-                <p class="font-bold text-primary text-sm">{{ annonce.vendeur_prenom }} {{ annonce.vendeur_nom }}</p>
-                {% if annonce.vendeur_phone %}
-                <p class="text-secondary text-sm mt-1 font-medium">📞 {{ annonce.vendeur_phone }}</p>
-                {% endif %}
-                <a href="{{ path('avis_vendeur', {id: annonce.vendeur_id}) }}"
-                   class="inline-block mt-2 text-xs text-secondary hover:underline">
-                    Voir les avis du vendeur
+                <a href="{{ path('avis_vendeur', {id: annonce.vendeur_id}) }}" class="group block mb-4">
+                    <p class="font-bold text-primary text-sm group-hover:underline group-hover:text-secondary transition-colors">{{ annonce.vendeur_prenom }} {{ annonce.vendeur_nom }}</p>
+                    <p class="text-[11px] text-tertiary group-hover:text-secondary/70 mt-0.5">Voir le profil et les annonces</p>
                 </a>
 
                 {% if app.user %}

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\AnnonceRepository;
 use App\Repository\MarqueRepository;
+use App\Repository\RechercheRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -172,7 +173,7 @@ class AnnonceController extends AbstractController
     }
 
     #[Route('/annonces/{id}', name: 'annonce_detail', methods: ['GET'], requirements: ['id' => '\d+'])]
-    public function detail(int $id, AnnonceRepository $repo): Response
+    public function detail(int $id, AnnonceRepository $repo, RechercheRepository $rechercheRepo): Response
     {
         $annonce = $repo->findById($id);
 
@@ -180,11 +181,20 @@ class AnnonceController extends AbstractController
             throw $this->createNotFoundException('Annonce introuvable.');
         }
 
-        $photos = $repo->findPhotos($id);
+        $user    = $this->getUser();
+        $isOwner = $user && (int) $annonce['vendeur_id'] === (int) $user->getId();
+
+        if (!$isOwner) {
+            $rechercheRepo->enregistrerVisite($id, $user ? $user->getId() : null);
+        }
+
+        $photos  = $repo->findPhotos($id);
+        $nbVues  = $rechercheRepo->countVisites($id);
 
         return $this->render('annonce/detail.html.twig', [
             'annonce' => $annonce,
             'photos'  => $photos,
+            'nb_vues' => $nbVues,
         ]);
     }
 

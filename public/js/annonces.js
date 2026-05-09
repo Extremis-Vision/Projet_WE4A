@@ -44,104 +44,155 @@
 /* ===== Cascade dropdowns (formulaire création/modification) ===== */
 (function () {
     if (typeof CATALOG === 'undefined') return;
+    if (typeof TomSelect === 'undefined') return;
 
-    const selMarque     = document.getElementById('sel-marque');
-    const selModele     = document.getElementById('sel-modele');
-    const selGeneration = document.getElementById('sel-generation');
-    const selVersion    = document.getElementById('sel-version');
+    var selMarque     = document.getElementById('sel-marque');
+    var selModele     = document.getElementById('sel-modele');
+    var selGeneration = document.getElementById('sel-generation');
+    var selVersion    = document.getElementById('sel-version');
 
     if (!selMarque) return;
 
-    function resetSelect(sel, placeholder) {
-        sel.innerHTML = '<option value="">' + placeholder + '</option>';
-        sel.disabled = true;
+    // Remove Tailwind classes that conflict with TomSelect styling
+    [selMarque, selModele, selGeneration, selVersion].forEach(function(el) {
+        el.classList.remove('px-4','py-3','border','border-gray-200','rounded-lg','bg-white',
+            'focus:outline-none','focus:ring-2','focus:ring-secondary','text-primary','text-sm',
+            'disabled:opacity-50');
+    });
+
+    var tsMarque, tsModele, tsGeneration, tsVersion;
+
+    /* --- helpers --- */
+    function resetTS(ts, placeholder) {
+        ts.clear(true);
+        ts.clearOptions();
+        ts.addOption({ value: '', text: placeholder });
+        ts.refreshOptions(false);
+        ts.disable();
     }
 
-    function populateSelect(sel, items, labelFn) {
-        sel.innerHTML = '<option value="">Sélectionner</option>';
+    function populateTS(ts, items, labelFn, placeholder) {
+        ts.clear(true);
+        ts.clearOptions();
+        ts.addOption({ value: '', text: placeholder });
         items.forEach(function (item) {
-            const opt = document.createElement('option');
-            opt.value = item.id;
-            opt.textContent = labelFn(item);
-            sel.appendChild(opt);
+            ts.addOption({ value: String(item.id), text: labelFn(item) });
         });
-        sel.disabled = false;
+        ts.refreshOptions(false);
+        ts.enable();
     }
 
-    // Peupler les marques
+    /* --- Cascade callbacks --- */
+    function onMarqueChange(value) {
+        resetTS(tsModele, 'Sélectionner un modèle');
+        resetTS(tsGeneration, 'Sélectionner une génération');
+        resetTS(tsVersion, 'Sélectionner une version');
+        selVersion.name = '';
+
+        var marque = CATALOG.find(function (m) { return m.id == value; });
+        if (!marque) return;
+
+        populateTS(tsModele, marque.modeles, function (mo) { return mo.nom; }, 'Sélectionner un modèle');
+    }
+
+    function onModeleChange(value) {
+        resetTS(tsGeneration, 'Sélectionner une génération');
+        resetTS(tsVersion, 'Sélectionner une version');
+        selVersion.name = '';
+
+        var marque = CATALOG.find(function (m) { return m.id == tsMarque.getValue(); });
+        if (!marque) return;
+        var modele = marque.modeles.find(function (mo) { return mo.id == value; });
+        if (!modele) return;
+
+        populateTS(tsGeneration, modele.generations, function (g) {
+            return g.nom || '(génération ' + g.id + ')';
+        }, 'Sélectionner une génération');
+    }
+
+    function onGenerationChange(value) {
+        resetTS(tsVersion, 'Sélectionner une version');
+        selVersion.name = '';
+
+        var marque = CATALOG.find(function (m) { return m.id == tsMarque.getValue(); });
+        if (!marque) return;
+        var modele = marque.modeles.find(function (mo) { return mo.id == tsModele.getValue(); });
+        if (!modele) return;
+        var gen = modele.generations.find(function (g) { return g.id == value; });
+        if (!gen) return;
+
+        populateTS(tsVersion, gen.versions, function (v) {
+            var label = v.nom;
+            if (v.bv) label += ' — ' + v.bv;
+            return label;
+        }, 'Sélectionner une version');
+        selVersion.name = 'id_version';
+    }
+
+    /* --- Build marque options on the native select FIRST --- */
     CATALOG.forEach(function (m) {
-        const opt = document.createElement('option');
+        var opt = document.createElement('option');
         opt.value = m.id;
         opt.textContent = m.nom;
         selMarque.appendChild(opt);
     });
 
-    selMarque.addEventListener('change', function () {
-        resetSelect(selModele, 'Sélectionner un modèle');
-        resetSelect(selGeneration, 'Sélectionner une génération');
-        resetSelect(selVersion, 'Sélectionner une version');
-        selVersion.name = '';
-
-        const marque = CATALOG.find(function (m) { return m.id == selMarque.value; });
-        if (!marque) return;
-
-        populateSelect(selModele, marque.modeles, function (mo) { return mo.nom; });
+    /* --- Initialize TomSelect instances WITH onChange --- */
+    tsMarque = new TomSelect(selMarque, {
+        create: false,
+        placeholder: 'Sélectionner une marque',
+        onChange: onMarqueChange
     });
 
-    selModele.addEventListener('change', function () {
-        resetSelect(selGeneration, 'Sélectionner une génération');
-        resetSelect(selVersion, 'Sélectionner une version');
-        selVersion.name = '';
-
-        const marque = CATALOG.find(function (m) { return m.id == selMarque.value; });
-        if (!marque) return;
-        const modele = marque.modeles.find(function (mo) { return mo.id == selModele.value; });
-        if (!modele) return;
-
-        populateSelect(selGeneration, modele.generations, function (g) {
-            return g.nom || '(génération ' + g.id + ')';
-        });
+    tsModele = new TomSelect(selModele, {
+        create: false,
+        placeholder: 'Sélectionner un modèle',
+        onChange: onModeleChange
     });
+    tsModele.disable();
 
-    selGeneration.addEventListener('change', function () {
-        resetSelect(selVersion, 'Sélectionner une version');
-        selVersion.name = '';
-
-        const marque = CATALOG.find(function (m) { return m.id == selMarque.value; });
-        if (!marque) return;
-        const modele = marque.modeles.find(function (mo) { return mo.id == selModele.value; });
-        if (!modele) return;
-        const gen = modele.generations.find(function (g) { return g.id == selGeneration.value; });
-        if (!gen) return;
-
-        populateSelect(selVersion, gen.versions, function (v) {
-            let label = v.nom;
-            if (v.bv) label += ' — ' + v.bv;
-            return label;
-        });
-        selVersion.name = 'id_version';
+    tsGeneration = new TomSelect(selGeneration, {
+        create: false,
+        placeholder: 'Sélectionner une génération',
+        onChange: onGenerationChange
     });
+    tsGeneration.disable();
 
-    // Pré-sélectionner si on modifie une annonce existante
+    tsVersion = new TomSelect(selVersion, {
+        create: false,
+        placeholder: 'Sélectionner une version'
+    });
+    tsVersion.disable();
+
+    /* --- Pre-select when editing an existing annonce --- */
     if (typeof SELECTED_VERSION !== 'undefined' && SELECTED_VERSION) {
-        outer: for (const m of CATALOG) {
-            for (const mo of m.modeles) {
-                for (const g of mo.generations) {
-                    for (const v of g.versions) {
+        outer: for (var mi = 0; mi < CATALOG.length; mi++) {
+            var m = CATALOG[mi];
+            for (var moi = 0; moi < m.modeles.length; moi++) {
+                var mo = m.modeles[moi];
+                for (var gi = 0; gi < mo.generations.length; gi++) {
+                    var g = mo.generations[gi];
+                    for (var vi = 0; vi < g.versions.length; vi++) {
+                        var v = g.versions[vi];
                         if (v.id == SELECTED_VERSION) {
-                            selMarque.value = m.id;
-                            selMarque.dispatchEvent(new Event('change'));
-                            setTimeout(function () {
-                                selModele.value = mo.id;
-                                selModele.dispatchEvent(new Event('change'));
-                                setTimeout(function () {
-                                    selGeneration.value = g.id;
-                                    selGeneration.dispatchEvent(new Event('change'));
-                                    setTimeout(function () {
-                                        selVersion.value = v.id;
-                                    }, 0);
-                                }, 0);
-                            }, 0);
+                            // 1) Select marque (triggers onMarqueChange → populates modeles)
+                            tsMarque.setValue(String(m.id));
+
+                            // 2) After modeles populated, select modele
+                            setTimeout((function(moId, gId, vId) {
+                                return function() {
+                                    tsModele.setValue(String(moId));
+                                    // 3) After generations populated, select generation
+                                    setTimeout(function() {
+                                        tsGeneration.setValue(String(gId));
+                                        // 4) After versions populated, select version
+                                        setTimeout(function() {
+                                            tsVersion.setValue(String(vId));
+                                        }, 50);
+                                    }, 50);
+                                };
+                            })(mo.id, g.id, v.id), 50);
+
                             break outer;
                         }
                     }

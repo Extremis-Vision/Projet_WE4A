@@ -2,6 +2,61 @@
 
 {% block pageTitle %}{{ annonce ? 'Modifier' : 'Publier' }} une annonce — AutoMarket{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" rel="stylesheet">
+    <style>
+        .ts-control { 
+            border-radius: 0.5rem !important; 
+            padding: 0.75rem 1rem !important; 
+            border-color: #e5e7eb !important; 
+            min-height: 50px !important;
+            display: flex;
+            align-items: center;
+            font-size: 0.875rem !important;
+            background-color: white !important;
+            color: #04122e !important;
+        }
+        .ts-control.focus { 
+            border-color: #9d4300 !important; 
+            box-shadow: 0 0 0 2px rgba(157, 67, 0, 0.2) !important; 
+        }
+        .ts-wrapper.disabled .ts-control {
+            opacity: 0.5 !important;
+            background-color: #f9fafb !important;
+            cursor: not-allowed !important;
+        }
+        .ts-dropdown {
+            border-radius: 0.5rem !important;
+            border-color: #e5e7eb !important;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+        }
+        .ts-dropdown .ts-dropdown-content .option {
+            padding: 0.5rem 1rem !important;
+        }
+
+        /* Validation error styles */
+        .field-error {
+            border-color: #ef4444 !important;
+            box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2) !important;
+            animation: shake 0.4s ease-in-out;
+        }
+        input.field-error, select.field-error, textarea.field-error {
+            background-color: #fef2f2 !important;
+        }
+        .ts-control.field-error {
+            background-color: #fef2f2 !important;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%      { transform: translateX(-4px); }
+            40%      { transform: translateX(4px); }
+            60%      { transform: translateX(-4px); }
+            80%      { transform: translateX(4px); }
+        }
+    </style>
+{% endblock %}
+
 {% block main %}
 <div class="max-w-3xl mx-auto px-6 py-8">
 
@@ -184,6 +239,7 @@
 {% endblock %}
 
 {% block javascripts %}
+<script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
 <script>
 const CATALOG = {{ catalog|json_encode|raw }};
 const SELECTED_VERSION = {{ annonce.id_version|json_encode|raw }};
@@ -203,6 +259,60 @@ document.getElementById('input-photos').addEventListener('change', function () {
         };
         reader.readAsDataURL(file);
     });
+});
+
+// Form validation — inline errors + scroll
+document.querySelector('form').addEventListener('submit', function(e) {
+    // Clear previous errors
+    document.querySelectorAll('.field-error-msg').forEach(function(el) { el.remove(); });
+    document.querySelectorAll('.field-error').forEach(function(el) { el.classList.remove('field-error'); });
+
+    var firstInvalid = null;
+    var requiredFields = this.querySelectorAll('[required]');
+
+    requiredFields.forEach(function(field) {
+        var value = field.value ? field.value.trim() : '';
+        if (!value) {
+            // Find the closest wrapper div
+            var wrapper = field.closest('div');
+            if (!wrapper) return;
+
+            // For TomSelect-wrapped fields, highlight the .ts-control
+            var tsControl = wrapper.querySelector('.ts-control');
+            if (tsControl) {
+                tsControl.classList.add('field-error');
+            } else {
+                field.classList.add('field-error');
+            }
+
+            // Get label text
+            var label = wrapper.querySelector('label');
+            var fieldName = label ? label.textContent.replace('*', '').trim() : (field.name || field.id);
+
+            // Add error message below
+            var msg = document.createElement('p');
+            msg.className = 'field-error-msg text-red-500 text-xs mt-1 font-medium';
+            msg.textContent = fieldName + ' — Ce champ est obligatoire';
+
+            // Insert after the field or the ts-wrapper
+            var tsWrapper = wrapper.querySelector('.ts-wrapper');
+            if (tsWrapper) {
+                tsWrapper.insertAdjacentElement('afterend', msg);
+            } else {
+                field.insertAdjacentElement('afterend', msg);
+            }
+
+            if (!firstInvalid) {
+                firstInvalid = tsControl || field;
+            }
+        }
+    });
+
+    if (firstInvalid) {
+        e.preventDefault();
+        firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        firstInvalid.focus && firstInvalid.focus();
+    }
 });
 </script>
 {% endblock %}

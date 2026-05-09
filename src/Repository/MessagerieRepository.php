@@ -98,4 +98,17 @@ class MessagerieRepository
         );
         $stmt->execute(['exp' => $expediteurId, 'dest' => $destinataireId, 'ann' => $idAnnonce]);
     }
+
+    /**
+     * Compte le nombre total de messages non lus pour un utilisateur.
+     * Utilisé pour le badge de notification dans le header.
+     */
+    public function countUnreadMessages(int $userId): int
+    {
+        $stmt = $this->db->getConnection()->prepare(
+            'SELECT COUNT(*) FROM message WHERE id_destinataire = :uid AND lu = 0'
+        );
+        $stmt->execute(['uid' => $userId]);
+        return (int) $stmt->fetchColumn();
+    }
 }

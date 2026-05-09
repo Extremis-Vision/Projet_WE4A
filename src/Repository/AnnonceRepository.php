@@ -31,7 +31,8 @@ class AnnonceRepository
             t.nom AS type_nom,
             ma.id_marque, ma.nom AS marque_nom, ma.pays AS marque_pays,
             u.id_utilisateur AS vendeur_id, u.prenom AS vendeur_prenom, u.nom AS vendeur_nom,
-            (SELECT url_photo FROM photo p WHERE p.id_annonce = a.id_annonce ORDER BY p.id_photo LIMIT 1) AS photo_principale
+            (SELECT url_photo FROM photo p WHERE p.id_annonce = a.id_annonce ORDER BY p.id_photo LIMIT 1) AS photo_principale,
+            (SELECT ROUND(AVG(au.note), 1) FROM avis_utilisateur au WHERE au.id_vendeur = u.id_utilisateur) AS vendeur_note
         FROM annonce a
         JOIN version v ON a.id_version = v.id_version
         LEFT JOIN reservoir r ON r.id_reservoir = v.id_reservoir
@@ -112,7 +113,7 @@ class AnnonceRepository
 
     public function __construct(private DatabaseService $db) {}
 
-    public function findAll(array $filters = []): array
+    public function findAll(array $filters = [], string $sort = 'recent'): array
     {
         $where  = ['a.statut = ?'];
         $params = ['active'];
@@ -150,8 +151,17 @@ class AnnonceRepository
             $params[] = (int) $filters['vendeur_id'];
         }
 
+        // Tri
+        $orderBy = match ($sort) {
+            'price_asc'    => 'a.prix ASC',
+            'price_desc'   => 'a.prix DESC',
+            'rating_desc'  => 'vendeur_note DESC, a.date_publication DESC',
+            'km_asc'       => 'a.kilometrage ASC',
+            default        => 'a.date_publication DESC, a.date_creation DESC',
+        };
+
         $sql  = self::BASE_SELECT . ' WHERE ' . implode(' AND ', $where);
-        $sql .= ' ORDER BY a.date_publication DESC, a.date_creation DESC';
+        $sql .= ' ORDER BY ' . $orderBy;
 
         $stmt = $this->db->getConnection()->prepare($sql);
         $stmt->execute($params);

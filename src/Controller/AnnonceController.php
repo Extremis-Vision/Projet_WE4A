@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\AnnonceRepository;
+use App\Repository\AvisRepository;
 use App\Repository\FavorisRepository;
 use App\Repository\MarqueRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,7 +33,13 @@ class AnnonceController extends AbstractController
             'annee_max' => $request->query->get('annee_max'),
         ];
 
-        $annonces    = $repo->findAll($filters);
+        $allowedSorts = ['recent', 'price_asc', 'price_desc', 'rating_desc', 'km_asc'];
+        $sort = $request->query->get('sort', 'recent');
+        if (!in_array($sort, $allowedSorts, true)) {
+            $sort = 'recent';
+        }
+
+        $annonces    = $repo->findAll($filters, $sort);
         $marques     = $marqueRepo->findAll();
         $modelesParMarque = $marqueRepo->findModelesByMarque();
         $favorisIds  = $this->getUser() ? $favorisRepo->getUserFavorisIds($this->getUser()->getId()) : [];
@@ -46,6 +53,7 @@ class AnnonceController extends AbstractController
             'marques'          => $marques,
             'modelesParMarque' => $modelesParMarque,
             'filters'          => $filters,
+            'sort'             => $sort,
             'favoris_ids'      => $favorisIds,
         ]);
     }
@@ -169,7 +177,7 @@ class AnnonceController extends AbstractController
     }
 
     #[Route('/annonces/{id}', name: 'annonce_detail', methods: ['GET'], requirements: ['id' => '\d+'])]
-    public function detail(int $id, AnnonceRepository $repo, FavorisRepository $favorisRepo): Response
+    public function detail(int $id, AnnonceRepository $repo, FavorisRepository $favorisRepo, AvisRepository $avisRepo): Response
     {
         $annonce = $repo->findById($id);
 
@@ -185,15 +193,24 @@ class AnnonceController extends AbstractController
             }
         }
 
-        $photos     = $repo->findPhotos($id);
-        $isFavori   = $this->getUser()
+        $modeleId        = (int) $annonce['id_modele'];
+        $photos          = $repo->findPhotos($id);
+        $isFavori        = $this->getUser()
             ? in_array($id, $favorisRepo->getUserFavorisIds($this->getUser()->getId()))
+            : false;
+        $avisModele      = $avisRepo->findByModele($modeleId);
+        $statsModele     = $avisRepo->getStatsModele($modeleId);
+        $dejaNote        = $this->getUser()
+            ? $avisRepo->hasAlreadyReviewedModele($this->getUser()->getId(), $modeleId)
             : false;
 
         return $this->render('annonce/detail.html.twig', [
-            'annonce'   => $annonce,
-            'photos'    => $photos,
-            'is_favori' => $isFavori,
+            'annonce'      => $annonce,
+            'photos'       => $photos,
+            'is_favori'    => $isFavori,
+            'avis_modele'  => $avisModele,
+            'stats_modele' => $statsModele,
+            'deja_note'    => $dejaNote,
         ]);
     }
 

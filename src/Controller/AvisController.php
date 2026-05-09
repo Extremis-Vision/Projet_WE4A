@@ -104,4 +104,61 @@ class AvisController extends AbstractController
 
         return $this->redirectToRoute('avis_vendeur', ['id' => $vendeurId]);
     }
+
+    #[Route('/annonces/{id_annonce}/avis-modele/ajouter', name: 'avis_modele_ajouter', methods: ['POST'], requirements: ['id_annonce' => '\d+'])]
+    #[IsGranted('ROLE_USER')]
+    public function ajouterModele(int $id_annonce, Request $request, AvisRepository $repo): Response
+    {
+        if (!$this->isCsrfTokenValid('avis_modele_' . $id_annonce, $request->request->get('_token'))) {
+            throw $this->createAccessDeniedException('Token CSRF invalide.');
+        }
+
+        $modeleId = (int) $request->request->get('id_modele');
+        $userId   = $this->getUser()->getId();
+
+        if ($repo->hasAlreadyReviewedModele($userId, $modeleId)) {
+            $this->addFlash('error', 'Vous avez déjà laissé un avis pour ce modèle.');
+            return $this->redirectToRoute('annonce_detail', ['id' => $id_annonce]);
+        }
+
+        $note    = (int) $request->request->get('note', 0);
+        $contenu = trim($request->request->get('contenu', ''));
+
+        if ($note < 1 || $note > 5) {
+            $this->addFlash('error', 'La note doit être comprise entre 1 et 5.');
+            return $this->redirectToRoute('annonce_detail', ['id' => $id_annonce]);
+        }
+
+        $repo->createModele($userId, $modeleId, $note, $contenu ?: null);
+        $this->addFlash('success', 'Votre avis sur ce modèle a été publié.');
+
+        return $this->redirectToRoute('annonce_detail', ['id' => $id_annonce]);
+    }
+
+    #[Route('/avis-modele/{id}/supprimer', name: 'avis_modele_supprimer', methods: ['POST'], requirements: ['id' => '\d+'])]
+    #[IsGranted('ROLE_USER')]
+    public function supprimerModele(int $id, Request $request, AvisRepository $repo): Response
+    {
+        if (!$this->isCsrfTokenValid('avis_modele_supprimer_' . $id, $request->request->get('_token'))) {
+            throw $this->createAccessDeniedException('Token CSRF invalide.');
+        }
+
+        $avis = $repo->findModeleAvisById($id);
+
+        if (!$avis) {
+            throw $this->createNotFoundException('Avis introuvable.');
+        }
+
+        $userId = $this->getUser()->getId();
+
+        if ((int) $avis['id_redacteur'] !== $userId && !$this->isGranted('ROLE_ADMIN')) {
+            throw $this->createAccessDeniedException('Vous ne pouvez supprimer que vos propres avis.');
+        }
+
+        $idAnnonce = (int) $request->request->get('id_annonce');
+        $repo->deleteModele($id);
+        $this->addFlash('success', 'Avis supprimé.');
+
+        return $this->redirectToRoute('annonce_detail', ['id' => $idAnnonce]);
+    }
 }

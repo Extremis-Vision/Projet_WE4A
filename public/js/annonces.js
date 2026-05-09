@@ -9,6 +9,13 @@
 
     function applyFilters() {
         const params = new URLSearchParams(new FormData(form));
+        
+        // Ensure sort is included even if the select is outside the form DOM element
+        const sortSelect = document.getElementById('sort-select');
+        if (sortSelect && sortSelect.value) {
+            params.set('sort', sortSelect.value);
+        }
+
         // Remove empty values
         for (const [key, value] of [...params.entries()]) {
             if (!value) params.delete(key);
@@ -31,6 +38,11 @@
     form.querySelectorAll('select').forEach(function (el) {
         el.addEventListener('change', applyFilters);
     });
+
+    const sortSelect = document.getElementById('sort-select');
+    if (sortSelect) {
+        sortSelect.addEventListener('change', applyFilters);
+    }
 
     form.querySelectorAll('input[type="number"]').forEach(function (el) {
         el.addEventListener('input', function () {

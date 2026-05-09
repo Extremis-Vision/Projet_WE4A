@@ -413,6 +413,135 @@
             </div>
             {% endif %}
 
+            {# ── Avis sur le modèle ── #}
+            <div class="bg-white rounded-xl p-6 shadow-sm">
+                <div class="flex items-center justify-between mb-5">
+                    <h2 class="font-bold text-primary text-base font-['ManRope'] flex items-center gap-2">
+                        <span class="w-1 h-4 bg-secondary rounded-full inline-block"></span>
+                        Avis sur le {{ annonce.marque_nom }} {{ annonce.modele_nom }}
+                    </h2>
+                    {% if stats_modele.nb_avis > 0 %}
+                    <div class="flex items-center gap-2">
+                        <div class="flex gap-0.5">
+                            {% for i in 1..5 %}
+                                <svg class="w-4 h-4 {{ i <= stats_modele.note_moyenne|round ? 'text-amber-400' : 'text-gray-200' }}"
+                                     fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                                </svg>
+                            {% endfor %}
+                        </div>
+                        <span class="text-sm font-bold text-primary">{{ stats_modele.note_moyenne }}</span>
+                        <span class="text-xs text-tertiary">({{ stats_modele.nb_avis }} avis)</span>
+                    </div>
+                    {% endif %}
+                </div>
+
+                {# Flashes avis modèle #}
+                {% for msg in app.flashes('success') %}
+                    <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg mb-4 text-sm">{{ msg }}</div>
+                {% endfor %}
+                {% for msg in app.flashes('error') %}
+                    <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4 text-sm">{{ msg }}</div>
+                {% endfor %}
+
+                {# Formulaire #}
+                {% if app.user %}
+                    {% if deja_note %}
+                        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-5 text-sm text-amber-800 text-center">
+                            Vous avez déjà laissé un avis pour ce modèle.
+                        </div>
+                    {% else %}
+                        <div class="border border-gray-100 rounded-xl p-5 mb-6 bg-gray-50">
+                            <p class="text-sm font-semibold text-primary mb-3">Votre avis</p>
+                            <form method="post" action="{{ path('avis_modele_ajouter', {id_annonce: annonce.id_annonce}) }}">
+                                <input type="hidden" name="_token" value="{{ csrf_token('avis_modele_' ~ annonce.id_annonce) }}">
+                                <input type="hidden" name="id_modele" value="{{ annonce.id_modele }}">
+
+                                <div class="mb-3">
+                                    <div class="flex gap-1" id="star-selector-modele">
+                                        {% for i in 1..5 %}
+                                            <button type="button" data-value="{{ i }}"
+                                                    class="star-btn-modele w-8 h-8 text-gray-300 hover:text-amber-400 transition-colors">
+                                                <svg fill="currentColor" viewBox="0 0 24 24" class="w-full h-full">
+                                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                                                </svg>
+                                            </button>
+                                        {% endfor %}
+                                    </div>
+                                    <input type="hidden" name="note" id="note-input-modele" value="0">
+                                </div>
+
+                                <textarea name="contenu" rows="3" maxlength="2000"
+                                          placeholder="Partagez votre expérience avec ce modèle..."
+                                          class="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm text-primary resize-none focus:outline-none focus:ring-2 focus:ring-secondary/30 focus:border-secondary mb-3"></textarea>
+
+                                <button type="submit"
+                                        class="px-5 py-2 bg-secondary text-white font-bold rounded-lg hover:bg-secondary/90 active:scale-95 transition-all text-sm">
+                                    Publier
+                                </button>
+                            </form>
+                        </div>
+                    {% endif %}
+                {% else %}
+                    <div class="border border-gray-100 rounded-xl p-4 mb-5 flex items-center justify-between gap-4 bg-gray-50">
+                        <p class="text-sm text-tertiary">Connectez-vous pour laisser un avis sur ce modèle.</p>
+                        <a href="{{ path('connexion') }}"
+                           class="shrink-0 px-4 py-2 bg-primary text-white font-bold rounded-lg text-sm hover:bg-primary/90 transition-all">
+                            Se connecter
+                        </a>
+                    </div>
+                {% endif %}
+
+                {# Liste des avis #}
+                {% if avis_modele is empty %}
+                    <p class="text-sm text-tertiary text-center py-6">Aucun avis pour ce modèle. Soyez le premier !</p>
+                {% else %}
+                    <div class="space-y-4">
+                        {% for a in avis_modele %}
+                        <div class="border-t border-gray-50 pt-4 first:border-t-0 first:pt-0">
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                        <span class="text-xs font-bold text-primary">{{ a.redacteur_prenom|first|upper }}</span>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-primary text-sm">{{ a.redacteur_prenom }} {{ a.redacteur_nom }}</p>
+                                        <p class="text-[11px] text-tertiary">{{ a.date_avis|date('d/m/Y') }}</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <div class="flex gap-0.5">
+                                        {% for i in 1..5 %}
+                                            <svg class="w-3.5 h-3.5 {{ i <= a.note ? 'text-amber-400' : 'text-gray-200' }}"
+                                                 fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                                            </svg>
+                                        {% endfor %}
+                                    </div>
+                                    {% if app.user and (app.user.id == a.redacteur_id or is_granted('ROLE_ADMIN')) %}
+                                        <form method="post" action="{{ path('avis_modele_supprimer', {id: a.id_avis_modele}) }}"
+                                              onsubmit="return confirm('Supprimer cet avis ?')">
+                                            <input type="hidden" name="_token" value="{{ csrf_token('avis_modele_supprimer_' ~ a.id_avis_modele) }}">
+                                            <input type="hidden" name="id_annonce" value="{{ annonce.id_annonce }}">
+                                            <button type="submit" title="Supprimer"
+                                                    class="text-gray-300 hover:text-red-500 transition-colors">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                                                </svg>
+                                            </button>
+                                        </form>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% if a.contenu %}
+                                <p class="mt-2 text-sm text-tertiary leading-relaxed pl-11">{{ a.contenu }}</p>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
         </div>
 
         {# ── Colonne droite : prix + vendeur ── #}
@@ -535,4 +664,29 @@
 })();
 </script>
 {% endif %}
+<script>
+(function () {
+    var stars   = document.querySelectorAll('.star-btn-modele');
+    var input   = document.getElementById('note-input-modele');
+    if (!stars.length || !input) return;
+    var current = 0;
+
+    function paint(value) {
+        stars.forEach(function (btn) {
+            btn.classList.toggle('text-amber-400', parseInt(btn.dataset.value) <= value);
+            btn.classList.toggle('text-gray-300',  parseInt(btn.dataset.value) >  value);
+        });
+    }
+
+    stars.forEach(function (btn) {
+        btn.addEventListener('mouseenter', function () { paint(parseInt(btn.dataset.value)); });
+        btn.addEventListener('mouseleave', function () { paint(current); });
+        btn.addEventListener('click', function () {
+            current = parseInt(btn.dataset.value);
+            input.value = current;
+            paint(current);
+        });
+    });
+})();
+</script>
 {% endblock %}

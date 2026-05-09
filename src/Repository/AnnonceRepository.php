@@ -237,9 +237,10 @@ class AnnonceRepository
         $stmt = $pdo->prepare('
             INSERT INTO annonce
                 (id_utilisateur, id_version, prix, annee_circulation, kilometrage,
-                 etat, couleur, premiere_main, nombre_proprietaire, controle_technique,
+                 etat, couleur, sellerie, finition, provenance,
+                 premiere_main, nombre_proprietaire, controle_technique,
                  localisation, description, statut, date_publication)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())
         ');
         $stmt->execute([
             $data['id_utilisateur'],
@@ -249,6 +250,9 @@ class AnnonceRepository
             $data['kilometrage'],
             $data['etat'] ?: null,
             $data['couleur'] ?: null,
+            $data['sellerie'] ?: null,
+            $data['finition'] ?: null,
+            $data['provenance'] ?: null,
             $data['premiere_main'] ? 1 : 0,
             $data['nombre_proprietaire'] ?: null,
             $data['controle_technique'] ?: null,
@@ -264,7 +268,8 @@ class AnnonceRepository
         $stmt = $this->db->getConnection()->prepare('
             UPDATE annonce SET
                 id_version = ?, prix = ?, annee_circulation = ?, kilometrage = ?,
-                etat = ?, couleur = ?, premiere_main = ?, nombre_proprietaire = ?,
+                etat = ?, couleur = ?, sellerie = ?, finition = ?, provenance = ?,
+                premiere_main = ?, nombre_proprietaire = ?,
                 controle_technique = ?, localisation = ?, description = ?
             WHERE id_annonce = ?
         ');
@@ -275,6 +280,9 @@ class AnnonceRepository
             $data['kilometrage'],
             $data['etat'] ?: null,
             $data['couleur'] ?: null,
+            $data['sellerie'] ?: null,
+            $data['finition'] ?: null,
+            $data['provenance'] ?: null,
             $data['premiere_main'] ? 1 : 0,
             $data['nombre_proprietaire'] ?: null,
             $data['controle_technique'] ?: null,

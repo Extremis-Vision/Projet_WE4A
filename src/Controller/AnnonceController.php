@@ -6,6 +6,7 @@ use App\Repository\AnnonceRepository;
 use App\Repository\AvisRepository;
 use App\Repository\FavorisRepository;
 use App\Repository\MarqueRepository;
+use App\Repository\RechercheRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -74,6 +75,9 @@ class AnnonceController extends AbstractController
                 'kilometrage'       => (int) $request->request->get('kilometrage'),
                 'etat'              => $request->request->get('etat'),
                 'couleur'           => $request->request->get('couleur'),
+                'sellerie'          => $request->request->get('sellerie'),
+                'finition'          => $request->request->get('finition'),
+                'provenance'        => $request->request->get('provenance'),
                 'premiere_main'     => $request->request->has('premiere_main'),
                 'nombre_proprietaire' => $request->request->get('nombre_proprietaire') ?: null,
                 'controle_technique'  => $request->request->get('controle_technique') ?: null,
@@ -157,6 +161,9 @@ class AnnonceController extends AbstractController
             'kilometrage'         => '',
             'etat'                => '',
             'couleur'             => '',
+            'sellerie'            => '',
+            'finition'            => '',
+            'provenance'          => '',
             'premiere_main'       => false,
             'nombre_proprietaire' => '',
             'controle_technique'  => '',
@@ -177,7 +184,7 @@ class AnnonceController extends AbstractController
     }
 
     #[Route('/annonces/{id}', name: 'annonce_detail', methods: ['GET'], requirements: ['id' => '\d+'])]
-    public function detail(int $id, AnnonceRepository $repo, FavorisRepository $favorisRepo, AvisRepository $avisRepo): Response
+    public function detail(int $id, AnnonceRepository $repo, FavorisRepository $favorisRepo, AvisRepository $avisRepo, RechercheRepository $rechercheRepo): Response
     {
         $annonce = $repo->findById($id);
 
@@ -185,12 +192,11 @@ class AnnonceController extends AbstractController
             throw $this->createNotFoundException('Annonce introuvable.');
         }
 
-        if ($annonce['statut'] === 'pause') {
-            $user    = $this->getUser();
-            $isOwner = $user && (int) $annonce['vendeur_id'] === (int) $user->getId();
-            if (!$isOwner && !$this->isGranted('ROLE_ADMIN')) {
-                throw $this->createNotFoundException('Annonce introuvable.');
-            }
+        $user    = $this->getUser();
+        $isOwner = $user && (int) $annonce['vendeur_id'] === (int) $user->getId();
+
+        if (!$isOwner) {
+            $rechercheRepo->enregistrerVisite($id, $user ? $user->getId() : null);
         }
 
         $modeleId        = (int) $annonce['id_modele'];
@@ -203,6 +209,7 @@ class AnnonceController extends AbstractController
         $dejaNote        = $this->getUser()
             ? $avisRepo->hasAlreadyReviewedModele($this->getUser()->getId(), $modeleId)
             : false;
+        $nbVues          = $rechercheRepo->countVisites($id);
 
         return $this->render('annonce/detail.html.twig', [
             'annonce'      => $annonce,
@@ -211,6 +218,7 @@ class AnnonceController extends AbstractController
             'avis_modele'  => $avisModele,
             'stats_modele' => $statsModele,
             'deja_note'    => $dejaNote,
+            'nb_vues'      => $nbVues,
         ]);
     }
 
@@ -239,6 +247,9 @@ class AnnonceController extends AbstractController
                 'kilometrage'       => (int) $request->request->get('kilometrage'),
                 'etat'              => $request->request->get('etat'),
                 'couleur'           => $request->request->get('couleur'),
+                'sellerie'          => $request->request->get('sellerie'),
+                'finition'          => $request->request->get('finition'),
+                'provenance'        => $request->request->get('provenance'),
                 'premiere_main'     => $request->request->has('premiere_main'),
                 'nombre_proprietaire' => $request->request->get('nombre_proprietaire') ?: null,
                 'controle_technique'  => $request->request->get('controle_technique') ?: null,
@@ -271,6 +282,36 @@ class AnnonceController extends AbstractController
             'errors'  => $errors,
             'photos'  => $photos,
         ]);
+    }
+
+    #[Route('/annonces/{id}/pause', name: 'annonce_pause', methods: ['POST'], requirements: ['id' => '\d+'])]
+    #[IsGranted('ROLE_USER')]
+    public function mettreEnPause(int $id, AnnonceRepository $repo): Response
+    {
+        $owner = $repo->getOwner($id);
+        if ((int) $owner !== (int) $this->getUser()->getId()) {
+            throw $this->createAccessDeniedException();
+        }
+        $repo->updateStatut($id, 'pause', null);
+        $this->addFlash('success', 'Annonce mise en pause.');
+        return $this->redirectToRoute('mes_annonces');
+    }
+
+    #[Route('/annonces/{id}/reprendre', name: 'annonce_reprendre', methods: ['POST'], requirements: ['id' => '\d+'])]
+    #[IsGranted('ROLE_USER')]
+    public function reprendre(int $id, AnnonceRepository $repo): Response
+    {
+        $annonce = $repo->findById($id);
+        if (!$annonce || (int) $annonce['vendeur_id'] !== (int) $this->getUser()->getId()) {
+            throw $this->createAccessDeniedException();
+        }
+        if (!empty($annonce['commentaire_admin'])) {
+            $this->addFlash('error', 'Cette annonce a été suspendue par l\'administration, vous ne pouvez pas la réactiver.');
+            return $this->redirectToRoute('mes_annonces');
+        }
+        $repo->updateStatut($id, 'active', null);
+        $this->addFlash('success', 'Annonce remise en ligne.');
+        return $this->redirectToRoute('mes_annonces');
     }
 
     #[Route('/annonces/{id}/vendu', name: 'annonce_vendu', methods: ['POST'], requirements: ['id' => '\d+'])]

@@ -68,17 +68,21 @@ return [
                         .'|(\\d+)/modifier(*:482)'
                         .'|(\\d+)/vendu(*:501)'
                         .'|(\\d+)/supprimer(*:524)'
+                        .'|(\\d+)/avis\\-modele/ajouter(*:558)'
                     .')'
-                    .'|vis/(\\d+)/supprimer(*:552)'
+                    .'|vis(?'
+                        .'|/(\\d+)/supprimer(*:589)'
+                        .'|\\-modele/(\\d+)/supprimer(*:621)'
+                    .')'
                 .')'
                 .'|/vendeur/(?'
-                    .'|(\\d+)/avis(*:583)'
-                    .'|(\\d+)/avis/ajouter(*:609)'
+                    .'|(\\d+)/avis(*:653)'
+                    .'|(\\d+)/avis/ajouter(*:679)'
                 .')'
-                .'|/favoris/(\\d+)/toggle(*:639)'
+                .'|/favoris/(\\d+)/toggle(*:709)'
                 .'|/messagerie/(?'
-                    .'|(\\d+)/(\\d+)(*:673)'
-                    .'|(\\d+)/(\\d+)/envoyer(*:700)'
+                    .'|(\\d+)/(\\d+)(*:743)'
+                    .'|(\\d+)/(\\d+)/envoyer(*:770)'
                 .')'
             .')/?$}sDu',
     ],
@@ -102,12 +106,14 @@ return [
         482 => [[['_route' => 'annonce_modifier', '_controller' => 'App\\Controller\\AnnonceController::modifier'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
         501 => [[['_route' => 'annonce_vendu', '_controller' => 'App\\Controller\\AnnonceController::marquerVendu'], ['id'], ['POST' => 0], null, false, false, null]],
         524 => [[['_route' => 'annonce_supprimer', '_controller' => 'App\\Controller\\AnnonceController::supprimer'], ['id'], ['POST' => 0], null, false, false, null]],
-        552 => [[['_route' => 'avis_supprimer', '_controller' => 'App\\Controller\\AvisController::supprimer'], ['id'], ['POST' => 0], null, false, false, null]],
-        583 => [[['_route' => 'avis_vendeur', '_controller' => 'App\\Controller\\AvisController::index'], ['id'], ['GET' => 0], null, false, false, null]],
-        609 => [[['_route' => 'avis_ajouter', '_controller' => 'App\\Controller\\AvisController::ajouter'], ['id'], ['POST' => 0], null, false, false, null]],
-        639 => [[['_route' => 'favori_toggle', '_controller' => 'App\\Controller\\FavorisController::toggle'], ['id'], ['POST' => 0], null, false, false, null]],
-        673 => [[['_route' => 'messagerie_conversation', '_controller' => 'App\\Controller\\MessagerieController::conversation'], ['id_vendeur', 'id_annonce'], ['GET' => 0], null, false, true, null]],
-        700 => [
+        558 => [[['_route' => 'avis_modele_ajouter', '_controller' => 'App\\Controller\\AvisController::ajouterModele'], ['id_annonce'], ['POST' => 0], null, false, false, null]],
+        589 => [[['_route' => 'avis_supprimer', '_controller' => 'App\\Controller\\AvisController::supprimer'], ['id'], ['POST' => 0], null, false, false, null]],
+        621 => [[['_route' => 'avis_modele_supprimer', '_controller' => 'App\\Controller\\AvisController::supprimerModele'], ['id'], ['POST' => 0], null, false, false, null]],
+        653 => [[['_route' => 'avis_vendeur', '_controller' => 'App\\Controller\\AvisController::index'], ['id'], ['GET' => 0], null, false, false, null]],
+        679 => [[['_route' => 'avis_ajouter', '_controller' => 'App\\Controller\\AvisController::ajouter'], ['id'], ['POST' => 0], null, false, false, null]],
+        709 => [[['_route' => 'favori_toggle', '_controller' => 'App\\Controller\\FavorisController::toggle'], ['id'], ['POST' => 0], null, false, false, null]],
+        743 => [[['_route' => 'messagerie_conversation', '_controller' => 'App\\Controller\\MessagerieController::conversation'], ['id_vendeur', 'id_annonce'], ['GET' => 0], null, false, true, null]],
+        770 => [
             [['_route' => 'messagerie_envoyer', '_controller' => 'App\\Controller\\MessagerieController::envoyer'], ['id_vendeur', 'id_annonce'], ['POST' => 0], null, false, false, null],
             [null, null, null, null, false, false, 0],
         ],

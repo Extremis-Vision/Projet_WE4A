@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\AnnonceRepository;
+use App\Repository\AvisRepository;
 use App\Repository\FavorisRepository;
 use App\Repository\MarqueRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -169,7 +170,7 @@ class AnnonceController extends AbstractController
     }
 
     #[Route('/annonces/{id}', name: 'annonce_detail', methods: ['GET'], requirements: ['id' => '\d+'])]
-    public function detail(int $id, AnnonceRepository $repo, FavorisRepository $favorisRepo): Response
+    public function detail(int $id, AnnonceRepository $repo, FavorisRepository $favorisRepo, AvisRepository $avisRepo): Response
     {
         $annonce = $repo->findById($id);
 
@@ -185,15 +186,24 @@ class AnnonceController extends AbstractController
             }
         }
 
-        $photos     = $repo->findPhotos($id);
-        $isFavori   = $this->getUser()
+        $modeleId        = (int) $annonce['id_modele'];
+        $photos          = $repo->findPhotos($id);
+        $isFavori        = $this->getUser()
             ? in_array($id, $favorisRepo->getUserFavorisIds($this->getUser()->getId()))
+            : false;
+        $avisModele      = $avisRepo->findByModele($modeleId);
+        $statsModele     = $avisRepo->getStatsModele($modeleId);
+        $dejaNote        = $this->getUser()
+            ? $avisRepo->hasAlreadyReviewedModele($this->getUser()->getId(), $modeleId)
             : false;
 
         return $this->render('annonce/detail.html.twig', [
-            'annonce'   => $annonce,
-            'photos'    => $photos,
-            'is_favori' => $isFavori,
+            'annonce'      => $annonce,
+            'photos'       => $photos,
+            'is_favori'    => $isFavori,
+            'avis_modele'  => $avisModele,
+            'stats_modele' => $statsModele,
+            'deja_note'    => $dejaNote,
         ]);
     }
 

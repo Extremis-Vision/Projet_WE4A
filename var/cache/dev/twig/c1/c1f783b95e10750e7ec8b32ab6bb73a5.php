@@ -1123,32 +1123,38 @@ class __TwigTemplate_0607768f2ea417172c5ce9437ed1e55d extends Template
                 ";
         }
         // line 471
-        yield "
+        yield "                <a href=\"";
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("avis_vendeur", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 471, $this->source); })()), "vendeur_id", [], "any", false, false, false, 471)]), "html", null, true);
+        yield "\"
+                   class=\"inline-block mt-2 text-xs text-secondary hover:underline\">
+                    Voir les avis du vendeur
+                </a>
+
                 ";
-        // line 472
-        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 472, $this->source); })()), "user", [], "any", false, false, false, 472)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-            // line 473
+        // line 476
+        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 476, $this->source); })()), "user", [], "any", false, false, false, 476)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 477
             yield "                    ";
-            if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 473, $this->source); })()), "user", [], "any", false, false, false, 473), "id", [], "any", false, false, false, 473) != CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 473, $this->source); })()), "vendeur_id", [], "any", false, false, false, 473))) {
-                // line 474
+            if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 477, $this->source); })()), "user", [], "any", false, false, false, 477), "id", [], "any", false, false, false, 477) != CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 477, $this->source); })()), "vendeur_id", [], "any", false, false, false, 477))) {
+                // line 478
                 yield "                    <a href=\"";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("messagerie_conversation", ["id_vendeur" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 474, $this->source); })()), "vendeur_id", [], "any", false, false, false, 474), "id_annonce" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 474, $this->source); })()), "id_annonce", [], "any", false, false, false, 474)]), "html", null, true);
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("messagerie_conversation", ["id_vendeur" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 478, $this->source); })()), "vendeur_id", [], "any", false, false, false, 478), "id_annonce" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 478, $this->source); })()), "id_annonce", [], "any", false, false, false, 478)]), "html", null, true);
                 yield "\"
                        class=\"mt-4 block text-center py-3 bg-secondary text-white font-bold rounded-lg hover:bg-opacity-90 active:scale-95 transition-all text-sm\">
                         Contacter le vendeur
                     </a>
                     ";
             } else {
-                // line 479
+                // line 483
                 yield "                    <a href=\"";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("annonce_modifier", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 479, $this->source); })()), "id_annonce", [], "any", false, false, false, 479)]), "html", null, true);
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("annonce_modifier", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 483, $this->source); })()), "id_annonce", [], "any", false, false, false, 483)]), "html", null, true);
                 yield "\"
                        class=\"mt-4 block text-center py-2 border border-primary text-primary font-semibold rounded-lg hover:bg-primary hover:text-white transition-all text-sm\">
                         Modifier l'annonce
                     </a>
                     <form action=\"";
-                // line 483
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("annonce_supprimer", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 483, $this->source); })()), "id_annonce", [], "any", false, false, false, 483)]), "html", null, true);
+                // line 487
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("annonce_supprimer", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 487, $this->source); })()), "id_annonce", [], "any", false, false, false, 487)]), "html", null, true);
                 yield "\" method=\"post\" class=\"mt-2\">
                         <button type=\"submit\" onclick=\"return confirm('Supprimer cette annonce ?')\"
                                 class=\"w-full py-2 border border-red-300 text-red-500 font-semibold rounded-lg hover:bg-red-50 transition-all text-sm\">
@@ -1157,10 +1163,10 @@ class __TwigTemplate_0607768f2ea417172c5ce9437ed1e55d extends Template
                     </form>
                     ";
             }
-            // line 490
+            // line 494
             yield "                ";
         } else {
-            // line 491
+            // line 495
             yield "                <a href=\"";
             yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("connexion");
             yield "\"
@@ -1169,18 +1175,18 @@ class __TwigTemplate_0607768f2ea417172c5ce9437ed1e55d extends Template
                 </a>
                 ";
         }
-        // line 496
+        // line 500
         yield "
                 ";
-        // line 497
-        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 497, $this->source); })()), "date_publication", [], "any", false, false, false, 497)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-            // line 498
+        // line 501
+        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 501, $this->source); })()), "date_publication", [], "any", false, false, false, 501)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 502
             yield "                <p class=\"text-xs text-tertiary mt-4 text-center\">Publiée le ";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 498, $this->source); })()), "date_publication", [], "any", false, false, false, 498), "d/m/Y"), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 502, $this->source); })()), "date_publication", [], "any", false, false, false, 502), "d/m/Y"), "html", null, true);
             yield "</p>
                 ";
         }
-        // line 500
+        // line 504
         yield "            </div>
         </div>
 
@@ -1188,14 +1194,14 @@ class __TwigTemplate_0607768f2ea417172c5ce9437ed1e55d extends Template
 </div>
 
 ";
-        // line 506
-        if ((Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["photos"]) || array_key_exists("photos", $context) ? $context["photos"] : (function () { throw new RuntimeError('Variable "photos" does not exist.', 506, $this->source); })())) > 1)) {
-            // line 507
+        // line 510
+        if ((Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["photos"]) || array_key_exists("photos", $context) ? $context["photos"] : (function () { throw new RuntimeError('Variable "photos" does not exist.', 510, $this->source); })())) > 1)) {
+            // line 511
             yield "<script>
 (function () {
     var photos = ";
-            // line 509
-            yield json_encode(Twig\Extension\CoreExtension::map($this->env, (isset($context["photos"]) || array_key_exists("photos", $context) ? $context["photos"] : (function () { throw new RuntimeError('Variable "photos" does not exist.', 509, $this->source); })()), function ($__p__) use ($context, $macros) { $context["p"] = $__p__; return CoreExtension::getAttribute($this->env, $this->source, (isset($context["p"]) || array_key_exists("p", $context) ? $context["p"] : (function () { throw new RuntimeError('Variable "p" does not exist.', 509, $this->source); })()), "url_photo", [], "any", false, false, false, 509); }));
+            // line 513
+            yield json_encode(Twig\Extension\CoreExtension::map($this->env, (isset($context["photos"]) || array_key_exists("photos", $context) ? $context["photos"] : (function () { throw new RuntimeError('Variable "photos" does not exist.', 513, $this->source); })()), function ($__p__) use ($context, $macros) { $context["p"] = $__p__; return CoreExtension::getAttribute($this->env, $this->source, (isset($context["p"]) || array_key_exists("p", $context) ? $context["p"] : (function () { throw new RuntimeError('Variable "p" does not exist.', 513, $this->source); })()), "url_photo", [], "any", false, false, false, 513); }));
             yield ";
     var current = 0;
     var mainImg = document.getElementById('carousel-main');
@@ -1253,7 +1259,7 @@ class __TwigTemplate_0607768f2ea417172c5ce9437ed1e55d extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  1198 => 509,  1194 => 507,  1192 => 506,  1184 => 500,  1178 => 498,  1176 => 497,  1173 => 496,  1164 => 491,  1161 => 490,  1151 => 483,  1143 => 479,  1134 => 474,  1131 => 473,  1129 => 472,  1126 => 471,  1120 => 469,  1118 => 468,  1112 => 467,  1105 => 462,  1099 => 460,  1096 => 459,  1090 => 457,  1087 => 456,  1081 => 454,  1078 => 453,  1072 => 451,  1070 => 450,  1066 => 449,  1061 => 448,  1055 => 446,  1053 => 445,  1048 => 443,  1042 => 442,  1039 => 441,  1034 => 438,  1028 => 434,  1022 => 430,  1020 => 429,  1015 => 427,  1011 => 426,  1006 => 425,  1004 => 424,  1000 => 423,  994 => 419,  989 => 415,  983 => 412,  976 => 407,  973 => 406,  968 => 402,  962 => 399,  958 => 397,  956 => 396,  951 => 394,  947 => 392,  936 => 389,  932 => 387,  929 => 386,  923 => 383,  919 => 381,  917 => 380,  912 => 378,  900 => 374,  890 => 366,  887 => 364,  882 => 361,  876 => 358,  872 => 356,  869 => 355,  863 => 352,  859 => 350,  856 => 349,  850 => 346,  846 => 344,  843 => 343,  837 => 340,  833 => 338,  830 => 337,  824 => 334,  820 => 332,  818 => 331,  810 => 325,  807 => 324,  804 => 322,  799 => 319,  793 => 316,  789 => 314,  786 => 313,  780 => 310,  776 => 308,  773 => 307,  767 => 304,  763 => 302,  760 => 301,  754 => 298,  750 => 296,  748 => 295,  740 => 289,  737 => 288,  734 => 286,  729 => 283,  722 => 279,  717 => 278,  712 => 277,  708 => 276,  704 => 275,  700 => 274,  695 => 271,  692 => 270,  686 => 267,  682 => 265,  679 => 264,  673 => 261,  669 => 259,  666 => 258,  660 => 255,  656 => 253,  653 => 252,  647 => 249,  643 => 247,  640 => 246,  634 => 243,  630 => 241,  628 => 240,  620 => 234,  617 => 233,  614 => 231,  609 => 228,  603 => 225,  599 => 223,  596 => 222,  590 => 219,  586 => 217,  583 => 216,  577 => 213,  573 => 211,  570 => 210,  564 => 207,  560 => 205,  557 => 204,  551 => 201,  547 => 199,  544 => 198,  538 => 195,  534 => 193,  531 => 192,  525 => 189,  521 => 187,  518 => 186,  507 => 183,  503 => 181,  500 => 180,  494 => 177,  490 => 175,  487 => 174,  481 => 171,  477 => 169,  474 => 168,  462 => 165,  458 => 163,  455 => 162,  449 => 159,  445 => 157,  442 => 156,  436 => 153,  432 => 151,  429 => 150,  417 => 147,  413 => 145,  411 => 144,  403 => 138,  400 => 137,  395 => 133,  389 => 130,  385 => 128,  382 => 127,  376 => 124,  372 => 122,  369 => 121,  363 => 118,  359 => 116,  356 => 115,  350 => 112,  346 => 110,  344 => 109,  339 => 107,  335 => 105,  329 => 102,  325 => 100,  322 => 99,  316 => 96,  312 => 94,  309 => 93,  303 => 90,  299 => 88,  296 => 87,  290 => 84,  286 => 82,  284 => 81,  279 => 79,  272 => 75,  262 => 67,  259 => 65,  253 => 61,  250 => 60,  246 => 58,  229 => 55,  218 => 54,  201 => 53,  198 => 52,  196 => 51,  193 => 50,  188 => 48,  180 => 42,  178 => 41,  170 => 38,  166 => 37,  162 => 35,  159 => 34,  155 => 31,  145 => 25,  139 => 23,  132 => 20,  130 => 19,  125 => 17,  122 => 16,  119 => 14,  110 => 12,  105 => 11,  96 => 9,  92 => 8,  88 => 6,  78 => 5,  58 => 3,  41 => 1,);
+        return array (  1204 => 513,  1200 => 511,  1198 => 510,  1190 => 504,  1184 => 502,  1182 => 501,  1179 => 500,  1170 => 495,  1167 => 494,  1157 => 487,  1149 => 483,  1140 => 478,  1137 => 477,  1135 => 476,  1126 => 471,  1120 => 469,  1118 => 468,  1112 => 467,  1105 => 462,  1099 => 460,  1096 => 459,  1090 => 457,  1087 => 456,  1081 => 454,  1078 => 453,  1072 => 451,  1070 => 450,  1066 => 449,  1061 => 448,  1055 => 446,  1053 => 445,  1048 => 443,  1042 => 442,  1039 => 441,  1034 => 438,  1028 => 434,  1022 => 430,  1020 => 429,  1015 => 427,  1011 => 426,  1006 => 425,  1004 => 424,  1000 => 423,  994 => 419,  989 => 415,  983 => 412,  976 => 407,  973 => 406,  968 => 402,  962 => 399,  958 => 397,  956 => 396,  951 => 394,  947 => 392,  936 => 389,  932 => 387,  929 => 386,  923 => 383,  919 => 381,  917 => 380,  912 => 378,  900 => 374,  890 => 366,  887 => 364,  882 => 361,  876 => 358,  872 => 356,  869 => 355,  863 => 352,  859 => 350,  856 => 349,  850 => 346,  846 => 344,  843 => 343,  837 => 340,  833 => 338,  830 => 337,  824 => 334,  820 => 332,  818 => 331,  810 => 325,  807 => 324,  804 => 322,  799 => 319,  793 => 316,  789 => 314,  786 => 313,  780 => 310,  776 => 308,  773 => 307,  767 => 304,  763 => 302,  760 => 301,  754 => 298,  750 => 296,  748 => 295,  740 => 289,  737 => 288,  734 => 286,  729 => 283,  722 => 279,  717 => 278,  712 => 277,  708 => 276,  704 => 275,  700 => 274,  695 => 271,  692 => 270,  686 => 267,  682 => 265,  679 => 264,  673 => 261,  669 => 259,  666 => 258,  660 => 255,  656 => 253,  653 => 252,  647 => 249,  643 => 247,  640 => 246,  634 => 243,  630 => 241,  628 => 240,  620 => 234,  617 => 233,  614 => 231,  609 => 228,  603 => 225,  599 => 223,  596 => 222,  590 => 219,  586 => 217,  583 => 216,  577 => 213,  573 => 211,  570 => 210,  564 => 207,  560 => 205,  557 => 204,  551 => 201,  547 => 199,  544 => 198,  538 => 195,  534 => 193,  531 => 192,  525 => 189,  521 => 187,  518 => 186,  507 => 183,  503 => 181,  500 => 180,  494 => 177,  490 => 175,  487 => 174,  481 => 171,  477 => 169,  474 => 168,  462 => 165,  458 => 163,  455 => 162,  449 => 159,  445 => 157,  442 => 156,  436 => 153,  432 => 151,  429 => 150,  417 => 147,  413 => 145,  411 => 144,  403 => 138,  400 => 137,  395 => 133,  389 => 130,  385 => 128,  382 => 127,  376 => 124,  372 => 122,  369 => 121,  363 => 118,  359 => 116,  356 => 115,  350 => 112,  346 => 110,  344 => 109,  339 => 107,  335 => 105,  329 => 102,  325 => 100,  322 => 99,  316 => 96,  312 => 94,  309 => 93,  303 => 90,  299 => 88,  296 => 87,  290 => 84,  286 => 82,  284 => 81,  279 => 79,  272 => 75,  262 => 67,  259 => 65,  253 => 61,  250 => 60,  246 => 58,  229 => 55,  218 => 54,  201 => 53,  198 => 52,  196 => 51,  193 => 50,  188 => 48,  180 => 42,  178 => 41,  170 => 38,  166 => 37,  162 => 35,  159 => 34,  155 => 31,  145 => 25,  139 => 23,  132 => 20,  130 => 19,  125 => 17,  122 => 16,  119 => 14,  110 => 12,  105 => 11,  96 => 9,  92 => 8,  88 => 6,  78 => 5,  58 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -1728,6 +1734,10 @@ class __TwigTemplate_0607768f2ea417172c5ce9437ed1e55d extends Template
                 {% if annonce.vendeur_phone %}
                 <p class=\"text-secondary text-sm mt-1 font-medium\">📞 {{ annonce.vendeur_phone }}</p>
                 {% endif %}
+                <a href=\"{{ path('avis_vendeur', {id: annonce.vendeur_id}) }}\"
+                   class=\"inline-block mt-2 text-xs text-secondary hover:underline\">
+                    Voir les avis du vendeur
+                </a>
 
                 {% if app.user %}
                     {% if app.user.id != annonce.vendeur_id %}

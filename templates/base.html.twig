@@ -74,7 +74,7 @@
                             Favoris
                         </a>
                     </li>
-                    <li class="text-tertiary text-sm">Bonjour, <span class="font-semibold text-primary">{{ app.user.prenom }}</span></li>
+                    <li class="text-tertiary text-sm">Bonjour, <a href="{{ path('avis_vendeur', {id: app.user.id}) }}" class="font-semibold text-primary hover:text-secondary transition-colors">{{ app.user.prenom }}</a></li>
                     <li>
                         <a href="{{ path('deconnexion') }}"
                            class="px-4 py-2 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-all text-sm font-semibold">

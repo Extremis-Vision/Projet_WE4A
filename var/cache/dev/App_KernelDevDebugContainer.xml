@@ -160,6 +160,14 @@
         <argument type="service" id=".service_locator.TJNRSaV.App\Controller\AuthController"/>
       </call>
     </service>
+    <service id="App\Controller\AvisController" class="App\Controller\AvisController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="routing.controller"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.TJNRSaV.App\Controller\AvisController"/>
+      </call>
+    </service>
     <service id="App\Controller\FavorisController" class="App\Controller\FavorisController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="routing.controller"/>
@@ -199,6 +207,9 @@
     <service id="App\Repository\AnnonceRepository" class="App\Repository\AnnonceRepository" autowire="true" autoconfigure="true">
       <argument type="service" id="App\Service\DatabaseService"/>
     </service>
+    <service id="App\Repository\AvisRepository" class="App\Repository\AvisRepository" autowire="true" autoconfigure="true">
+      <argument type="service" id="App\Service\DatabaseService"/>
+    </service>
     <service id="App\Repository\CatalogueRepository" class="App\Repository\CatalogueRepository" autowire="true" autoconfigure="true">
       <argument type="service" id="App\Service\DatabaseService"/>
     </service>
@@ -236,6 +247,7 @@
           <argument>App\Controller\AdminController</argument>
           <argument>App\Controller\AnnonceController</argument>
           <argument>App\Controller\AuthController</argument>
+          <argument>App\Controller\AvisController</argument>
           <argument>App\Controller\FavorisController</argument>
           <argument>App\Controller\MessagerieController</argument>
           <argument>App\Controller\StatsController</argument>
@@ -282,7 +294,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver" priority="-50">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.kiH_1kr"/>
+      <argument type="service" id=".service_locator.bj81CSj"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver" priority="-100">controller.argument_value_resolver</tag>
@@ -1571,6 +1583,7 @@
         <argument>App\Controller\AdminController</argument>
         <argument>App\Controller\AnnonceController</argument>
         <argument>App\Controller\AuthController</argument>
+        <argument>App\Controller\AvisController</argument>
         <argument>App\Controller\FavorisController</argument>
         <argument>App\Controller\MessagerieController</argument>
         <argument>App\Controller\StatsController</argument>
@@ -3070,6 +3083,10 @@
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\AuthController" class="App\Controller\AuthController" autowire="true" abstract="true"/>
     <service id=".instanceof.App\Controller\AuthController.0.App\Controller\AuthController" class="App\Controller\AuthController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\AuthController" class="App\Controller\AuthController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\AvisController" class="App\Controller\AvisController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\AvisController" class="App\Controller\AvisController" autowire="true" abstract="true"/>
+    <service id=".instanceof.App\Controller\AvisController.0.App\Controller\AvisController" class="App\Controller\AvisController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\AvisController" class="App\Controller\AvisController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\FavorisController" class="App\Controller\FavorisController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\FavorisController" class="App\Controller\FavorisController" autowire="true" abstract="true"/>
     <service id=".instanceof.App\Controller\FavorisController.0.App\Controller\FavorisController" class="App\Controller\FavorisController" autowire="true" abstract="true"/>
@@ -3345,6 +3362,30 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.1OQIs_V" method="withContext"/>
     </service>
+    <service id=".service_locator.Chdxzej" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="repo" type="service_closure" id="App\Repository\AvisRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.Chdxzej.App\Controller\AvisController::index()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\AvisController::index()"/>
+      <argument>App\Controller\AvisController::index()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.Chdxzej" method="withContext"/>
+    </service>
+    <service id=".service_locator.Chdxzej.App\Controller\AvisController::ajouter()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\AvisController::ajouter()"/>
+      <argument>App\Controller\AvisController::ajouter()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.Chdxzej" method="withContext"/>
+    </service>
+    <service id=".service_locator.Chdxzej.App\Controller\AvisController::supprimer()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\AvisController::supprimer()"/>
+      <argument>App\Controller\AvisController::supprimer()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.Chdxzej" method="withContext"/>
+    </service>
     <service id=".service_locator._IIoh05" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -3412,7 +3453,7 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.UD.qFKd" method="withContext"/>
     </service>
-    <service id=".service_locator.kiH_1kr" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.bj81CSj" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.1vYpZ1B.kernel::registerContainerConfiguration()"/>
@@ -3446,6 +3487,9 @@
         <argument key="App\Controller\AnnonceController::supprimer" type="service_closure" id=".service_locator.w4AXElG.App\Controller\AnnonceController::supprimer()"/>
         <argument key="App\Controller\AuthController::connexion" type="service_closure" id=".service_locator.Jt3EkEi.App\Controller\AuthController::connexion()"/>
         <argument key="App\Controller\AuthController::inscription" type="service_closure" id=".service_locator.1OQIs_V.App\Controller\AuthController::inscription()"/>
+        <argument key="App\Controller\AvisController::index" type="service_closure" id=".service_locator.Chdxzej.App\Controller\AvisController::index()"/>
+        <argument key="App\Controller\AvisController::ajouter" type="service_closure" id=".service_locator.Chdxzej.App\Controller\AvisController::ajouter()"/>
+        <argument key="App\Controller\AvisController::supprimer" type="service_closure" id=".service_locator.Chdxzej.App\Controller\AvisController::supprimer()"/>
         <argument key="App\Controller\FavorisController::index" type="service_closure" id=".service_locator._IIoh05.App\Controller\FavorisController::index()"/>
         <argument key="App\Controller\FavorisController::toggle" type="service_closure" id=".service_locator._IIoh05.App\Controller\FavorisController::toggle()"/>
         <argument key="App\Controller\MessagerieController::inbox" type="service_closure" id=".service_locator.LAz2Ccu.App\Controller\MessagerieController::inbox()"/>
@@ -3482,6 +3526,9 @@
         <argument key="App\Controller\AnnonceController:supprimer" type="service_closure" id=".service_locator.w4AXElG.App\Controller\AnnonceController::supprimer()"/>
         <argument key="App\Controller\AuthController:connexion" type="service_closure" id=".service_locator.Jt3EkEi.App\Controller\AuthController::connexion()"/>
         <argument key="App\Controller\AuthController:inscription" type="service_closure" id=".service_locator.1OQIs_V.App\Controller\AuthController::inscription()"/>
+        <argument key="App\Controller\AvisController:index" type="service_closure" id=".service_locator.Chdxzej.App\Controller\AvisController::index()"/>
+        <argument key="App\Controller\AvisController:ajouter" type="service_closure" id=".service_locator.Chdxzej.App\Controller\AvisController::ajouter()"/>
+        <argument key="App\Controller\AvisController:supprimer" type="service_closure" id=".service_locator.Chdxzej.App\Controller\AvisController::supprimer()"/>
         <argument key="App\Controller\FavorisController:index" type="service_closure" id=".service_locator._IIoh05.App\Controller\FavorisController::index()"/>
         <argument key="App\Controller\FavorisController:toggle" type="service_closure" id=".service_locator._IIoh05.App\Controller\FavorisController::toggle()"/>
         <argument key="App\Controller\MessagerieController:inbox" type="service_closure" id=".service_locator.LAz2Ccu.App\Controller\MessagerieController::inbox()"/>
@@ -3561,6 +3608,12 @@
     <service id=".service_locator.TJNRSaV.App\Controller\AuthController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\AuthController"/>
       <argument>App\Controller\AuthController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.TJNRSaV" method="withContext"/>
+    </service>
+    <service id=".service_locator.TJNRSaV.App\Controller\AvisController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\AvisController"/>
+      <argument>App\Controller\AvisController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.TJNRSaV" method="withContext"/>
     </service>
@@ -4128,7 +4181,7 @@
     <service id="Symfony\Component\Security\Core\User\UserCheckerInterface" alias="security.user_checker"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.ryAvHi4" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.kiH_1kr"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.bj81CSj"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface" alias="logger"/>
     <service id="twig.error_renderer.html.inner" alias="error_handler.error_renderer.html"/>
@@ -4143,6 +4196,7 @@
     <service id=".service_locator.SJlM9Mn" alias=".service_locator.kEBUapz"/>
     <service id=".service_locator.YU1i9lx" alias=".service_locator.Jt3EkEi"/>
     <service id=".service_locator.IsWLJOC" alias=".service_locator.1OQIs_V"/>
+    <service id=".service_locator.f8TOZBH" alias=".service_locator.Chdxzej"/>
     <service id=".service_locator._The.CK" alias=".service_locator._IIoh05"/>
     <service id=".service_locator.Gf8mdSO" alias=".service_locator.LAz2Ccu"/>
     <service id=".service_locator.TXYAU8e" alias=".service_locator.ZFol7hu"/>

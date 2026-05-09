@@ -294,10 +294,12 @@ class __TwigTemplate_f67f4de7e537ba0d5c580f88179add83 extends Template
                             Favoris
                         </a>
                     </li>
-                    <li class=\"text-tertiary text-sm\">Bonjour, <span class=\"font-semibold text-primary\">";
+                    <li class=\"text-tertiary text-sm\">Bonjour, <a href=\"";
             // line 77
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("avis_vendeur", ["id" => CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 77, $this->source); })()), "user", [], "any", false, false, false, 77), "id", [], "any", false, false, false, 77)]), "html", null, true);
+            yield "\" class=\"font-semibold text-primary hover:text-secondary transition-colors\">";
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 77, $this->source); })()), "user", [], "any", false, false, false, 77), "prenom", [], "any", false, false, false, 77), "html", null, true);
-            yield "</span></li>
+            yield "</a></li>
                     <li>
                         <a href=\"";
             // line 79
@@ -550,7 +552,7 @@ class __TwigTemplate_f67f4de7e537ba0d5c580f88179add83 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  525 => 201,  454 => 135,  449 => 133,  445 => 132,  441 => 131,  436 => 130,  431 => 128,  427 => 127,  422 => 126,  417 => 124,  413 => 123,  409 => 122,  404 => 121,  399 => 119,  395 => 118,  391 => 117,  386 => 116,  384 => 115,  369 => 103,  365 => 102,  361 => 100,  351 => 99,  342 => 94,  332 => 93,  323 => 88,  318 => 86,  313 => 85,  304 => 79,  299 => 77,  289 => 70,  286 => 69,  284 => 68,  279 => 65,  274 => 63,  269 => 62,  264 => 60,  260 => 59,  256 => 58,  251 => 57,  246 => 55,  242 => 54,  238 => 53,  234 => 52,  229 => 51,  224 => 49,  220 => 48,  216 => 47,  212 => 46,  207 => 45,  205 => 44,  197 => 39,  193 => 38,  187 => 34,  177 => 33,  168 => 199,  166 => 99,  161 => 96,  159 => 93,  154 => 90,  152 => 33,  149 => 32,  139 => 31,  128 => 10,  118 => 9,  101 => 5,  92 => 202,  90 => 201,  88 => 31,  67 => 12,  65 => 9,  58 => 5,  52 => 1,);
+        return array (  527 => 201,  456 => 135,  451 => 133,  447 => 132,  443 => 131,  438 => 130,  433 => 128,  429 => 127,  424 => 126,  419 => 124,  415 => 123,  411 => 122,  406 => 121,  401 => 119,  397 => 118,  393 => 117,  388 => 116,  386 => 115,  371 => 103,  367 => 102,  363 => 100,  353 => 99,  344 => 94,  334 => 93,  325 => 88,  320 => 86,  315 => 85,  306 => 79,  299 => 77,  289 => 70,  286 => 69,  284 => 68,  279 => 65,  274 => 63,  269 => 62,  264 => 60,  260 => 59,  256 => 58,  251 => 57,  246 => 55,  242 => 54,  238 => 53,  234 => 52,  229 => 51,  224 => 49,  220 => 48,  216 => 47,  212 => 46,  207 => 45,  205 => 44,  197 => 39,  193 => 38,  187 => 34,  177 => 33,  168 => 199,  166 => 99,  161 => 96,  159 => 93,  154 => 90,  152 => 33,  149 => 32,  139 => 31,  128 => 10,  118 => 9,  101 => 5,  92 => 202,  90 => 201,  88 => 31,  67 => 12,  65 => 9,  58 => 5,  52 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -631,7 +633,7 @@ class __TwigTemplate_f67f4de7e537ba0d5c580f88179add83 extends Template
                             Favoris
                         </a>
                     </li>
-                    <li class=\"text-tertiary text-sm\">Bonjour, <span class=\"font-semibold text-primary\">{{ app.user.prenom }}</span></li>
+                    <li class=\"text-tertiary text-sm\">Bonjour, <a href=\"{{ path('avis_vendeur', {id: app.user.id}) }}\" class=\"font-semibold text-primary hover:text-secondary transition-colors\">{{ app.user.prenom }}</a></li>
                     <li>
                         <a href=\"{{ path('deconnexion') }}\"
                            class=\"px-4 py-2 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-all text-sm font-semibold\">

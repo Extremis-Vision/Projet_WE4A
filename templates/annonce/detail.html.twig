@@ -468,6 +468,10 @@
                 {% if annonce.vendeur_phone %}
                 <p class="text-secondary text-sm mt-1 font-medium">📞 {{ annonce.vendeur_phone }}</p>
                 {% endif %}
+                <a href="{{ path('avis_vendeur', {id: annonce.vendeur_id}) }}"
+                   class="inline-block mt-2 text-xs text-secondary hover:underline">
+                    Voir les avis du vendeur
+                </a>
 
                 {% if app.user %}
                     {% if app.user.id != annonce.vendeur_id %}

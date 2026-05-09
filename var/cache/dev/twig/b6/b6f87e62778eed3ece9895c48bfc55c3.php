@@ -244,13 +244,79 @@ class __TwigTemplate_f08117f2f76e5cdec7035a3b7ef749e6 extends Template
                 </div>
             </div>
 
+            <div class=\"grid grid-cols-3 gap-4\">
+                <div>
+                    <label class=\"block text-sm font-medium text-tertiary mb-1\">Sellerie</label>
+                    <select name=\"sellerie\" class=\"w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary bg-white text-primary text-sm\">
+                        <option value=\"\">Non précisé</option>
+                        ";
+        // line 110
+        $context['_parent'] = $context;
+        $context['_seq'] = CoreExtension::ensureTraversable(["Tissu", "Cuir", "Semi-cuir", "Alcantara", "Velours"]);
+        foreach ($context['_seq'] as $context["_key"] => $context["s"]) {
+            // line 111
+            yield "                            <option value=\"";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["s"], "html", null, true);
+            yield "\" ";
+            if ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 111, $this->source); })()), "sellerie", [], "any", false, false, false, 111) == $context["s"])) {
+                yield "selected";
+            }
+            yield ">";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["s"], "html", null, true);
+            yield "</option>
+                        ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_key'], $context['s'], $context['_parent']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 113
+        yield "                    </select>
+                </div>
+                <div>
+                    <label class=\"block text-sm font-medium text-tertiary mb-1\">Finition</label>
+                    <input type=\"text\" name=\"finition\" placeholder=\"Sport, Luxe, Business…\"
+                           value=\"";
+        // line 118
+        yield (((CoreExtension::getAttribute($this->env, $this->source, ($context["annonce"] ?? null), "finition", [], "any", true, true, false, 118) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 118, $this->source); })()), "finition", [], "any", false, false, false, 118)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 118, $this->source); })()), "finition", [], "any", false, false, false, 118), "html", null, true)) : (""));
+        yield "\"
+                           class=\"w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary bg-white text-primary\">
+                </div>
+                <div>
+                    <label class=\"block text-sm font-medium text-tertiary mb-1\">Provenance</label>
+                    <select name=\"provenance\" class=\"w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary bg-white text-primary text-sm\">
+                        <option value=\"\">Non précisé</option>
+                        ";
+        // line 125
+        $context['_parent'] = $context;
+        $context['_seq'] = CoreExtension::ensureTraversable(["France", "Import UE", "Import hors UE"]);
+        foreach ($context['_seq'] as $context["_key"] => $context["p"]) {
+            // line 126
+            yield "                            <option value=\"";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["p"], "html", null, true);
+            yield "\" ";
+            if ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 126, $this->source); })()), "provenance", [], "any", false, false, false, 126) == $context["p"])) {
+                yield "selected";
+            }
+            yield ">";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["p"], "html", null, true);
+            yield "</option>
+                        ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_key'], $context['p'], $context['_parent']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 128
+        yield "                    </select>
+                </div>
+            </div>
+
             <div class=\"grid grid-cols-2 gap-4\">
                 <div>
                     <label class=\"block text-sm font-medium text-tertiary mb-1\">Nombre de propriétaires</label>
                     <input type=\"number\" name=\"nombre_proprietaire\" id=\"nombre_proprietaire\" min=\"1\" max=\"20\"
                            value=\"";
-        // line 109
-        yield (((CoreExtension::getAttribute($this->env, $this->source, ($context["annonce"] ?? null), "nombre_proprietaire", [], "any", true, true, false, 109) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 109, $this->source); })()), "nombre_proprietaire", [], "any", false, false, false, 109)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 109, $this->source); })()), "nombre_proprietaire", [], "any", false, false, false, 109), "html", null, true)) : (""));
+        // line 136
+        yield (((CoreExtension::getAttribute($this->env, $this->source, ($context["annonce"] ?? null), "nombre_proprietaire", [], "any", true, true, false, 136) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 136, $this->source); })()), "nombre_proprietaire", [], "any", false, false, false, 136)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 136, $this->source); })()), "nombre_proprietaire", [], "any", false, false, false, 136), "html", null, true)) : (""));
         yield "\"
                            class=\"w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary bg-white text-primary\">
                 </div>
@@ -258,8 +324,8 @@ class __TwigTemplate_f08117f2f76e5cdec7035a3b7ef749e6 extends Template
                     <label class=\"block text-sm font-medium text-tertiary mb-1\">Contrôle technique</label>
                     <input type=\"date\" name=\"controle_technique\"
                            value=\"";
-        // line 115
-        yield (((CoreExtension::getAttribute($this->env, $this->source, ($context["annonce"] ?? null), "controle_technique", [], "any", true, true, false, 115) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 115, $this->source); })()), "controle_technique", [], "any", false, false, false, 115)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 115, $this->source); })()), "controle_technique", [], "any", false, false, false, 115), "html", null, true)) : (""));
+        // line 142
+        yield (((CoreExtension::getAttribute($this->env, $this->source, ($context["annonce"] ?? null), "controle_technique", [], "any", true, true, false, 142) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 142, $this->source); })()), "controle_technique", [], "any", false, false, false, 142)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 142, $this->source); })()), "controle_technique", [], "any", false, false, false, 142), "html", null, true)) : (""));
         yield "\"
                            class=\"w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary bg-white text-primary\">
                 </div>
@@ -268,11 +334,11 @@ class __TwigTemplate_f08117f2f76e5cdec7035a3b7ef749e6 extends Template
             <div class=\"flex items-center gap-3\">
                 <input type=\"checkbox\" id=\"premiere_main\" name=\"premiere_main\" value=\"1\"
                        ";
-        // line 122
-        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 122, $this->source); })()), "premiere_main", [], "any", false, false, false, 122)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+        // line 149
+        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 149, $this->source); })()), "premiere_main", [], "any", false, false, false, 149)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
             yield "checked";
         }
-        // line 123
+        // line 150
         yield "                       class=\"w-4 h-4 accent-secondary rounded\"
                        onchange=\"
                            var nb = document.getElementById('nombre_proprietaire');
@@ -284,43 +350,43 @@ class __TwigTemplate_f08117f2f76e5cdec7035a3b7ef749e6 extends Template
         </div>
 
         ";
-        // line 134
+        // line 161
         yield "        <div class=\"bg-white rounded-xl p-6 shadow-sm\">
             <h2 class=\"font-bold text-primary font-['ManRope'] mb-3\">Description</h2>
             <textarea name=\"description\" rows=\"5\" placeholder=\"Décrivez l'état général, l'historique, les options…\"
                       class=\"w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary bg-white text-primary text-sm resize-none\">";
-        // line 137
-        yield (((CoreExtension::getAttribute($this->env, $this->source, ($context["annonce"] ?? null), "description", [], "any", true, true, false, 137) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 137, $this->source); })()), "description", [], "any", false, false, false, 137)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 137, $this->source); })()), "description", [], "any", false, false, false, 137), "html", null, true)) : (""));
+        // line 164
+        yield (((CoreExtension::getAttribute($this->env, $this->source, ($context["annonce"] ?? null), "description", [], "any", true, true, false, 164) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 164, $this->source); })()), "description", [], "any", false, false, false, 164)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 164, $this->source); })()), "description", [], "any", false, false, false, 164), "html", null, true)) : (""));
         yield "</textarea>
         </div>
 
         ";
-        // line 141
+        // line 168
         yield "        <div class=\"bg-white rounded-xl p-6 shadow-sm space-y-3\">
             <h2 class=\"font-bold text-primary font-['ManRope']\">Photos du véhicule</h2>
 
             ";
-        // line 144
-        if ((array_key_exists("photos", $context) &&  !Twig\Extension\CoreExtension::testEmpty((isset($context["photos"]) || array_key_exists("photos", $context) ? $context["photos"] : (function () { throw new RuntimeError('Variable "photos" does not exist.', 144, $this->source); })())))) {
-            // line 145
+        // line 171
+        if ((array_key_exists("photos", $context) &&  !Twig\Extension\CoreExtension::testEmpty((isset($context["photos"]) || array_key_exists("photos", $context) ? $context["photos"] : (function () { throw new RuntimeError('Variable "photos" does not exist.', 171, $this->source); })())))) {
+            // line 172
             yield "                <p class=\"text-sm font-medium text-tertiary\">Photos actuelles</p>
                 <div class=\"grid grid-cols-4 gap-2\">
                     ";
-            // line 147
+            // line 174
             $context['_parent'] = $context;
-            $context['_seq'] = CoreExtension::ensureTraversable((isset($context["photos"]) || array_key_exists("photos", $context) ? $context["photos"] : (function () { throw new RuntimeError('Variable "photos" does not exist.', 147, $this->source); })()));
+            $context['_seq'] = CoreExtension::ensureTraversable((isset($context["photos"]) || array_key_exists("photos", $context) ? $context["photos"] : (function () { throw new RuntimeError('Variable "photos" does not exist.', 174, $this->source); })()));
             foreach ($context['_seq'] as $context["_key"] => $context["photo"]) {
-                // line 148
+                // line 175
                 yield "                    <div class=\"relative aspect-square bg-gray-100 rounded-lg overflow-hidden\">
                         <img src=\"";
-                // line 149
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["photo"], "url_photo", [], "any", false, false, false, 149), "html", null, true);
+                // line 176
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["photo"], "url_photo", [], "any", false, false, false, 176), "html", null, true);
                 yield "\" class=\"w-full h-full object-cover\">
                         <label class=\"absolute top-1 right-1 bg-red-500 hover:bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center cursor-pointer transition-colors\"
                                title=\"Supprimer cette photo\">
                             <input type=\"checkbox\" name=\"delete_photos[]\" value=\"";
-                // line 152
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["photo"], "id_photo", [], "any", false, false, false, 152), "html", null, true);
+                // line 179
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["photo"], "id_photo", [], "any", false, false, false, 179), "html", null, true);
                 yield "\" class=\"hidden\" onchange=\"this.closest('.relative').style.opacity = this.checked ? '0.3' : '1'\">
                             <svg class=\"w-3 h-3\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" viewBox=\"0 0 24 24\">
                                 <path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M6 18L18 6M6 6l12 12\"/>
@@ -332,12 +398,12 @@ class __TwigTemplate_f08117f2f76e5cdec7035a3b7ef749e6 extends Template
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_key'], $context['photo'], $context['_parent']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 159
+            // line 186
             yield "                </div>
                 <p class=\"text-xs text-gray-400\">Cochez la croix rouge pour supprimer une photo. Les nouvelles photos s'ajouteront aux existantes.</p>
             ";
         }
-        // line 162
+        // line 189
         yield "
             <p class=\"text-sm font-medium text-tertiary\">Ajouter des photos</p>
             <label class=\"flex flex-col items-center justify-center border-2 border-dashed border-gray-200 rounded-xl py-8 px-4 cursor-pointer hover:border-secondary transition-colors\">
@@ -356,8 +422,8 @@ class __TwigTemplate_f08117f2f76e5cdec7035a3b7ef749e6 extends Template
         <button type=\"submit\"
                 class=\"w-full py-4 bg-primary text-white font-bold rounded-xl hover:bg-opacity-90 active:scale-95 transition-all text-lg\">
             ";
-        // line 179
-        yield (((CoreExtension::getAttribute($this->env, $this->source, ($context["annonce"] ?? null), "id_annonce", [], "any", true, true, false, 179) && CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 179, $this->source); })()), "id_annonce", [], "any", false, false, false, 179))) ? ("Enregistrer les modifications") : ("Publier l'annonce"));
+        // line 206
+        yield (((CoreExtension::getAttribute($this->env, $this->source, ($context["annonce"] ?? null), "id_annonce", [], "any", true, true, false, 206) && CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 206, $this->source); })()), "id_annonce", [], "any", false, false, false, 206))) ? ("Enregistrer les modifications") : ("Publier l'annonce"));
         yield "
         </button>
 
@@ -370,7 +436,7 @@ class __TwigTemplate_f08117f2f76e5cdec7035a3b7ef749e6 extends Template
         yield from [];
     }
 
-    // line 186
+    // line 213
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -380,19 +446,19 @@ class __TwigTemplate_f08117f2f76e5cdec7035a3b7ef749e6 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 187
+        // line 214
         yield "<script>
 const CATALOG = ";
-        // line 188
-        yield json_encode((isset($context["catalog"]) || array_key_exists("catalog", $context) ? $context["catalog"] : (function () { throw new RuntimeError('Variable "catalog" does not exist.', 188, $this->source); })()));
+        // line 215
+        yield json_encode((isset($context["catalog"]) || array_key_exists("catalog", $context) ? $context["catalog"] : (function () { throw new RuntimeError('Variable "catalog" does not exist.', 215, $this->source); })()));
         yield ";
 const SELECTED_VERSION = ";
-        // line 189
-        yield json_encode(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 189, $this->source); })()), "id_version", [], "any", false, false, false, 189));
+        // line 216
+        yield json_encode(CoreExtension::getAttribute($this->env, $this->source, (isset($context["annonce"]) || array_key_exists("annonce", $context) ? $context["annonce"] : (function () { throw new RuntimeError('Variable "annonce" does not exist.', 216, $this->source); })()), "id_version", [], "any", false, false, false, 216));
         yield ";
 </script>
 <script src=\"";
-        // line 191
+        // line 218
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/annonces.js"), "html", null, true);
         yield "\"></script>
 <script>
@@ -439,7 +505,7 @@ document.getElementById('input-photos').addEventListener('change', function () {
      */
     public function getDebugInfo(): array
     {
-        return array (  396 => 191,  391 => 189,  387 => 188,  384 => 187,  374 => 186,  360 => 179,  341 => 162,  336 => 159,  323 => 152,  317 => 149,  314 => 148,  310 => 147,  306 => 145,  304 => 144,  299 => 141,  293 => 137,  288 => 134,  276 => 123,  272 => 122,  262 => 115,  253 => 109,  241 => 100,  232 => 94,  222 => 86,  207 => 84,  203 => 83,  193 => 76,  181 => 67,  172 => 61,  163 => 54,  131 => 23,  126 => 19,  117 => 17,  112 => 16,  103 => 14,  99 => 13,  92 => 9,  87 => 6,  77 => 5,  59 => 3,  42 => 1,);
+        return array (  462 => 218,  457 => 216,  453 => 215,  450 => 214,  440 => 213,  426 => 206,  407 => 189,  402 => 186,  389 => 179,  383 => 176,  380 => 175,  376 => 174,  372 => 172,  370 => 171,  365 => 168,  359 => 164,  354 => 161,  342 => 150,  338 => 149,  328 => 142,  319 => 136,  309 => 128,  294 => 126,  290 => 125,  280 => 118,  273 => 113,  258 => 111,  254 => 110,  241 => 100,  232 => 94,  222 => 86,  207 => 84,  203 => 83,  193 => 76,  181 => 67,  172 => 61,  163 => 54,  131 => 23,  126 => 19,  117 => 17,  112 => 16,  103 => 14,  99 => 13,  92 => 9,  87 => 6,  77 => 5,  59 => 3,  42 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -545,6 +611,33 @@ document.getElementById('input-photos').addEventListener('change', function () {
                     <input type=\"text\" name=\"localisation\" placeholder=\"Paris, 75001\"
                            value=\"{{ annonce.localisation ?? '' }}\"
                            class=\"w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary bg-white text-primary\">
+                </div>
+            </div>
+
+            <div class=\"grid grid-cols-3 gap-4\">
+                <div>
+                    <label class=\"block text-sm font-medium text-tertiary mb-1\">Sellerie</label>
+                    <select name=\"sellerie\" class=\"w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary bg-white text-primary text-sm\">
+                        <option value=\"\">Non précisé</option>
+                        {% for s in ['Tissu', 'Cuir', 'Semi-cuir', 'Alcantara', 'Velours'] %}
+                            <option value=\"{{ s }}\" {% if annonce.sellerie == s %}selected{% endif %}>{{ s }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label class=\"block text-sm font-medium text-tertiary mb-1\">Finition</label>
+                    <input type=\"text\" name=\"finition\" placeholder=\"Sport, Luxe, Business…\"
+                           value=\"{{ annonce.finition ?? '' }}\"
+                           class=\"w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary bg-white text-primary\">
+                </div>
+                <div>
+                    <label class=\"block text-sm font-medium text-tertiary mb-1\">Provenance</label>
+                    <select name=\"provenance\" class=\"w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary bg-white text-primary text-sm\">
+                        <option value=\"\">Non précisé</option>
+                        {% for p in ['France', 'Import UE', 'Import hors UE'] %}
+                            <option value=\"{{ p }}\" {% if annonce.provenance == p %}selected{% endif %}>{{ p }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
             </div>
 

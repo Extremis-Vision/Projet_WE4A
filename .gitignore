@@ -1,3 +1,11 @@
 .env
-
+.env.local
+.env.*.local
 var/
+vendor/
+.idea/
+.DS_Store
+*.log
+public/uploads/
+symfony.lock
+test_output.html

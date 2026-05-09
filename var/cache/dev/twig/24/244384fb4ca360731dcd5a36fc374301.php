@@ -146,6 +146,26 @@ class __TwigTemplate_415b7ef544a9339668448656691c1d1e extends Template
                 <p id=\"mdp-error\" class=\"text-red-500 text-sm mt-1 hidden\">Les mots de passe ne correspondent pas.</p>
             </div>
 
+            <div>
+                <label class=\"block text-sm font-medium text-tertiary mb-2\">Type de compte *</label>
+                <div class=\"grid grid-cols-2 gap-3\">
+                    <label class=\"flex items-center gap-3 border border-gray-200 rounded-lg px-4 py-3 cursor-pointer hover:border-secondary transition-colors has-[:checked]:border-secondary has-[:checked]:bg-secondary/5\">
+                        <input type=\"radio\" name=\"type_compte\" value=\"particulier\" checked class=\"accent-secondary\">
+                        <div>
+                            <p class=\"text-sm font-semibold text-primary\">Particulier</p>
+                            <p class=\"text-xs text-tertiary\">Acheteur / vendeur</p>
+                        </div>
+                    </label>
+                    <label class=\"flex items-center gap-3 border border-gray-200 rounded-lg px-4 py-3 cursor-pointer hover:border-secondary transition-colors has-[:checked]:border-secondary has-[:checked]:bg-secondary/5\">
+                        <input type=\"radio\" name=\"type_compte\" value=\"entreprise\" class=\"accent-secondary\">
+                        <div>
+                            <p class=\"text-sm font-semibold text-primary\">Entreprise</p>
+                            <p class=\"text-xs text-tertiary\">+ accès statistiques marché</p>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
             <button type=\"submit\"
                     class=\"w-full py-3 bg-primary text-white font-bold rounded-lg hover:bg-opacity-90 active:scale-95 transition-all\">
                 Créer mon compte
@@ -155,7 +175,7 @@ class __TwigTemplate_415b7ef544a9339668448656691c1d1e extends Template
         <p class=\"text-center text-tertiary mt-6 text-sm\">
             Déjà un compte ?
             <a href=\"";
-        // line 62
+        // line 82
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("connexion");
         yield "\" class=\"text-secondary font-semibold hover:underline\">Se connecter</a>
         </p>
@@ -168,7 +188,7 @@ class __TwigTemplate_415b7ef544a9339668448656691c1d1e extends Template
         yield from [];
     }
 
-    // line 68
+    // line 88
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -178,7 +198,7 @@ class __TwigTemplate_415b7ef544a9339668448656691c1d1e extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 69
+        // line 89
         yield "    <script src=\"";
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/validation.js"), "html", null, true);
         yield "\"></script>
@@ -210,7 +230,7 @@ class __TwigTemplate_415b7ef544a9339668448656691c1d1e extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  182 => 69,  172 => 68,  159 => 62,  109 => 15,  106 => 14,  97 => 12,  93 => 11,  86 => 6,  76 => 5,  59 => 3,  42 => 1,);
+        return array (  202 => 89,  192 => 88,  179 => 82,  109 => 15,  106 => 14,  97 => 12,  93 => 11,  86 => 6,  76 => 5,  59 => 3,  42 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -266,6 +286,26 @@ class __TwigTemplate_415b7ef544a9339668448656691c1d1e extends Template
                 <input type=\"password\" id=\"mdp_confirm\" name=\"mdp_confirm\" required autocomplete=\"new-password\"
                        class=\"w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary bg-white text-primary\">
                 <p id=\"mdp-error\" class=\"text-red-500 text-sm mt-1 hidden\">Les mots de passe ne correspondent pas.</p>
+            </div>
+
+            <div>
+                <label class=\"block text-sm font-medium text-tertiary mb-2\">Type de compte *</label>
+                <div class=\"grid grid-cols-2 gap-3\">
+                    <label class=\"flex items-center gap-3 border border-gray-200 rounded-lg px-4 py-3 cursor-pointer hover:border-secondary transition-colors has-[:checked]:border-secondary has-[:checked]:bg-secondary/5\">
+                        <input type=\"radio\" name=\"type_compte\" value=\"particulier\" checked class=\"accent-secondary\">
+                        <div>
+                            <p class=\"text-sm font-semibold text-primary\">Particulier</p>
+                            <p class=\"text-xs text-tertiary\">Acheteur / vendeur</p>
+                        </div>
+                    </label>
+                    <label class=\"flex items-center gap-3 border border-gray-200 rounded-lg px-4 py-3 cursor-pointer hover:border-secondary transition-colors has-[:checked]:border-secondary has-[:checked]:bg-secondary/5\">
+                        <input type=\"radio\" name=\"type_compte\" value=\"entreprise\" class=\"accent-secondary\">
+                        <div>
+                            <p class=\"text-sm font-semibold text-primary\">Entreprise</p>
+                            <p class=\"text-xs text-tertiary\">+ accès statistiques marché</p>
+                        </div>
+                    </label>
+                </div>
             </div>
 
             <button type=\"submit\"

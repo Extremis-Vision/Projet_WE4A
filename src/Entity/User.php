@@ -12,7 +12,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private string $prenom;
     private string $email;
     private string $mdp;
-    private string $role; // 'admin' | 'vendeur' | 'acheteur'
+    private string $role; // 'admin' | 'vendeur' | 'acheteur' | 'entreprise'
     private ?string $numeroPhone;
     private \DateTimeInterface $dateInscription;
 
@@ -45,7 +45,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getRoles(): array
     {
-        return $this->role === 'admin' ? ['ROLE_ADMIN', 'ROLE_USER'] : ['ROLE_USER'];
+        return match($this->role) {
+            'admin'      => ['ROLE_ADMIN', 'ROLE_USER'],
+            'entreprise' => ['ROLE_ENTREPRISE', 'ROLE_USER'],
+            default      => ['ROLE_USER'],
+        };
     }
 
     public function eraseCredentials(): void {}

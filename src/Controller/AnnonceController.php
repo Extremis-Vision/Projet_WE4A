@@ -260,6 +260,49 @@ class AnnonceController extends AbstractController
         ]);
     }
 
+    #[Route('/annonces/{id}/pause', name: 'annonce_pause', methods: ['POST'], requirements: ['id' => '\d+'])]
+    #[IsGranted('ROLE_USER')]
+    public function mettreEnPause(int $id, AnnonceRepository $repo): Response
+    {
+        $owner = $repo->getOwner($id);
+        if ((int) $owner !== (int) $this->getUser()->getId()) {
+            throw $this->createAccessDeniedException();
+        }
+        $repo->updateStatut($id, 'pause', null);
+        $this->addFlash('success', 'Annonce mise en pause.');
+        return $this->redirectToRoute('mes_annonces');
+    }
+
+    #[Route('/annonces/{id}/reprendre', name: 'annonce_reprendre', methods: ['POST'], requirements: ['id' => '\d+'])]
+    #[IsGranted('ROLE_USER')]
+    public function reprendre(int $id, AnnonceRepository $repo): Response
+    {
+        $annonce = $repo->findById($id);
+        if (!$annonce || (int) $annonce['vendeur_id'] !== (int) $this->getUser()->getId()) {
+            throw $this->createAccessDeniedException();
+        }
+        if (!empty($annonce['commentaire_admin'])) {
+            $this->addFlash('error', 'Cette annonce a été suspendue par l\'administration, vous ne pouvez pas la réactiver.');
+            return $this->redirectToRoute('mes_annonces');
+        }
+        $repo->updateStatut($id, 'active', null);
+        $this->addFlash('success', 'Annonce remise en ligne.');
+        return $this->redirectToRoute('mes_annonces');
+    }
+
+    #[Route('/annonces/{id}/vendu', name: 'annonce_vendu', methods: ['POST'], requirements: ['id' => '\d+'])]
+    #[IsGranted('ROLE_USER')]
+    public function marquerVendu(int $id, AnnonceRepository $repo): Response
+    {
+        $owner = $repo->getOwner($id);
+        if ((int) $owner !== (int) $this->getUser()->getId()) {
+            throw $this->createAccessDeniedException();
+        }
+        $repo->marquerVendu($id);
+        $this->addFlash('success', 'Annonce marquée comme vendue. Félicitations !');
+        return $this->redirectToRoute('mes_annonces');
+    }
+
     #[Route('/annonces/{id}/supprimer', name: 'annonce_supprimer', methods: ['POST'], requirements: ['id' => '\d+'])]
     #[IsGranted('ROLE_USER')]
     public function supprimer(int $id, AnnonceRepository $repo): Response

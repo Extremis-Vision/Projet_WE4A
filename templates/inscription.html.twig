@@ -51,6 +51,26 @@
                 <p id="mdp-error" class="text-red-500 text-sm mt-1 hidden">Les mots de passe ne correspondent pas.</p>
             </div>
 
+            <div>
+                <label class="block text-sm font-medium text-tertiary mb-2">Type de compte *</label>
+                <div class="grid grid-cols-2 gap-3">
+                    <label class="flex items-center gap-3 border border-gray-200 rounded-lg px-4 py-3 cursor-pointer hover:border-secondary transition-colors has-[:checked]:border-secondary has-[:checked]:bg-secondary/5">
+                        <input type="radio" name="type_compte" value="particulier" checked class="accent-secondary">
+                        <div>
+                            <p class="text-sm font-semibold text-primary">Particulier</p>
+                            <p class="text-xs text-tertiary">Acheteur / vendeur</p>
+                        </div>
+                    </label>
+                    <label class="flex items-center gap-3 border border-gray-200 rounded-lg px-4 py-3 cursor-pointer hover:border-secondary transition-colors has-[:checked]:border-secondary has-[:checked]:bg-secondary/5">
+                        <input type="radio" name="type_compte" value="entreprise" class="accent-secondary">
+                        <div>
+                            <p class="text-sm font-semibold text-primary">Entreprise</p>
+                            <p class="text-xs text-tertiary">+ accès statistiques marché</p>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
             <button type="submit"
                     class="w-full py-3 bg-primary text-white font-bold rounded-lg hover:bg-opacity-90 active:scale-95 transition-all">
                 Créer mon compte

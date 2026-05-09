@@ -37,12 +37,14 @@ class AuthController extends AbstractController
         }
 
         if ($request->isMethod('POST')) {
-            $prenom = trim($request->request->get('prenom', ''));
-            $nom    = trim($request->request->get('nom', ''));
-            $email  = trim($request->request->get('email', ''));
-            $mdp    = $request->request->get('mdp', '');
+            $prenom     = trim($request->request->get('prenom', ''));
+            $nom        = trim($request->request->get('nom', ''));
+            $email      = trim($request->request->get('email', ''));
+            $mdp        = $request->request->get('mdp', '');
             $mdpConfirm = $request->request->get('mdp_confirm', '');
-            $phone  = trim($request->request->get('numero_phone', '')) ?: null;
+            $phone      = trim($request->request->get('numero_phone', '')) ?: null;
+            $typeCompte = $request->request->get('type_compte', 'particulier');
+            $role       = $typeCompte === 'entreprise' ? 'entreprise' : 'acheteur';
 
             if (!$prenom || !$nom || !$email || !$mdp) {
                 $this->addFlash('error', 'Tous les champs obligatoires doivent être remplis.');
@@ -80,7 +82,7 @@ class AuthController extends AbstractController
             $stmt = $pdo->prepare(
                 'INSERT INTO utilisateur (nom, prenom, email, mdp, role, numero_phone) VALUES (?, ?, ?, ?, ?, ?)'
             );
-            $stmt->execute([$nom, $prenom, $email, $hashedPwd, 'acheteur', $phone]);
+            $stmt->execute([$nom, $prenom, $email, $hashedPwd, $role, $phone]);
 
             $this->addFlash('success', 'Compte créé avec succès. Vous pouvez maintenant vous connecter.');
             return $this->redirectToRoute('connexion');

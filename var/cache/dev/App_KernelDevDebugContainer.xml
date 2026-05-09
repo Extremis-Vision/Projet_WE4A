@@ -112,6 +112,10 @@
     <parameter key="security.role_hierarchy.roles" type="collection">
       <parameter key="ROLE_ADMIN" type="collection">
         <parameter>ROLE_USER</parameter>
+        <parameter>ROLE_ENTREPRISE</parameter>
+      </parameter>
+      <parameter key="ROLE_ENTREPRISE" type="collection">
+        <parameter>ROLE_USER</parameter>
       </parameter>
     </parameter>
     <parameter key="security.access.denied_url">null</parameter>
@@ -131,6 +135,14 @@
       <tag name="controller.service_arguments"/>
       <tag name="routing.route_loader"/>
     </service>
+    <service id="App\Controller\AdminController" class="App\Controller\AdminController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="routing.controller"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.TJNRSaV.App\Controller\AdminController"/>
+      </call>
+    </service>
     <service id="App\Controller\AnnonceController" class="App\Controller\AnnonceController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="routing.controller"/>
@@ -148,6 +160,14 @@
         <argument type="service" id=".service_locator.TJNRSaV.App\Controller\AuthController"/>
       </call>
     </service>
+    <service id="App\Controller\StatsController" class="App\Controller\StatsController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="routing.controller"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.TJNRSaV.App\Controller\StatsController"/>
+      </call>
+    </service>
     <service id="App\Controller\mainController" class="App\Controller\mainController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="routing.controller"/>
@@ -157,10 +177,19 @@
       </call>
     </service>
     <service id="App\Entity\User" class="App\Entity\User" autowire="true" autoconfigure="true"/>
+    <service id="App\Repository\AdminRepository" class="App\Repository\AdminRepository" autowire="true" autoconfigure="true">
+      <argument type="service" id="App\Service\DatabaseService"/>
+    </service>
     <service id="App\Repository\AnnonceRepository" class="App\Repository\AnnonceRepository" autowire="true" autoconfigure="true">
       <argument type="service" id="App\Service\DatabaseService"/>
     </service>
+    <service id="App\Repository\CatalogueRepository" class="App\Repository\CatalogueRepository" autowire="true" autoconfigure="true">
+      <argument type="service" id="App\Service\DatabaseService"/>
+    </service>
     <service id="App\Repository\MarqueRepository" class="App\Repository\MarqueRepository" autowire="true" autoconfigure="true">
+      <argument type="service" id="App\Service\DatabaseService"/>
+    </service>
+    <service id="App\Repository\StatsRepository" class="App\Repository\StatsRepository" autowire="true" autoconfigure="true">
       <argument type="service" id="App\Service\DatabaseService"/>
     </service>
     <service id="App\Security\UserProvider" class="App\Security\UserProvider" autowire="true" autoconfigure="true">
@@ -182,8 +211,10 @@
       <call method="allowControllers">
         <argument type="collection">
           <argument>App\Kernel</argument>
+          <argument>App\Controller\AdminController</argument>
           <argument>App\Controller\AnnonceController</argument>
           <argument>App\Controller\AuthController</argument>
+          <argument>App\Controller\StatsController</argument>
           <argument>App\Controller\mainController</argument>
         </argument>
       </call>
@@ -227,7 +258,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver" priority="-50">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.pMpAlNV"/>
+      <argument type="service" id=".service_locator.PtnTBqW"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver" priority="-100">controller.argument_value_resolver</tag>
@@ -1513,8 +1544,10 @@
     <service id="routing.loader.attribute.services" class="Symfony\Component\Routing\Loader\AttributeServicesLoader">
       <tag name="routing.loader" priority="-10"/>
       <argument type="collection">
+        <argument>App\Controller\AdminController</argument>
         <argument>App\Controller\AnnonceController</argument>
         <argument>App\Controller\AuthController</argument>
+        <argument>App\Controller\StatsController</argument>
         <argument>App\Controller\mainController</argument>
       </argument>
     </service>
@@ -2235,6 +2268,13 @@
         <argument>null</argument>
       </call>
       <call method="add">
+        <argument type="service" id=".security.request_matcher.Kr5qqSG"/>
+        <argument type="collection">
+          <argument>ROLE_ENTREPRISE</argument>
+        </argument>
+        <argument>null</argument>
+      </call>
+      <call method="add">
         <argument type="service" id=".security.request_matcher.4Drir2O"/>
         <argument type="collection">
           <argument>ROLE_USER</argument>
@@ -2935,6 +2975,14 @@
         <argument type="service" id=".security.request_matcher.pqyCXG8"/>
       </argument>
     </service>
+    <service id=".security.request_matcher.Bj1NCZO" class="Symfony\Component\HttpFoundation\RequestMatcher\PathRequestMatcher">
+      <argument>^/stats</argument>
+    </service>
+    <service id=".security.request_matcher.Kr5qqSG" class="Symfony\Component\HttpFoundation\ChainRequestMatcher">
+      <argument type="collection">
+        <argument type="service" id=".security.request_matcher.Bj1NCZO"/>
+      </argument>
+    </service>
     <service id=".security.request_matcher.NOVYDtw" class="Symfony\Component\HttpFoundation\RequestMatcher\PathRequestMatcher">
       <argument>^/annonces/nouvelle</argument>
     </service>
@@ -2984,6 +3032,10 @@
         <argument>Dump the role hierarchy as a Mermaid flowchart</argument>
       </call>
     </service>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\AdminController" class="App\Controller\AdminController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\AdminController" class="App\Controller\AdminController" autowire="true" abstract="true"/>
+    <service id=".instanceof.App\Controller\AdminController.0.App\Controller\AdminController" class="App\Controller\AdminController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\AdminController" class="App\Controller\AdminController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\AnnonceController" class="App\Controller\AnnonceController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\AnnonceController" class="App\Controller\AnnonceController" autowire="true" abstract="true"/>
     <service id=".instanceof.App\Controller\AnnonceController.0.App\Controller\AnnonceController" class="App\Controller\AnnonceController" autowire="true" abstract="true"/>
@@ -2992,6 +3044,10 @@
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\AuthController" class="App\Controller\AuthController" autowire="true" abstract="true"/>
     <service id=".instanceof.App\Controller\AuthController.0.App\Controller\AuthController" class="App\Controller\AuthController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\AuthController" class="App\Controller\AuthController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\StatsController" class="App\Controller\StatsController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\StatsController" class="App\Controller\StatsController" autowire="true" abstract="true"/>
+    <service id=".instanceof.App\Controller\StatsController.0.App\Controller\StatsController" class="App\Controller\StatsController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\StatsController" class="App\Controller\StatsController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\mainController" class="App\Controller\mainController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\mainController" class="App\Controller\mainController" autowire="true" abstract="true"/>
     <service id=".instanceof.App\Controller\mainController.0.App\Controller\mainController" class="App\Controller\mainController" autowire="true" abstract="true"/>
@@ -3040,12 +3096,138 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.1vYpZ1B" method="withContext"/>
     </service>
+    <service id=".service_locator.xioidcN" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="repo" type="service_closure" id="App\Repository\AdminRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.xioidcN.App\Controller\AdminController::utilisateurs()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\AdminController::utilisateurs()"/>
+      <argument>App\Controller\AdminController::utilisateurs()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.xioidcN" method="withContext"/>
+    </service>
+    <service id=".service_locator.xioidcN.App\Controller\AdminController::supprimerUtilisateur()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\AdminController::supprimerUtilisateur()"/>
+      <argument>App\Controller\AdminController::supprimerUtilisateur()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.xioidcN" method="withContext"/>
+    </service>
     <service id=".service_locator.S.QzeB4" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="repo" type="service_closure" id="App\Repository\AnnonceRepository"/>
         <argument key="marqueRepo" type="service_closure" id="App\Repository\MarqueRepository"/>
       </argument>
+    </service>
+    <service id=".service_locator.S.QzeB4.App\Controller\AdminController::annonces()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\AdminController::annonces()"/>
+      <argument>App\Controller\AdminController::annonces()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.S.QzeB4" method="withContext"/>
+    </service>
+    <service id=".service_locator.w4AXElG" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="repo" type="service_closure" id="App\Repository\AnnonceRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.w4AXElG.App\Controller\AdminController::pauserAnnonce()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\AdminController::pauserAnnonce()"/>
+      <argument>App\Controller\AdminController::pauserAnnonce()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.w4AXElG" method="withContext"/>
+    </service>
+    <service id=".service_locator.w4AXElG.App\Controller\AdminController::reactiverAnnonce()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\AdminController::reactiverAnnonce()"/>
+      <argument>App\Controller\AdminController::reactiverAnnonce()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.w4AXElG" method="withContext"/>
+    </service>
+    <service id=".service_locator.w4AXElG.App\Controller\AdminController::supprimerAnnonce()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\AdminController::supprimerAnnonce()"/>
+      <argument>App\Controller\AdminController::supprimerAnnonce()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.w4AXElG" method="withContext"/>
+    </service>
+    <service id=".service_locator.zEKXLuT" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="repo" type="service_closure" id="App\Repository\CatalogueRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.zEKXLuT.App\Controller\AdminController::catalogue()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\AdminController::catalogue()"/>
+      <argument>App\Controller\AdminController::catalogue()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.zEKXLuT" method="withContext"/>
+    </service>
+    <service id=".service_locator.zEKXLuT.App\Controller\AdminController::ajouterMarque()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\AdminController::ajouterMarque()"/>
+      <argument>App\Controller\AdminController::ajouterMarque()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.zEKXLuT" method="withContext"/>
+    </service>
+    <service id=".service_locator.zEKXLuT.App\Controller\AdminController::supprimerMarque()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\AdminController::supprimerMarque()"/>
+      <argument>App\Controller\AdminController::supprimerMarque()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.zEKXLuT" method="withContext"/>
+    </service>
+    <service id=".service_locator.zEKXLuT.App\Controller\AdminController::catalogueModeles()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\AdminController::catalogueModeles()"/>
+      <argument>App\Controller\AdminController::catalogueModeles()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.zEKXLuT" method="withContext"/>
+    </service>
+    <service id=".service_locator.zEKXLuT.App\Controller\AdminController::ajouterModele()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\AdminController::ajouterModele()"/>
+      <argument>App\Controller\AdminController::ajouterModele()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.zEKXLuT" method="withContext"/>
+    </service>
+    <service id=".service_locator.zEKXLuT.App\Controller\AdminController::supprimerModele()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\AdminController::supprimerModele()"/>
+      <argument>App\Controller\AdminController::supprimerModele()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.zEKXLuT" method="withContext"/>
+    </service>
+    <service id=".service_locator.zEKXLuT.App\Controller\AdminController::catalogueGenerations()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\AdminController::catalogueGenerations()"/>
+      <argument>App\Controller\AdminController::catalogueGenerations()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.zEKXLuT" method="withContext"/>
+    </service>
+    <service id=".service_locator.zEKXLuT.App\Controller\AdminController::ajouterGeneration()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\AdminController::ajouterGeneration()"/>
+      <argument>App\Controller\AdminController::ajouterGeneration()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.zEKXLuT" method="withContext"/>
+    </service>
+    <service id=".service_locator.zEKXLuT.App\Controller\AdminController::supprimerGeneration()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\AdminController::supprimerGeneration()"/>
+      <argument>App\Controller\AdminController::supprimerGeneration()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.zEKXLuT" method="withContext"/>
+    </service>
+    <service id=".service_locator.zEKXLuT.App\Controller\AdminController::catalogueVersions()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\AdminController::catalogueVersions()"/>
+      <argument>App\Controller\AdminController::catalogueVersions()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.zEKXLuT" method="withContext"/>
+    </service>
+    <service id=".service_locator.zEKXLuT.App\Controller\AdminController::ajouterVersion()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\AdminController::ajouterVersion()"/>
+      <argument>App\Controller\AdminController::ajouterVersion()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.zEKXLuT" method="withContext"/>
+    </service>
+    <service id=".service_locator.zEKXLuT.App\Controller\AdminController::supprimerVersion()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\AdminController::supprimerVersion()"/>
+      <argument>App\Controller\AdminController::supprimerVersion()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.zEKXLuT" method="withContext"/>
     </service>
     <service id=".service_locator.S.QzeB4.App\Controller\AnnonceController::liste()" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\AnnonceController::liste()"/>
@@ -3058,12 +3240,6 @@
       <argument>App\Controller\AnnonceController::nouvelle()</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.S.QzeB4" method="withContext"/>
-    </service>
-    <service id=".service_locator.w4AXElG" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="repo" type="service_closure" id="App\Repository\AnnonceRepository"/>
-      </argument>
     </service>
     <service id=".service_locator.w4AXElG.App\Controller\AnnonceController::mesAnnonces()" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\AnnonceController::mesAnnonces()"/>
@@ -3082,6 +3258,24 @@
       <argument>App\Controller\AnnonceController::modifier()</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.S.QzeB4" method="withContext"/>
+    </service>
+    <service id=".service_locator.w4AXElG.App\Controller\AnnonceController::mettreEnPause()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\AnnonceController::mettreEnPause()"/>
+      <argument>App\Controller\AnnonceController::mettreEnPause()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.w4AXElG" method="withContext"/>
+    </service>
+    <service id=".service_locator.w4AXElG.App\Controller\AnnonceController::reprendre()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\AnnonceController::reprendre()"/>
+      <argument>App\Controller\AnnonceController::reprendre()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.w4AXElG" method="withContext"/>
+    </service>
+    <service id=".service_locator.w4AXElG.App\Controller\AnnonceController::marquerVendu()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\AnnonceController::marquerVendu()"/>
+      <argument>App\Controller\AnnonceController::marquerVendu()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.w4AXElG" method="withContext"/>
     </service>
     <service id=".service_locator.w4AXElG.App\Controller\AnnonceController::supprimer()" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\AnnonceController::supprimer()"/>
@@ -3114,6 +3308,18 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.1OQIs_V" method="withContext"/>
     </service>
+    <service id=".service_locator.ZFol7hu" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="repo" type="service_closure" id="App\Repository\StatsRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.ZFol7hu.App\Controller\StatsController::index()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\StatsController::index()"/>
+      <argument>App\Controller\StatsController::index()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.ZFol7hu" method="withContext"/>
+    </service>
     <service id=".service_locator.UD.qFKd" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -3127,32 +3333,76 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.UD.qFKd" method="withContext"/>
     </service>
-    <service id=".service_locator.pMpAlNV" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.PtnTBqW" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.1vYpZ1B.kernel::registerContainerConfiguration()"/>
         <argument key="App\Kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.1vYpZ1B.kernel::registerContainerConfiguration()"/>
         <argument key="kernel::loadRoutes" type="service_closure" id=".service_locator.1vYpZ1B.kernel::loadRoutes()"/>
         <argument key="App\Kernel::loadRoutes" type="service_closure" id=".service_locator.1vYpZ1B.kernel::loadRoutes()"/>
+        <argument key="App\Controller\AdminController::utilisateurs" type="service_closure" id=".service_locator.xioidcN.App\Controller\AdminController::utilisateurs()"/>
+        <argument key="App\Controller\AdminController::supprimerUtilisateur" type="service_closure" id=".service_locator.xioidcN.App\Controller\AdminController::supprimerUtilisateur()"/>
+        <argument key="App\Controller\AdminController::annonces" type="service_closure" id=".service_locator.S.QzeB4.App\Controller\AdminController::annonces()"/>
+        <argument key="App\Controller\AdminController::pauserAnnonce" type="service_closure" id=".service_locator.w4AXElG.App\Controller\AdminController::pauserAnnonce()"/>
+        <argument key="App\Controller\AdminController::reactiverAnnonce" type="service_closure" id=".service_locator.w4AXElG.App\Controller\AdminController::reactiverAnnonce()"/>
+        <argument key="App\Controller\AdminController::supprimerAnnonce" type="service_closure" id=".service_locator.w4AXElG.App\Controller\AdminController::supprimerAnnonce()"/>
+        <argument key="App\Controller\AdminController::catalogue" type="service_closure" id=".service_locator.zEKXLuT.App\Controller\AdminController::catalogue()"/>
+        <argument key="App\Controller\AdminController::ajouterMarque" type="service_closure" id=".service_locator.zEKXLuT.App\Controller\AdminController::ajouterMarque()"/>
+        <argument key="App\Controller\AdminController::supprimerMarque" type="service_closure" id=".service_locator.zEKXLuT.App\Controller\AdminController::supprimerMarque()"/>
+        <argument key="App\Controller\AdminController::catalogueModeles" type="service_closure" id=".service_locator.zEKXLuT.App\Controller\AdminController::catalogueModeles()"/>
+        <argument key="App\Controller\AdminController::ajouterModele" type="service_closure" id=".service_locator.zEKXLuT.App\Controller\AdminController::ajouterModele()"/>
+        <argument key="App\Controller\AdminController::supprimerModele" type="service_closure" id=".service_locator.zEKXLuT.App\Controller\AdminController::supprimerModele()"/>
+        <argument key="App\Controller\AdminController::catalogueGenerations" type="service_closure" id=".service_locator.zEKXLuT.App\Controller\AdminController::catalogueGenerations()"/>
+        <argument key="App\Controller\AdminController::ajouterGeneration" type="service_closure" id=".service_locator.zEKXLuT.App\Controller\AdminController::ajouterGeneration()"/>
+        <argument key="App\Controller\AdminController::supprimerGeneration" type="service_closure" id=".service_locator.zEKXLuT.App\Controller\AdminController::supprimerGeneration()"/>
+        <argument key="App\Controller\AdminController::catalogueVersions" type="service_closure" id=".service_locator.zEKXLuT.App\Controller\AdminController::catalogueVersions()"/>
+        <argument key="App\Controller\AdminController::ajouterVersion" type="service_closure" id=".service_locator.zEKXLuT.App\Controller\AdminController::ajouterVersion()"/>
+        <argument key="App\Controller\AdminController::supprimerVersion" type="service_closure" id=".service_locator.zEKXLuT.App\Controller\AdminController::supprimerVersion()"/>
         <argument key="App\Controller\AnnonceController::liste" type="service_closure" id=".service_locator.S.QzeB4.App\Controller\AnnonceController::liste()"/>
         <argument key="App\Controller\AnnonceController::nouvelle" type="service_closure" id=".service_locator.S.QzeB4.App\Controller\AnnonceController::nouvelle()"/>
         <argument key="App\Controller\AnnonceController::mesAnnonces" type="service_closure" id=".service_locator.w4AXElG.App\Controller\AnnonceController::mesAnnonces()"/>
         <argument key="App\Controller\AnnonceController::detail" type="service_closure" id=".service_locator.w4AXElG.App\Controller\AnnonceController::detail()"/>
         <argument key="App\Controller\AnnonceController::modifier" type="service_closure" id=".service_locator.S.QzeB4.App\Controller\AnnonceController::modifier()"/>
+        <argument key="App\Controller\AnnonceController::mettreEnPause" type="service_closure" id=".service_locator.w4AXElG.App\Controller\AnnonceController::mettreEnPause()"/>
+        <argument key="App\Controller\AnnonceController::reprendre" type="service_closure" id=".service_locator.w4AXElG.App\Controller\AnnonceController::reprendre()"/>
+        <argument key="App\Controller\AnnonceController::marquerVendu" type="service_closure" id=".service_locator.w4AXElG.App\Controller\AnnonceController::marquerVendu()"/>
         <argument key="App\Controller\AnnonceController::supprimer" type="service_closure" id=".service_locator.w4AXElG.App\Controller\AnnonceController::supprimer()"/>
         <argument key="App\Controller\AuthController::connexion" type="service_closure" id=".service_locator.Jt3EkEi.App\Controller\AuthController::connexion()"/>
         <argument key="App\Controller\AuthController::inscription" type="service_closure" id=".service_locator.1OQIs_V.App\Controller\AuthController::inscription()"/>
+        <argument key="App\Controller\StatsController::index" type="service_closure" id=".service_locator.ZFol7hu.App\Controller\StatsController::index()"/>
         <argument key="App\Controller\mainController::homePage" type="service_closure" id=".service_locator.UD.qFKd.App\Controller\mainController::homePage()"/>
         <argument key="kernel:registerContainerConfiguration" type="service_closure" id=".service_locator.1vYpZ1B.kernel::registerContainerConfiguration()"/>
         <argument key="kernel:loadRoutes" type="service_closure" id=".service_locator.1vYpZ1B.kernel::loadRoutes()"/>
+        <argument key="App\Controller\AdminController:utilisateurs" type="service_closure" id=".service_locator.xioidcN.App\Controller\AdminController::utilisateurs()"/>
+        <argument key="App\Controller\AdminController:supprimerUtilisateur" type="service_closure" id=".service_locator.xioidcN.App\Controller\AdminController::supprimerUtilisateur()"/>
+        <argument key="App\Controller\AdminController:annonces" type="service_closure" id=".service_locator.S.QzeB4.App\Controller\AdminController::annonces()"/>
+        <argument key="App\Controller\AdminController:pauserAnnonce" type="service_closure" id=".service_locator.w4AXElG.App\Controller\AdminController::pauserAnnonce()"/>
+        <argument key="App\Controller\AdminController:reactiverAnnonce" type="service_closure" id=".service_locator.w4AXElG.App\Controller\AdminController::reactiverAnnonce()"/>
+        <argument key="App\Controller\AdminController:supprimerAnnonce" type="service_closure" id=".service_locator.w4AXElG.App\Controller\AdminController::supprimerAnnonce()"/>
+        <argument key="App\Controller\AdminController:catalogue" type="service_closure" id=".service_locator.zEKXLuT.App\Controller\AdminController::catalogue()"/>
+        <argument key="App\Controller\AdminController:ajouterMarque" type="service_closure" id=".service_locator.zEKXLuT.App\Controller\AdminController::ajouterMarque()"/>
+        <argument key="App\Controller\AdminController:supprimerMarque" type="service_closure" id=".service_locator.zEKXLuT.App\Controller\AdminController::supprimerMarque()"/>
+        <argument key="App\Controller\AdminController:catalogueModeles" type="service_closure" id=".service_locator.zEKXLuT.App\Controller\AdminController::catalogueModeles()"/>
+        <argument key="App\Controller\AdminController:ajouterModele" type="service_closure" id=".service_locator.zEKXLuT.App\Controller\AdminController::ajouterModele()"/>
+        <argument key="App\Controller\AdminController:supprimerModele" type="service_closure" id=".service_locator.zEKXLuT.App\Controller\AdminController::supprimerModele()"/>
+        <argument key="App\Controller\AdminController:catalogueGenerations" type="service_closure" id=".service_locator.zEKXLuT.App\Controller\AdminController::catalogueGenerations()"/>
+        <argument key="App\Controller\AdminController:ajouterGeneration" type="service_closure" id=".service_locator.zEKXLuT.App\Controller\AdminController::ajouterGeneration()"/>
+        <argument key="App\Controller\AdminController:supprimerGeneration" type="service_closure" id=".service_locator.zEKXLuT.App\Controller\AdminController::supprimerGeneration()"/>
+        <argument key="App\Controller\AdminController:catalogueVersions" type="service_closure" id=".service_locator.zEKXLuT.App\Controller\AdminController::catalogueVersions()"/>
+        <argument key="App\Controller\AdminController:ajouterVersion" type="service_closure" id=".service_locator.zEKXLuT.App\Controller\AdminController::ajouterVersion()"/>
+        <argument key="App\Controller\AdminController:supprimerVersion" type="service_closure" id=".service_locator.zEKXLuT.App\Controller\AdminController::supprimerVersion()"/>
         <argument key="App\Controller\AnnonceController:liste" type="service_closure" id=".service_locator.S.QzeB4.App\Controller\AnnonceController::liste()"/>
         <argument key="App\Controller\AnnonceController:nouvelle" type="service_closure" id=".service_locator.S.QzeB4.App\Controller\AnnonceController::nouvelle()"/>
         <argument key="App\Controller\AnnonceController:mesAnnonces" type="service_closure" id=".service_locator.w4AXElG.App\Controller\AnnonceController::mesAnnonces()"/>
         <argument key="App\Controller\AnnonceController:detail" type="service_closure" id=".service_locator.w4AXElG.App\Controller\AnnonceController::detail()"/>
         <argument key="App\Controller\AnnonceController:modifier" type="service_closure" id=".service_locator.S.QzeB4.App\Controller\AnnonceController::modifier()"/>
+        <argument key="App\Controller\AnnonceController:mettreEnPause" type="service_closure" id=".service_locator.w4AXElG.App\Controller\AnnonceController::mettreEnPause()"/>
+        <argument key="App\Controller\AnnonceController:reprendre" type="service_closure" id=".service_locator.w4AXElG.App\Controller\AnnonceController::reprendre()"/>
+        <argument key="App\Controller\AnnonceController:marquerVendu" type="service_closure" id=".service_locator.w4AXElG.App\Controller\AnnonceController::marquerVendu()"/>
         <argument key="App\Controller\AnnonceController:supprimer" type="service_closure" id=".service_locator.w4AXElG.App\Controller\AnnonceController::supprimer()"/>
         <argument key="App\Controller\AuthController:connexion" type="service_closure" id=".service_locator.Jt3EkEi.App\Controller\AuthController::connexion()"/>
         <argument key="App\Controller\AuthController:inscription" type="service_closure" id=".service_locator.1OQIs_V.App\Controller\AuthController::inscription()"/>
+        <argument key="App\Controller\StatsController:index" type="service_closure" id=".service_locator.ZFol7hu.App\Controller\StatsController::index()"/>
         <argument key="App\Controller\mainController:homePage" type="service_closure" id=".service_locator.UD.qFKd.App\Controller\mainController::homePage()"/>
       </argument>
     </service>
@@ -3211,6 +3461,12 @@
         <argument key="parameter_bag" type="service_closure" id="parameter_bag" on-invalid="ignore"/>
       </argument>
     </service>
+    <service id=".service_locator.TJNRSaV.App\Controller\AdminController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\AdminController"/>
+      <argument>App\Controller\AdminController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.TJNRSaV" method="withContext"/>
+    </service>
     <service id=".service_locator.TJNRSaV.App\Controller\AnnonceController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\AnnonceController"/>
       <argument>App\Controller\AnnonceController</argument>
@@ -3220,6 +3476,12 @@
     <service id=".service_locator.TJNRSaV.App\Controller\AuthController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\AuthController"/>
       <argument>App\Controller\AuthController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.TJNRSaV" method="withContext"/>
+    </service>
+    <service id=".service_locator.TJNRSaV.App\Controller\StatsController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\StatsController"/>
+      <argument>App\Controller\StatsController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.TJNRSaV" method="withContext"/>
     </service>
@@ -3769,17 +4031,20 @@
     <service id="Symfony\Component\Security\Core\User\UserCheckerInterface" alias="security.user_checker"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.ryAvHi4" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.pMpAlNV"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.PtnTBqW"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface" alias="logger"/>
     <service id="twig.error_renderer.html.inner" alias="error_handler.error_renderer.html"/>
     <service id="security.access.decision_manager" alias="debug.security.access.decision_manager"/>
     <service id="security.firewall.authenticator.main" alias="debug.security.firewall.authenticator.main"/>
     <service id=".service_locator.c0wzfI4" alias=".service_locator.1vYpZ1B"/>
+    <service id=".service_locator.fuBCfaq" alias=".service_locator.xioidcN"/>
     <service id=".service_locator.mu30hKL" alias=".service_locator.S.QzeB4"/>
     <service id=".service_locator.cacWT5p" alias=".service_locator.w4AXElG"/>
+    <service id=".service_locator.Cl2Xrim" alias=".service_locator.zEKXLuT"/>
     <service id=".service_locator.YU1i9lx" alias=".service_locator.Jt3EkEi"/>
     <service id=".service_locator.IsWLJOC" alias=".service_locator.1OQIs_V"/>
+    <service id=".service_locator.TXYAU8e" alias=".service_locator.ZFol7hu"/>
     <service id=".service_locator.wMFE1bA" alias=".service_locator.UD.qFKd"/>
     <service id=".service_locator.uqiMYGk" alias=".service_locator.TJNRSaV"/>
   </services>

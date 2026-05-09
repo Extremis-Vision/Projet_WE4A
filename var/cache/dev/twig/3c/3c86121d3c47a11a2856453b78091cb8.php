@@ -86,9 +86,9 @@ class __TwigTemplate_4e8cb2d9b2492d28951109b7b9629ed2 extends Template
 ";
         // line 31
         yield from $this->unwrap()->yieldBlock('body', $context, $blocks);
-        // line 169
+        // line 190
         yield from $this->unwrap()->yieldBlock('javascripts', $context, $blocks);
-        // line 170
+        // line 191
         yield "</body>
 </html>";
         
@@ -150,21 +150,21 @@ class __TwigTemplate_4e8cb2d9b2492d28951109b7b9629ed2 extends Template
         ";
         // line 33
         yield from $this->unwrap()->yieldBlock('header', $context, $blocks);
-        // line 67
+        // line 79
         yield "    </nav>
 
     <main class=\"flex-grow\">
         ";
-        // line 70
+        // line 82
         yield from $this->unwrap()->yieldBlock('main', $context, $blocks);
-        // line 73
+        // line 85
         yield "    </main>
 
     <footer class=\"flex-none py-10 text-white\">
         ";
-        // line 76
+        // line 88
         yield from $this->unwrap()->yieldBlock('footer', $context, $blocks);
-        // line 167
+        // line 188
         yield "    </footer>
 ";
         
@@ -200,38 +200,83 @@ class __TwigTemplate_4e8cb2d9b2492d28951109b7b9629ed2 extends Template
                     </h1>
                 </li>
 
-                <li class=\"nav-item nav-gauche\"><a href=\"";
-        // line 44
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("annonces");
-        yield "\">Annonces</a></li>
-
-                <li class=\"nav-item nav-gauche\"><a href=\"";
-        // line 46
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("vendreMaVoiture");
-        yield "\">Vendre ma voiture</a></li>
                 ";
-        // line 47
-        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 47, $this->source); })()), "user", [], "any", false, false, false, 47)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+        // line 44
+        if ((($tmp = $this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN")) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 45
+            yield "                    <li class=\"nav-item nav-gauche\"><a href=\"";
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_utilisateurs");
+            yield "\">Utilisateurs</a></li>
+                    <li class=\"nav-item nav-gauche\"><a href=\"";
+            // line 46
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_annonces");
+            yield "\">Annonces</a></li>
+                    <li class=\"nav-item nav-gauche\"><a href=\"";
+            // line 47
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_catalogue");
+            yield "\">Catalogue</a></li>
+                    <li class=\"nav-item nav-gauche\"><a href=\"";
             // line 48
-            yield "                <li class=\"nav-item nav-gauche\"><a href=\"";
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("stats");
+            yield "\">Statistiques</a></li>
+                ";
+        } elseif ((($tmp = $this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ENTREPRISE")) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 50
+            yield "                    <li class=\"nav-item nav-gauche\"><a href=\"";
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("annonces");
+            yield "\">Annonces</a></li>
+                    <li class=\"nav-item nav-gauche\"><a href=\"";
+            // line 51
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("vendreMaVoiture");
+            yield "\">Vendre ma voiture</a></li>
+                    <li class=\"nav-item nav-gauche\"><a href=\"";
+            // line 52
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("mes_annonces");
+            yield "\">Mes annonces</a></li>
+                    <li class=\"nav-item nav-gauche\"><a href=\"";
+            // line 53
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("stats");
+            yield "\">Statistiques</a></li>
+                ";
+        } elseif ((($tmp = $this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_USER")) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 55
+            yield "                    <li class=\"nav-item nav-gauche\"><a href=\"";
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("annonces");
+            yield "\">Annonces</a></li>
+                    <li class=\"nav-item nav-gauche\"><a href=\"";
+            // line 56
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("vendreMaVoiture");
+            yield "\">Vendre ma voiture</a></li>
+                    <li class=\"nav-item nav-gauche\"><a href=\"";
+            // line 57
             yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("mes_annonces");
             yield "\">Mes annonces</a></li>
                 ";
+        } else {
+            // line 59
+            yield "                    <li class=\"nav-item nav-gauche\"><a href=\"";
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("annonces");
+            yield "\">Annonces</a></li>
+                    <li class=\"nav-item nav-gauche\"><a href=\"";
+            // line 60
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("vendreMaVoiture");
+            yield "\">Vendre ma voiture</a></li>
+                ";
         }
-        // line 50
+        // line 62
         yield "
                 <li class=\"spacer\"></li>
 
                 ";
-        // line 53
-        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 53, $this->source); })()), "user", [], "any", false, false, false, 53)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-            // line 54
+        // line 65
+        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 65, $this->source); })()), "user", [], "any", false, false, false, 65)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 66
             yield "                    <li class=\"text-tertiary text-sm\">Bonjour, <span class=\"font-semibold text-primary\">";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 54, $this->source); })()), "user", [], "any", false, false, false, 54), "prenom", [], "any", false, false, false, 54), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 66, $this->source); })()), "user", [], "any", false, false, false, 66), "prenom", [], "any", false, false, false, 66), "html", null, true);
             yield "</span></li>
                     <li>
                         <a href=\"";
-            // line 56
+            // line 68
             yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("deconnexion");
             yield "\"
                            class=\"px-4 py-2 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-all text-sm font-semibold\">
@@ -240,17 +285,17 @@ class __TwigTemplate_4e8cb2d9b2492d28951109b7b9629ed2 extends Template
                     </li>
                 ";
         } else {
-            // line 62
+            // line 74
             yield "                    <li><a href=\"";
             yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("connexion");
             yield "\">Connexion</a></li>
                     <li><a class=\"px-6 py-2.5 bg-primary text-white font-bold rounded-lg active:scale-95\" href=\"";
-            // line 63
+            // line 75
             yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("inscription");
             yield "\">S'inscrire</a></li>
                 ";
         }
-        // line 65
+        // line 77
         yield "            </ul>
         ";
         
@@ -259,7 +304,7 @@ class __TwigTemplate_4e8cb2d9b2492d28951109b7b9629ed2 extends Template
         yield from [];
     }
 
-    // line 70
+    // line 82
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -269,7 +314,7 @@ class __TwigTemplate_4e8cb2d9b2492d28951109b7b9629ed2 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "main"));
 
-        // line 71
+        // line 83
         yield "
         ";
         
@@ -278,7 +323,7 @@ class __TwigTemplate_4e8cb2d9b2492d28951109b7b9629ed2 extends Template
         yield from [];
     }
 
-    // line 76
+    // line 88
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -288,15 +333,15 @@ class __TwigTemplate_4e8cb2d9b2492d28951109b7b9629ed2 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "footer"));
 
-        // line 77
+        // line 89
         yield "            <div class=\"px-10 py-5 flex flex-row gap-8\">
                 <div class=\"basis-1/3\"> <!-- 1ere colonne -->
                     <a href=\"";
-        // line 79
+        // line 91
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("homePage");
         yield "\" class=\"inline-block pb-5\">
                         <img src=\"";
-        // line 80
+        // line 92
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("automarket_logo.svg"), "html", null, true);
         yield "\" alt=\"AutoMarket\" class=\"h-12 w-auto\">
                     </a>
@@ -310,31 +355,78 @@ class __TwigTemplate_4e8cb2d9b2492d28951109b7b9629ed2 extends Template
                         <li class=\"pb-5\">
                             <h3 class=\"font-['ManRope'] text-[15px] font-bold text-secondary\">ÉCOSYSTÈME</h3>
                         </li>
-                        <li class=\"pb-3\">
-                            <a href=\"";
-        // line 93
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("annonces");
-        yield "\">Annonces</a>
-                        </li>
-                        <li class=\"pb-3\">
-                            <a href=\"";
-        // line 96
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("vendreMaVoiture");
-        yield "\">Vente</a>
-                        </li>
                         ";
-        // line 98
-        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 98, $this->source); })()), "user", [], "any", false, false, false, 98)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-            // line 99
-            yield "                        <li class=\"pb-3\">
-                            <a href=\"";
-            // line 100
+        // line 104
+        if ((($tmp = $this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN")) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 105
+            yield "                        <li class=\"pb-3\"><a href=\"";
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_utilisateurs");
+            yield "\">Utilisateurs</a></li>
+                        <li class=\"pb-3\"><a href=\"";
+            // line 106
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_annonces");
+            yield "\">Annonces</a></li>
+                        <li class=\"pb-3\"><a href=\"";
+            // line 107
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_catalogue");
+            yield "\">Catalogue</a></li>
+                        <li class=\"pb-3\"><a href=\"";
+            // line 108
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("stats");
+            yield "\">Statistiques</a></li>
+                        ";
+        } elseif ((($tmp = $this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ENTREPRISE")) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 110
+            yield "                        <li class=\"pb-3\"><a href=\"";
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("annonces");
+            yield "\">Annonces</a></li>
+                        <li class=\"pb-3\"><a href=\"";
+            // line 111
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("vendreMaVoiture");
+            yield "\">Vendre ma voiture</a></li>
+                        <li class=\"pb-3\"><a href=\"";
+            // line 112
             yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("mes_annonces");
-            yield "\">Mes annonces</a>
-                        </li>
+            yield "\">Mes annonces</a></li>
+                        <li class=\"pb-3\"><a href=\"";
+            // line 113
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("stats");
+            yield "\">Statistiques</a></li>
+                        ";
+        } elseif ((($tmp = $this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_USER")) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 115
+            yield "                        <li class=\"pb-3\"><a href=\"";
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("annonces");
+            yield "\">Annonces</a></li>
+                        <li class=\"pb-3\"><a href=\"";
+            // line 116
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("vendreMaVoiture");
+            yield "\">Vendre ma voiture</a></li>
+                        <li class=\"pb-3\"><a href=\"";
+            // line 117
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("mes_annonces");
+            yield "\">Mes annonces</a></li>
+                        ";
+        } else {
+            // line 119
+            yield "                        <li class=\"pb-3\"><a href=\"";
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("annonces");
+            yield "\">Annonces</a></li>
+                        <li class=\"pb-3\"><a href=\"";
+            // line 120
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("vendreMaVoiture");
+            yield "\">Vendre ma voiture</a></li>
+                        <li class=\"pb-3\"><a href=\"";
+            // line 121
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("connexion");
+            yield "\">Connexion</a></li>
+                        <li class=\"pb-3\"><a href=\"";
+            // line 122
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("inscription");
+            yield "\">S'inscrire</a></li>
                         ";
         }
-        // line 103
+        // line 124
         yield "                    </ul>
                 </div>
 
@@ -405,7 +497,7 @@ class __TwigTemplate_4e8cb2d9b2492d28951109b7b9629ed2 extends Template
         yield from [];
     }
 
-    // line 169
+    // line 190
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -434,7 +526,7 @@ class __TwigTemplate_4e8cb2d9b2492d28951109b7b9629ed2 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  409 => 169,  338 => 103,  332 => 100,  329 => 99,  327 => 98,  322 => 96,  316 => 93,  300 => 80,  296 => 79,  292 => 77,  282 => 76,  273 => 71,  263 => 70,  254 => 65,  249 => 63,  244 => 62,  235 => 56,  229 => 54,  227 => 53,  222 => 50,  216 => 48,  214 => 47,  210 => 46,  205 => 44,  197 => 39,  193 => 38,  187 => 34,  177 => 33,  168 => 167,  166 => 76,  161 => 73,  159 => 70,  154 => 67,  152 => 33,  149 => 32,  139 => 31,  128 => 10,  118 => 9,  101 => 5,  92 => 170,  90 => 169,  88 => 31,  67 => 12,  65 => 9,  58 => 5,  52 => 1,);
+        return array (  501 => 190,  430 => 124,  425 => 122,  421 => 121,  417 => 120,  412 => 119,  407 => 117,  403 => 116,  398 => 115,  393 => 113,  389 => 112,  385 => 111,  380 => 110,  375 => 108,  371 => 107,  367 => 106,  362 => 105,  360 => 104,  345 => 92,  341 => 91,  337 => 89,  327 => 88,  318 => 83,  308 => 82,  299 => 77,  294 => 75,  289 => 74,  280 => 68,  274 => 66,  272 => 65,  267 => 62,  262 => 60,  257 => 59,  252 => 57,  248 => 56,  243 => 55,  238 => 53,  234 => 52,  230 => 51,  225 => 50,  220 => 48,  216 => 47,  212 => 46,  207 => 45,  205 => 44,  197 => 39,  193 => 38,  187 => 34,  177 => 33,  168 => 188,  166 => 88,  161 => 85,  159 => 82,  154 => 79,  152 => 33,  149 => 32,  139 => 31,  128 => 10,  118 => 9,  101 => 5,  92 => 191,  90 => 190,  88 => 31,  67 => 12,  65 => 9,  58 => 5,  52 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -482,11 +574,23 @@ class __TwigTemplate_4e8cb2d9b2492d28951109b7b9629ed2 extends Template
                     </h1>
                 </li>
 
-                <li class=\"nav-item nav-gauche\"><a href=\"{{ path('annonces') }}\">Annonces</a></li>
-
-                <li class=\"nav-item nav-gauche\"><a href=\"{{ path('vendreMaVoiture') }}\">Vendre ma voiture</a></li>
-                {% if app.user %}
-                <li class=\"nav-item nav-gauche\"><a href=\"{{ path('mes_annonces') }}\">Mes annonces</a></li>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li class=\"nav-item nav-gauche\"><a href=\"{{ path('admin_utilisateurs') }}\">Utilisateurs</a></li>
+                    <li class=\"nav-item nav-gauche\"><a href=\"{{ path('admin_annonces') }}\">Annonces</a></li>
+                    <li class=\"nav-item nav-gauche\"><a href=\"{{ path('admin_catalogue') }}\">Catalogue</a></li>
+                    <li class=\"nav-item nav-gauche\"><a href=\"{{ path('stats') }}\">Statistiques</a></li>
+                {% elseif is_granted('ROLE_ENTREPRISE') %}
+                    <li class=\"nav-item nav-gauche\"><a href=\"{{ path('annonces') }}\">Annonces</a></li>
+                    <li class=\"nav-item nav-gauche\"><a href=\"{{ path('vendreMaVoiture') }}\">Vendre ma voiture</a></li>
+                    <li class=\"nav-item nav-gauche\"><a href=\"{{ path('mes_annonces') }}\">Mes annonces</a></li>
+                    <li class=\"nav-item nav-gauche\"><a href=\"{{ path('stats') }}\">Statistiques</a></li>
+                {% elseif is_granted('ROLE_USER') %}
+                    <li class=\"nav-item nav-gauche\"><a href=\"{{ path('annonces') }}\">Annonces</a></li>
+                    <li class=\"nav-item nav-gauche\"><a href=\"{{ path('vendreMaVoiture') }}\">Vendre ma voiture</a></li>
+                    <li class=\"nav-item nav-gauche\"><a href=\"{{ path('mes_annonces') }}\">Mes annonces</a></li>
+                {% else %}
+                    <li class=\"nav-item nav-gauche\"><a href=\"{{ path('annonces') }}\">Annonces</a></li>
+                    <li class=\"nav-item nav-gauche\"><a href=\"{{ path('vendreMaVoiture') }}\">Vendre ma voiture</a></li>
                 {% endif %}
 
                 <li class=\"spacer\"></li>
@@ -530,16 +634,25 @@ class __TwigTemplate_4e8cb2d9b2492d28951109b7b9629ed2 extends Template
                         <li class=\"pb-5\">
                             <h3 class=\"font-['ManRope'] text-[15px] font-bold text-secondary\">ÉCOSYSTÈME</h3>
                         </li>
-                        <li class=\"pb-3\">
-                            <a href=\"{{ path(\"annonces\") }}\">Annonces</a>
-                        </li>
-                        <li class=\"pb-3\">
-                            <a href=\"{{ path(\"vendreMaVoiture\") }}\">Vente</a>
-                        </li>
-                        {% if app.user %}
-                        <li class=\"pb-3\">
-                            <a href=\"{{ path(\"mes_annonces\") }}\">Mes annonces</a>
-                        </li>
+                        {% if is_granted('ROLE_ADMIN') %}
+                        <li class=\"pb-3\"><a href=\"{{ path('admin_utilisateurs') }}\">Utilisateurs</a></li>
+                        <li class=\"pb-3\"><a href=\"{{ path('admin_annonces') }}\">Annonces</a></li>
+                        <li class=\"pb-3\"><a href=\"{{ path('admin_catalogue') }}\">Catalogue</a></li>
+                        <li class=\"pb-3\"><a href=\"{{ path('stats') }}\">Statistiques</a></li>
+                        {% elseif is_granted('ROLE_ENTREPRISE') %}
+                        <li class=\"pb-3\"><a href=\"{{ path('annonces') }}\">Annonces</a></li>
+                        <li class=\"pb-3\"><a href=\"{{ path('vendreMaVoiture') }}\">Vendre ma voiture</a></li>
+                        <li class=\"pb-3\"><a href=\"{{ path('mes_annonces') }}\">Mes annonces</a></li>
+                        <li class=\"pb-3\"><a href=\"{{ path('stats') }}\">Statistiques</a></li>
+                        {% elseif is_granted('ROLE_USER') %}
+                        <li class=\"pb-3\"><a href=\"{{ path('annonces') }}\">Annonces</a></li>
+                        <li class=\"pb-3\"><a href=\"{{ path('vendreMaVoiture') }}\">Vendre ma voiture</a></li>
+                        <li class=\"pb-3\"><a href=\"{{ path('mes_annonces') }}\">Mes annonces</a></li>
+                        {% else %}
+                        <li class=\"pb-3\"><a href=\"{{ path('annonces') }}\">Annonces</a></li>
+                        <li class=\"pb-3\"><a href=\"{{ path('vendreMaVoiture') }}\">Vendre ma voiture</a></li>
+                        <li class=\"pb-3\"><a href=\"{{ path('connexion') }}\">Connexion</a></li>
+                        <li class=\"pb-3\"><a href=\"{{ path('inscription') }}\">S'inscrire</a></li>
                         {% endif %}
                     </ul>
                 </div>

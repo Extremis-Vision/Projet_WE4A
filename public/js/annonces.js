@@ -1,24 +1,35 @@
-/* ===== AJAX Filtres (page liste des annonces) ===== */
+/* ===== AJAX Filtres + Pagination (page liste des annonces) ===== */
 (function () {
     const form = document.getElementById('filtres-form');
     if (!form) return;
 
     const container = document.getElementById('liste-annonces');
     const counter   = document.getElementById('nb-resultats');
+    const pageCourante = document.getElementById('page-courante');
     let debounceTimer = null;
+    let currentPage   = 1;
 
-    function applyFilters() {
+    function applyFilters(page) {
+        if (typeof page === 'number') {
+            currentPage = page;
+        } else {
+            currentPage = 1; // Reset to page 1 on filter change
+        }
+
         const params = new URLSearchParams(new FormData(form));
-        
+
         // Ensure sort is included even if the select is outside the form DOM element
         const sortSelect = document.getElementById('sort-select');
         if (sortSelect && sortSelect.value) {
             params.set('sort', sortSelect.value);
         }
 
-        // Remove empty values
+        // Add page
+        params.set('page', currentPage);
+
+        // Remove empty values (except page)
         for (const [key, value] of [...params.entries()]) {
-            if (!value) params.delete(key);
+            if (!value && key !== 'page') params.delete(key);
         }
 
         fetch('/annonces?' + params.toString(), {
@@ -27,27 +38,74 @@
         .then(function (res) { return res.text(); })
         .then(function (html) {
             container.innerHTML = html;
-            // Mettre à jour le compteur
-            const cards = container.querySelectorAll('a[href]');
-            if (counter) counter.textContent = cards.length;
+
+            // Update counter from pagination data attributes
+            var paginationBar = container.querySelector('#pagination-bar');
+            if (paginationBar) {
+                var total = paginationBar.getAttribute('data-total');
+                var pg    = paginationBar.getAttribute('data-page');
+                var tp    = paginationBar.getAttribute('data-total-pages');
+                if (counter) counter.textContent = total;
+                if (pageCourante) pageCourante.textContent = pg;
+
+                // Show page info
+                var compteur = document.getElementById('compteur');
+                if (compteur && parseInt(tp) > 1) {
+                    compteur.innerHTML =
+                        '<span id="nb-resultats" class="font-bold text-primary">' + total + '</span> annonce(s) trouvée(s) ' +
+                        '— page <span id="page-courante" class="font-bold text-primary">' + pg + '</span> sur ' + tp;
+                } else if (compteur) {
+                    compteur.innerHTML =
+                        '<span id="nb-resultats" class="font-bold text-primary">' + total + '</span> annonce(s) trouvée(s)';
+                }
+            } else {
+                // No pagination bar = 0 or few results
+                var cards = container.querySelectorAll('.group');
+                if (counter) counter.textContent = cards.length;
+                var compteur = document.getElementById('compteur');
+                if (compteur) {
+                    compteur.innerHTML =
+                        '<span id="nb-resultats" class="font-bold text-primary">' + cards.length + '</span> annonce(s) trouvée(s)';
+                }
+            }
+
+            // Rebind pagination buttons
+            bindPaginationButtons();
+
+            // Scroll to top of list
+            if (typeof page === 'number' && page > 1) {
+                container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         })
         .catch(function (err) { console.error('Erreur filtre AJAX:', err); });
     }
 
+    function bindPaginationButtons() {
+        container.querySelectorAll('.pagination-btn').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var p = parseInt(this.getAttribute('data-page'));
+                if (p) applyFilters(p);
+            });
+        });
+    }
+
+    // Bind initial pagination buttons (first page load)
+    bindPaginationButtons();
+
     // Déclencher sur chaque changement de filtre (avec debounce sur les inputs)
     form.querySelectorAll('select').forEach(function (el) {
-        el.addEventListener('change', applyFilters);
+        el.addEventListener('change', function() { applyFilters(); });
     });
 
     const sortSelect = document.getElementById('sort-select');
     if (sortSelect) {
-        sortSelect.addEventListener('change', applyFilters);
+        sortSelect.addEventListener('change', function() { applyFilters(); });
     }
 
     form.querySelectorAll('input[type="number"]').forEach(function (el) {
         el.addEventListener('input', function () {
             clearTimeout(debounceTimer);
-            debounceTimer = setTimeout(applyFilters, 500);
+            debounceTimer = setTimeout(function() { applyFilters(); }, 500);
         });
     });
 })();

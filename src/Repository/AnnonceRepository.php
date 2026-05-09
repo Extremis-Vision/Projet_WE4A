@@ -113,7 +113,10 @@ class AnnonceRepository
 
     public function __construct(private DatabaseService $db) {}
 
-    public function findAll(array $filters = [], string $sort = 'recent'): array
+    /**
+     * Construit les clauses WHERE et paramètres à partir des filtres.
+     */
+    private function buildWhereClause(array $filters): array
     {
         $where  = ['a.statut = ?'];
         $params = ['active'];
@@ -151,6 +154,33 @@ class AnnonceRepository
             $params[] = (int) $filters['vendeur_id'];
         }
 
+        return [$where, $params];
+    }
+
+    /**
+     * Retourne le nombre total d'annonces correspondant aux filtres (pour la pagination).
+     */
+    public function countAll(array $filters = []): int
+    {
+        [$where, $params] = $this->buildWhereClause($filters);
+
+        $sql = 'SELECT COUNT(*) FROM annonce a
+                JOIN version v ON a.id_version = v.id_version
+                JOIN generation g ON v.id_generation = g.id_generation
+                JOIN modele mo ON g.id_modele = mo.id_modele
+                JOIN marque ma ON mo.id_marque = ma.id_marque
+                JOIN utilisateur u ON a.id_utilisateur = u.id_utilisateur
+                WHERE ' . implode(' AND ', $where);
+
+        $stmt = $this->db->getConnection()->prepare($sql);
+        $stmt->execute($params);
+        return (int) $stmt->fetchColumn();
+    }
+
+    public function findAll(array $filters = [], string $sort = 'recent', int $page = 1, int $perPage = 12): array
+    {
+        [$where, $params] = $this->buildWhereClause($filters);
+
         // Tri
         $orderBy = match ($sort) {
             'price_asc'    => 'a.prix ASC',
@@ -162,6 +192,7 @@ class AnnonceRepository
 
         $sql  = self::BASE_SELECT . ' WHERE ' . implode(' AND ', $where);
         $sql .= ' ORDER BY ' . $orderBy;
+        $sql .= ' LIMIT ' . (int) $perPage . ' OFFSET ' . (int) (($page - 1) * $perPage);
 
         $stmt = $this->db->getConnection()->prepare($sql);
         $stmt->execute($params);

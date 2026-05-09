@@ -77,7 +77,10 @@
     {# Compteur #}
     <div class="flex items-center mb-6">
         <p id="compteur" class="text-tertiary text-sm font-medium">
-            <span id="nb-resultats" class="font-bold text-primary">{{ annonces|length }}</span> annonce(s) trouvée(s)
+            <span id="nb-resultats" class="font-bold text-primary">{{ pagination.total }}</span> annonce(s) trouvée(s)
+            {% if pagination.totalPages > 1 %}
+                — page <span id="page-courante" class="font-bold text-primary">{{ pagination.page }}</span> sur {{ pagination.totalPages }}
+            {% endif %}
         </p>
     </div>
 
@@ -113,5 +116,5 @@ const MODELES_PAR_MARQUE = {{ modelesParMarque|json_encode|raw }};
     });
 })();
 </script>
-<script src="{{ asset('js/annonces.js') }}?v=3"></script>
+<script src="{{ asset('js/annonces.js') }}?v=5"></script>
 {% endblock %}

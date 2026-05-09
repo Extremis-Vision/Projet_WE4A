@@ -21,6 +21,8 @@ class AnnonceController extends AbstractController
         #[Autowire('%kernel.project_dir%')] private string $projectDir
     ) {}
 
+    private const PER_PAGE = 12;
+
     #[Route('/annonces', name: 'annonces', methods: ['GET'])]
     public function liste(Request $request, AnnonceRepository $repo, MarqueRepository $marqueRepo, FavorisRepository $favorisRepo): Response
     {
@@ -40,13 +42,29 @@ class AnnonceController extends AbstractController
             $sort = 'recent';
         }
 
-        $annonces    = $repo->findAll($filters, $sort);
+        $page       = max(1, (int) $request->query->get('page', 1));
+        $total      = $repo->countAll($filters);
+        $totalPages = max(1, (int) ceil($total / self::PER_PAGE));
+        $page       = min($page, $totalPages);
+
+        $annonces    = $repo->findAll($filters, $sort, $page, self::PER_PAGE);
         $marques     = $marqueRepo->findAll();
         $modelesParMarque = $marqueRepo->findModelesByMarque();
         $favorisIds  = $this->getUser() ? $favorisRepo->getUserFavorisIds($this->getUser()->getId()) : [];
 
+        $pagination = [
+            'page'       => $page,
+            'totalPages' => $totalPages,
+            'total'      => $total,
+            'perPage'    => self::PER_PAGE,
+        ];
+
         if ($request->isXmlHttpRequest()) {
-            return $this->render('annonce/_liste.html.twig', ['annonces' => $annonces, 'favoris_ids' => $favorisIds]);
+            return $this->render('annonce/_liste.html.twig', [
+                'annonces'   => $annonces,
+                'favoris_ids' => $favorisIds,
+                'pagination' => $pagination,
+            ]);
         }
 
         return $this->render('annonces.html.twig', [
@@ -56,6 +74,7 @@ class AnnonceController extends AbstractController
             'filters'          => $filters,
             'sort'             => $sort,
             'favoris_ids'      => $favorisIds,
+            'pagination'       => $pagination,
         ]);
     }
 
